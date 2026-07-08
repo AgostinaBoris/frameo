@@ -31,17 +31,17 @@ export function MOVIEMARATHON(_p = {}) {
       }} />
       <span style={{
         position: "absolute",
-        left: 45,
+        left: 14,
         top: 83,
-        width: 78,
+        width: 140,
         height: 47,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,
-        fontSize: 15,
+        fontSize: 14,
         textAlign: "center",
-        whiteSpace: "nowrap",
-        lineHeight: "24px",
-        letterSpacing: "0.050em",
+        whiteSpace: "normal",
+        lineHeight: "20px",
+        letterSpacing: "0.020em",
         color: "rgb(255,255,255)",
       }}>{props.text1 ?? "Movie Marathon"}</span>
       <MovieMarathonIcon style={{
@@ -86,17 +86,17 @@ export function MOVIEMARATHON(_p = {}) {
       }} />
       <span style={{
         position: "absolute",
-        left: 41,
+        left: 14,
         top: 78,
-        width: 87,
+        width: 140,
         height: 47,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,
-        fontSize: 15,
+        fontSize: 14,
         textAlign: "center",
-        whiteSpace: "nowrap",
-        lineHeight: "24px",
-        letterSpacing: "0.050em",
+        whiteSpace: "normal",
+        lineHeight: "20px",
+        letterSpacing: "0.020em",
         color: "rgb(255,255,255)",
       }}>{props.text2 ?? "Movie Marathon"}</span>
       <MovieMarathonIcon style={{

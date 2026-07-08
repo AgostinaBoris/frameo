@@ -30,17 +30,17 @@ export function BACKGROUNDWATCH(_p = {}) {
       }} />
       <span style={{
         position: "absolute",
-        left: 37,
+        left: 14,
         top: 88,
-        width: 93,
+        width: 140,
         height: 47,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,
-        fontSize: 15,
+        fontSize: 14,
         textAlign: "center",
-        whiteSpace: "nowrap",
-        lineHeight: "24px",
-        letterSpacing: "0.050em",
+        whiteSpace: "normal",
+        lineHeight: "20px",
+        letterSpacing: "0.020em",
         color: "rgb(255,255,255)",
       }}>{props.text1 ?? "Background Watch"}</span>
       <BackgroundWatchIcon style={{
@@ -70,17 +70,17 @@ export function BACKGROUNDWATCH(_p = {}) {
       }} />
       <span style={{
         position: "absolute",
-        left: 26,
+        left: 14,
         top: 90,
-        width: 116,
+        width: 140,
         height: 47,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,
-        fontSize: 15,
+        fontSize: 14,
         textAlign: "center",
-        whiteSpace: "nowrap",
-        lineHeight: "24px",
-        letterSpacing: "0.050em",
+        whiteSpace: "normal",
+        lineHeight: "20px",
+        letterSpacing: "0.020em",
         color: "rgb(255,255,255)",
       }}>{props.text1 ?? "Background Watch"}</span>
       <BackgroundWatchIcon style={{

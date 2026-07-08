@@ -24,7 +24,7 @@ export function AIMATCHCONTEXT(_p = {}) {
     }}>
       <div style={{
         position: "absolute",
-        left: -3,
+        left: 0,
         top: 85,
         width: 402,
         height: 673,
@@ -33,7 +33,15 @@ export function AIMATCHCONTEXT(_p = {}) {
         WebkitOverflowScrolling: "touch",
         backgroundColor: "rgb(7,3,15)",
       }}>
-        <div className="fig-asset-6e42081eae4ff783" style={{
+        <div className="fig-asset-6e42081eae4ff783 crystal-ball-center" style={{
+          position: "absolute",
+          left: 210,
+          top: 119,
+          width: 168,
+          height: 169,
+          borderRadius: "50%",
+        }} />
+        <div className="fig-asset-6e42081eae4ff783 crystal-ball-ring" style={{
           position: "absolute",
           left: 210,
           top: 119,
@@ -140,93 +148,26 @@ export function AIMATCHCONTEXT(_p = {}) {
           property1={"default"}
           onClick={props.onNext}
         />
+        <div style={{ position: "absolute", left: 0, top: 974, width: 1, height: 20 }} />
         <div style={{
           position: "absolute",
-          left: 18,
+          left: 0,
           top: 384,
-          width: 372,
-          height: 500.167,
-          borderRadius: 20,
-          display: "grid",
-          gridTemplateRows: "1fr 1fr 1fr",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "18px 18px",
-          padding: "14px 14px 14px 14px",
+          width: 402,
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "16px 14px",
+          padding: "0 16px",
           boxSizing: "border-box",
         }}>
-          <div style={{
-              position: "relative",
-              width: 163,
-              height: 145.389,
-              gridRow: "1",
-              gridColumn: "1",
-              alignSelf: "start",
-            }}>
-            <SOLONIGHT
-              style={{ transform: "scale(0.970, 0.957)", transformOrigin: "0 0" }}
-              property1={"default"}
-            />
-          </div>
-          <div style={{
-              position: "relative",
-              width: 163,
-              height: 145.389,
-              gridRow: "1",
-              gridColumn: "2",
-            }}>
-            <DATENIGHT
-              style={{ transform: "scale(0.970, 0.957)", transformOrigin: "0 0" }}
-              property1={"default"}
-            />
-          </div>
-          <div style={{
-              position: "relative",
-              width: 163,
-              height: 145.389,
-              gridRow: "2",
-              gridColumn: "1",
-            }}>
-            <FAMILYTIME
-              style={{ transform: "scale(0.970, 0.957)", transformOrigin: "0 0" }}
-              property1={"default"}
-            />
-          </div>
-          <div style={{
-              position: "relative",
-              width: 163,
-              height: 145.389,
-              gridRow: "2",
-              gridColumn: "2",
-            }}>
-            <WITHFRIENDS
-              style={{ transform: "scale(0.970, 0.957)", transformOrigin: "0 0" }}
-              property1={"default"}
-            />
-          </div>
-          <div style={{
-              position: "relative",
-              width: 163,
-              height: 145.389,
-              gridRow: "3",
-              gridColumn: "1",
-            }}>
-            <BACKGROUNDWATCH
-              style={{ transform: "scale(0.970, 0.957)", transformOrigin: "0 0" }}
-              property1={"default"}
-            />
-          </div>
-          <div style={{
-              position: "relative",
-              width: 163,
-              height: 145.389,
-              gridRow: "3",
-              gridColumn: "2",
-            }}>
-            <MOVIEMARATHON
-              style={{ transform: "scale(0.970, 0.957)", transformOrigin: "0 0" }}
-              property1={"default"}
-            />
-          </div>
+          <SOLONIGHT property1={"default"} />
+          <DATENIGHT property1={"default"} />
+          <FAMILYTIME property1={"default"} />
+          <WITHFRIENDS property1={"default"} />
+          <BACKGROUNDWATCH property1={"default"} />
+          <MOVIEMARATHON property1={"default"} />
         </div>
         <MiArrowUp style={{
             position: "absolute",
@@ -273,14 +214,15 @@ export function AIMATCHCONTEXT(_p = {}) {
           position: "absolute",
           left: 29,
           top: 308,
-          width: 315,
+          width: 344,
           height: 51,
           fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           fontWeight: 700,
           fontSize: 14,
-          whiteSpace: "nowrap",
-          lineHeight: "25px",
-          letterSpacing: "0.100em",
+          textAlign: "center",
+          whiteSpace: "normal",
+          lineHeight: "22px",
+          letterSpacing: "0.050em",
           color: "rgb(255,255,255)",
         }}>Tell us how you’re watching so we can recommend the perfect movie.</span>
       </div>

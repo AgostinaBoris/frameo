@@ -27,6 +27,7 @@ export default function FrameoApp() {
   };
 
   const phoneFrame = {
+    boxSizing: 'content-box',
     position: 'relative',
     width: '402px',
     height: '874px',

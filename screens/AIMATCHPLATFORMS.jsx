@@ -24,7 +24,7 @@ export function AIMATCHPLATFORMS(_p = {}) {
     }}>
       <div style={{
         position: "absolute",
-        left: -3,
+        left: 0,
         top: 85,
         width: 402,
         height: 673,
