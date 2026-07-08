@@ -5,7 +5,7 @@ const __vkey = (p) => "property1=" + __venc(p.property1);
 export function SHORTWATCH(_p = {}) {
   const props = { ..._p, property1: _p.property1 ?? "default" };
   const __body0 = () => (
-    <div className={props.className} style={{
+    <div className={`selectable-card ${props.className ?? ''}`} style={{
       width: 352,
       height: 120,
       position: "relative",
@@ -58,7 +58,7 @@ export function SHORTWATCH(_p = {}) {
     </div>
   );
   const __body1 = () => (
-    <div className={props.className} style={{
+    <div className={`selectable-card ${props.className ?? ''}`} style={{
       width: 352,
       height: 120,
       position: "relative",

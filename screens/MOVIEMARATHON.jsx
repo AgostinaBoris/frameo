@@ -2,10 +2,19 @@
 const __venc = (v) => String(v).replace(/[%|=]/g, encodeURIComponent);
 const __vkey = (p) => "property1=" + __venc(p.property1);
 
+const MovieMarathonIcon = ({ style }) => (
+  <svg width={40} height={40} viewBox="0 0 40 40" fill="none" style={style}>
+    <rect x="2" y="5" width="20" height="14" rx="2.5" stroke="white" strokeWidth="1.6" opacity="0.5" />
+    <rect x="6" y="9" width="20" height="14" rx="2.5" stroke="white" strokeWidth="1.6" opacity="0.75" />
+    <rect x="10" y="13" width="20" height="14" rx="2.5" stroke="white" strokeWidth="1.6" />
+    <path d="M17 17l7 3-7 3v-6z" fill="white" />
+  </svg>
+);
+
 export function MOVIEMARATHON(_p = {}) {
   const props = { ..._p, property1: _p.property1 ?? "default" };
   const __body0 = () => (
-    <div className={props.className} style={{
+    <div className={`selectable-card ${props.className ?? ''}`} style={{
       width: 168,
       height: 152,
       position: "relative",
@@ -35,7 +44,7 @@ export function MOVIEMARATHON(_p = {}) {
         letterSpacing: "0.050em",
         color: "rgb(255,255,255)",
       }}>{props.text1 ?? "Movie Marathon"}</span>
-      <div style={{
+      <MovieMarathonIcon style={{
         position: "absolute",
         left: 56,
         top: 28,
@@ -45,7 +54,7 @@ export function MOVIEMARATHON(_p = {}) {
     </div>
   );
   const __body1 = () => (
-    <div className={props.className} style={{
+    <div className={`selectable-card ${props.className ?? ''}`} style={{
       width: 168,
       height: 152,
       position: "relative",
@@ -90,7 +99,7 @@ export function MOVIEMARATHON(_p = {}) {
         letterSpacing: "0.050em",
         color: "rgb(255,255,255)",
       }}>{props.text2 ?? "Movie Marathon"}</span>
-      <div style={{
+      <MovieMarathonIcon style={{
         position: "absolute",
         left: 59,
         top: 28,

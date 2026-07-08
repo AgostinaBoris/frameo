@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { FORYOU } from './FORYOU.jsx';
 import { ROMANCE } from './ROMANCE.jsx';
 import { SCIFI } from './SCIFI.jsx';
@@ -8,11 +8,62 @@ import { THRILLER } from './THRILLER.jsx';
 import { TOPNAV } from './TOPNAV.jsx';
 import { TRENDING } from './TRENDING.jsx';
 
+const ScrollTrack = ({ progress, style }) => (
+  <div style={{
+    position: "absolute",
+    height: 3,
+    borderRadius: 2,
+    backgroundColor: "rgba(255,255,255,0.1)",
+    overflow: "hidden",
+    ...style,
+  }}>
+    <div style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      height: "100%",
+      width: "28%",
+      borderRadius: 2,
+      background: "linear-gradient(90deg, rgba(168,85,247,0.9), rgba(139,61,255,0.9))",
+      transform: `translateX(${progress * (100 / 0.28 - 100)}%)`,
+    }} />
+  </div>
+);
+
+const useDragScroll = () => {
+  const state = useRef({ dragging: false, startX: 0, startScrollLeft: 0 });
+  return {
+    onMouseDown: (e) => {
+      state.current.dragging = true;
+      state.current.startX = e.pageX;
+      state.current.startScrollLeft = e.currentTarget.scrollLeft;
+    },
+    onMouseMove: (e) => {
+      if (!state.current.dragging) return;
+      e.preventDefault();
+      e.currentTarget.scrollLeft = state.current.startScrollLeft - (e.pageX - state.current.startX);
+    },
+    onMouseUp: () => { state.current.dragging = false; },
+    onMouseLeave: () => { state.current.dragging = false; },
+  };
+};
+
 // figma node: 348:562 DISCOVER
 export function DISCOVER(_p = {}) {
   const props = _p;
   const [query, setQuery] = useState('');
   const [activeFilter, setActiveFilter] = useState('trending');
+  const [trendingProgress, setTrendingProgress] = useState(0);
+  const [scifiProgress, setScifiProgress] = useState(0);
+  const [romanceProgress, setRomanceProgress] = useState(0);
+  const handleCarouselScroll = (setProgress) => (e) => {
+    const el = e.currentTarget;
+    const max = el.scrollWidth - el.clientWidth;
+    setProgress(max > 0 ? el.scrollLeft / max : 0);
+  };
+  const trendingDrag = useDragScroll();
+  const scifiDrag = useDragScroll();
+  const romanceDrag = useDragScroll();
   const dimStyle = (key) => ({
     position: "relative",
     width: 64,
@@ -167,7 +218,12 @@ export function DISCOVER(_p = {}) {
           letterSpacing: "0.020em",
           color: "rgb(248,247,255)",
         }}>Because You Liked Romance</span>
-        <div style={{
+        <ScrollTrack progress={trendingProgress} style={{ left: 24, top: 293, width: 352 }} />
+        <div
+          className="no-scrollbar"
+          onScroll={handleCarouselScroll(setTrendingProgress)}
+          {...trendingDrag}
+          style={{
           position: "absolute",
           left: 24,
           top: 297,
@@ -176,6 +232,7 @@ export function DISCOVER(_p = {}) {
           overflowX: "auto",
           overflowY: "hidden",
           WebkitOverflowScrolling: "touch",
+          cursor: "grab",
           backgroundColor: "rgb(7,3,15)",
         }}>
           <div style={{
@@ -261,7 +318,12 @@ export function DISCOVER(_p = {}) {
             }} />
           </div>
         </div>
-        <div style={{
+        <ScrollTrack progress={scifiProgress} style={{ left: 24, top: 500, width: 352 }} />
+        <div
+          className="no-scrollbar"
+          onScroll={handleCarouselScroll(setScifiProgress)}
+          {...scifiDrag}
+          style={{
           position: "absolute",
           left: 24,
           top: 504,
@@ -270,6 +332,7 @@ export function DISCOVER(_p = {}) {
           overflowX: "auto",
           overflowY: "hidden",
           WebkitOverflowScrolling: "touch",
+          cursor: "grab",
           backgroundColor: "rgb(7,3,15)",
         }}>
           <div style={{
@@ -355,20 +418,26 @@ export function DISCOVER(_p = {}) {
             }} />
           </div>
         </div>
-        <div style={{
+        <ScrollTrack progress={romanceProgress} style={{ left: 24, top: 710, width: 352 }} />
+        <div
+          className="no-scrollbar"
+          onScroll={handleCarouselScroll(setRomanceProgress)}
+          {...romanceDrag}
+          style={{
           position: "absolute",
-          left: 16,
+          left: 24,
           top: 714,
           width: 352,
           height: 150,
           overflowX: "auto",
           overflowY: "hidden",
           WebkitOverflowScrolling: "touch",
+          cursor: "grab",
           backgroundColor: "rgb(7,3,15)",
         }}>
           <div style={{
             position: "absolute",
-            left: 8,
+            left: 0,
             top: 9,
             display: "flex",
             flexDirection: "row",
@@ -450,18 +519,10 @@ export function DISCOVER(_p = {}) {
           </div>
         </div>
       </div>
-      <div style={{
-          position: "absolute",
-          left: 2,
-          top: -1,
-          width: 399,
-          height: 96,
-        }}>
-        <TOPNAV
-          style={{ transform: "scale(0.993, 0.906)", transformOrigin: "0 0" }}
-          onProfileClick={props.onProfile}
-        />
-      </div>
+      <TOPNAV
+        style={{ position: "absolute", left: 0, top: 0, width: 402, height: 91 }}
+        onProfileClick={props.onProfile}
+      />
       <TABBAR style={{
           position: "absolute",
           left: 0,

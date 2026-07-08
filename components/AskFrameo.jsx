@@ -5,7 +5,7 @@ const __vkey = (p) => "property1=" + __venc(p.property1);
 export function AskFrameo(_p = {}) {
   const props = { ..._p, property1: _p.property1 ?? "default" };
   const __body0 = () => (
-    <div className={props.className} style={{
+    <div className={`cta-button ${props.className ?? ''}`} style={{
       width: 280,
       height: 60,
       position: "relative",

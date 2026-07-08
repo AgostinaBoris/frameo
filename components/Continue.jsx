@@ -5,7 +5,7 @@ const __vkey = (p) => "property1=" + __venc(p.property1);
 export function Continue(_p = {}) {
   const props = { ..._p, property1: _p.property1 ?? "default" };
   const __body0 = () => (
-    <div className={props.className} style={{
+    <div className={`cta-button ${props.className ?? ''}`} style={{
       width: 280,
       height: 60,
       position: "relative",
@@ -27,16 +27,15 @@ export function Continue(_p = {}) {
       }} />
       <span style={{
         position: "absolute",
-        left: 75,
-        top: 18,
-        width: 108,
-        height: 24,
+        inset: 0,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
         fontFamily: "Roboto, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,
         fontSize: 26,
         textAlign: "center",
         whiteSpace: "nowrap",
-        lineHeight: "44px",
         color: "rgb(241,245,249)",
       }}>{props.text1 ?? "Continue"}</span>
       <svg width={22.468} height={12.499} viewBox="0 0 22.468 12.499" fill="none" style={{
@@ -64,7 +63,7 @@ export function Continue(_p = {}) {
     </div>
   );
   const __body1 = () => (
-    <div className={props.className} style={{
+    <div className={`cta-button ${props.className ?? ''}`} style={{
       width: 280,
       height: 60,
       position: "relative",
@@ -85,16 +84,15 @@ export function Continue(_p = {}) {
       }} />
       <span style={{
         position: "absolute",
-        left: 72,
-        top: 18,
-        width: 108,
-        height: 24,
+        inset: 0,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
         fontFamily: "Roboto, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,
         fontSize: 26,
         textAlign: "center",
         whiteSpace: "nowrap",
-        lineHeight: "44px",
         color: "rgb(241,245,249)",
       }}>{props.text1 ?? "Continue"}</span>
       <svg width={2.500} height={25.833} viewBox="0 0 2.500 25.833" fill="none" style={{

@@ -2,10 +2,18 @@
 const __venc = (v) => String(v).replace(/[%|=]/g, encodeURIComponent);
 const __vkey = (p) => "property1=" + __venc(p.property1);
 
+const BackgroundWatchIcon = ({ style }) => (
+  <svg width={38} height={38} viewBox="0 0 38 38" fill="none" style={style}>
+    <rect x="4" y="7" width="30" height="21" rx="3" stroke="white" strokeWidth="1.6" />
+    <path d="M16 14.5l8 3.5-8 3.5v-7z" fill="white" />
+    <path d="M17 32h4M14 32.5h.01M24 32.5h.01" stroke="white" strokeWidth="1.6" strokeLinecap="round" />
+  </svg>
+);
+
 export function BACKGROUNDWATCH(_p = {}) {
   const props = { ..._p, property1: _p.property1 ?? "default" };
   const __body0 = () => (
-    <div className={props.className} style={{
+    <div className={`selectable-card ${props.className ?? ''}`} style={{
       width: 168,
       height: 152,
       position: "relative",
@@ -35,7 +43,7 @@ export function BACKGROUNDWATCH(_p = {}) {
         letterSpacing: "0.050em",
         color: "rgb(255,255,255)",
       }}>{props.text1 ?? "Background Watch"}</span>
-      <div style={{
+      <BackgroundWatchIcon style={{
         position: "absolute",
         left: 49,
         top: 38,
@@ -45,7 +53,7 @@ export function BACKGROUNDWATCH(_p = {}) {
     </div>
   );
   const __body1 = () => (
-    <div className={props.className} style={{
+    <div className={`selectable-card ${props.className ?? ''}`} style={{
       width: 168,
       height: 152,
       position: "relative",
@@ -75,7 +83,7 @@ export function BACKGROUNDWATCH(_p = {}) {
         letterSpacing: "0.050em",
         color: "rgb(255,255,255)",
       }}>{props.text1 ?? "Background Watch"}</span>
-      <div style={{
+      <BackgroundWatchIcon style={{
         position: "absolute",
         left: 49,
         top: 38,
