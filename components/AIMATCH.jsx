@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { ADVENTUROUS } from './ADVENTUROUS.jsx';
 import { CURIOUS } from './CURIOUS.jsx';
 import { Continue } from './Continue.jsx';
@@ -10,9 +11,33 @@ import { STRESSED } from './STRESSED.jsx';
 import { TABBAR } from './TABBAR.jsx';
 import { TOPNAV } from './TOPNAV.jsx';
 
-// figma node: 109:209 AI MATCH 
+const SelectRing = ({ selected }) => (
+  <div style={{
+    position: "absolute",
+    inset: 0,
+    borderRadius: 12,
+    pointerEvents: "none",
+    boxShadow: selected
+      ? "inset 0 0 0 2px rgb(192,132,252), 0 0 14px 2px rgba(168,85,247,0.7)"
+      : "inset 0 0 0 0px transparent",
+    transition: "box-shadow 0.2s ease",
+  }} />
+);
+
+// figma node: 109:209 AI MATCH
 export function AIMATCH(_p = {}) {
   const props = _p;
+  const [mood, setMood] = useState(null);
+  const Mood = ({ id, Comp, ...rest }) => (
+    <div
+      className="selectable-card"
+      style={{ position: "relative", width: 160, height: 56, cursor: "pointer" }}
+      onClick={() => setMood(id)}
+    >
+      <Comp style={{ position: "relative" }} property1={"default"} {...rest} />
+      <SelectRing selected={mood === id} />
+    </div>
+  );
   return (
     <div className={props.className} style={{
       width: 402,
@@ -114,6 +139,7 @@ export function AIMATCH(_p = {}) {
           property1={"default"}
           onClick={props.onNext}
         />
+        <div style={{ position: "absolute", left: 0, top: 833, width: 1, height: 20 }} />
         <div style={{
           position: "absolute",
           left: 25,
@@ -159,11 +185,11 @@ export function AIMATCH(_p = {}) {
               fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
               fontWeight: 700,
               fontSize: 14,
-              whiteSpace: "nowrap",
+              whiteSpace: "normal",
               lineHeight: "25px",
-              letterSpacing: "0.100em",
-              color: "rgb(255,255,255)",
-            }}>Choose how you feel and FRAMEO will start building your match. </span>
+              letterSpacing: "0.020em",
+              color: "rgb(181,174,200)",
+            }}>Choose how you feel and FRAMEO will start building your match.</span>
           </div>
           <div style={{
             position: "relative",
@@ -175,87 +201,30 @@ export function AIMATCH(_p = {}) {
             gap: "22px 16px",
             flexShrink: 0,
           }}>
-            <RELAXED
-              style={{
-                position: "relative",
-                width: 160,
-                height: 56,
-                gridRow: "1",
-                gridColumn: "1",
-              }}
-              property1={"default"}
-            />
-            <ROMANTIC
-              style={{
-                position: "relative",
-                width: 160,
-                height: 56,
-                gridRow: "1",
-                gridColumn: "2",
-              }}
-              property1={"default"}
-            />
-            <CURIOUS
-              style={{
-                position: "relative",
-                width: 160,
-                height: 56,
-                gridRow: "2",
-                gridColumn: "1",
-              }}
-              property1={"default"}
-            />
-            <FOCUSED
-              style={{
-                position: "relative",
-                width: 160,
-                height: 56,
-                gridRow: "2",
-                gridColumn: "2",
-              }}
-              property1={"default"}
-            />
-            <SAD
-              style={{
-                position: "relative",
-                width: 160,
-                height: 56,
-                gridRow: "3",
-                gridColumn: "1",
-              }}
-              property1={"default"}
-            />
-            <EXCITED
-              style={{
-                position: "relative",
-                width: 160,
-                height: 56,
-                gridRow: "3",
-                gridColumn: "2",
-              }}
-              property1={"default"}
-            />
-            <ADVENTUROUS
-              style={{
-                position: "relative",
-                width: 160,
-                height: 56,
-                gridRow: "4",
-                gridColumn: "1",
-              }}
-              text1={"Adventurous"}
-              property1={"default"}
-            />
-            <STRESSED
-              style={{
-                position: "relative",
-                width: 160,
-                height: 56,
-                gridRow: "4",
-                gridColumn: "2",
-              }}
-              property1={"default"}
-            />
+            <div style={{ gridRow: "1", gridColumn: "1" }}>
+              <Mood id="relaxed" Comp={RELAXED} />
+            </div>
+            <div style={{ gridRow: "1", gridColumn: "2" }}>
+              <Mood id="romantic" Comp={ROMANTIC} />
+            </div>
+            <div style={{ gridRow: "2", gridColumn: "1" }}>
+              <Mood id="curious" Comp={CURIOUS} />
+            </div>
+            <div style={{ gridRow: "2", gridColumn: "2" }}>
+              <Mood id="focused" Comp={FOCUSED} />
+            </div>
+            <div style={{ gridRow: "3", gridColumn: "1" }}>
+              <Mood id="sad" Comp={SAD} />
+            </div>
+            <div style={{ gridRow: "3", gridColumn: "2" }}>
+              <Mood id="excited" Comp={EXCITED} />
+            </div>
+            <div style={{ gridRow: "4", gridColumn: "1" }}>
+              <Mood id="adventurous" Comp={ADVENTUROUS} text1={"Adventurous"} />
+            </div>
+            <div style={{ gridRow: "4", gridColumn: "2" }}>
+              <Mood id="stressed" Comp={STRESSED} />
+            </div>
           </div>
         </div>
       </div>

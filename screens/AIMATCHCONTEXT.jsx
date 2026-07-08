@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { BACKGROUNDWATCH } from './BACKGROUNDWATCH.jsx';
 import { Continue } from './Continue.jsx';
 import { DATENIGHT } from './DATENIGHT.jsx';
@@ -9,9 +10,33 @@ import { TABBAR } from './TABBAR.jsx';
 import { TOPNAV } from './TOPNAV.jsx';
 import { WITHFRIENDS } from './WITHFRIENDS.jsx';
 
+const SelectRing = ({ selected }) => (
+  <div style={{
+    position: "absolute",
+    inset: 0,
+    borderRadius: 16,
+    pointerEvents: "none",
+    boxShadow: selected
+      ? "inset 0 0 0 2px rgb(192,132,252), 0 0 14px 2px rgba(168,85,247,0.7)"
+      : "inset 0 0 0 0px transparent",
+    transition: "box-shadow 0.2s ease",
+  }} />
+);
+
 // figma node: 109:211 AI MATCH CONTEXT
 export function AIMATCHCONTEXT(_p = {}) {
   const props = _p;
+  const [context, setContext] = useState(null);
+  const Ctx = ({ id, Comp }) => (
+    <div
+      className="selectable-card"
+      style={{ position: "relative", width: 168, height: 152, cursor: "pointer" }}
+      onClick={() => setContext(id)}
+    >
+      <Comp style={{ position: "relative" }} property1={"default"} />
+      <SelectRing selected={context === id} />
+    </div>
+  );
   return (
     <div className={props.className} style={{
       width: 402,
@@ -162,12 +187,12 @@ export function AIMATCHCONTEXT(_p = {}) {
           padding: "0 16px",
           boxSizing: "border-box",
         }}>
-          <SOLONIGHT property1={"default"} />
-          <DATENIGHT property1={"default"} />
-          <FAMILYTIME property1={"default"} />
-          <WITHFRIENDS property1={"default"} />
-          <BACKGROUNDWATCH property1={"default"} />
-          <MOVIEMARATHON property1={"default"} />
+          <Ctx id="solo" Comp={SOLONIGHT} />
+          <Ctx id="date" Comp={DATENIGHT} />
+          <Ctx id="family" Comp={FAMILYTIME} />
+          <Ctx id="friends" Comp={WITHFRIENDS} />
+          <Ctx id="background" Comp={BACKGROUNDWATCH} />
+          <Ctx id="marathon" Comp={MOVIEMARATHON} />
         </div>
         <MiArrowUp style={{
             position: "absolute",

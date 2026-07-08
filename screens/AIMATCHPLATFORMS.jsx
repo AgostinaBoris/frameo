@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { APPLETV } from './APPLETV.jsx';
 import { DISNEY } from './DISNEY.jsx';
 import { GetMatches } from './GetMatches.jsx';
@@ -9,9 +10,40 @@ import { PRIMEVIDEO } from './PRIMEVIDEO.jsx';
 import { TABBAR } from './TABBAR.jsx';
 import { TOPNAV } from './TOPNAV.jsx';
 
+const SelectRing = ({ selected }) => (
+  <div style={{
+    position: "absolute",
+    inset: 0,
+    borderRadius: 20,
+    pointerEvents: "none",
+    boxShadow: selected
+      ? "inset 0 0 0 2px rgb(192,132,252), 0 0 14px 2px rgba(168,85,247,0.7)"
+      : "inset 0 0 0 0px transparent",
+    transition: "box-shadow 0.2s ease",
+  }} />
+);
+
 // figma node: 188:195 AI MATCH PLATFORMS
 export function AIMATCHPLATFORMS(_p = {}) {
   const props = _p;
+  const [platforms, setPlatforms] = useState(new Set());
+  const togglePlatform = (id) => {
+    setPlatforms((prev) => {
+      const next = new Set(prev);
+      next.has(id) ? next.delete(id) : next.add(id);
+      return next;
+    });
+  };
+  const Plat = ({ id, Comp }) => (
+    <div
+      className="selectable-card"
+      style={{ position: "relative", width: 150, height: 100, flexShrink: 0, cursor: "pointer" }}
+      onClick={() => togglePlatform(id)}
+    >
+      <Comp style={{ position: "relative" }} property1={"default"} />
+      <SelectRing selected={platforms.has(id)} />
+    </div>
+  );
   return (
     <div className={props.className} style={{
       width: 402,
@@ -195,12 +227,12 @@ export function AIMATCHPLATFORMS(_p = {}) {
           padding: "0 20px",
           boxSizing: "border-box",
         }}>
-          <NETFLIX property1={"default"} />
-          <PRIMEVIDEO property1={"default"} />
-          <DISNEY property1={"default"} />
-          <APPLETV property1={"default"} />
-          <HULU property1={"default"} />
-          <MAX2 property1={"default"} />
+          <Plat id="netflix" Comp={NETFLIX} />
+          <Plat id="prime" Comp={PRIMEVIDEO} />
+          <Plat id="disney" Comp={DISNEY} />
+          <Plat id="appletv" Comp={APPLETV} />
+          <Plat id="hulu" Comp={HULU} />
+          <Plat id="max" Comp={MAX2} />
         </div>
         <GetMatches
           style={{

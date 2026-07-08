@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Continue } from './Continue.jsx';
 import { HAVETIME } from './HAVETIME.jsx';
 import { MOVIENIGHT } from './MOVIENIGHT.jsx';
@@ -6,9 +7,33 @@ import { SHORTWATCH } from './SHORTWATCH.jsx';
 import { TABBAR } from './TABBAR.jsx';
 import { TOPNAV } from './TOPNAV.jsx';
 
+const SelectRing = ({ selected }) => (
+  <div style={{
+    position: "absolute",
+    inset: 0,
+    borderRadius: 20,
+    pointerEvents: "none",
+    boxShadow: selected
+      ? "inset 0 0 0 2px rgb(192,132,252), 0 0 14px 2px rgba(168,85,247,0.7)"
+      : "inset 0 0 0 0px transparent",
+    transition: "box-shadow 0.2s ease",
+  }} />
+);
+
 // figma node: 180:145 AI MATCH TIME
 export function AIMATCHTIME(_p = {}) {
   const props = _p;
+  const [duration, setDuration] = useState(null);
+  const Dur = ({ id, Comp, ...rest }) => (
+    <div
+      className="selectable-card"
+      style={{ position: "relative", height: 120, flexShrink: 0, alignSelf: "stretch", cursor: "pointer" }}
+      onClick={() => setDuration(id)}
+    >
+      <Comp style={{ position: "relative", width: "auto" }} property1={"default"} {...rest} />
+      <SelectRing selected={duration === id} />
+    </div>
+  );
   return (
     <div className={props.className} style={{
       width: 402,
@@ -162,6 +187,7 @@ export function AIMATCHTIME(_p = {}) {
           property1={"default"}
           onClick={props.onNext}
         />
+        <div style={{ position: "absolute", left: 0, top: 1052, width: 1, height: 20 }} />
         <span style={{
           position: "absolute",
           left: 29,
@@ -191,47 +217,10 @@ export function AIMATCHTIME(_p = {}) {
           flexWrap: "nowrap",
           boxSizing: "border-box",
         }}>
-          <SHORTWATCH
-            style={{
-              position: "relative",
-              height: 120,
-              flexShrink: 0,
-              alignSelf: "stretch",
-              width: "auto",
-            }}
-            property1={"default"}
-          />
-          <QUICKBREAK
-            style={{
-              position: "relative",
-              height: 120,
-              flexShrink: 0,
-              alignSelf: "stretch",
-              width: "auto",
-            }}
-            text1={"Under 30 min.\n"}
-            property1={"default"}
-          />
-          <MOVIENIGHT
-            style={{
-              position: "relative",
-              height: 120,
-              flexShrink: 0,
-              alignSelf: "stretch",
-              width: "auto",
-            }}
-            property1={"default"}
-          />
-          <HAVETIME
-            style={{
-              position: "relative",
-              height: 120,
-              flexShrink: 0,
-              alignSelf: "stretch",
-              width: "auto",
-            }}
-            property1={"default"}
-          />
+          <Dur id="short" Comp={SHORTWATCH} />
+          <Dur id="quick" Comp={QUICKBREAK} text1={"Under 30 min.\n"} />
+          <Dur id="night" Comp={MOVIENIGHT} />
+          <Dur id="have-time" Comp={HAVETIME} />
         </div>
         <div style={{
           position: "absolute",
