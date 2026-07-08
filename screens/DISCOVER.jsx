@@ -93,7 +93,7 @@ export function DISCOVER(_p = {}) {
         <span style={{
           position: "absolute",
           left: 28,
-          top: 99,
+          top: 62,
           width: 328,
           height: 25,
           fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
@@ -107,7 +107,7 @@ export function DISCOVER(_p = {}) {
         <div style={{
           position: "absolute",
           left: 28,
-          top: 57,
+          top: 20,
           width: 110,
           height: 40,
           overflow: "hidden",
@@ -130,7 +130,7 @@ export function DISCOVER(_p = {}) {
         <div style={{
           position: "absolute",
           left: 17,
-          top: 200,
+          top: 163,
           display: "flex",
           flexDirection: "row",
           gap: 12,
@@ -169,7 +169,7 @@ export function DISCOVER(_p = {}) {
           style={{
             position: "absolute",
             left: 23,
-            top: 135,
+            top: 98,
             width: 353,
             height: 42,
           }}
@@ -179,7 +179,7 @@ export function DISCOVER(_p = {}) {
         <span style={{
           position: "absolute",
           left: 24,
-          top: 266,
+          top: 229,
           width: 102,
           height: 25,
           fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
@@ -193,7 +193,7 @@ export function DISCOVER(_p = {}) {
         <span style={{
           position: "absolute",
           left: 23,
-          top: 473,
+          top: 436,
           width: 188,
           height: 25,
           fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
@@ -207,7 +207,7 @@ export function DISCOVER(_p = {}) {
         <span style={{
           position: "absolute",
           left: 23,
-          top: 683,
+          top: 646,
           width: 220,
           height: 25,
           fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
@@ -218,7 +218,7 @@ export function DISCOVER(_p = {}) {
           letterSpacing: "0.020em",
           color: "rgb(248,247,255)",
         }}>Because You Liked Romance</span>
-        <ScrollTrack progress={trendingProgress} style={{ left: 24, top: 293, width: 352 }} />
+        <ScrollTrack progress={trendingProgress} style={{ left: 24, top: 256, width: 352 }} />
         <div
           className="no-scrollbar"
           onScroll={handleCarouselScroll(setTrendingProgress)}
@@ -226,7 +226,7 @@ export function DISCOVER(_p = {}) {
           style={{
           position: "absolute",
           left: 24,
-          top: 297,
+          top: 260,
           width: 352,
           height: 151,
           overflowX: "auto",
@@ -318,7 +318,7 @@ export function DISCOVER(_p = {}) {
             }} />
           </div>
         </div>
-        <ScrollTrack progress={scifiProgress} style={{ left: 24, top: 500, width: 352 }} />
+        <ScrollTrack progress={scifiProgress} style={{ left: 24, top: 463, width: 352 }} />
         <div
           className="no-scrollbar"
           onScroll={handleCarouselScroll(setScifiProgress)}
@@ -326,7 +326,7 @@ export function DISCOVER(_p = {}) {
           style={{
           position: "absolute",
           left: 24,
-          top: 504,
+          top: 467,
           width: 352,
           height: 154,
           overflowX: "auto",
@@ -418,7 +418,7 @@ export function DISCOVER(_p = {}) {
             }} />
           </div>
         </div>
-        <ScrollTrack progress={romanceProgress} style={{ left: 24, top: 710, width: 352 }} />
+        <ScrollTrack progress={romanceProgress} style={{ left: 24, top: 673, width: 352 }} />
         <div
           className="no-scrollbar"
           onScroll={handleCarouselScroll(setRomanceProgress)}
@@ -426,7 +426,7 @@ export function DISCOVER(_p = {}) {
           style={{
           position: "absolute",
           left: 24,
-          top: 714,
+          top: 677,
           width: 352,
           height: 150,
           overflowX: "auto",
@@ -518,6 +518,7 @@ export function DISCOVER(_p = {}) {
             }} />
           </div>
         </div>
+        <div style={{ position: "absolute", left: 0, top: 827, width: 1, height: 60 }} />
       </div>
       <TOPNAV
         style={{ position: "absolute", left: 0, top: 0, width: 402, height: 91 }}
