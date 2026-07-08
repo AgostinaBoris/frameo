@@ -23,7 +23,7 @@ export function HOMEFRAMEO(_p = {}) {
         left: 0,
         top: 42,
         width: 402,
-        height: 737,
+        height: 716,
         overflowY: "auto",
         overflowX: "hidden",
         WebkitOverflowScrolling: "touch",
@@ -368,7 +368,7 @@ export function HOMEFRAMEO(_p = {}) {
       <TABBAR style={{
           position: "absolute",
           left: 0,
-          top: 779,
+          top: 758,
           width: 402,
           height: 98,
         }}

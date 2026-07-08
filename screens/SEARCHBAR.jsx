@@ -9,7 +9,7 @@ export function SEARCHBAR(_p = {}) {
       boxShadow: "inset 0 0 0 1px rgb(168,85,247), 0 0 0 1px rgb(168,85,247)",
       display: "flex",
       flexDirection: "row",
-      gap: 105,
+      gap: 12,
       padding: "4px 16px 9px 15px",
       alignItems: "center",
       flexWrap: "nowrap",
@@ -18,17 +18,24 @@ export function SEARCHBAR(_p = {}) {
       color: "rgb(255,255,255)",
       ...props.style,
     }}>
-      <span style={{
-        position: "relative",
-        fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
-        fontWeight: 700,
-        fontSize: 11,
-        whiteSpace: "nowrap",
-        lineHeight: "25px",
-        letterSpacing: "0.020em",
-        color: "rgb(138,131,156)",
-        flexShrink: 0,
-      }}>{props.text1 ?? "Search movies, series, genres... "}</span>
+      <input
+        type="text"
+        value={props.value}
+        onChange={props.onChange}
+        placeholder={props.text1 ?? "Search movies, series, genres..."}
+        style={{
+          flex: 1,
+          minWidth: 0,
+          border: "none",
+          outline: "none",
+          background: "transparent",
+          fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+          fontWeight: 700,
+          fontSize: 13,
+          letterSpacing: "0.020em",
+          color: "rgb(248,247,255)",
+        }}
+      />
       <svg width={17.490} height={17.490} viewBox="0 0 17.490 17.490" fill="none" style={{
         position: "relative",
         width: 17.49,

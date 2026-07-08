@@ -23,7 +23,7 @@ export function AIMATCHTIME(_p = {}) {
         left: 0,
         top: 79,
         width: 402,
-        height: 697,
+        height: 679,
         overflowY: "auto",
         overflowX: "hidden",
         WebkitOverflowScrolling: "touch",
@@ -266,7 +266,7 @@ export function AIMATCHTIME(_p = {}) {
       <TABBAR style={{
           position: "absolute",
           left: 0,
-          top: 776,
+          top: 758,
           width: 402,
           height: 98,
         }}

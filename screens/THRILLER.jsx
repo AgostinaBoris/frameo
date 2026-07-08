@@ -13,8 +13,11 @@ export function THRILLER(_p = {}) {
       alignItems: "flex-start",
       flexWrap: "nowrap",
       position: "relative",
+      cursor: "pointer",
       ...props.style,
-    }}>
+    }}
+    onClick={props.onClick}
+    >
       <div style={{
         position: "relative",
         height: 36,

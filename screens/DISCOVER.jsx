@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { FORYOU } from './FORYOU.jsx';
 import { ROMANCE } from './ROMANCE.jsx';
 import { SCIFI } from './SCIFI.jsx';
@@ -10,6 +11,14 @@ import { TRENDING } from './TRENDING.jsx';
 // figma node: 348:562 DISCOVER
 export function DISCOVER(_p = {}) {
   const props = _p;
+  const [query, setQuery] = useState('');
+  const [activeFilter, setActiveFilter] = useState('trending');
+  const dimStyle = (key) => ({
+    position: "relative",
+    width: 64,
+    flexShrink: 0,
+    opacity: activeFilter === key ? 1 : 0.45,
+  });
   return (
     <div className={props.className} style={{
       width: 402,
@@ -24,7 +33,7 @@ export function DISCOVER(_p = {}) {
         left: 0,
         top: 91,
         width: 402,
-        height: 685,
+        height: 667,
         overflowY: "auto",
         overflowX: "hidden",
         WebkitOverflowScrolling: "touch",
@@ -79,44 +88,43 @@ export function DISCOVER(_p = {}) {
           flexWrap: "nowrap",
         }}>
           <TRENDING
-            style={{
-              position: "relative",
-              width: 64,
-              height: 36,
-              flexShrink: 0,
-            }}
+            style={{ ...dimStyle('trending'), height: 36 }}
             property1={"default"}
+            onClick={() => setActiveFilter('trending')}
           />
           <THRILLER
-            style={{ position: "relative", width: 64, flexShrink: 0 }}
+            style={dimStyle('thriller')}
             property1={"default"}
+            onClick={() => setActiveFilter('thriller')}
           />
           <SCIFI
-            style={{ position: "relative", width: 64, flexShrink: 0 }}
+            style={dimStyle('scifi')}
             property1={"default"}
+            onClick={() => setActiveFilter('scifi')}
           />
           <ROMANCE
-            style={{
-              position: "relative",
-              width: 64,
-              height: 36,
-              flexShrink: 0,
-            }}
+            style={{ ...dimStyle('romance'), height: 36 }}
             property1={"default"}
+            onClick={() => setActiveFilter('romance')}
           />
           <FORYOU
-            style={{ position: "relative", width: 64, flexShrink: 0 }}
+            style={dimStyle('foryou')}
             text1={"For You"}
             property1={"default"}
+            onClick={() => setActiveFilter('foryou')}
           />
         </div>
-        <SEARCHBAR style={{
+        <SEARCHBAR
+          style={{
             position: "absolute",
             left: 23,
             top: 135,
             width: 353,
             height: 42,
-          }} />
+          }}
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
         <span style={{
           position: "absolute",
           left: 24,
@@ -457,7 +465,7 @@ export function DISCOVER(_p = {}) {
       <TABBAR style={{
           position: "absolute",
           left: 0,
-          top: 776,
+          top: 758,
           width: 402,
           height: 98,
         }}

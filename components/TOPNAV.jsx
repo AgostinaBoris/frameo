@@ -14,7 +14,7 @@ export function TOPNAV(_p = {}) {
       alignItems: "center",
       justifyContent: "space-between",
       boxSizing: "border-box",
-      padding: "0 24px",
+      padding: "0 40px 0 32px",
       ...props.style,
     }}>
       <span style={{
@@ -32,6 +32,7 @@ export function TOPNAV(_p = {}) {
           alignItems: "center",
           justifyContent: "center",
           cursor: "pointer",
+          transform: "translateY(-7px)",
         }}
         onClick={props.onProfileClick}
       >{props.icon1 ?? <PROFILE style={{ transform: "scale(1.086, 1.086)", transformOrigin: "0 0" }} />}</div>

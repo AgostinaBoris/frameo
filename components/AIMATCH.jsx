@@ -28,7 +28,7 @@ export function AIMATCH(_p = {}) {
         left: 0,
         top: 29,
         width: 402,
-        height: 750,
+        height: 729,
         overflowY: "auto",
         overflowX: "hidden",
         WebkitOverflowScrolling: "touch",
@@ -262,7 +262,7 @@ export function AIMATCH(_p = {}) {
       <TABBAR style={{
           position: "absolute",
           left: 0,
-          top: 779,
+          top: 758,
           width: 402,
           height: 98,
         }}

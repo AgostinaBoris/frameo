@@ -9,7 +9,7 @@ const labelStyle = {
   fontSize: 11,
   textAlign: "center",
   lineHeight: "18px",
-  letterSpacing: "0.280em",
+  letterSpacing: "0.02em",
   whiteSpace: "nowrap",
   color: "rgb(201,202,190)",
 };

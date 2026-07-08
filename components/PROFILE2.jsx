@@ -504,7 +504,7 @@ export function PROFILE2(_p = {}) {
       <TABBAR style={{
           position: "absolute",
           left: 0,
-          top: 779,
+          top: 758,
           width: 402,
           height: 98,
         }}

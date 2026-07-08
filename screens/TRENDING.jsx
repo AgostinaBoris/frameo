@@ -16,8 +16,11 @@ export function TRENDING(_p = {}) {
       flexWrap: "nowrap",
       boxSizing: "border-box",
       position: "relative",
+      cursor: "pointer",
       ...props.style,
-    }}>
+    }}
+    onClick={props.onClick}
+    >
       <div style={{
         position: "absolute",
         left: 0,
