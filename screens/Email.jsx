@@ -23,7 +23,8 @@ export function Email(_p = {}) {
         width: 350,
         height: 50,
         borderRadius: 12,
-        backgroundColor: "rgb(217,217,217)",
+        backgroundColor: "rgba(139,61,255,0.08)",
+        boxShadow: "inset 0 0 0 1px rgba(168,85,247,0.6)",
         flexShrink: 0,
       }} />
       <input
@@ -43,7 +44,7 @@ export function Email(_p = {}) {
           fontFamily: "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           fontWeight: 600,
           fontSize: 16,
-          color: "rgb(51,51,51)",
+          color: "rgb(248,247,255)",
         }}
       />
     </div>

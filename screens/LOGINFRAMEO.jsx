@@ -17,21 +17,25 @@ export function LOGINFRAMEO(_p = {}) {
       position: "relative",
       ...props.style,
     }}>
-      <span style={{
+      <div style={{
         position: "absolute",
-        left: 127,
+        left: 0,
         top: 80,
-        width: 148,
+        width: 402,
         height: 30,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
         fontFamily: "Montserrat, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 400,
         fontSize: 20,
-        whiteSpace: "pre-wrap",
+        whiteSpace: "nowrap",
         lineHeight: "100%",
         letterSpacing: "0.500em",
-        color: "rgb(255,255,255)",
-        display: "inline-block",
-      }}><span style={{ fontSize: 20 }}>{"FRAME"}</span><span style={{ fontSize: 20 }}>{"O"}</span></span>
+      }}>
+        <span style={{ color: "rgb(255,255,255)" }}>FRAME</span>
+        <span style={{ color: "rgb(192,132,252)" }}>O</span>
+      </div>
       <span style={{
         position: "absolute",
         left: 95,

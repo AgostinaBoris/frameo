@@ -11,48 +11,35 @@ export function ONBOARDINGFRAMEO(_p = {}) {
       position: "relative",
       ...props.style,
     }}>
-      <span style={{
-        position: "absolute",
-        left: 77,
-        top: 120,
-        width: 248,
-        height: 44,
-        fontFamily: "Montserrat, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
-        fontWeight: 400,
-        fontSize: 35,
-        whiteSpace: "pre-wrap",
-        lineHeight: "100%",
-        letterSpacing: "0.280em",
-        color: "rgb(255,255,255)",
-        display: "inline-block",
-      }}>{"FRAME"}{"O"}</span>
       <div style={{
         position: "absolute",
         left: 0,
-        top: 304,
+        top: 120,
+        width: 402,
+        height: 44,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        fontFamily: "Montserrat, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+        fontWeight: 400,
+        fontSize: 35,
+        whiteSpace: "nowrap",
+        lineHeight: "100%",
+        letterSpacing: "0.280em",
+      }}>
+        <span style={{ color: "rgb(255,255,255)" }}>FRAME</span>
+        <span style={{ color: "rgb(192,132,252)" }}>O</span>
+      </div>
+      <div style={{
+        position: "absolute",
+        left: 0,
+        top: 264,
         width: 410,
         height: 410,
         overflow: "hidden",
+        perspective: "600px",
       }}>
-        <div style={{
-          position: "absolute",
-          left: 38.95,
-          top: 0,
-          width: 330.05,
-          height: 330.05,
-          borderRadius: "50%",
-          backgroundColor: "rgba(139,61,255,0.15)",
-        }} />
-        <div style={{
-          position: "absolute",
-          left: 0,
-          top: 0,
-          width: 410,
-          height: 410,
-          borderRadius: "50%",
-          backgroundColor: "rgba(139,61,255,0.1)",
-        }} />
-        <div className="fig-asset-5596bc84483bed9d" style={{
+        <div className="fig-asset-5596bc84483bed9d onboarding-sphere" style={{
           position: "absolute",
           left: 65,
           top: 30.75,
@@ -60,12 +47,19 @@ export function ONBOARDINGFRAMEO(_p = {}) {
           height: 278.8,
           borderRadius: "50%",
           boxShadow: "inset 10px 10px 30px 0px rgba(204,128,255,0.35), inset -12px -16px 24px 0px rgba(0,0,0,0.6), 0px 0px 50px 8px rgba(128,38,255,0.55), 18px 22px 28px -4px rgba(0,0,26,0.7)",
-        }} />
+          overflow: "hidden",
+        }}>
+          <div className="onboarding-sphere-highlight" style={{
+            position: "absolute",
+            inset: 0,
+            borderRadius: "50%",
+          }} />
+        </div>
       </div>
       <div style={{
         position: "absolute",
         left: 162,
-        top: 427,
+        top: 387,
         width: 84,
         height: 84,
         overflow: "hidden",
@@ -106,7 +100,7 @@ export function ONBOARDINGFRAMEO(_p = {}) {
       <div style={{
         position: "absolute",
         left: 116,
-        top: 763,
+        top: 748,
         width: 184,
         height: 56,
         overflow: "hidden",

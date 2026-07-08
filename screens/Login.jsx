@@ -5,7 +5,7 @@ const __vkey = (p) => "property1=" + __venc(p.property1);
 export function Login(_p = {}) {
   const props = { ..._p, property1: _p.property1 ?? "default" };
   const __body0 = () => (
-    <div className={props.className} style={{
+    <div className={`cta-button ${props.className ?? ''}`} style={{
       width: 280,
       height: 60,
       display: "flex",
@@ -14,6 +14,7 @@ export function Login(_p = {}) {
       alignItems: "center",
       flexWrap: "nowrap",
       position: "relative",
+      cursor: "pointer",
       ...props.style,
     }}
     onClick={props.onClick}
@@ -22,7 +23,7 @@ export function Login(_p = {}) {
         position: "relative",
         width: 280,
         borderRadius: 15,
-        backgroundColor: "rgb(76,29,149)",
+        backgroundColor: "rgb(139,61,255)",
         boxShadow: "inset 0 0 0 1px rgba(168,85,247,0.89)",
         flexShrink: 0,
         alignSelf: "stretch",

@@ -15,7 +15,8 @@ export function Password2(_p = {}) {
         width: 352,
         height: 52,
         borderRadius: 12,
-        backgroundColor: "rgb(217,217,217)",
+        backgroundColor: "rgba(139,61,255,0.08)",
+        boxShadow: "inset 0 0 0 1px rgba(168,85,247,0.6)",
       }} />
     </div>
   );

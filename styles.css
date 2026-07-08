@@ -97,3 +97,27 @@ body {
   mask-image: radial-gradient(ellipse 19% 30% at 50% 48%, transparent 0%, transparent 85%, black 100%);
   animation: orbitSpin 9s linear infinite;
 }
+
+@keyframes spinY {
+  0% { transform: rotateY(-42deg); }
+  50% { transform: rotateY(42deg); }
+  100% { transform: rotateY(-42deg); }
+}
+
+.onboarding-sphere {
+  animation: spinY 5s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+@keyframes sphereHighlight {
+  0% { transform: translateX(-30%); opacity: 0.25; }
+  50% { transform: translateX(30%); opacity: 0.55; }
+  100% { transform: translateX(-30%); opacity: 0.25; }
+}
+
+.onboarding-sphere-highlight {
+  animation: sphereHighlight 5s ease-in-out infinite;
+  background: radial-gradient(ellipse 40% 70% at 50% 45%, rgba(255,255,255,0.9) 0%, transparent 70%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}

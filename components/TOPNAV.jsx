@@ -22,8 +22,10 @@ export function TOPNAV(_p = {}) {
         fontWeight: 400,
         fontSize: 22,
         letterSpacing: "0.500em",
-        color: "rgb(255,255,255)",
-      }}>FRAMEO</span>
+      }}>
+        <span style={{ color: "rgb(255,255,255)" }}>FRAME</span>
+        <span style={{ color: "rgb(192,132,252)" }}>O</span>
+      </span>
       <div
         className="tab-icon-wrap"
         style={{

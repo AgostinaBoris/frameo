@@ -39,7 +39,7 @@ export function Password(_p = {}) {
           fontFamily: "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           fontWeight: 600,
           fontSize: 16,
-          color: "rgb(51,51,51)",
+          color: "rgb(248,247,255)",
         }}
       />
     </div>
