@@ -5,70 +5,41 @@ const __vkey = (p) => "property1=" + __venc(p.property1);
 export function DETAILS(_p = {}) {
   const props = { ..._p, property1: _p.property1 ?? "default" };
   const __body0 = () => (
-    <div className={props.className} style={{
-      width: 70,
-      height: 28,
+    <div className={`cta-button ${props.className ?? ''}`} style={{
+      width: 124,
+      height: 44,
       position: "relative",
+      cursor: "pointer",
       ...props.style,
-    }}>
+    }}
+    onClick={props.onClick}
+    >
       <div style={{
         position: "absolute",
         left: 0,
         top: 0,
-        width: 75,
-        height: 32,
+        width: "100%",
+        height: "100%",
         borderRadius: 20,
-        backgroundColor: "rgb(217,217,217)",
-        boxShadow: "inset 0 0 0 1px rgba(168,85,247,0.89)",
+        background: "linear-gradient(135deg, #c084fc 0%, #9333ea 55%, #6d28d9 100%)",
+        boxShadow: "0 4px 12px -2px rgba(147,51,234,0.6), inset 0 1px 0 rgba(255,255,255,0.3)",
       }} />
       <span style={{
         position: "absolute",
-        left: 18,
-        top: 3,
-        width: 42,
-        height: 18,
+        inset: 0,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 700,
-        fontSize: 11,
+        fontSize: 16,
         whiteSpace: "nowrap",
-        lineHeight: "25px",
         letterSpacing: "0.020em",
-        color: "rgb(0,0,0)",
+        color: "rgb(255,255,255)",
       }}>{props.text1 ?? "Details"}</span>
     </div>
   );
-  const __body1 = () => (
-    <div className={props.className} style={{
-      width: 70,
-      height: 28,
-      position: "relative",
-      ...props.style,
-    }}>
-      <div style={{
-        position: "absolute",
-        left: 0,
-        top: 0,
-        width: 75,
-        height: 32,
-        borderRadius: 20,
-        backgroundColor: "rgb(139,61,255)",
-      }} />
-      <span style={{
-        position: "absolute",
-        left: 17,
-        top: 3,
-        width: 43,
-        height: 18,
-        fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
-        fontWeight: 700,
-        fontSize: 11,
-        whiteSpace: "nowrap",
-        lineHeight: "25px",
-        letterSpacing: "0.020em",
-        color: "rgb(248,247,255)",
-      }}>{props.text1 ?? "Details"}</span>
-    </div>
-  );
+  const __body1 = __body0;
   const __impls = {
     // figma: Property 1=Default
     "property1=default": __body0,

@@ -31,20 +31,35 @@ export function AIMATCHTIME(_p = {}) {
       }}>
         <div style={{
           position: "absolute",
-          left: 262,
-          top: 195,
-          width: 130,
-          height: 130,
+          left: 246,
+          top: 175,
+          width: 145,
+          height: 170,
           borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(139,61,255,0.45) 0%, rgba(7,3,15,0.95) 72%)",
-          boxShadow: "0 0 40px 6px rgba(139,61,255,0.45), inset 0 0 0 1px rgba(168,85,247,0.7)",
+          background: "radial-gradient(circle, rgba(139,61,255,0.5) 0%, rgba(7,3,15,0.95) 70%)",
+          boxShadow: "0 0 44px 8px rgba(139,61,255,0.45)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
         }}>
-          <svg width={64} height={64} viewBox="0 0 24 24" fill="none">
-            <circle cx="12" cy="12" r="9" stroke="white" strokeWidth="1.3" />
-            <path d="M12 7v5l3.5 2" stroke="white" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+          <svg width={110} height={140} viewBox="0 0 110 140" fill="none">
+            {[
+              { x: 12, y: 40, s: 5 }, { x: 96, y: 60, s: 7 }, { x: 18, y: 105, s: 4 }, { x: 92, y: 20, s: 4 },
+            ].map((p, i) => (
+              <path key={i} d={`M${p.x} ${p.y - p.s} L${p.x + p.s * 0.35} ${p.y - p.s * 0.35} L${p.x + p.s} ${p.y} L${p.x + p.s * 0.35} ${p.y + p.s * 0.35} L${p.x} ${p.y + p.s} L${p.x - p.s * 0.35} ${p.y + p.s * 0.35} L${p.x - p.s} ${p.y} L${p.x - p.s * 0.35} ${p.y - p.s * 0.35} Z`} fill="rgba(216,180,254,0.85)" />
+            ))}
+            <text x="55" y="18" textAnchor="middle" fontSize="9" fontFamily="serif" fill="rgba(230,210,255,0.85)" letterSpacing="2">XII</text>
+            <rect x="30" y="24" width="50" height="9" rx="4" stroke="rgba(216,180,254,0.9)" strokeWidth="1.6" />
+            <rect x="30" y="118" width="50" height="9" rx="4" stroke="rgba(216,180,254,0.9)" strokeWidth="1.6" />
+            <path d="M33 33 C33 55 52 55 52 68 C52 70 58 70 58 68 C58 55 77 55 77 33"
+              stroke="rgba(216,180,254,0.9)" strokeWidth="1.6" fill="none" />
+            <path d="M33 118 C33 96 52 96 52 83 C52 81 58 81 58 83 C58 96 77 96 77 118"
+              stroke="rgba(216,180,254,0.9)" strokeWidth="1.6" fill="none" />
+            <path d="M38 33 C38 50 55 52 55 63 L55 33 Z" fill="rgba(147,51,234,0.55)" />
+            <path d="M40 118 C40 102 55 100 55 92 L55 118 Z" fill="rgba(147,51,234,0.55)" />
+            <circle cx="55" cy="72" r="1.4" fill="rgba(230,210,255,0.9)" />
+            <circle cx="55" cy="79" r="1.4" fill="rgba(230,210,255,0.9)" />
+            <path d="M55 63 L55 72" stroke="rgba(230,210,255,0.9)" strokeWidth="1.4" strokeLinecap="round" />
           </svg>
         </div>
         <span style={{

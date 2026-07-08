@@ -318,7 +318,6 @@ export function WATCHLIST(_p = {}) {
           </div>
           <div style={{
             position: "relative",
-            backgroundColor: "rgb(181,174,200)",
             display: "flex",
             flexDirection: "row",
             gap: 12,
