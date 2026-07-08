@@ -1,0 +1,281 @@
+import { Continue } from './Continue.jsx';
+import { HAVETIME } from './HAVETIME.jsx';
+import { MOVIENIGHT } from './MOVIENIGHT.jsx';
+import { QUICKBREAK } from './QUICKBREAK.jsx';
+import { SHORTWATCH } from './SHORTWATCH.jsx';
+import { TABBAR } from './TABBAR.jsx';
+import { TOPNAV } from './TOPNAV.jsx';
+
+// figma node: 180:145 AI MATCH TIME
+export function AIMATCHTIME(_p = {}) {
+  const props = _p;
+  return (
+    <div className={props.className} style={{
+      width: 402,
+      height: 874,
+      overflow: "hidden",
+      backgroundColor: "rgb(7,3,15)",
+      position: "relative",
+      ...props.style,
+    }}>
+      <div style={{
+        position: "absolute",
+        left: 0,
+        top: 79,
+        width: 402,
+        height: 697,
+        overflowY: "auto",
+        overflowX: "hidden",
+        WebkitOverflowScrolling: "touch",
+        backgroundColor: "rgb(7,3,15)",
+      }}>
+        <svg width={178} height={231} viewBox="0 0 178 231" fill="none" style={{
+          position: "absolute",
+          left: 206,
+          top: 169,
+          width: 178,
+          height: 231,
+          borderRadius: 10,
+          color: "rgba(168,85,247,0.18)",
+        }}>
+          <path d={"M 79.863 20.537 C 83.384 12.623 94.616 12.623 98.137 20.537 L 159.819 159.185 C 162.761 165.799 157.921 173.25 150.682 173.25 L 27.318 173.25 C 20.079 173.25 15.239 165.798 18.181 159.185 L 79.863 20.537 Z"} fill="currentColor" fillRule="nonzero" />
+        </svg>
+        <span style={{
+          position: "absolute",
+          left: 29,
+          top: 192,
+          width: 184,
+          height: 122,
+          fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+          fontWeight: 700,
+          fontSize: 32,
+          whiteSpace: "normal",
+          lineHeight: "40px",
+          letterSpacing: "0.100em",
+          color: "rgb(255,255,255)",
+        }}>How much time do you have?</span>
+        <div style={{
+          position: "absolute",
+          left: 29,
+          top: 136,
+          width: 155,
+          height: 29,
+          overflow: "hidden",
+        }}>
+          <div style={{
+            position: "absolute",
+            left: 0,
+            top: 0,
+            width: 155,
+            height: 29,
+            overflow: "hidden",
+          }}>
+            <div style={{
+              position: "absolute",
+              left: 0,
+              top: 0,
+              width: 155,
+              height: 29,
+              overflow: "hidden",
+            }}>
+              <div style={{
+                position: "absolute",
+                left: 0,
+                top: 25,
+                width: 35,
+                height: 4,
+                backgroundColor: "rgb(168,85,247)",
+              }} />
+              <span style={{
+                position: "absolute",
+                left: 0,
+                top: 0,
+                width: 106,
+                height: 17,
+                fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+                fontWeight: 400,
+                fontSize: 13,
+                whiteSpace: "nowrap",
+                lineHeight: "18px",
+                letterSpacing: "0.280em",
+                color: "rgb(255,255,255)",
+              }}>Step 3 of 4</span>
+              <svg width={35} height={4} viewBox="0 0 35 4" fill="none" style={{
+                position: "absolute",
+                left: 40,
+                top: 25,
+                width: 35,
+                height: 4,
+                color: "rgb(168,85,247)",
+              }}>
+                <path d={"M 0 0 L 35 0 L 35 4 L 15 4 L 0 4 L 0 0 Z"} fill="currentColor" fillRule="nonzero" />
+              </svg>
+              <div style={{
+                position: "absolute",
+                left: 80,
+                top: 25,
+                width: 35,
+                height: 4,
+                backgroundColor: "rgb(168,85,247)",
+              }} />
+              <div style={{
+                position: "absolute",
+                left: 120,
+                top: 25,
+                width: 35,
+                height: 4,
+                backgroundColor: "rgb(217,217,217)",
+              }} />
+            </div>
+          </div>
+        </div>
+        <Continue
+          style={{
+            position: "absolute",
+            left: 61,
+            top: 992,
+            width: 280,
+            height: 60,
+          }}
+          property1={"default"}
+          onClick={props.onNext}
+        />
+        <span style={{
+          position: "absolute",
+          left: 29,
+          top: 352,
+          width: 315,
+          height: 51,
+          fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+          fontWeight: 700,
+          fontSize: 14,
+          whiteSpace: "nowrap",
+          lineHeight: "25px",
+          letterSpacing: "0.100em",
+          color: "rgb(255,255,255)",
+        }}>Frameo will match you with something that fits your available time. </span>
+        <div style={{
+          position: "absolute",
+          left: 26,
+          top: 419,
+          width: 352,
+          borderRadius: 20,
+          display: "flex",
+          flexDirection: "column",
+          gap: 18,
+          padding: "5px 5px 5px 5px",
+          alignItems: "flex-start",
+          flexWrap: "nowrap",
+          boxSizing: "border-box",
+        }}>
+          <SHORTWATCH
+            style={{
+              position: "relative",
+              height: 120,
+              flexShrink: 0,
+              alignSelf: "stretch",
+              width: "auto",
+            }}
+            property1={"default"}
+          />
+          <QUICKBREAK
+            style={{
+              position: "relative",
+              height: 120,
+              flexShrink: 0,
+              alignSelf: "stretch",
+              width: "auto",
+            }}
+            text1={"Under 30 min.\n"}
+            property1={"default"}
+          />
+          <MOVIENIGHT
+            style={{
+              position: "relative",
+              height: 120,
+              flexShrink: 0,
+              alignSelf: "stretch",
+              width: "auto",
+            }}
+            property1={"default"}
+          />
+          <HAVETIME
+            style={{
+              position: "relative",
+              height: 120,
+              flexShrink: 0,
+              alignSelf: "stretch",
+              width: "auto",
+            }}
+            property1={"default"}
+          />
+        </div>
+        <div style={{
+          position: "absolute",
+          left: 24,
+          top: 88,
+          width: 152,
+          height: 40,
+          overflow: "hidden",
+        }}>
+          <div style={{
+            position: "absolute",
+            left: 0,
+            top: 0,
+            transform: "matrix(0.000,-1,1,0.000,0,34)",
+            transformOrigin: "0 0",
+            width: 28,
+            height: 28,
+          }}>
+            <svg width={16.305} height={18.667} viewBox="0 0 16.305 18.667" fill="none" style={{
+              position: "absolute",
+              left: 5.848,
+              top: 4.667,
+              width: 16.305,
+              height: 18.667,
+              color: "rgb(248,247,255)",
+            }}>
+              <path d={"M 8.152 0 C 8.462 0 8.758 0.123 8.977 0.342 L 15.977 7.342 C 16.19 7.562 16.307 7.857 16.305 8.162 C 16.302 8.468 16.179 8.761 15.963 8.977 C 15.747 9.194 15.454 9.316 15.148 9.319 C 14.842 9.322 14.548 9.204 14.327 8.991 L 9.319 3.983 L 9.319 17.5 C 9.319 17.809 9.196 18.106 8.977 18.325 C 8.758 18.544 8.462 18.667 8.152 18.667 C 7.843 18.667 7.546 18.544 7.327 18.325 C 7.109 18.106 6.986 17.809 6.986 17.5 L 6.986 3.983 L 1.977 8.991 C 1.757 9.204 1.462 9.322 1.157 9.319 C 0.851 9.316 0.558 9.194 0.342 8.977 C 0.125 8.761 0.003 8.468 0 8.162 C -0.003 7.857 0.115 7.562 0.327 7.342 L 7.327 0.342 C 7.546 0.123 7.843 0 8.152 0 Z"} fill="currentColor" fillRule="nonzero" />
+            </svg>
+          </div>
+          <span style={{
+            position: "absolute",
+            left: 38,
+            top: 0,
+            width: 114,
+            height: 40,
+            fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+            fontWeight: 700,
+            fontSize: 22,
+            whiteSpace: "nowrap",
+            lineHeight: "40px",
+            letterSpacing: "0.100em",
+            color: "rgb(255,255,255)",
+          }}>AI Match</span>
+        </div>
+      </div>
+      <TOPNAV style={{
+          position: "absolute",
+          left: 0,
+          top: -1,
+          width: 402,
+          height: 106,
+        }}
+        onProfileClick={props.onProfile}
+      />
+      <TABBAR style={{
+          position: "absolute",
+          left: 0,
+          top: 776,
+          width: 402,
+          height: 98,
+        }}
+        onHome={props.onHome}
+        onDiscover={props.onDiscover}
+        onMatch={props.onMatch}
+        onWatchlist={props.onWatchlist}
+      />
+    </div>
+  );
+}
+export default AIMATCHTIME;

@@ -1,0 +1,303 @@
+import { APPLETV } from './APPLETV.jsx';
+import { DISNEY } from './DISNEY.jsx';
+import { GetMatches } from './GetMatches.jsx';
+import { HULU } from './HULU.jsx';
+import { MAX2 } from './MAX2.jsx';
+import { MiArrowUp } from './MiArrowUp.jsx';
+import { NETFLIX } from './NETFLIX.jsx';
+import { PRIMEVIDEO } from './PRIMEVIDEO.jsx';
+import { TABBAR } from './TABBAR.jsx';
+import { TOPNAV } from './TOPNAV.jsx';
+
+// figma node: 188:195 AI MATCH PLATFORMS
+export function AIMATCHPLATFORMS(_p = {}) {
+  const props = _p;
+  return (
+    <div className={props.className} style={{
+      width: 402,
+      height: 874,
+      overflow: "hidden",
+      backgroundColor: "rgb(7,3,15)",
+      position: "relative",
+      color: "rgb(168,85,247)",
+      ...props.style,
+    }}>
+      <div style={{
+        position: "absolute",
+        left: -3,
+        top: 85,
+        width: 402,
+        height: 691,
+        overflowY: "auto",
+        overflowX: "hidden",
+        WebkitOverflowScrolling: "touch",
+        backgroundColor: "rgb(7,3,15)",
+      }}>
+        <span style={{
+          position: "absolute",
+          left: 27,
+          top: 174,
+          width: 338,
+          height: 77,
+          fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+          fontWeight: 700,
+          fontSize: 32,
+          whiteSpace: "normal",
+          lineHeight: "40px",
+          letterSpacing: "0.100em",
+          color: "rgb(255,255,255)",
+        }}>Which platforms do you have?</span>
+        <div style={{
+          position: "absolute",
+          left: 27,
+          top: 115,
+          width: 155,
+          height: 29,
+          overflow: "hidden",
+        }}>
+          <div style={{
+            position: "absolute",
+            left: 0,
+            top: 0,
+            width: 155,
+            height: 29,
+            overflow: "hidden",
+          }}>
+            <div style={{
+              position: "absolute",
+              left: 0,
+              top: 0,
+              width: 155,
+              height: 29,
+              overflow: "hidden",
+            }}>
+              <div style={{
+                position: "absolute",
+                left: 0,
+                top: 25,
+                width: 35,
+                height: 4,
+                backgroundColor: "rgb(168,85,247)",
+              }} />
+              <span style={{
+                position: "absolute",
+                left: 0,
+                top: 0,
+                width: 106,
+                height: 17,
+                fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+                fontWeight: 400,
+                fontSize: 13,
+                whiteSpace: "nowrap",
+                lineHeight: "18px",
+                letterSpacing: "0.280em",
+                color: "rgb(255,255,255)",
+              }}>Step 4 of 4</span>
+              <svg width={35} height={4} viewBox="0 0 35 4" fill="none" style={{
+                position: "absolute",
+                left: 40,
+                top: 25,
+                width: 35,
+                height: 4,
+              }}>
+                <path d={"M 0 0 L 35 0 L 35 4 L 15 4 L 0 4 L 0 0 Z"} fill="currentColor" fillRule="nonzero" />
+              </svg>
+              <div style={{
+                position: "absolute",
+                left: 80,
+                top: 25,
+                width: 35,
+                height: 4,
+                backgroundColor: "rgb(168,85,247)",
+              }} />
+              <div style={{
+                position: "absolute",
+                left: 120,
+                top: 25,
+                width: 35,
+                height: 4,
+                backgroundColor: "rgb(168,85,247)",
+              }} />
+            </div>
+          </div>
+        </div>
+        <span style={{
+          position: "absolute",
+          left: 44,
+          top: 276,
+          width: 315,
+          height: 51,
+          fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+          fontWeight: 700,
+          fontSize: 14,
+          textAlign: "center",
+          whiteSpace: "nowrap",
+          lineHeight: "18px",
+          letterSpacing: "0.100em",
+          color: "rgb(255,255,255)",
+        }}>Choose your streaming services so Frameo can find available matches.</span>
+        <span style={{
+          position: "absolute",
+          left: 57,
+          top: 714,
+          width: 245,
+          height: 27,
+          fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+          fontWeight: 700,
+          fontSize: 14,
+          whiteSpace: "nowrap",
+          lineHeight: "25px",
+          letterSpacing: "0.100em",
+          color: "rgb(255,255,255)",
+        }}>You can select more than one.</span>
+        <div style={{
+          position: "absolute",
+          left: 19,
+          top: 67,
+          width: 152,
+          height: 40,
+          overflow: "hidden",
+        }}>
+          <MiArrowUp style={{
+              position: "absolute",
+              left: 0,
+              top: 0,
+              width: 28,
+              height: 28,
+              transform: "matrix(0.000,-1,1,0.000,0,34)",
+              transformOrigin: "0 0",
+            }} />
+          <span style={{
+            position: "absolute",
+            left: 38,
+            top: 0,
+            width: 114,
+            height: 40,
+            fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+            fontWeight: 700,
+            fontSize: 22,
+            whiteSpace: "nowrap",
+            lineHeight: "40px",
+            letterSpacing: "0.100em",
+            color: "rgb(255,255,255)",
+          }}>AI Match</span>
+        </div>
+        <div style={{
+          position: "absolute",
+          left: 38,
+          top: 335,
+          width: 321,
+          height: 356,
+          borderRadius: 20,
+          display: "grid",
+          gridTemplateRows: "1fr 1fr 1fr",
+          gridTemplateColumns: "1fr 1fr",
+          gap: "24px 24px",
+          padding: "8px 8px 8px 8px",
+          boxSizing: "border-box",
+        }}>
+          <div style={{
+              position: "relative",
+              width: 140.5,
+              height: 97.333,
+              gridRow: "1",
+              gridColumn: "1",
+              alignSelf: "start",
+            }}>
+            <NETFLIX
+              style={{ transform: "scale(0.937, 0.973)", transformOrigin: "0 0" }}
+              property1={"default"}
+            />
+          </div>
+          <div style={{
+              position: "relative",
+              width: 140.5,
+              height: 97.333,
+              gridRow: "1",
+              gridColumn: "2",
+            }}>
+            <PRIMEVIDEO
+              style={{ transform: "scale(0.937, 0.973)", transformOrigin: "0 0" }}
+              property1={"default"}
+            />
+          </div>
+          <div style={{
+              position: "relative",
+              width: 140.5,
+              height: 97.333,
+              gridRow: "2",
+              gridColumn: "2",
+            }}>
+            <DISNEY
+              style={{ transform: "scale(0.937, 0.973)", transformOrigin: "0 0" }}
+              property1={"default"}
+            />
+          </div>
+          <div style={{
+              position: "relative",
+              width: 140.5,
+              height: 97.333,
+              gridRow: "3",
+              gridColumn: "1",
+            }}>
+            <APPLETV
+              style={{ transform: "scale(0.937, 0.973)", transformOrigin: "0 0" }}
+              property1={"default"}
+            />
+          </div>
+          <div style={{
+              position: "relative",
+              width: 140.5,
+              height: 97.333,
+              gridRow: "3",
+              gridColumn: "2",
+            }}>
+            <HULU
+              style={{ transform: "scale(0.937, 0.973)", transformOrigin: "0 0" }}
+              property1={"default"}
+            />
+          </div>
+          <div style={{ position: "relative", width: 140.5, height: 97.333 }}>
+            <MAX2
+              style={{ transform: "scale(0.937, 0.973)", transformOrigin: "0 0" }}
+              property1={"default"}
+            />
+          </div>
+        </div>
+        <GetMatches
+          style={{
+            position: "absolute",
+            left: 61,
+            top: 791,
+            width: 280,
+            height: 60,
+          }}
+          property1={"default"}
+          onClick={props.onNext}
+        />
+      </div>
+      <TOPNAV style={{
+          position: "absolute",
+          left: 0,
+          top: -1,
+          width: 402,
+          height: 106,
+        }}
+        onProfileClick={props.onProfile}
+      />
+      <TABBAR style={{
+          position: "absolute",
+          left: 0,
+          top: 776,
+          width: 402,
+          height: 98,
+        }}
+        onHome={props.onHome}
+        onDiscover={props.onDiscover}
+        onMatch={props.onMatch}
+        onWatchlist={props.onWatchlist}
+      />
+    </div>
+  );
+}
+export default AIMATCHPLATFORMS;

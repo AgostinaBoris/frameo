@@ -1,0 +1,12 @@
+@import './components/fig-tokens.css';
+@import './components/fig-assets.css';
+@import './components/fig-typography.css';
+@import './screens/fig-assets.css';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}

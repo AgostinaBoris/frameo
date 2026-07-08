@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; background: #0a0a0a; padding: 20px;">
+  <div style="position: relative; width: 402px; height: 874px; border-radius: 40px; border: 12px solid #1a1a1a; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.9); background: #0a0a0a;">
+    
+    <!-- ONBOARDING -->
+    <sc-if value="{{ screen === 'onboarding' }}" hint-placeholder-val="{{ true }}">
+      <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 100%); display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 40px 20px; color: #fff; overflow: auto;">
+        <div style="text-align: center; margin-top: 20px;">
+          <h1 style="font-size: 32px; margin-bottom: 10px; font-weight: 700;">Frameo</h1>
+          <p style="font-size: 14px; color: #aaa;">Find your movie soulmate</p>
+        </div>
+        
+        <div style="width: 100%;">
+          <div style="margin-bottom: 30px;">
+            <p style="font-size: 12px; color: #8b3dff; margin-bottom: 12px; font-weight: 600;">Select your moods</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+              <sc-for list="{{ moods_list }}" as="mood" hint-placeholder-count="3">
+                <button data-action="toggle-mood" data-mood="{{ mood }}" style="padding: 10px 16px; border-radius: 20px; border: {{ mood_selected[mood] ? '2px solid #8b3dff' : '2px solid #333' }}; background: {{ mood_selected[mood] ? 'rgba(139, 61, 255, 0.2)' : 'transparent' }}; color: #fff; cursor: pointer; font-size: 12px; font-weight: 500; transition: all 0.3s ease;">{{ mood }}</button>
+              </sc-for>
+            </div>
+          </div>
+          
+          <div>
+            <p style="font-size: 12px; color: #8b3dff; margin-bottom: 12px; font-weight: 600;">Preferred services</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+              <sc-for list="{{ services_list }}" as="service" hint-placeholder-count="3">
+                <button data-action="toggle-service" data-service="{{ service }}" style="padding: 10px 16px; border-radius: 20px; border: {{ service_selected[service] ? '2px solid #8b3dff' : '2px solid #333' }}; background: {{ service_selected[service] ? 'rgba(139, 61, 255, 0.2)' : 'transparent' }}; color: #fff; cursor: pointer; font-size: 12px; font-weight: 500; transition: all 0.3s ease;">{{ service }}</button>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+        
+        <button data-test="go-home" style="width: 100%; padding: 14px; border-radius: 12px; border: none; background: linear-gradient(135deg, #8b3dff 0%, #6a2dc7 100%); color: #fff; font-size: 14px; font-weight: 600; cursor: pointer; margin-bottom: 20px;">Continue</button>
+      </div>
+    </sc-if>
+
+    <!-- HOME -->
+    <sc-if value="{{ screen === 'home' }}" hint-placeholder-val="{{ false }}">
+      <div style="width: 100%; height: 100%; background: #0a0a0a; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 40px 20px; color: #fff;">
+        <div style="text-align: center; margin-top: 20px;">
+          <h1 style="font-size: 32px; margin-bottom: 10px; font-weight: 700;">Frameo</h1>
+          <p style="font-size: 14px; color: #aaa;">Ready to match?</p>
+        </div>
+        <div style="width: 200px; height: 200px; border-radius: 20px; background: linear-gradient(135deg, #8b3dff 0%, #6a2dc7 100%); display: flex; align-items: center; justify-content: center; font-size: 80px; margin-bottom: 40px;">🎬</div>
+        <button data-test="go-match" style="width: 100%; padding: 14px; border-radius: 12px; border: none; background: linear-gradient(135deg, #8b3dff 0%, #6a2dc7 100%); color: #fff; font-size: 14px; font-weight: 600; cursor: pointer; margin-bottom: 20px;">Find a Match</button>
+      </div>
+    </sc-if>
+
+    <!-- MATCH -->
+    <sc-if value="{{ screen === 'match' }}" hint-placeholder-val="{{ false }}">
+      <div style="width: 100%; height: 100%; background: #0a0a0a; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 40px 20px; color: #fff;">
+        <h2 style="font-size: 20px; font-weight: 700; margin-bottom: 20px; margin-top: 40px;">It's a Match! 💫</h2>
+        <div style="display: flex; gap: 20px; margin-bottom: 30px; align-items: center;">
+          <div style="width: 80px; height: 80px; border-radius: 12px; background: #8b3dff; display: flex; align-items: center; justify-content: center; font-size: 40px;">👤</div>
+          <div style="font-size: 24px;">💜</div>
+          <div style="width: 80px; height: 80px; border-radius: 12px; background: #8b3dff; display: flex; align-items: center; justify-content: center; font-size: 40px;">👤</div>
+        </div>
+        <div style="text-align: center; margin-bottom: 30px;">
+          <p style="font-size: 14px; color: #aaa; margin-bottom: 10px;">Compatibility</p>
+          <p style="font-size: 36px; font-weight: 700; background: linear-gradient(135deg, #8b3dff 0%, #6a2dc7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">87%</p>
+          <p style="font-size: 12px; color: #aaa; margin-top: 8px;">Netflix • Drama • Romantic</p>
+        </div>
+        <button data-test="go-profile" style="width: 100%; padding: 14px; border-radius: 12px; border: none; background: linear-gradient(135deg, #8b3dff 0%, #6a2dc7 100%); color: #fff; font-size: 14px; font-weight: 600; cursor: pointer; margin-bottom: 20px;">View Profile</button>
+      </div>
+    </sc-if>
+
+    <!-- PROFILE -->
+    <sc-if value="{{ screen === 'profile' }}" hint-placeholder-val="{{ false }}">
+      <div style="width: 100%; height: 100%; background: #0a0a0a; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; color: #fff; overflow: auto;">
+        <div style="text-align: center; margin-bottom: 30px;">
+          <div style="width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, #8b3dff 0%, #6a2dc7 100%); display: flex; align-items: center; justify-content: center; font-size: 50px; margin: 0 auto 20px;">👤</div>
+          <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 5px;">Alex</h2>
+          <p style="font-size: 12px; color: #8b3dff; font-weight: 600;">27 years old</p>
+        </div>
+        
+        <div style="width: 100%; margin-bottom: 30px;">
+          <p style="font-size: 12px; color: #8b3dff; margin-bottom: 12px; font-weight: 600;">Favorite Movies</p>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <sc-for list="{{ movies }}" as="movie" hint-placeholder-count="3">
+              <div style="padding: 12px; border-radius: 8px; background: rgba(139, 61, 255, 0.1); border: 1px solid rgba(139, 61, 255, 0.3); font-size: 13px;">🎬 {{ movie }}</div>
+            </sc-for>
+          </div>
+        </div>
+        
+        <div style="width: 100%;">
+          <p style="font-size: 12px; color: #8b3dff; margin-bottom: 12px; font-weight: 600;">Moods</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <sc-for list="{{ profile_moods }}" as="mood" hint-placeholder-count="3">
+              <span style="padding: 8px 12px; border-radius: 16px; background: rgba(139, 61, 255, 0.2); border: 1px solid rgba(139, 61, 255, 0.3); font-size: 12px;">{{ mood }}</span>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;430px&quot;,&quot;height&quot;:&quot;900px&quot;}}">
+class Component extends DCLogic {
+  state = { 
+    screen: 'onboarding',
+    selectedMoods: [],
+    selectedServices: []
+  };
+
+  toggleMood = (e) => {
+    const mood = e.target.getAttribute('data-mood');
+    this.setState(s => ({
+      selectedMoods: s.selectedMoods.includes(mood)
+        ? s.selectedMoods.filter(m => m !== mood)
+        : [...s.selectedMoods, mood]
+    }));
+  };
+
+  toggleService = (e) => {
+    const service = e.target.getAttribute('data-service');
+    this.setState(s => ({
+      selectedServices: s.selectedServices.includes(service)
+        ? s.selectedServices.filter(svc => svc !== service)
+        : [...s.selectedServices, service]
+    }));
+  };
+
+  goToHome = () => this.setState({ screen: 'home' });
+  goToMatch = () => this.setState({ screen: 'match' });
+  goToProfile = () => this.setState({ screen: 'profile' });
+
+  componentDidMount() {
+    setTimeout(() => {
+      const buttons = document.querySelectorAll('button');
+      buttons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const dataTest = btn.getAttribute('data-test');
+          const dataAction = btn.getAttribute('data-action');
+
+          if (dataAction === 'toggle-mood') {
+            this.toggleMood(e);
+          } else if (dataAction === 'toggle-service') {
+            this.toggleService(e);
+          } else if (dataTest === 'go-home') {
+            this.goToHome();
+          } else if (dataTest === 'go-match') {
+            this.goToMatch();
+          } else if (dataTest === 'go-profile') {
+            this.goToProfile();
+          }
+        });
+      });
+    }, 100);
+  }
+
+  renderVals() {
+    const moods_list = ['Excited', 'Relaxed', 'Romantic', 'Focused', 'Adventurous', 'Curious'];
+    const services_list = ['Netflix', 'Disney+', 'Max', 'Hulu', 'Prime Video'];
+    const movies = ['Inception', 'The Notebook', 'Interstellar', 'Pride & Prejudice'];
+    const profile_moods = ['Romantic', 'Adventurous', 'Focused'];
+
+    const mood_selected = {};
+    moods_list.forEach(m => {
+      mood_selected[m] = this.state.selectedMoods.includes(m);
+    });
+
+    const service_selected = {};
+    services_list.forEach(s => {
+      service_selected[s] = this.state.selectedServices.includes(s);
+    });
+
+    return {
+      screen: this.state.screen,
+      moods_list,
+      services_list,
+      mood_selected,
+      service_selected,
+      movies,
+      profile_moods,
+      toggleMood: this.toggleMood,
+      toggleService: this.toggleService,
+      goToHome: this.goToHome,
+      goToMatch: this.goToMatch,
+      goToProfile: this.goToProfile
+    };
+  }
+}
+</script>
+</body>
+</html>

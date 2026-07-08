@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="design_doc_mode" content="canvas">
+<title>Frameo</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./components/fig-assets.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Manrope, sans-serif; background: rgb(7,3,15); color: rgb(255,255,255); }
+</style>
+</helmet>
+
+<div style="width: 402px; height: 874px; position: relative; overflow: hidden; background: rgb(7,3,15);">
+  <div id="onboarding" style="position: absolute; width: 402px; height: 874px; left: 0; top: 0; background: rgb(0,0,0); display: {{ currentScreen === 'onboarding' ? 'flex' : 'none' }}; flex-direction: column; align-items: center; justify-content: center;">
+    <h1 style="font-size: 35px; font-weight: 400; letter-spacing: 0.28em; color: rgb(255,255,255); font-family: Montserrat, sans-serif; position: absolute; top: 120px;">FRAMEO</h1>
+    
+    <div style="position: relative; width: 200px; height: 200px;">
+      <div style="position: absolute; width: 100%; height: 100%; border-radius: 50%; background: radial-gradient(circle, rgba(168,85,247,0.3) 0%, rgba(139,61,255,0.1) 100%); box-shadow: 0 0 40px rgba(139,61,255,0.4);"></div>
+      <button onClick="{{ startOnboarding }}" style="position: absolute; width: 84px; height: 84px; left: 50%; top: 50%; transform: translate(-50%, -50%); border-radius: 50%; background: linear-gradient(180deg, rgba(192,132,252,0.3) 0%, rgba(168,85,247,0.2) 50%, rgba(139,61,255,0.2) 100%); border: 1px solid rgba(192,132,252,0.6); box-shadow: 0 10px 50px rgba(139,61,255,0.5); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 32px; color: rgb(217,217,217);">▶</button>
+    </div>
+    
+    <p style="position: absolute; bottom: 80px; font-size: 14px; font-weight: 500; color: rgb(217,217,217);">Press play to begin</p>
+  </div>
+
+  <div id="login" style="position: absolute; width: 402px; height: 874px; left: 0; top: 0; background: rgb(7,3,15); display: {{ currentScreen === 'login' ? 'flex' : 'none' }}; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px;">
+    <h1 style="font-size: 32px; font-weight: 700; margin-bottom: 16px; color: rgb(255,255,255);">FRAMEO</h1>
+    <p style="font-size: 18px; font-weight: 500; color: rgb(181,174,200); margin-bottom: 12px;">Welcome back</p>
+    <p style="font-size: 14px; font-weight: 500; color: rgb(138,131,156); margin-bottom: 40px; max-width: 300px; text-align: center;">Log in to continue and get personalized recommendations just for you.</p>
+    
+    <input type="email" placeholder="Email" style="width: 100%; max-width: 320px; padding: 14px 16px; border: 1px solid rgb(217,217,217); border-radius: 8px; background: rgb(255,255,255); color: rgb(0,0,0); font-size: 14px; margin-bottom: 12px; font-family: inherit;" />
+    <input type="password" placeholder="Password" style="width: 100%; max-width: 320px; padding: 14px 16px; border: 1px solid rgb(217,217,217); border-radius: 8px; background: rgb(255,255,255); color: rgb(0,0,0); font-size: 14px; margin-bottom: 24px; font-family: inherit;" />
+    
+    <button onClick="{{ loginHandler }}" style="width: 100%; max-width: 280px; padding: 15px; background: rgb(138,56,245); color: rgb(255,255,255); border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; margin-bottom: 16px;">Log In</button>
+    
+    <p style="font-size: 14px; color: rgb(138,131,156);">Don't have an account? <a href="#" onClick="{{ signupHandler }}" style="color: rgb(168,85,247); font-weight: 600; cursor: pointer; text-decoration: none;">Sign up</a></p>
+  </div>
+
+  <div id="home" style="position: absolute; width: 402px; height: 874px; left: 0; top: 0; background: rgb(7,3,15); display: {{ currentScreen === 'home' ? 'flex' : 'none' }}; flex-direction: column; overflow-y: auto;">
+    <div style="padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: space-between;">
+      <h2 style="font-size: 18px; font-weight: 700; color: rgb(255,255,255);">FRAMEO</h2>
+      <button onClick="{{ openSettings }}" style="background: none; border: none; cursor: pointer; font-size: 20px; color: rgb(255,255,255);">⚙️</button>
+    </div>
+    
+    <div style="padding: 24px 20px; text-align: center; background: rgb(42,36,56);">
+      <h1 style="font-size: 32px; font-weight: 700; color: rgb(255,255,255); margin-bottom: 16px; line-height: 1.2;">What should we watch tonight?</h1>
+      <p style="font-size: 14px; color: rgb(181,174,200); line-height: 1.5;">Get AI-powered recommendations based on your mood, time, and streaming platforms.</p>
+      <button onClick="{{ startAiMatch }}" style="margin-top: 20px; padding: 15px 40px; background: rgb(139,61,255); color: rgb(255,255,255); border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer;">Ask Frameo</button>
+    </div>
+
+    <div style="padding: 20px; padding-bottom: 0;">
+      <h3 style="font-size: 16px; font-weight: 700; color: rgb(255,255,255); margin-bottom: 12px;">Recommended for you</h3>
+      <div style="display: flex; gap: 12px; overflow-x: auto; padding-bottom: 20px; scroll-behavior: smooth;">
+        <div style="min-width: 110px; height: 160px; background: url('./assets/recommended-1.jpg') center / cover no-repeat; border-radius: 8px; flex-shrink: 0;"></div>
+        <div style="min-width: 110px; height: 160px; background: url('./assets/recommended-2.jpg') center / cover no-repeat; border-radius: 8px; flex-shrink: 0;"></div>
+        <div style="min-width: 110px; height: 160px; background: url('./assets/recommended-3.jpg') center / cover no-repeat; border-radius: 8px; flex-shrink: 0;"></div>
+        <div style="min-width: 110px; height: 160px; background: url('./assets/recommended-4.jpg') center / cover no-repeat; border-radius: 8px; flex-shrink: 0;"></div>
+        <div style="min-width: 110px; height: 160px; background: url('./assets/recommended-5.jpg') center / cover no-repeat; border-radius: 8px; flex-shrink: 0;"></div>
+      </div>
+    </div>
+
+    <div style="padding: 20px; padding-top: 0; padding-bottom: 0;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <h3 style="font-size: 16px; font-weight: 700; color: rgb(255,255,255);">Trending now</h3>
+        <span style="font-size: 14px; color: rgb(168,85,247); cursor: pointer;">See all</span>
+      </div>
+      <div style="display: flex; gap: 12px; overflow-x: auto; padding-bottom: 20px; scroll-behavior: smooth;">
+        <div style="min-width: 110px; height: 160px; background: url('./assets/trending-1.jpg') center / cover no-repeat; border-radius: 8px; flex-shrink: 0;"></div>
+        <div style="min-width: 110px; height: 160px; background: url('./assets/trending-2.jpg') center / cover no-repeat; border-radius: 8px; flex-shrink: 0;"></div>
+        <div style="min-width: 110px; height: 160px; background: url('./assets/recommended-1.jpg') center / cover no-repeat; border-radius: 8px; flex-shrink: 0;"></div>
+      </div>
+    </div>
+
+    <div style="padding: 20px; padding-top: 0; padding-bottom: 20px;">
+      <h3 style="font-size: 14px; font-weight: 600; color: rgb(181,174,200); margin-bottom: 12px;">Mood filters</h3>
+      <div style="display: flex; gap: 8px; overflow-x: auto; scroll-behavior: smooth;">
+        <button style="min-width: 80px; padding: 8px 12px; background: rgb(42,36,56); border: 1px solid rgb(76,29,149); color: rgb(255,255,255); border-radius: 20px; font-size: 12px; cursor: pointer; flex-shrink: 0;">Relaxed</button>
+        <button style="min-width: 80px; padding: 8px 12px; background: rgb(42,36,56); border: 1px solid rgb(76,29,149); color: rgb(255,255,255); border-radius: 20px; font-size: 12px; cursor: pointer; flex-shrink: 0;">Action</button>
+        <button style="min-width: 80px; padding: 8px 12px; background: rgb(42,36,56); border: 1px solid rgb(76,29,149); color: rgb(255,255,255); border-radius: 20px; font-size: 12px; cursor: pointer; flex-shrink: 0;">Drama</button>
+        <button style="min-width: 80px; padding: 8px 12px; background: rgb(42,36,56); border: 1px solid rgb(76,29,149); color: rgb(255,255,255); border-radius: 20px; font-size: 12px; cursor: pointer; flex-shrink: 0;">Comedy</button>
+      </div>
+    </div>
+    
+    <div style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-around;">
+      <button onClick="{{ goToHome }}" style="flex: 1; padding: 12px; background: none; border: none; cursor: pointer; color: rgb(168,85,247); font-weight: 600; font-size: 12px;">🏠 Home</button>
+      <button onClick="{{ goToAiMatch }}" style="flex: 1; padding: 12px; background: none; border: none; cursor: pointer; color: rgb(138,131,156); font-weight: 600; font-size: 12px;">✨ AI Match</button>
+      <button onClick="{{ goToDiscover }}" style="flex: 1; padding: 12px; background: none; border: none; cursor: pointer; color: rgb(138,131,156); font-weight: 600; font-size: 12px;">🔍 Discover</button>
+      <button onClick="{{ goToWatchlist }}" style="flex: 1; padding: 12px; background: none; border: none; cursor: pointer; color: rgb(138,131,156); font-weight: 600; font-size: 12px;">⭐ Watchlist</button>
+    </div>
+  </div>
+
+  <div id="aimatch" style="position: absolute; width: 402px; height: 874px; left: 0; top: 0; background: rgb(7,3,15); display: {{ currentScreen === 'aimatch' ? 'block' : 'none' }}; overflow: hidden;">
+    <div style="position: absolute; left: 0; top: 0; width: 402px; height: 874px; background: rgb(255,255,255); overflow: hidden;">
+      <button onClick="{{ backHandler }}" style="position: absolute; left: 20px; top: 50px; background: none; border: none; cursor: pointer; color: rgb(42,36,56); font-size: 24px; z-index: 10;">←</button>
+      <h2 style="position: absolute; left: 30px; top: 148px; font-size: 32px; font-weight: 700; color: rgb(42,36,56);">AI Match</h2>
+      <div style="position: absolute; left: 204px; top: 140px; width: 172px; height: 168px; border-radius: 50%; background: rgb(42,36,56); opacity: 0.1;"></div>
+      
+      <p style="position: absolute; left: 30px; top: 192px; font-size: 15px; font-weight: 400; color: rgb(42,36,56); margin: 0;">Step {{ currentStep }} of 4</p>
+      
+      <div style="position: absolute; left: 24px; top: 224px; height: 4px; display: flex; gap: 8px; width: 354px;">
+        <div style="flex: 1; background: {{ currentStep >= 1 ? 'rgb(217,217,217)' : 'rgb(220,220,220)' }}; border-radius: 2px;"></div>
+        <div style="flex: 1; background: {{ currentStep >= 2 ? 'rgb(217,217,217)' : 'rgb(220,220,220)' }}; border-radius: 2px;"></div>
+        <div style="flex: 1; background: {{ currentStep >= 3 ? 'rgb(217,217,217)' : 'rgb(220,220,220)' }}; border-radius: 2px;"></div>
+        <div style="flex: 1; background: {{ currentStep >= 4 ? 'rgb(217,217,217)' : 'rgb(220,220,220)' }}; border-radius: 2px;"></div>
+      </div>
+      
+      <div style="position: absolute; left: 25px; top: 287px; width: 352px; border-radius: 20px; background: rgb(42,36,56); padding: 32px 24px; display: flex; flex-direction: column; gap: 24px;">
+        <div style="width: 100%;"><h3 style="font-size: 22px; font-weight: 700; color: rgb(255,255,255); margin: 0 0 12px 0;">{{ currentStepTitle }}</h3><p style="font-size: 14px; color: rgb(181,174,200); margin: 0; line-height: 1.5;">{{ currentStepDescription }}</p></div>
+        
+        <sc-if value="{{ currentStep === 1 }}" hint-placeholder-val="{{ true }}">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+            <button onClick="{{ selectMood }}" data-mood="Relaxed" style="padding: 14px 12px; background: {{ selectedMood === 'Relaxed' ? 'rgb(139,61,255)' : 'transparent' }}; color: rgb(255,255,255); border: 1px solid {{ selectedMood === 'Relaxed' ? 'rgb(168,85,247)' : 'rgb(76,29,149)' }}; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: Manrope, sans-serif;">Relaxed</button>
+            <button onClick="{{ selectMood }}" data-mood="Romantic" style="padding: 14px 12px; background: {{ selectedMood === 'Romantic' ? 'rgb(139,61,255)' : 'transparent' }}; color: rgb(255,255,255); border: 1px solid {{ selectedMood === 'Romantic' ? 'rgb(168,85,247)' : 'rgb(76,29,149)' }}; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: Manrope, sans-serif;">Romantic</button>
+            <button onClick="{{ selectMood }}" data-mood="Curious" style="padding: 14px 12px; background: {{ selectedMood === 'Curious' ? 'rgb(139,61,255)' : 'transparent' }}; color: rgb(255,255,255); border: 1px solid {{ selectedMood === 'Curious' ? 'rgb(168,85,247)' : 'rgb(76,29,149)' }}; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: Manrope, sans-serif;">Curious</button>
+            <button onClick="{{ selectMood }}" data-mood="Focused" style="padding: 14px 12px; background: {{ selectedMood === 'Focused' ? 'rgb(139,61,255)' : 'transparent' }}; color: rgb(255,255,255); border: 1px solid {{ selectedMood === 'Focused' ? 'rgb(168,85,247)' : 'rgb(76,29,149)' }}; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: Manrope, sans-serif;">Focused</button>
+            <button onClick="{{ selectMood }}" data-mood="Sad" style="padding: 14px 12px; background: {{ selectedMood === 'Sad' ? 'rgb(139,61,255)' : 'transparent' }}; color: rgb(255,255,255); border: 1px solid {{ selectedMood === 'Sad' ? 'rgb(168,85,247)' : 'rgb(76,29,149)' }}; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: Manrope, sans-serif;">Sad</button>
+            <button onClick="{{ selectMood }}" data-mood="Excited" style="padding: 14px 12px; background: {{ selectedMood === 'Excited' ? 'rgb(139,61,255)' : 'transparent' }}; color: rgb(255,255,255); border: 1px solid {{ selectedMood === 'Excited' ? 'rgb(168,85,247)' : 'rgb(76,29,149)' }}; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: Manrope, sans-serif;">Excited</button>
+            <button onClick="{{ selectMood }}" data-mood="Adventurous" style="padding: 14px 12px; background: {{ selectedMood === 'Adventurous' ? 'rgb(139,61,255)' : 'transparent' }}; color: rgb(255,255,255); border: 1px solid {{ selectedMood === 'Adventurous' ? 'rgb(168,85,247)' : 'rgb(76,29,149)' }}; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: Manrope, sans-serif;">Adventurous</button>
+            <button onClick="{{ selectMood }}" data-mood="Stressed" style="padding: 14px 12px; background: {{ selectedMood === 'Stressed' ? 'rgb(139,61,255)' : 'transparent' }}; color: rgb(255,255,255); border: 1px solid {{ selectedMood === 'Stressed' ? 'rgb(168,85,247)' : 'rgb(76,29,149)' }}; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: Manrope, sans-serif;">Stressed</button>
+          </div>
+        </sc-if>
+        
+        <sc-if value="{{ currentStep === 2 }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">
+            <button onClick="{{ selectTime }}" data-time="Quick Break" style="padding: 14px 12px; background: {{ selectedTime === 'Quick Break' ? 'rgb(139,61,255)' : 'transparent' }}; color: rgb(255,255,255); border: 1px solid {{ selectedTime === 'Quick Break' ? 'rgb(168,85,247)' : 'rgb(76,29,149)' }}; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; text-align: left; font-family: Manrope, sans-serif;">Quick Break (15-30 min)</button>
+            <button onClick="{{ selectTime }}" data-time="Short Watch" style="padding: 14px 12px; background: {{ selectedTime === 'Short Watch' ? 'rgb(139,61,255)' : 'transparent' }}; color: rgb(255,255,255); border: 1px solid {{ selectedTime === 'Short Watch' ? 'rgb(168,85,247)' : 'rgb(76,29,149)' }}; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; text-align: left; font-family: Manrope, sans-serif;">Short Watch (30-60 min)</button>
+            <button onClick="{{ selectTime }}" data-time="Movie Night" style="padding: 14px 12px; background: {{ selectedTime === 'Movie Night' ? 'rgb(139,61,255)' : 'transparent' }}; color: rgb(255,255,255); border: 1px solid {{ selectedTime === 'Movie Night' ? 'rgb(168,85,247)' : 'rgb(76,29,149)' }}; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; text-align: left; font-family: Manrope, sans-serif;">Movie Night (1.5-2 hrs)</button>
+            <button onClick="{{ selectTime }}" data-time="Movie Marathon" style="padding: 14px 12px; background: {{ selectedTime === 'Movie Marathon' ? 'rgb(139,61,255)' : 'transparent' }}; color: rgb(255,255,255); border: 1px solid {{ selectedTime === 'Movie Marathon' ? 'rgb(168,85,247)' : 'rgb(76,29,149)' }}; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; text-align: left; font-family: Manrope, sans-serif;">Movie Marathon (2+ hrs)</button>
+          </div>
+        </sc-if>
+        
+        <sc-if value="{{ currentStep === 3 }}" hint-placeholder-val="{{ false }}">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+            <button onClick="{{ togglePlatform }}" data-platform="Netflix" style="padding: 14px 12px; background: {{ selectedPlatforms.includes('Netflix') ? 'rgb(139,61,255)' : 'transparent' }}; color: rgb(255,255,255); border: 1px solid {{ selectedPlatforms.includes('Netflix') ? 'rgb(168,85,247)' : 'rgb(76,29,149)' }}; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: Manrope, sans-serif;">Netflix</button>
+            <button onClick="{{ togglePlatform }}" data-platform="Disney+" style="padding: 14px 12px; background: {{ selectedPlatforms.includes('Disney+') ? 'rgb(139,61,255)' : 'transparent' }}; color: rgb(255,255,255); border: 1px solid {{ selectedPlatforms.includes('Disney+') ? 'rgb(168,85,247)' : 'rgb(76,29,149)' }}; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: Manrope, sans-serif;">Disney+</button>
+            <button onClick="{{ togglePlatform }}" data-platform="Prime Video" style="padding: 14px 12px; background: {{ selectedPlatforms.includes('Prime Video') ? 'rgb(139,61,255)' : 'transparent' }}; color: rgb(255,255,255); border: 1px solid {{ selectedPlatforms.includes('Prime Video') ? 'rgb(168,85,247)' : 'rgb(76,29,149)' }}; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: Manrope, sans-serif;">Prime Video</button>
+            <button onClick="{{ togglePlatform }}" data-platform="Hulu" style="padding: 14px 12px; background: {{ selectedPlatforms.includes('Hulu') ? 'rgb(139,61,255)' : 'transparent' }}; color: rgb(255,255,255); border: 1px solid {{ selectedPlatforms.includes('Hulu') ? 'rgb(168,85,247)' : 'rgb(76,29,149)' }}; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: Manrope, sans-serif;">Hulu</button>
+            <button onClick="{{ togglePlatform }}" data-platform="HBO Max" style="padding: 14px 12px; background: {{ selectedPlatforms.includes('HBO Max') ? 'rgb(139,61,255)' : 'transparent' }}; color: rgb(255,255,255); border: 1px solid {{ selectedPlatforms.includes('HBO Max') ? 'rgb(168,85,247)' : 'rgb(76,29,149)' }}; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: Manrope, sans-serif;">HBO Max</button>
+            <button onClick="{{ togglePlatform }}" data-platform="Apple TV" style="padding: 14px 12px; background: {{ selectedPlatforms.includes('Apple TV') ? 'rgb(139,61,255)' : 'transparent' }}; color: rgb(255,255,255); border: 1px solid {{ selectedPlatforms.includes('Apple TV') ? 'rgb(168,85,247)' : 'rgb(76,29,149)' }}; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: Manrope, sans-serif;">Apple TV</button>
+          </div>
+        </sc-if>
+        
+        <sc-if value="{{ currentStep === 4 }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">
+            <button onClick="{{ selectContext }}" data-context="Solo Night" style="padding: 14px 12px; background: {{ selectedContext === 'Solo Night' ? 'rgb(139,61,255)' : 'transparent' }}; color: rgb(255,255,255); border: 1px solid {{ selectedContext === 'Solo Night' ? 'rgb(168,85,247)' : 'rgb(76,29,149)' }}; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; text-align: left; font-family: Manrope, sans-serif;">Solo Night</button>
+            <button onClick="{{ selectContext }}" data-context="Date Night" style="padding: 14px 12px; background: {{ selectedContext === 'Date Night' ? 'rgb(139,61,255)' : 'transparent' }}; color: rgb(255,255,255); border: 1px solid {{ selectedContext === 'Date Night' ? 'rgb(168,85,247)' : 'rgb(76,29,149)' }}; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; text-align: left; font-family: Manrope, sans-serif;">Date Night</button>
+            <button onClick="{{ selectContext }}" data-context="Family Time" style="padding: 14px 12px; background: {{ selectedContext === 'Family Time' ? 'rgb(139,61,255)' : 'transparent' }}; color: rgb(255,255,255); border: 1px solid {{ selectedContext === 'Family Time' ? 'rgb(168,85,247)' : 'rgb(76,29,149)' }}; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; text-align: left; font-family: Manrope, sans-serif;">Family Time</button>
+            <button onClick="{{ selectContext }}" data-context="With Friends" style="padding: 14px 12px; background: {{ selectedContext === 'With Friends' ? 'rgb(139,61,255)' : 'transparent' }}; color: rgb(255,255,255); border: 1px solid {{ selectedContext === 'With Friends' ? 'rgb(168,85,247)' : 'rgb(76,29,149)' }}; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; text-align: left; font-family: Manrope, sans-serif;">With Friends</button>
+            <button onClick="{{ selectContext }}" data-context="Background Watch" style="padding: 14px 12px; background: {{ selectedContext === 'Background Watch' ? 'rgb(139,61,255)' : 'transparent' }}; color: rgb(255,255,255); border: 1px solid {{ selectedContext === 'Background Watch' ? 'rgb(168,85,247)' : 'rgb(76,29,149)' }}; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; text-align: left; font-family: Manrope, sans-serif;">Background Watch</button>
+          </div>
+        </sc-if>
+      </div>
+      
+      <button onClick="{{ nextOrMatch }}" style="position: absolute; left: 61px; top: 773px; width: 280px; height: 60px; padding: 15px; background: rgb(139,61,255); color: rgb(255,255,255); border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer;">{{ currentStep === 4 ? 'Get Matches' : 'Continue' }}</button>
+    </div>
+  </div>
+
+  <div id="results" style="position: absolute; width: 402px; height: 874px; left: 0; top: 0; background: rgb(7,3,15); display: {{ currentScreen === 'results' ? 'flex' : 'none' }}; flex-direction: column; overflow-y: auto;">
+    <div style="padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: space-between;">
+      <button onClick="{{ backHandler }}" style="background: none; border: none; cursor: pointer; color: rgb(255,255,255); font-size: 18px;">←</button>
+      <h2 style="font-size: 18px; font-weight: 700; color: rgb(255,255,255);">Your Matches</h2>
+      <div style="width: 24px;"></div>
+    </div>
+    
+    <div style="padding: 24px; flex: 1;">
+      <h3 style="font-size: 20px; font-weight: 700; color: rgb(255,255,255); margin-bottom: 12px;">Based on {{ selectedMood }} mood</h3>
+      <p style="font-size: 14px; color: rgb(181,174,200); margin-bottom: 20px;">{{ matchCount }} great recommendations found</p>
+      
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <sc-for list="{{ results }}" as="result" hint-placeholder-count="3">
+          <div style="padding: 16px; background: rgb(42,36,56); border-radius: 12px; border-left: 4px solid rgb(139,61,255);">
+            <div style="display: flex; justify-content: space-between; align-items: start;">
+              <div style="flex: 1;">
+                <h4 style="font-size: 16px; font-weight: 600; color: rgb(255,255,255); margin-bottom: 4px;">{{ result.title }}</h4>
+                <p style="font-size: 12px; color: rgb(181,174,200);">{{ result.platforms }} • {{ result.runtime }}</p>
+              </div>
+              <span style="font-size: 20px;">{{ result.icon }}</span>
+            </div>
+            <p style="font-size: 12px; color: rgb(181,174,200); margin-top: 8px;">{{ result.reason }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    
+    <div style="padding: 20px; display: flex; gap: 12px; margin-top: auto;">
+      <button onClick="{{ returnHome }}" style="flex: 1; padding: 15px; background: rgb(56,30,114); color: rgb(255,255,255); border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer;">Back Home</button>
+      <button onClick="{{ startAiMatch }}" style="flex: 1; padding: 15px; background: rgb(139,61,255); color: rgb(255,255,255); border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer;">New Match</button>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: {
+    &quot;width&quot;: 402,
+    &quot;height&quot;: 874
+  }
+}">
+class Component extends DCLogic {
+  state = {
+    currentScreen: 'aimatch',
+    currentStep: 1,
+    selectedMood: '',
+    selectedTime: '',
+    selectedPlatforms: [],
+    selectedContext: '',
+    matchCount: 3,
+  };
+
+  moodOptions = ['Relaxed', 'Romantic', 'Curious', 'Focused', 'Sad', 'Excited', 'Adventurous', 'Stressed'];
+  timeOptions = ['Quick Break (15-30 min)', 'Short Watch (30-60 min)', 'Movie Night (1.5-2 hrs)', 'Marathon (2+ hrs)'];
+  platformOptions = ['Netflix', 'Disney+', 'Prime Video', 'Hulu', 'HBO Max', 'Apple TV'];
+  contextOptions = ['Solo Night', 'Date Night', 'Family Time', 'With Friends', 'Background Watch'];
+
+  stepTitles = ['Tell FRAMEO your mood', 'How much time do you have?', 'Which platforms do you have?', 'Who are you watching with?'];
+  stepDescriptions = ["Choose how you feel and FRAMEO will start building your match.", "We'll find shows that fit your schedule perfectly.", "We only recommend from services you actually have.", "Let us know your viewing context to refine recommendations."];
+  results = [
+    { title: 'The Bear', platforms: 'Hulu', runtime: '43 min', icon: '🍳', reason: 'Fast-paced drama perfect for this mood' },
+    { title: 'Shrinking', platforms: 'Apple TV', runtime: '45 min', icon: '💭', reason: 'Thoughtful comedy-drama series' },
+    { title: 'Succession', platforms: 'Prime Video', runtime: '68 min', icon: '💼', reason: 'Engaging drama with great pacing' }
+  ];
+
+  startOnboarding = () => this.setState({ currentScreen: 'login' });
+  loginHandler = () => this.setState({ currentScreen: 'home', currentStep: 1 });
+  signupHandler = () => alert('Sign up coming soon!');
+  startAiMatch = () => this.setState({ currentScreen: 'aimatch', currentStep: 1, selectedMood: '', selectedTime: '', selectedPlatforms: [], selectedContext: '' });
+  selectMood = (e) => this.setState({ selectedMood: e.currentTarget.getAttribute('data-mood') });
+  selectTime = (e) => this.setState({ selectedTime: e.currentTarget.getAttribute('data-time') });
+  togglePlatform = (e) => {
+    const platform = e.currentTarget.getAttribute('data-platform');
+    const { selectedPlatforms } = this.state;
+    const updated = selectedPlatforms.includes(platform) ? selectedPlatforms.filter(p => p !== platform) : [...selectedPlatforms, platform];
+    this.setState({ selectedPlatforms: updated });
+  };
+  selectContext = (e) => this.setState({ selectedContext: e.currentTarget.getAttribute('data-context') });
+  nextOrMatch = () => {
+    if (this.state.currentStep < 4) this.setState({ currentStep: this.state.currentStep + 1 });
+    else this.setState({ currentScreen: 'results' });
+  };
+  backHandler = () => {
+    const { currentScreen, currentStep } = this.state;
+    if (currentScreen === 'aimatch' && currentStep > 1) this.setState({ currentStep: currentStep - 1 });
+    else if (currentScreen === 'aimatch') this.setState({ currentScreen: 'home' });
+    else if (currentScreen === 'results') this.setState({ currentScreen: 'home' });
+  };
+  goToHome = () => this.setState({ currentScreen: 'home' });
+  returnHome = () => this.setState({ currentScreen: 'home', currentStep: 1 });
+  goToAiMatch = () => this.startAiMatch();
+  goToDiscover = () => alert('Discover feature coming soon!');
+  goToWatchlist = () => alert('Watchlist feature coming soon!');
+  openSettings = () => alert('Settings coming soon!');
+
+  renderVals() {
+    const { currentScreen, currentStep, selectedMood, selectedTime, selectedPlatforms, selectedContext, matchCount } = this.state;
+    return {
+      currentScreen,
+      currentStep,
+      currentStepTitle: this.stepTitles[currentStep - 1] || '',
+      currentStepDescription: this.stepDescriptions[currentStep - 1] || '',
+      selectedMood,
+      selectedTime,
+      selectedPlatforms,
+      selectedContext,
+      matchCount,
+      displayOnboarding: currentScreen === 'onboarding' ? 'flex' : 'none',
+      displayLogin: currentScreen === 'login' ? 'flex' : 'none',
+      displayHome: currentScreen === 'home' ? 'flex' : 'none',
+      displayAiMatch: currentScreen === 'aimatch' ? 'flex' : 'none',
+      displayResults: currentScreen === 'results' ? 'flex' : 'none',
+      moodOptions: this.moodOptions,
+      timeOptions: this.timeOptions,
+      platformOptions: this.platformOptions,
+      contextOptions: this.contextOptions,
+      results: this.results,
+      startOnboarding: this.startOnboarding,
+      loginHandler: this.loginHandler,
+      signupHandler: this.signupHandler,
+      startAiMatch: this.startAiMatch,
+      selectMood: this.selectMood,
+      selectTime: this.selectTime,
+      togglePlatform: this.togglePlatform,
+      selectContext: this.selectContext,
+      nextOrMatch: this.nextOrMatch,
+      backHandler: this.backHandler,
+      goToHome: this.goToHome,
+      returnHome: this.returnHome,
+      goToAiMatch: this.goToAiMatch,
+      goToDiscover: this.goToDiscover,
+      goToWatchlist: this.goToWatchlist,
+      openSettings: this.openSettings
+    };
+  }
+}
+</script>
+</body>
+</html>

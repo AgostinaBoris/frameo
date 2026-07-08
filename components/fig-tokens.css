@@ -1,0 +1,130 @@
+/* Generated from Figma Variables. First mode = :root default.
+   FLOAT tokens are unitless — multiply by 1px in calc() where a length is needed. */
+
+:root {
+  --state-layers-on-primary-fixed-variant-opacity-08: rgba(79,55,139,0.08); /* @kind color */
+  --static-display-large-line-height: 64;
+  --static-display-medium-tracking: 0;
+  --static-display-small-font: var(--static-font-brand);
+  --static-display-small-line-height: 44;
+  --static-font-brand: "Roboto";
+}
+
+:root[data-mode="wireframe"] {
+  --static-font-brand: "Flow Circular";
+}
+
+:root[data-theme="light"], .light {
+  --state-layers-on-primary-fixed-variant-opacity-08: rgba(255,255,255,0.08); /* @kind color */
+  --state-layers-on-primary-fixed-variant-opacity-08: rgba(255,255,255,0.08); /* @kind color */
+}
+
+:root[data-theme="dark"], .dark {
+  --state-layers-on-primary-fixed-variant-opacity-08: rgba(27,9,66,0.08); /* @kind color */
+  --state-layers-on-primary-fixed-variant-opacity-08: rgba(60,45,99,0.08); /* @kind color */
+  --state-layers-on-primary-fixed-variant-opacity-08: rgba(79,55,139,0.08); /* @kind color */
+}
+
+:root[data-mode="monochrome-lt"] {
+  --state-layers-on-primary-fixed-variant-opacity-08: rgba(227,226,226,0.08); /* @kind color */
+}
+
+:root[data-mode="monochrome-dt"] {
+  --state-layers-on-primary-fixed-variant-opacity-08: rgba(227,226,226,0.08); /* @kind color */
+}
+
+:root[data-mode="pink-lt"] {
+  --state-layers-on-primary-fixed-variant-opacity-08: rgba(110,51,79,0.08); /* @kind color */
+}
+
+:root[data-mode="pink-dt"] {
+  --state-layers-on-primary-fixed-variant-opacity-08: rgba(110,51,79,0.08); /* @kind color */
+}
+
+:root[data-mode="rose-lt"] {
+  --state-layers-on-primary-fixed-variant-opacity-08: rgba(114,50,63,0.08); /* @kind color */
+}
+
+:root[data-mode="rose-dt"] {
+  --state-layers-on-primary-fixed-variant-opacity-08: rgba(114,50,63,0.08); /* @kind color */
+}
+
+:root[data-mode="red-lt"] {
+  --state-layers-on-primary-fixed-variant-opacity-08: rgba(115,51,44,0.08); /* @kind color */
+}
+
+:root[data-mode="red-dt"] {
+  --state-layers-on-primary-fixed-variant-opacity-08: rgba(115,51,44,0.08); /* @kind color */
+}
+
+:root[data-mode="orange-lt"] {
+  --state-layers-on-primary-fixed-variant-opacity-08: rgba(103,60,34,0.08); /* @kind color */
+}
+
+:root[data-mode="orange-dt"] {
+  --state-layers-on-primary-fixed-variant-opacity-08: rgba(103,60,34,0.08); /* @kind color */
+}
+
+:root[data-mode="yellow-lt"] {
+  --state-layers-on-primary-fixed-variant-opacity-08: rgba(84,69,34,0.08); /* @kind color */
+}
+
+:root[data-mode="yellow-dt"] {
+  --state-layers-on-primary-fixed-variant-opacity-08: rgba(84,69,34,0.08); /* @kind color */
+}
+
+:root[data-mode="chartreuse-lt"] {
+  --state-layers-on-primary-fixed-variant-opacity-08: rgba(69,74,35,0.08); /* @kind color */
+}
+
+:root[data-mode="chartreuse-dt"] {
+  --state-layers-on-primary-fixed-variant-opacity-08: rgba(69,74,35,0.08); /* @kind color */
+}
+
+:root[data-mode="green-lt"] {
+  --state-layers-on-primary-fixed-variant-opacity-08: rgba(45,78,48,0.08); /* @kind color */
+}
+
+:root[data-mode="green-dt"] {
+  --state-layers-on-primary-fixed-variant-opacity-08: rgba(45,78,48,0.08); /* @kind color */
+}
+
+:root[data-mode="teal-lt"] {
+  --state-layers-on-primary-fixed-variant-opacity-08: rgba(46,76,71,0.08); /* @kind color */
+}
+
+:root[data-mode="teal-dt"] {
+  --state-layers-on-primary-fixed-variant-opacity-08: rgba(46,76,71,0.08); /* @kind color */
+}
+
+:root[data-mode="cyan-lt"] {
+  --state-layers-on-primary-fixed-variant-opacity-08: rgba(47,75,84,0.08); /* @kind color */
+}
+
+:root[data-mode="cyan-dt"] {
+  --state-layers-on-primary-fixed-variant-opacity-08: rgba(47,75,84,0.08); /* @kind color */
+}
+
+:root[data-mode="blue-lt"] {
+  --state-layers-on-primary-fixed-variant-opacity-08: rgba(50,69,116,0.08); /* @kind color */
+}
+
+:root[data-mode="blue-dt"] {
+  --state-layers-on-primary-fixed-variant-opacity-08: rgba(50,69,116,0.08); /* @kind color */
+}
+
+:root[data-mode="indigo-lt"] {
+  --state-layers-on-primary-fixed-variant-opacity-08: rgba(67,64,120,0.08); /* @kind color */
+}
+
+:root[data-mode="indigo-dt"] {
+  --state-layers-on-primary-fixed-variant-opacity-08: rgba(67,64,120,0.08); /* @kind color */
+}
+
+:root[data-mode="purple-lt"] {
+  --state-layers-on-primary-fixed-variant-opacity-08: rgba(82,60,114,0.08); /* @kind color */
+}
+
+:root[data-mode="purple-dt"] {
+  --state-layers-on-primary-fixed-variant-opacity-08: rgba(82,60,114,0.08); /* @kind color */
+}
