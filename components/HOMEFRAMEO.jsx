@@ -183,17 +183,23 @@ export function HOMEFRAMEO(_p = {}) {
           gap: 28,
         }}>
           {[
-            { Icon: Ellipse8, label: "Mood" },
-            { Icon: Ellipse9, label: "Context" },
-            { Icon: Ellipse10, label: "Time" },
-            { Icon: Ellipse11, label: "Platforms" },
-          ].map(({ Icon, label }) => (
-            <div key={label} style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: 10,
-            }}>
+            { Icon: Ellipse8, label: "Mood", step: "match" },
+            { Icon: Ellipse9, label: "Context", step: "match-context" },
+            { Icon: Ellipse10, label: "Time", step: "match-time" },
+            { Icon: Ellipse11, label: "Platforms", step: "match-platforms" },
+          ].map(({ Icon, label, step }) => (
+            <div
+              key={label}
+              className="selectable-card"
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 10,
+                cursor: "pointer",
+              }}
+              onClick={() => props.onQuickMatch?.(step)}
+            >
               <Icon style={{ position: "relative" }} property1={"default"} />
               <span style={{
                 fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",

@@ -15,6 +15,7 @@ import AIMATCHTIME from './screens/AIMATCHTIME';
 import AIMATCHPLATFORMS from './screens/AIMATCHPLATFORMS';
 import AIMATCHRESULTS from './screens/AIMATCHRESULTS';
 import MOVIEDETAILS from './screens/MOVIEDETAILS';
+import SETTINGS from './screens/SETTINGS';
 
 export default function FrameoApp() {
   const [screen, setScreen] = useState('onboarding');
@@ -87,7 +88,7 @@ export default function FrameoApp() {
 
         {screen === 'home' && (
           <div style={{ width: '100%', height: '100%', position: 'relative' }}>
-            <HOMEFRAMEO {...navHandlers} onAskFrameo={() => setScreen('match')} />
+            <HOMEFRAMEO {...navHandlers} onAskFrameo={() => setScreen('match')} onQuickMatch={(step) => setScreen(step)} />
           </div>
         )}
 
@@ -129,7 +130,13 @@ export default function FrameoApp() {
 
         {screen === 'profile' && (
           <div style={{ width: '100%', height: '100%' }}>
-            <PROFILE2 {...navHandlers} onLogout={() => setScreen('login')} />
+            <PROFILE2 {...navHandlers} onLogout={() => setScreen('login')} onSettings={() => setScreen('settings')} />
+          </div>
+        )}
+
+        {screen === 'settings' && (
+          <div style={{ width: '100%', height: '100%' }}>
+            <SETTINGS {...navHandlers} onBack={() => setScreen('profile')} onLogout={() => setScreen('login')} />
           </div>
         )}
 
