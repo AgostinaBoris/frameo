@@ -175,6 +175,7 @@ export function SETTINGS(props = {}) {
         onDiscover={props.onDiscover}
         onMatch={props.onMatch}
         onWatchlist={props.onWatchlist}
+        active={props.active}
       />
     </div>
   );

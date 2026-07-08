@@ -286,6 +286,7 @@ export function AIMATCHTIME(_p = {}) {
         onDiscover={props.onDiscover}
         onMatch={props.onMatch}
         onWatchlist={props.onWatchlist}
+        active={props.active}
       />
     </div>
   );

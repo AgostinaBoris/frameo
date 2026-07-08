@@ -262,6 +262,7 @@ export function AIMATCHCONTEXT(_p = {}) {
         onDiscover={props.onDiscover}
         onMatch={props.onMatch}
         onWatchlist={props.onWatchlist}
+        active={props.active}
       />
       <TOPNAV style={{
           position: "absolute",

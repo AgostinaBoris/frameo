@@ -30,6 +30,15 @@ export default function FrameoApp() {
     onProfile: () => setScreen('profile'),
   };
 
+  const activeTabFor = (s) => {
+    if (s === 'home') return 'home';
+    if (s === 'discover') return 'discover';
+    if (s.startsWith('match')) return 'match';
+    if (s === 'watchlist') return 'watchlist';
+    return null;
+  };
+  const activeTab = activeTabFor(screen === 'movie-details' ? previousScreen : screen);
+
   const openMovieDetails = (movie) => {
     setPreviousScreen(screen);
     setSelectedMovie(movie);
@@ -88,67 +97,67 @@ export default function FrameoApp() {
 
         {screen === 'home' && (
           <div style={{ width: '100%', height: '100%', position: 'relative' }}>
-            <HOMEFRAMEO {...navHandlers} onAskFrameo={() => setScreen('match')} onQuickMatch={(step) => setScreen(step)} />
+            <HOMEFRAMEO {...navHandlers} active={activeTab} onAskFrameo={() => setScreen('match')} onQuickMatch={(step) => setScreen(step)} />
           </div>
         )}
 
         {screen === 'match' && (
           <div style={{ width: '100%', height: '100%', position: 'relative' }}>
-            <AIMATCH {...navHandlers} onNext={() => setScreen('match-context')} />
+            <AIMATCH {...navHandlers} active={activeTab} onNext={() => setScreen('match-context')} />
           </div>
         )}
 
         {screen === 'match-context' && (
           <div style={{ width: '100%', height: '100%' }}>
-            <AIMATCHCONTEXT {...navHandlers} onNext={() => setScreen('match-time')} />
+            <AIMATCHCONTEXT {...navHandlers} active={activeTab} onNext={() => setScreen('match-time')} />
           </div>
         )}
 
         {screen === 'match-time' && (
           <div style={{ width: '100%', height: '100%' }}>
-            <AIMATCHTIME {...navHandlers} onNext={() => setScreen('match-platforms')} />
+            <AIMATCHTIME {...navHandlers} active={activeTab} onNext={() => setScreen('match-platforms')} />
           </div>
         )}
 
         {screen === 'match-platforms' && (
           <div style={{ width: '100%', height: '100%' }}>
-            <AIMATCHPLATFORMS {...navHandlers} onNext={() => setScreen('match-results')} />
+            <AIMATCHPLATFORMS {...navHandlers} active={activeTab} onNext={() => setScreen('match-results')} />
           </div>
         )}
 
         {screen === 'match-results' && (
           <div style={{ width: '100%', height: '100%' }}>
-            <AIMATCHRESULTS {...navHandlers} onDetails={openMovieDetails} />
+            <AIMATCHRESULTS {...navHandlers} active={activeTab} onDetails={openMovieDetails} />
           </div>
         )}
 
         {screen === 'movie-details' && (
           <div style={{ width: '100%', height: '100%' }}>
-            <MOVIEDETAILS {...navHandlers} movie={selectedMovie} onBack={() => setScreen(previousScreen)} />
+            <MOVIEDETAILS {...navHandlers} active={activeTab} movie={selectedMovie} onBack={() => setScreen(previousScreen)} />
           </div>
         )}
 
         {screen === 'profile' && (
           <div style={{ width: '100%', height: '100%' }}>
-            <PROFILE2 {...navHandlers} onLogout={() => setScreen('login')} onSettings={() => setScreen('settings')} />
+            <PROFILE2 {...navHandlers} active={activeTab} onLogout={() => setScreen('login')} onSettings={() => setScreen('settings')} />
           </div>
         )}
 
         {screen === 'settings' && (
           <div style={{ width: '100%', height: '100%' }}>
-            <SETTINGS {...navHandlers} onBack={() => setScreen('profile')} onLogout={() => setScreen('login')} />
+            <SETTINGS {...navHandlers} active={activeTab} onBack={() => setScreen('profile')} onLogout={() => setScreen('login')} />
           </div>
         )}
 
         {screen === 'discover' && (
           <div style={{ width: '100%', height: '100%' }}>
-            <DISCOVER {...navHandlers} />
+            <DISCOVER {...navHandlers} active={activeTab} />
           </div>
         )}
 
         {screen === 'watchlist' && (
           <div style={{ width: '100%', height: '100%' }}>
-            <WATCHLIST {...navHandlers} onDetails={openMovieDetails} />
+            <WATCHLIST {...navHandlers} active={activeTab} onDetails={openMovieDetails} />
           </div>
         )}
       </div>

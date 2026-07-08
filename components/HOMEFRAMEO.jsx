@@ -446,6 +446,7 @@ export function HOMEFRAMEO(_p = {}) {
         onMatch={props.onAskFrameo}
         onDiscover={props.onDiscover}
         onWatchlist={props.onWatchlist}
+        active={props.active}
       />
       <TOPNAV style={{
           position: "absolute",

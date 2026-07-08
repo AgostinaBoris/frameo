@@ -215,6 +215,7 @@ export function MOVIEDETAILS(props = {}) {
         onDiscover={props.onDiscover}
         onMatch={props.onMatch}
         onWatchlist={props.onWatchlist}
+        active={props.active}
       />
     </div>
   );

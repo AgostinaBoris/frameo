@@ -98,7 +98,7 @@ export function WATCHLIST(_p = {}) {
             height: 190,
             overflow: "hidden",
             borderRadius: 18,
-            boxShadow: "inset 0 0 0 1px rgb(248,247,255)",
+            boxShadow: "inset 0 0 0 1px rgba(168,85,247,0.35)",
             flexShrink: 0,
             alignSelf: "stretch",
           }}>
@@ -196,11 +196,12 @@ export function WATCHLIST(_p = {}) {
             <DETAILS
               style={{
                 position: "absolute",
-                left: 190,
-                top: 147,
-                width: 70,
-                height: 28,
+                left: 184,
+                top: 143,
+                width: 86,
+                height: 36,
               }}
+              strong
               property1={"default"}
               onClick={() => props.onDetails?.(MOVIE_DATA.ironman2)}
             />
@@ -223,7 +224,7 @@ export function WATCHLIST(_p = {}) {
               width: 357,
               overflow: "hidden",
               borderRadius: 18,
-              boxShadow: "inset 0 0 0 1px rgb(181,174,200)",
+              boxShadow: "inset 0 0 0 1px rgba(168,85,247,0.35)",
               flexShrink: 0,
               alignSelf: "stretch",
             }}>
@@ -312,11 +313,12 @@ export function WATCHLIST(_p = {}) {
               <DETAILS
                 style={{
                   position: "absolute",
-                  left: 191,
-                  top: 148,
-                  width: 70,
-                  height: 28,
+                  left: 185,
+                  top: 144,
+                  width: 86,
+                  height: 36,
                 }}
+                strong
                 property1={"default"}
                 onClick={() => props.onDetails?.(MOVIE_DATA.endgame)}
               />
@@ -338,7 +340,7 @@ export function WATCHLIST(_p = {}) {
               width: 357,
               height: 190,
               borderRadius: 18,
-              boxShadow: "inset 0 0 0 1px rgb(248,247,255)",
+              boxShadow: "inset 0 0 0 1px rgba(168,85,247,0.35)",
               flexShrink: 0,
             }}>
               <div className="fig-asset-45cc3d44daf46f8f" style={{
@@ -417,11 +419,12 @@ export function WATCHLIST(_p = {}) {
               <DETAILS
                 style={{
                   position: "absolute",
-                  left: 196,
-                  top: 152,
-                  width: 70,
-                  height: 28,
+                  left: 190,
+                  top: 148,
+                  width: 86,
+                  height: 36,
                 }}
+                strong
                 property1={"default"}
                 onClick={() => props.onDetails?.(MOVIE_DATA.skyscraper)}
               />
@@ -507,6 +510,7 @@ export function WATCHLIST(_p = {}) {
         onDiscover={props.onDiscover}
         onMatch={props.onMatch}
         onWatchlist={props.onWatchlist}
+        active={props.active}
       />
     </div>
   );

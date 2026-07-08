@@ -341,6 +341,7 @@ export function PROFILE2(_p = {}) {
         onMatch={props.onMatch}
         onDiscover={props.onDiscover}
         onWatchlist={props.onWatchlist}
+        active={props.active}
       />
     </div>
   );

@@ -535,6 +535,7 @@ export function DISCOVER(_p = {}) {
         onDiscover={props.onDiscover}
         onMatch={props.onMatch}
         onWatchlist={props.onWatchlist}
+        active={props.active}
       />
     </div>
   );

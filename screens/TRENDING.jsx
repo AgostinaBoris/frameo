@@ -28,7 +28,8 @@ export function TRENDING(_p = {}) {
         width: 64,
         height: 36,
         borderRadius: 15,
-        boxShadow: "2px 2px 6px 0.500px rgba(168,85,247,0.89)",
+        backgroundColor: "rgba(139,61,255,0.5)",
+        boxShadow: "inset 0 0 0 1px rgba(168,85,247,0.7), 2px 2px 6px 0.500px rgba(168,85,247,0.45)",
       }} />
       <span style={{
         position: "relative",
