@@ -189,6 +189,7 @@ export function MOVIEDETAILS(props = {}) {
               alignItems: "center",
               justifyContent: "center",
             }}
+            onClick={props.onWatchlist}
           >
             <span style={{ ...fontStyle, fontWeight: 700, fontSize: 16, color: "rgb(255,255,255)", letterSpacing: "0.020em" }}>Save to Watchlist</span>
           </div>
