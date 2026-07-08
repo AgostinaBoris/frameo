@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { ALL } from './ALL.jsx';
 import { DETAILS } from './DETAILS.jsx';
 import { MOVIES } from './MOVIES.jsx';
@@ -6,10 +7,13 @@ import { RECENTLYSAVED } from './RECENTLYSAVED.jsx';
 import { SERIES } from './SERIES.jsx';
 import { TABBAR } from './TABBAR.jsx';
 import { TOPNAV } from './TOPNAV.jsx';
+import { MOVIES as MOVIE_DATA } from './movieData.js';
 
 // figma node: 326:335 WATCHLIST
 export function WATCHLIST(_p = {}) {
   const props = _p;
+  const [activeFilter, setActiveFilter] = useState('all');
+  const filterStyle = (key) => ({ opacity: activeFilter === key ? 1 : 0.45 });
   return (
     <div className={props.className} style={{
       width: 402,
@@ -89,7 +93,7 @@ export function WATCHLIST(_p = {}) {
           alignItems: "center",
           flexWrap: "nowrap",
         }}>
-          <div style={{
+          <div className="selectable-card" style={{
             position: "relative",
             height: 190,
             overflow: "hidden",
@@ -198,6 +202,7 @@ export function WATCHLIST(_p = {}) {
                 height: 28,
               }}
               property1={"default"}
+              onClick={() => props.onDetails?.(MOVIE_DATA.ironman2)}
             />
           </div>
           <div style={{
@@ -213,7 +218,7 @@ export function WATCHLIST(_p = {}) {
             flexShrink: 0,
             alignSelf: "stretch",
           }}>
-            <div style={{
+            <div className="selectable-card" style={{
               position: "relative",
               width: 357,
               overflow: "hidden",
@@ -313,6 +318,7 @@ export function WATCHLIST(_p = {}) {
                   height: 28,
                 }}
                 property1={"default"}
+                onClick={() => props.onDetails?.(MOVIE_DATA.endgame)}
               />
             </div>
           </div>
@@ -327,7 +333,7 @@ export function WATCHLIST(_p = {}) {
             flexShrink: 0,
             alignSelf: "stretch",
           }}>
-            <div style={{
+            <div className="selectable-card" style={{
               position: "relative",
               width: 357,
               height: 190,
@@ -417,6 +423,7 @@ export function WATCHLIST(_p = {}) {
                   height: 28,
                 }}
                 property1={"default"}
+                onClick={() => props.onDetails?.(MOVIE_DATA.skyscraper)}
               />
             </div>
           </div>
@@ -438,8 +445,10 @@ export function WATCHLIST(_p = {}) {
               width: 77,
               height: 40,
               flexShrink: 0,
+              ...filterStyle('all'),
             }}
             property1={"default"}
+            onClick={() => setActiveFilter('all')}
           />
           <MOVIES
             style={{
@@ -447,8 +456,10 @@ export function WATCHLIST(_p = {}) {
               width: 77,
               height: 40,
               flexShrink: 0,
+              ...filterStyle('movies'),
             }}
             property1={"default"}
+            onClick={() => setActiveFilter('movies')}
           />
           <SERIES
             style={{
@@ -456,8 +467,10 @@ export function WATCHLIST(_p = {}) {
               width: 77,
               height: 40,
               flexShrink: 0,
+              ...filterStyle('series'),
             }}
             property1={"default"}
+            onClick={() => setActiveFilter('series')}
           />
           <RECENTLYSAVED
             style={{
@@ -465,11 +478,14 @@ export function WATCHLIST(_p = {}) {
               width: 88,
               height: 40,
               flexShrink: 0,
+              ...filterStyle('saved'),
             }}
             text1={"Saved\n"}
             property1={"default"}
+            onClick={() => setActiveFilter('saved')}
           />
         </div>
+        <div style={{ position: "absolute", left: 0, top: 824, width: 1, height: 60 }} />
       </div>
       <TOPNAV style={{
           position: "absolute",

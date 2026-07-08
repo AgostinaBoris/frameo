@@ -330,13 +330,14 @@ export function PROFILE2(_p = {}) {
           overflow: "hidden",
           borderRadius: 16,
         }}>
-          <div style={{
+          <div className="selectable-card" style={{
             position: "absolute",
             left: 4,
             top: 4,
             width: 302,
             height: 48,
             borderRadius: 8,
+            cursor: "pointer",
             boxShadow: "0 0 0 1px rgb(0,0,0), 5px 5px 8px 0px rgba(168,85,247,0.89)",
           }}>
             <span style={{

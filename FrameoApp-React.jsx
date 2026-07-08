@@ -14,9 +14,12 @@ import AIMATCHCONTEXT from './screens/AIMATCHCONTEXT';
 import AIMATCHTIME from './screens/AIMATCHTIME';
 import AIMATCHPLATFORMS from './screens/AIMATCHPLATFORMS';
 import AIMATCHRESULTS from './screens/AIMATCHRESULTS';
+import MOVIEDETAILS from './screens/MOVIEDETAILS';
 
 export default function FrameoApp() {
   const [screen, setScreen] = useState('onboarding');
+  const [previousScreen, setPreviousScreen] = useState('home');
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
   const navHandlers = {
     onHome: () => setScreen('home'),
@@ -24,6 +27,12 @@ export default function FrameoApp() {
     onMatch: () => setScreen('match'),
     onWatchlist: () => setScreen('watchlist'),
     onProfile: () => setScreen('profile'),
+  };
+
+  const openMovieDetails = (movie) => {
+    setPreviousScreen(screen);
+    setSelectedMovie(movie);
+    setScreen('movie-details');
   };
 
   const phoneFrame = {
@@ -108,7 +117,13 @@ export default function FrameoApp() {
 
         {screen === 'match-results' && (
           <div style={{ width: '100%', height: '100%' }}>
-            <AIMATCHRESULTS {...navHandlers} />
+            <AIMATCHRESULTS {...navHandlers} onDetails={openMovieDetails} />
+          </div>
+        )}
+
+        {screen === 'movie-details' && (
+          <div style={{ width: '100%', height: '100%' }}>
+            <MOVIEDETAILS {...navHandlers} movie={selectedMovie} onBack={() => setScreen(previousScreen)} />
           </div>
         )}
 
@@ -126,7 +141,7 @@ export default function FrameoApp() {
 
         {screen === 'watchlist' && (
           <div style={{ width: '100%', height: '100%' }}>
-            <WATCHLIST {...navHandlers} />
+            <WATCHLIST {...navHandlers} onDetails={openMovieDetails} />
           </div>
         )}
       </div>

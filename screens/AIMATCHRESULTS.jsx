@@ -4,8 +4,9 @@ import { DETAILS } from './DETAILS.jsx';
 import { MiArrowUp } from './MiArrowUp.jsx';
 import { TABBAR } from './TABBAR.jsx';
 import { TOPNAV } from './TOPNAV.jsx';
+import { MOVIES } from './movieData.js';
 
-const ResultCard = ({ imgClass, title, match }) => (
+const ResultCard = ({ imgClass, title, match, onDetails }) => (
   <div className="selectable-card" style={{
     position: "relative",
     height: 210,
@@ -46,11 +47,11 @@ const ResultCard = ({ imgClass, title, match }) => (
           color: "rgb(181,174,200)",
         }}>{match}</div>
       </div>
-      <div style={{ display: "flex", flexDirection: "row", gap: 8, flexWrap: "wrap" }}>
+      <div style={{ display: "flex", flexDirection: "row", gap: 16, flexWrap: "wrap" }}>
         <AIAdvent style={{ position: "relative" }} property1={"default"} />
         <AIMovieNight2 style={{ position: "relative" }} property1={"default"} />
       </div>
-      <DETAILS style={{ position: "relative" }} property1={"default"} />
+      <DETAILS style={{ position: "relative", marginTop: 8 }} property1={"default"} onClick={onDetails} />
     </div>
   </div>
 );
@@ -136,10 +137,11 @@ export function AIMATCHRESULTS(_p = {}) {
           alignItems: "stretch",
           flexWrap: "nowrap",
         }}>
-          <ResultCard imgClass="fig-asset-1260199bc4366ee9-23daf735" title="Avengers: Endgame" match="98% Match" />
-          <ResultCard imgClass="fig-asset-45cc3d44daf46f8f" title="Skyscraper: LIVE" match="93% Match" />
-          <ResultCard imgClass="fig-asset-d9a58d848d1c6df9" title="Iron Man 2" match="93% Match" />
+          <ResultCard imgClass="fig-asset-1260199bc4366ee9-23daf735" title="Avengers: Endgame" match="98% Match" onDetails={() => props.onDetails?.(MOVIES.endgame)} />
+          <ResultCard imgClass="fig-asset-45cc3d44daf46f8f" title="Skyscraper: LIVE" match="93% Match" onDetails={() => props.onDetails?.(MOVIES.skyscraper)} />
+          <ResultCard imgClass="fig-asset-d9a58d848d1c6df9" title="Iron Man 2" match="93% Match" onDetails={() => props.onDetails?.(MOVIES.ironman2)} />
         </div>
+        <div style={{ position: "absolute", left: 0, top: 826, width: 1, height: 60 }} />
       </div>
       <TOPNAV style={{
           position: "absolute",

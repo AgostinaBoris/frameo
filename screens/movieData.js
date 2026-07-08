@@ -1,0 +1,32 @@
+export const MOVIES = {
+  endgame: {
+    id: 'endgame',
+    title: 'Avengers: Endgame',
+    imgClass: 'fig-asset-1260199bc4366ee9',
+    match: '98% Match',
+    genre: 'Action Adventure • Sci-Fi • 3h 1m',
+    platform: 'Available on Disney+',
+    description: 'After the devastating events of Infinity War, the Avengers assemble one final time to reverse Thanos’ actions and restore balance to the universe.',
+    whyMatch: 'You chose Movie Marathon, With Friends, and Adventurous. Avengers: Endgame delivers epic action, high stakes, and an emotional payoff that make it perfect for watching together.',
+  },
+  skyscraper: {
+    id: 'skyscraper',
+    title: 'Skyscraper: LIVE',
+    imgClass: 'fig-asset-45cc3d44daf46f8f',
+    match: '93% Match',
+    genre: 'Action Thriller • Adventure • 1h 42m',
+    platform: 'Available on Netflix',
+    description: 'A former FBI agent must save his family after criminals set the tallest, safest building in the world ablaze — live, from the top floor.',
+    whyMatch: 'You chose With Friends and Adventurous. Skyscraper: LIVE delivers pulse-pounding action and constant tension, perfect for a thrilling watch with friends.',
+  },
+  ironman2: {
+    id: 'ironman2',
+    title: 'Iron Man 2',
+    imgClass: 'fig-asset-d9a58d848d1c6df9',
+    match: '93% Match',
+    genre: 'Action Adventure • Sci-Fi • 2h',
+    platform: 'Available on Disney+',
+    description: 'Tony Stark must confront new enemies, government pressure, and the consequences of his own technology while proving he is still worthy of being Iron Man.',
+    whyMatch: 'You chose Movie Night, With Friends, and Adventurous. Iron Man 2 brings superhero action, sharp humor, and fast-paced energy, making it a fun and exciting pick to watch together.',
+  },
+};

@@ -34,7 +34,7 @@ export function ROMANCE(_p = {}) {
         position: "relative",
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 700,
-        fontSize: 12,
+        fontSize: 13,
         textAlign: "center",
         whiteSpace: "nowrap",
         lineHeight: "25px",

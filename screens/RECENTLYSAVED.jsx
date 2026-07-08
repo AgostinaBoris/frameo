@@ -5,12 +5,15 @@ const __vkey = (p) => "property1=" + __venc(p.property1);
 export function RECENTLYSAVED(_p = {}) {
   const props = { ..._p, property1: _p.property1 ?? "default" };
   const __body0 = () => (
-    <div className={props.className} style={{
+    <div className={`selectable-card ${props.className ?? ''}`} style={{
       width: 88,
       height: 40,
       position: "relative",
+      cursor: "pointer",
       ...props.style,
-    }}>
+    }}
+    onClick={props.onClick}
+    >
       <div style={{
         position: "absolute",
         left: 0,
@@ -18,23 +21,23 @@ export function RECENTLYSAVED(_p = {}) {
         width: 88,
         height: 40,
         borderRadius: 5,
-        boxShadow: "inset 0 0 0 1px rgb(0,0,0), 2px 2px 6px 0.500px rgba(168,85,247,0.89)",
+        backgroundColor: "rgba(139,61,255,0.5)",
+        boxShadow: "inset 0 0 0 1px rgba(168,85,247,0.7), 2px 2px 6px 0.500px rgba(168,85,247,0.45)",
       }} />
       <span style={{
         position: "absolute",
-        left: 8,
-        top: 0,
-        width: 72.769,
-        height: 25,
+        inset: 0,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 700,
-        fontSize: 11,
+        fontSize: 14,
         textAlign: "center",
-        lineHeight: "40px",
         letterSpacing: "0.020em",
         color: "rgb(248,247,255)",
-        whiteSpace: "pre-wrap",
-      }}>{props.text1 ?? "Saved\n"}</span>
+        whiteSpace: "nowrap",
+      }}>{(props.text1 ?? "Saved").trim()}</span>
     </div>
   );
   const __body1 = () => (

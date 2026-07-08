@@ -32,7 +32,7 @@ export function FORYOU(_p = {}) {
         top: 4.5,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 700,
-        fontSize: 12,
+        fontSize: 13,
         whiteSpace: "nowrap",
         lineHeight: "25px",
         letterSpacing: "0.020em",
