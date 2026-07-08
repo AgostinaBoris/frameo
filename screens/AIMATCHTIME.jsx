@@ -29,29 +29,36 @@ export function AIMATCHTIME(_p = {}) {
         WebkitOverflowScrolling: "touch",
         backgroundColor: "rgb(7,3,15)",
       }}>
-        <svg width={178} height={231} viewBox="0 0 178 231" fill="none" style={{
+        <div style={{
           position: "absolute",
-          left: 206,
-          top: 169,
-          width: 178,
-          height: 231,
-          borderRadius: 10,
-          color: "rgba(168,85,247,0.18)",
+          left: 262,
+          top: 195,
+          width: 130,
+          height: 130,
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(139,61,255,0.45) 0%, rgba(7,3,15,0.95) 72%)",
+          boxShadow: "0 0 40px 6px rgba(139,61,255,0.45), inset 0 0 0 1px rgba(168,85,247,0.7)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}>
-          <path d={"M 79.863 20.537 C 83.384 12.623 94.616 12.623 98.137 20.537 L 159.819 159.185 C 162.761 165.799 157.921 173.25 150.682 173.25 L 27.318 173.25 C 20.079 173.25 15.239 165.798 18.181 159.185 L 79.863 20.537 Z"} fill="currentColor" fillRule="nonzero" />
-        </svg>
+          <svg width={64} height={64} viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="9" stroke="white" strokeWidth="1.3" />
+            <path d="M12 7v5l3.5 2" stroke="white" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </div>
         <span style={{
           position: "absolute",
           left: 29,
-          top: 192,
-          width: 184,
+          top: 195,
+          width: 230,
           height: 122,
           fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           fontWeight: 700,
           fontSize: 32,
           whiteSpace: "normal",
-          lineHeight: "40px",
-          letterSpacing: "0.100em",
+          lineHeight: "38px",
+          letterSpacing: "0.030em",
           color: "rgb(255,255,255)",
         }}>How much time do you have?</span>
         <div style={{
@@ -144,16 +151,17 @@ export function AIMATCHTIME(_p = {}) {
           position: "absolute",
           left: 29,
           top: 352,
-          width: 315,
+          width: 344,
           height: 51,
           fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           fontWeight: 700,
           fontSize: 14,
-          whiteSpace: "nowrap",
-          lineHeight: "25px",
-          letterSpacing: "0.100em",
+          textAlign: "center",
+          whiteSpace: "normal",
+          lineHeight: "22px",
+          letterSpacing: "0.050em",
           color: "rgb(255,255,255)",
-        }}>Frameo will match you with something that fits your available time. </span>
+        }}>Frameo will match you with something that fits your available time.</span>
         <div style={{
           position: "absolute",
           left: 26,

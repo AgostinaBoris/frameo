@@ -30,16 +30,17 @@ export function AIMATCHRESULTS(_p = {}) {
       }}>
         <span style={{
           position: "absolute",
-          left: 37,
+          left: 29,
           top: 110,
-          width: 317,
+          width: 344,
           height: 25,
           fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           fontWeight: 700,
           fontSize: 14,
-          whiteSpace: "nowrap",
+          textAlign: "center",
+          whiteSpace: "normal",
           lineHeight: "18px",
-          letterSpacing: "0.100em",
+          letterSpacing: "0.050em",
           color: "rgb(255,255,255)",
         }}>We found the best picks for your night.</span>
         <div style={{

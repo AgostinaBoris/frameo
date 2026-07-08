@@ -123,17 +123,17 @@ export function AIMATCHPLATFORMS(_p = {}) {
         </div>
         <span style={{
           position: "absolute",
-          left: 44,
+          left: 29,
           top: 276,
-          width: 315,
+          width: 344,
           height: 51,
           fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           fontWeight: 700,
           fontSize: 14,
           textAlign: "center",
-          whiteSpace: "nowrap",
-          lineHeight: "18px",
-          letterSpacing: "0.100em",
+          whiteSpace: "normal",
+          lineHeight: "22px",
+          letterSpacing: "0.050em",
           color: "rgb(255,255,255)",
         }}>Choose your streaming services so Frameo can find available matches.</span>
         <span style={{
@@ -184,85 +184,23 @@ export function AIMATCHPLATFORMS(_p = {}) {
         </div>
         <div style={{
           position: "absolute",
-          left: 38,
+          left: 0,
           top: 335,
-          width: 321,
-          height: 356,
-          borderRadius: 20,
-          display: "grid",
-          gridTemplateRows: "1fr 1fr 1fr",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "24px 24px",
-          padding: "8px 8px 8px 8px",
+          width: 402,
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "20px 18px",
+          padding: "0 20px",
           boxSizing: "border-box",
         }}>
-          <div style={{
-              position: "relative",
-              width: 140.5,
-              height: 97.333,
-              gridRow: "1",
-              gridColumn: "1",
-              alignSelf: "start",
-            }}>
-            <NETFLIX
-              style={{ transform: "scale(0.937, 0.973)", transformOrigin: "0 0" }}
-              property1={"default"}
-            />
-          </div>
-          <div style={{
-              position: "relative",
-              width: 140.5,
-              height: 97.333,
-              gridRow: "1",
-              gridColumn: "2",
-            }}>
-            <PRIMEVIDEO
-              style={{ transform: "scale(0.937, 0.973)", transformOrigin: "0 0" }}
-              property1={"default"}
-            />
-          </div>
-          <div style={{
-              position: "relative",
-              width: 140.5,
-              height: 97.333,
-              gridRow: "2",
-              gridColumn: "2",
-            }}>
-            <DISNEY
-              style={{ transform: "scale(0.937, 0.973)", transformOrigin: "0 0" }}
-              property1={"default"}
-            />
-          </div>
-          <div style={{
-              position: "relative",
-              width: 140.5,
-              height: 97.333,
-              gridRow: "3",
-              gridColumn: "1",
-            }}>
-            <APPLETV
-              style={{ transform: "scale(0.937, 0.973)", transformOrigin: "0 0" }}
-              property1={"default"}
-            />
-          </div>
-          <div style={{
-              position: "relative",
-              width: 140.5,
-              height: 97.333,
-              gridRow: "3",
-              gridColumn: "2",
-            }}>
-            <HULU
-              style={{ transform: "scale(0.937, 0.973)", transformOrigin: "0 0" }}
-              property1={"default"}
-            />
-          </div>
-          <div style={{ position: "relative", width: 140.5, height: 97.333 }}>
-            <MAX2
-              style={{ transform: "scale(0.937, 0.973)", transformOrigin: "0 0" }}
-              property1={"default"}
-            />
-          </div>
+          <NETFLIX property1={"default"} />
+          <PRIMEVIDEO property1={"default"} />
+          <DISNEY property1={"default"} />
+          <APPLETV property1={"default"} />
+          <HULU property1={"default"} />
+          <MAX2 property1={"default"} />
         </div>
         <GetMatches
           style={{
@@ -275,6 +213,7 @@ export function AIMATCHPLATFORMS(_p = {}) {
           property1={"default"}
           onClick={props.onNext}
         />
+        <div style={{ position: "absolute", left: 0, top: 851, width: 1, height: 20 }} />
       </div>
       <TOPNAV style={{
           position: "absolute",

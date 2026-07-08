@@ -18,6 +18,8 @@ export function AIMovieNight2(_p = {}) {
         width: 66,
         height: 30,
         borderRadius: 12,
+        backgroundColor: "rgba(139,61,255,0.35)",
+        boxShadow: "inset 0 0 0 1px rgba(168,85,247,0.7)",
       }} />
       <span style={{
         position: "absolute",

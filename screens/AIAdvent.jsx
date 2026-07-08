@@ -18,7 +18,8 @@ export function AIAdvent(_p = {}) {
         width: 66,
         height: 30,
         borderRadius: 12,
-        boxShadow: "inset 0 0 0 1px rgb(0,0,0)",
+        backgroundColor: "rgba(139,61,255,0.35)",
+        boxShadow: "inset 0 0 0 1px rgba(168,85,247,0.7)",
       }} />
       <span style={{
         position: "absolute",
@@ -31,7 +32,7 @@ export function AIAdvent(_p = {}) {
         fontSize: 9.800000190734863,
         whiteSpace: "nowrap",
         lineHeight: "10px",
-        color: "rgb(0,0,0)",
+        color: "rgb(255,255,255)",
       }}>{props.text1 ?? "Adventurous"}</span>
     </div>
   );
