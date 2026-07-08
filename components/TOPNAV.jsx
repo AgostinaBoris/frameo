@@ -25,6 +25,7 @@ export function TOPNAV(_p = {}) {
         color: "rgb(255,255,255)",
       }}>FRAMEO</span>
       <div
+        className="tab-icon-wrap"
         style={{
           width: 38,
           height: 38,

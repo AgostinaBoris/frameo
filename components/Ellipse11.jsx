@@ -34,7 +34,7 @@ export function Ellipse11(_p = {}) {
       position: "relative",
       ...props.style,
     }}>
-      <div style={iconCircleStyle}><PlatformsIcon /></div>
+      <div className="quick-match-pulse" style={{ ...iconCircleStyle, animationDelay: "0.6s" }}><PlatformsIcon /></div>
     </div>
   );
   const __body1 = () => (
@@ -44,7 +44,7 @@ export function Ellipse11(_p = {}) {
       position: "relative",
       ...props.style,
     }}>
-      <div style={iconCircleStyle}><PlatformsIcon /></div>
+      <div className="quick-match-pulse" style={{ ...iconCircleStyle, animationDelay: "0.6s" }}><PlatformsIcon /></div>
     </div>
   );
   const __impls = {

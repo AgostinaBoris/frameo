@@ -10,3 +10,45 @@
 body {
   margin: 0;
 }
+
+@keyframes quickMatchPulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.07);
+    filter: brightness(1.25);
+  }
+}
+
+.quick-match-pulse {
+  animation: quickMatchPulse 2.6s ease-in-out infinite;
+  will-change: transform;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.tab-icon-wrap {
+  border-radius: 10px;
+  transition: filter 0.2s ease, transform 0.15s ease;
+}
+
+.tab-icon-wrap:hover {
+  filter: drop-shadow(0 0 6px rgba(168,85,247,0.85)) brightness(1.3);
+  transform: scale(1.08);
+}
+
+.tab-icon-wrap:active {
+  filter: drop-shadow(0 0 10px rgba(168,85,247,1)) brightness(1.5);
+  transform: scale(0.9);
+}

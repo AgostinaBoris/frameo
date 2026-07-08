@@ -1,3 +1,4 @@
+import { useRef, useState } from 'react';
 import { AskFrameo } from './AskFrameo.jsx';
 import { Ellipse10 } from './Ellipse10.jsx';
 import { Ellipse11 } from './Ellipse11.jsx';
@@ -6,9 +7,58 @@ import { Ellipse9 } from './Ellipse9.jsx';
 import { TABBAR } from './TABBAR.jsx';
 import { TOPNAV } from './TOPNAV.jsx';
 
+const ScrollTrack = ({ progress, style }) => (
+  <div style={{
+    position: "absolute",
+    height: 3,
+    borderRadius: 2,
+    backgroundColor: "rgba(255,255,255,0.1)",
+    overflow: "hidden",
+    ...style,
+  }}>
+    <div style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      height: "100%",
+      width: "28%",
+      borderRadius: 2,
+      background: "linear-gradient(90deg, rgba(168,85,247,0.9), rgba(139,61,255,0.9))",
+      transform: `translateX(${progress * (100 / 0.28 - 100)}%)`,
+    }} />
+  </div>
+);
+
+const useDragScroll = () => {
+  const state = useRef({ dragging: false, startX: 0, startScrollLeft: 0 });
+  return {
+    onMouseDown: (e) => {
+      state.current.dragging = true;
+      state.current.startX = e.pageX;
+      state.current.startScrollLeft = e.currentTarget.scrollLeft;
+    },
+    onMouseMove: (e) => {
+      if (!state.current.dragging) return;
+      e.preventDefault();
+      e.currentTarget.scrollLeft = state.current.startScrollLeft - (e.pageX - state.current.startX);
+    },
+    onMouseUp: () => { state.current.dragging = false; },
+    onMouseLeave: () => { state.current.dragging = false; },
+  };
+};
+
 // figma node: 99:95 HOME - FRAMEO
 export function HOMEFRAMEO(_p = {}) {
   const props = _p;
+  const [trendingProgress, setTrendingProgress] = useState(0);
+  const [recommendedProgress, setRecommendedProgress] = useState(0);
+  const handleCarouselScroll = (setProgress) => (e) => {
+    const el = e.currentTarget;
+    const max = el.scrollWidth - el.clientWidth;
+    setProgress(max > 0 ? el.scrollLeft / max : 0);
+  };
+  const trendingDrag = useDragScroll();
+  const recommendedDrag = useDragScroll();
   return (
     <div className={props.className} style={{
       width: 402,
@@ -61,17 +111,18 @@ export function HOMEFRAMEO(_p = {}) {
           height: 96,
           fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           fontWeight: 500,
-          fontSize: 18,
-          whiteSpace: "nowrap",
+          fontSize: 16,
+          textAlign: "center",
+          whiteSpace: "normal",
           lineHeight: "24px",
-          letterSpacing: "0.100em",
+          letterSpacing: "0.030em",
           color: "rgb(181,174,200)",
-        }}>Get AI-powered recommendations based on your mood, time, and streaming platforms.</span>
+        }}>AI-powered picks for your mood, time, and platforms.</span>
         <AskFrameo
           style={{
             position: "absolute",
             left: 61,
-            top: 330,
+            top: 345,
             width: 280,
             height: 60,
           }}
@@ -186,7 +237,12 @@ export function HOMEFRAMEO(_p = {}) {
           color: "rgb(168,85,247)",
           textDecoration: "underline",
         }}>See all</span>
-        <div style={{
+        <ScrollTrack progress={recommendedProgress} style={{ left: 27, top: 899, width: 375 }} />
+        <div
+          className="no-scrollbar"
+          onScroll={handleCarouselScroll(setRecommendedProgress)}
+          {...recommendedDrag}
+          style={{
           position: "absolute",
           left: 27,
           top: 911,
@@ -194,6 +250,7 @@ export function HOMEFRAMEO(_p = {}) {
           height: 125,
           overflowX: "auto",
           overflowY: "hidden",
+          cursor: "grab",
           WebkitOverflowScrolling: "touch",
           backgroundColor: "rgb(42,36,56)",
         }}>
@@ -268,7 +325,12 @@ export function HOMEFRAMEO(_p = {}) {
             height: 130,
           }} />
         </div>
-        <div style={{
+        <ScrollTrack progress={trendingProgress} style={{ left: 24, top: 691, width: 378 }} />
+        <div
+          className="no-scrollbar"
+          onScroll={handleCarouselScroll(setTrendingProgress)}
+          {...trendingDrag}
+          style={{
           position: "absolute",
           left: 24,
           top: 703,
@@ -277,6 +339,7 @@ export function HOMEFRAMEO(_p = {}) {
           overflowX: "auto",
           overflowY: "hidden",
           WebkitOverflowScrolling: "touch",
+          cursor: "grab",
           backgroundColor: "rgb(7,3,15)",
         }}>
           <div className="fig-asset-fcb0ef5ff53e601e" style={{
@@ -364,6 +427,7 @@ export function HOMEFRAMEO(_p = {}) {
             height: 130,
           }} />
         </div>
+        <div style={{ position: "absolute", left: 0, top: 1036, width: 1, height: 110 }} />
       </div>
       <TABBAR style={{
           position: "absolute",

@@ -34,7 +34,7 @@ export function Ellipse8(_p = {}) {
       position: "relative",
       ...props.style,
     }}>
-      <div style={iconCircleStyle}><MoodIcon /></div>
+      <div className="quick-match-pulse" style={{ ...iconCircleStyle, animationDelay: "0s" }}><MoodIcon /></div>
     </div>
   );
   const __body1 = () => (
@@ -44,7 +44,7 @@ export function Ellipse8(_p = {}) {
       position: "relative",
       ...props.style,
     }}>
-      <div style={iconCircleStyle}><MoodIcon /></div>
+      <div className="quick-match-pulse" style={{ ...iconCircleStyle, animationDelay: "0s" }}><MoodIcon /></div>
     </div>
   );
   const __impls = {

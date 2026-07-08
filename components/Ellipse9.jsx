@@ -6,8 +6,8 @@ const iconCircleStyle = {
   position: "absolute",
   left: 0,
   top: 0,
-  width: 64,
-  height: 60,
+  width: 56,
+  height: 56,
   borderRadius: "50%",
   background: "radial-gradient(circle, rgba(139,61,255,0.32) 0%, rgba(7,3,15,0.95) 72%)",
   boxShadow: "0px 2px 3px 0px rgba(121,55,206,0.4), 0 0 8px 1px rgba(139,61,255,0.28)",
@@ -28,22 +28,22 @@ export function Ellipse9(_p = {}) {
   const props = { ..._p, property1: _p.property1 ?? "default" };
   const __body0 = () => (
     <div className={props.className} style={{
-      width: 64,
-      height: 60,
+      width: 56,
+      height: 56,
       position: "relative",
       ...props.style,
     }}>
-      <div style={iconCircleStyle}><ContextIcon /></div>
+      <div className="quick-match-pulse" style={{ ...iconCircleStyle, animationDelay: "0.2s" }}><ContextIcon /></div>
     </div>
   );
   const __body1 = () => (
     <div className={props.className} style={{
-      width: 64,
-      height: 60,
+      width: 56,
+      height: 56,
       position: "relative",
       ...props.style,
     }}>
-      <div style={iconCircleStyle}><ContextIcon /></div>
+      <div className="quick-match-pulse" style={{ ...iconCircleStyle, animationDelay: "0.2s" }}><ContextIcon /></div>
     </div>
   );
   const __impls = {
