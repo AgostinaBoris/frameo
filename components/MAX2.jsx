@@ -23,9 +23,9 @@ export function MAX2(_p = {}) {
         lineHeight: "24px",
         letterSpacing: "0.050em",
         color: "rgb(255,255,255)",
-        whiteSpace: "pre-wrap",
-      }}>{props.text1 ?? "Max\n"}</span>
-      <div style={{
+        whiteSpace: "nowrap",
+      }}>{(props.text1 ?? "Max").trim()}</span>
+      <div className="fig-asset-7ca60bcf740459d7-2e00ffef" style={{
         position: "absolute",
         left: 49,
         top: 24,

@@ -34,7 +34,7 @@ export function NETFLIX(_p = {}) {
         borderRadius: 20,
         boxShadow: "inset 0 0 0 1px rgb(0,0,0), 2px 2px 6px 0.500px rgba(168,85,247,0.89)",
       }} />
-      <div style={{
+      <div className="fig-asset-9b40e13b3dba361e-288f168c" style={{
         position: "absolute",
         left: 63,
         top: 21,

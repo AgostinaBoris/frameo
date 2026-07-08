@@ -11,7 +11,7 @@ export function APPLETV(_p = {}) {
       position: "relative",
       ...props.style,
     }}>
-      <div style={{
+      <div className="fig-asset-ea5abcb6314634e4-bb393892" style={{
         position: "absolute",
         left: 35,
         top: 21,

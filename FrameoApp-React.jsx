@@ -129,7 +129,7 @@ export default function FrameoApp() {
 
         {screen === 'profile' && (
           <div style={{ width: '100%', height: '100%' }}>
-            <PROFILE2 {...navHandlers} />
+            <PROFILE2 {...navHandlers} onLogout={() => setScreen('login')} />
           </div>
         )}
 

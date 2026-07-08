@@ -34,7 +34,7 @@ export function PRIMEVIDEO(_p = {}) {
         borderRadius: 20,
         boxShadow: "inset 0 0 0 1px rgb(0,0,0), 2px 2px 6px 0.500px rgba(168,85,247,0.89)",
       }} />
-      <div style={{
+      <div className="fig-asset-636f404e7bdc5f13-d9f82a16" style={{
         position: "absolute",
         left: 37,
         top: 23,
