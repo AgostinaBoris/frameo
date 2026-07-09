@@ -139,13 +139,13 @@ export default function FrameoApp() {
 
         {screen === 'profile' && (
           <div style={{ width: '100%', height: '100%' }}>
-            <PROFILE2 {...navHandlers} active={activeTab} onLogout={() => setScreen('login')} onSettings={() => setScreen('settings')} />
+            <PROFILE2 {...navHandlers} active={activeTab} onLogout={() => setScreen('onboarding')} onSettings={() => setScreen('settings')} />
           </div>
         )}
 
         {screen === 'settings' && (
           <div style={{ width: '100%', height: '100%' }}>
-            <SETTINGS {...navHandlers} active={activeTab} onBack={() => setScreen('profile')} onLogout={() => setScreen('login')} />
+            <SETTINGS {...navHandlers} active={activeTab} onBack={() => setScreen('profile')} onLogout={() => setScreen('onboarding')} />
           </div>
         )}
 
