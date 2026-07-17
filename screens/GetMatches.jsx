@@ -27,16 +27,15 @@ export function GetMatches(_p = {}) {
       }} />
       <span style={{
         position: "absolute",
-        left: 58,
-        top: 18,
-        width: 149,
-        height: 24,
+        inset: 0,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
         fontFamily: "Roboto, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,
         fontSize: 26,
         textAlign: "center",
         whiteSpace: "nowrap",
-        lineHeight: "44px",
         color: "rgb(241,245,249)",
       }}>{props.text1 ?? "Get matches"}</span>
       <svg width={22.468} height={12.499} viewBox="0 0 22.468 12.499" fill="none" style={{
@@ -85,16 +84,15 @@ export function GetMatches(_p = {}) {
       }} />
       <span style={{
         position: "absolute",
-        left: 57,
-        top: 18,
-        width: 149,
-        height: 24,
+        inset: 0,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
         fontFamily: "Roboto, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,
         fontSize: 26,
         textAlign: "center",
         whiteSpace: "nowrap",
-        lineHeight: "44px",
         color: "rgb(241,245,249)",
       }}>{props.text1 ?? "Get matches"}</span>
       <svg width={2.500} height={25.833} viewBox="0 0 2.500 25.833" fill="none" style={{

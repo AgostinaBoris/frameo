@@ -80,7 +80,7 @@ export default function FrameoApp() {
         {screen === 'login' && (
           <div style={{ width: '100%', height: '100%' }}>
             <LOGINFRAMEO
-              onLogin={() => setScreen('signup')}
+              onLogin={() => setScreen('home')}
               onSignUp={() => setScreen('signup')}
             />
           </div>

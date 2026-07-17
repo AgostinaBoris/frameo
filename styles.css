@@ -121,3 +121,50 @@ body {
   mix-blend-mode: screen;
   pointer-events: none;
 }
+
+@keyframes timeImageFloat {
+  0%, 100% { transform: translateY(0) scale(1); box-shadow: 0 0 44px 8px rgba(139,61,255,0.45); }
+  50% { transform: translateY(-6px) scale(1.04); box-shadow: 0 0 58px 16px rgba(139,61,255,0.65); }
+}
+
+.time-image-float {
+  animation: timeImageFloat 3.6s ease-in-out infinite;
+}
+
+@keyframes sandFall {
+  0% { background-position-y: 0; }
+  100% { background-position-y: 16px; }
+}
+
+.hourglass-sand {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(240,220,255,0.95) 0px,
+    rgba(240,220,255,0.95) 2px,
+    transparent 2px,
+    transparent 6px
+  );
+  background-size: 100% 16px;
+  animation: sandFall 0.5s linear infinite;
+  mix-blend-mode: screen;
+  border-radius: 2px;
+  filter: blur(0.2px);
+}
+
+@keyframes seaShimmer {
+  0% { transform: translateX(-30%); opacity: 0.35; }
+  50% { transform: translateX(30%); opacity: 0.75; }
+  100% { transform: translateX(-30%); opacity: 0.35; }
+}
+
+.mood-sea-shimmer {
+  position: absolute;
+  left: 0;
+  top: 62%;
+  width: 100%;
+  height: 38%;
+  background: radial-gradient(ellipse 70% 100% at 50% 0%, rgba(230,210,255,0.9) 0%, transparent 70%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  animation: seaShimmer 4s ease-in-out infinite;
+}

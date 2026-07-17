@@ -6,12 +6,12 @@ export function THRILLER(_p = {}) {
   const props = { ..._p, property1: _p.property1 ?? "default" };
   const __body0 = () => (
     <div className={props.className} style={{
-      width: 64,
-      display: "flex",
-      flexDirection: "column",
-      gap: 10,
-      alignItems: "flex-start",
-      flexWrap: "nowrap",
+      height: 40,
+      padding: "0 14px",
+      boxSizing: "border-box",
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
       position: "relative",
       cursor: "pointer",
       ...props.style,
@@ -19,23 +19,19 @@ export function THRILLER(_p = {}) {
     onClick={props.onClick}
     >
       <div style={{
-        position: "relative",
-        height: 36,
-        borderRadius: 15,
+        position: "absolute",
+        inset: 0,
+        borderRadius: 5,
         backgroundColor: "rgba(139,61,255,0.5)",
         boxShadow: "inset 0 0 0 1px rgba(168,85,247,0.7), 2px 2px 6px 0.500px rgba(168,85,247,0.45)",
-        flexShrink: 0,
-        alignSelf: "stretch",
       }} />
       <span style={{
-        position: "absolute",
-        left: 9,
-        top: 5.625,
+        position: "relative",
+        whiteSpace: "nowrap",
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 700,
         fontSize: 13,
-        whiteSpace: "nowrap",
-        lineHeight: "25px",
+        textAlign: "center",
         letterSpacing: "0.020em",
         color: "rgb(255,255,255)",
       }}>{props.text1 ?? "Thriller"}</span>

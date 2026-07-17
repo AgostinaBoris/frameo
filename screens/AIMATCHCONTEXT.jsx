@@ -23,6 +23,10 @@ const SelectRing = ({ selected }) => (
   }} />
 );
 
+const CARD_W = 168;
+const CARD_H = 152;
+const CARD_SCALE = 0.9;
+
 // figma node: 109:211 AI MATCH CONTEXT
 export function AIMATCHCONTEXT(_p = {}) {
   const props = _p;
@@ -30,10 +34,20 @@ export function AIMATCHCONTEXT(_p = {}) {
   const Ctx = ({ id, Comp }) => (
     <div
       className="selectable-card"
-      style={{ position: "relative", width: 168, height: 152, cursor: "pointer" }}
+      style={{ position: "relative", width: CARD_W * CARD_SCALE, height: CARD_H * CARD_SCALE, cursor: "pointer" }}
       onClick={() => setContext(id)}
     >
-      <Comp style={{ position: "relative" }} property1={"default"} />
+      <div style={{
+        position: "absolute",
+        left: 0,
+        top: 0,
+        width: CARD_W,
+        height: CARD_H,
+        transform: `scale(${CARD_SCALE})`,
+        transformOrigin: "top left",
+      }}>
+        <Comp style={{ position: "relative" }} property1={"default"} />
+      </div>
       <SelectRing selected={context === id} />
     </div>
   );
@@ -128,7 +142,7 @@ export function AIMATCHCONTEXT(_p = {}) {
                 height: 17,
                 fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
                 fontWeight: 400,
-                fontSize: 13,
+                fontSize: 15,
                 whiteSpace: "nowrap",
                 lineHeight: "18px",
                 letterSpacing: "0.280em",
@@ -166,7 +180,7 @@ export function AIMATCHCONTEXT(_p = {}) {
           style={{
             position: "absolute",
             left: 61,
-            top: 914,
+            top: 880,
             width: 280,
             height: 60,
           }}
@@ -177,12 +191,13 @@ export function AIMATCHCONTEXT(_p = {}) {
         <div style={{
           position: "absolute",
           left: 0,
-          top: 384,
+          top: 398,
           width: 402,
           display: "flex",
           flexWrap: "wrap",
           justifyContent: "center",
           alignItems: "center",
+          alignContent: "center",
           gap: "16px 14px",
           padding: "0 16px",
           boxSizing: "border-box",
@@ -194,15 +209,6 @@ export function AIMATCHCONTEXT(_p = {}) {
           <Ctx id="background" Comp={BACKGROUNDWATCH} />
           <Ctx id="marathon" Comp={MOVIEMARATHON} />
         </div>
-        <MiArrowUp style={{
-            position: "absolute",
-            left: 0,
-            top: 0,
-            width: 28,
-            height: 28,
-            transform: "matrix(0.000,-1,1,0.000,19,101)",
-            transformOrigin: "0 0",
-          }} />
         <div style={{
           position: "absolute",
           left: 24,
@@ -238,12 +244,12 @@ export function AIMATCHCONTEXT(_p = {}) {
         <span style={{
           position: "absolute",
           left: 29,
-          top: 308,
+          top: 324,
           width: 344,
           height: 51,
           fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           fontWeight: 700,
-          fontSize: 14,
+          fontSize: 15,
           textAlign: "center",
           whiteSpace: "normal",
           lineHeight: "22px",

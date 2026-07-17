@@ -18,27 +18,60 @@ const fontStyle = {
   fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
 };
 
-const ScrollTrack = ({ progress, style }) => (
-  <div style={{
-    position: "absolute",
-    height: 3,
-    borderRadius: 2,
-    backgroundColor: "rgba(255,255,255,0.1)",
-    overflow: "hidden",
-    ...style,
-  }}>
-    <div style={{
-      position: "absolute",
-      top: 0,
-      left: 0,
-      height: "100%",
-      width: "28%",
-      borderRadius: 2,
-      background: "linear-gradient(90deg, rgba(168,85,247,0.9), rgba(139,61,255,0.9))",
-      transform: `translateX(${progress * (100 / 0.28 - 100)}%)`,
-    }} />
-  </div>
-);
+const ScrollTrack = ({ progress, style, scrollRef }) => {
+  const trackRef = useRef(null);
+  const seek = (clientX) => {
+    const el = scrollRef?.current;
+    const track = trackRef.current;
+    if (!el || !track) return;
+    const rect = track.getBoundingClientRect();
+    const fraction = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
+    el.scrollLeft = fraction * (el.scrollWidth - el.clientWidth);
+  };
+  return (
+    <div
+      ref={trackRef}
+      onMouseDown={(e) => {
+        seek(e.clientX);
+        const onMove = (ev) => seek(ev.clientX);
+        const onUp = () => {
+          window.removeEventListener("mousemove", onMove);
+          window.removeEventListener("mouseup", onUp);
+        };
+        window.addEventListener("mousemove", onMove);
+        window.addEventListener("mouseup", onUp);
+      }}
+      style={{
+        position: "absolute",
+        height: 16,
+        display: "flex",
+        alignItems: "flex-start",
+        cursor: "pointer",
+        ...style,
+      }}
+    >
+      <div style={{
+        position: "relative",
+        width: "100%",
+        height: 3,
+        borderRadius: 2,
+        backgroundColor: "rgba(255,255,255,0.1)",
+        overflow: "hidden",
+      }}>
+        <div style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          height: "100%",
+          width: "28%",
+          borderRadius: 2,
+          background: "linear-gradient(90deg, rgba(168,85,247,0.9), rgba(139,61,255,0.9))",
+          transform: `translateX(${progress * (100 / 0.28 - 100)}%)`,
+        }} />
+      </div>
+    </div>
+  );
+};
 
 const useDragScroll = () => {
   const state = useRef({ dragging: false, startX: 0, startScrollLeft: 0 });
@@ -58,16 +91,15 @@ const useDragScroll = () => {
   };
 };
 
-const SettingsRow = ({ top, label, onClick, danger }) => (
+const SettingsRow = ({ label, onClick, danger }) => (
   <div
     className="selectable-card"
     style={{
-      position: "absolute",
-      left: 3,
-      top,
-      width: 302,
-      height: 48,
-      borderRadius: 8,
+      position: "relative",
+      width: "100%",
+      height: 72,
+      flexShrink: 0,
+      borderRadius: 12,
       cursor: "pointer",
       backgroundColor: danger ? "rgba(210,24,24,0.12)" : "rgba(139,61,255,0.12)",
       boxShadow: danger
@@ -79,23 +111,23 @@ const SettingsRow = ({ top, label, onClick, danger }) => (
     <span style={{
       ...fontStyle,
       position: "absolute",
-      left: 20,
+      left: 22,
       top: 0,
       bottom: 0,
       display: "flex",
       alignItems: "center",
       fontWeight: 600,
-      fontSize: 14,
+      fontSize: 18,
       letterSpacing: "0.020em",
       color: danger ? "rgb(255,120,120)" : "rgb(255,255,255)",
       whiteSpace: "nowrap",
     }}>{label}</span>
     <WeuiArrowFilled style={{
       position: "absolute",
-      right: 16,
-      top: 12,
-      width: 12,
-      height: 24,
+      right: 20,
+      top: 24,
+      width: 16,
+      height: 32,
       color: danger ? "rgb(255,120,120)" : "rgb(248,247,255)",
     }} />
   </div>
@@ -106,6 +138,7 @@ export function PROFILE2(_p = {}) {
   const props = _p;
   const [platformsProgress, setPlatformsProgress] = useState(0);
   const platformsDrag = useDragScroll();
+  const platformsScrollRef = useRef(null);
   const handleScroll = (setProgress) => (e) => {
     const el = e.currentTarget;
     const max = el.scrollWidth - el.clientWidth;
@@ -152,9 +185,9 @@ export function PROFILE2(_p = {}) {
           left: 30,
           top: 94,
           width: 311,
-          height: 17,
+          height: 20,
           fontWeight: 600,
-          fontSize: 14,
+          fontSize: 15,
           whiteSpace: "nowrap",
           letterSpacing: "0.020em",
           color: "rgb(181,174,200)",
@@ -163,7 +196,7 @@ export function PROFILE2(_p = {}) {
         <div style={{
           position: "absolute",
           left: 26,
-          top: 120,
+          top: 124,
           width: 350,
           height: 150,
           borderRadius: 22,
@@ -201,7 +234,7 @@ export function PROFILE2(_p = {}) {
             width: 165,
             height: 24,
             fontWeight: 500,
-            fontSize: 13,
+            fontSize: 15,
             whiteSpace: "nowrap",
             letterSpacing: "0.020em",
             color: "rgb(181,174,200)",
@@ -222,15 +255,16 @@ export function PROFILE2(_p = {}) {
           color: "rgb(181,174,200)",
         }}>Streaming Platforms</span>
 
-        <ScrollTrack progress={platformsProgress} style={{ left: 26, top: 429, width: 350 }} />
+        <ScrollTrack progress={platformsProgress} scrollRef={platformsScrollRef} style={{ left: 26, top: 449, width: 350 }} />
         <div
+          ref={platformsScrollRef}
           className="no-scrollbar"
           onScroll={handleScroll(setPlatformsProgress)}
           {...platformsDrag}
           style={{
             position: "absolute",
             left: 0,
-            top: 335,
+            top: 339,
             width: 402,
             height: 100,
             overflowX: "auto",
@@ -277,10 +311,13 @@ export function PROFILE2(_p = {}) {
           position: "absolute",
           left: 31,
           top: 502,
+          width: 350,
           display: "flex",
           flexDirection: "row",
-          flexWrap: "nowrap",
-          gap: 9,
+          flexWrap: "wrap",
+          gap: 10,
+          padding: "4px 2px",
+          boxSizing: "border-box",
         }}>
           <MYSTERY property1={"default"} />
           <COMEDY property1={"default"} />
@@ -293,7 +330,7 @@ export function PROFILE2(_p = {}) {
           ...fontStyle,
           position: "absolute",
           left: 31,
-          top: 579,
+          top: 603,
           width: 200,
           height: 26,
           fontWeight: 600,
@@ -306,19 +343,23 @@ export function PROFILE2(_p = {}) {
         <div style={{
           position: "absolute",
           left: 41,
-          top: 615,
+          top: 639,
           width: 320,
-          height: 354,
           borderRadius: 16,
+          display: "flex",
+          flexDirection: "column",
+          gap: 16,
+          padding: "4px 10px",
+          boxSizing: "border-box",
         }}>
-          <SettingsRow top={4} label="Settings" onClick={props.onSettings} />
-          <SettingsRow top={77} label="Language" onClick={props.onLanguage} />
-          <SettingsRow top={149} label="Notifications" onClick={props.onNotifications} />
-          <SettingsRow top={221} label="Privacy" onClick={props.onPrivacy} />
-          <SettingsRow top={293} label="Log out" onClick={props.onLogout} danger />
+          <SettingsRow label="Settings" onClick={props.onSettings} />
+          <SettingsRow label="Language" onClick={props.onLanguage} />
+          <SettingsRow label="Notifications" onClick={props.onNotifications} />
+          <SettingsRow label="Privacy" onClick={props.onPrivacy} />
+          <SettingsRow label="Log out" onClick={props.onLogout} danger />
         </div>
 
-        <div style={{ position: "absolute", left: 0, top: 1029, width: 1, height: 40 }} />
+        <div style={{ position: "absolute", left: 0, top: 1047, width: 1, height: 40 }} />
       </div>
 
       <TOPNAV style={{

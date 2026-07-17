@@ -7,27 +7,60 @@ import { Ellipse9 } from './Ellipse9.jsx';
 import { TABBAR } from './TABBAR.jsx';
 import { TOPNAV } from './TOPNAV.jsx';
 
-const ScrollTrack = ({ progress, style }) => (
-  <div style={{
-    position: "absolute",
-    height: 3,
-    borderRadius: 2,
-    backgroundColor: "rgba(255,255,255,0.1)",
-    overflow: "hidden",
-    ...style,
-  }}>
-    <div style={{
-      position: "absolute",
-      top: 0,
-      left: 0,
-      height: "100%",
-      width: "28%",
-      borderRadius: 2,
-      background: "linear-gradient(90deg, rgba(168,85,247,0.9), rgba(139,61,255,0.9))",
-      transform: `translateX(${progress * (100 / 0.28 - 100)}%)`,
-    }} />
-  </div>
-);
+const ScrollTrack = ({ progress, style, scrollRef }) => {
+  const trackRef = useRef(null);
+  const seek = (clientX) => {
+    const el = scrollRef?.current;
+    const track = trackRef.current;
+    if (!el || !track) return;
+    const rect = track.getBoundingClientRect();
+    const fraction = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
+    el.scrollLeft = fraction * (el.scrollWidth - el.clientWidth);
+  };
+  return (
+    <div
+      ref={trackRef}
+      onMouseDown={(e) => {
+        seek(e.clientX);
+        const onMove = (ev) => seek(ev.clientX);
+        const onUp = () => {
+          window.removeEventListener("mousemove", onMove);
+          window.removeEventListener("mouseup", onUp);
+        };
+        window.addEventListener("mousemove", onMove);
+        window.addEventListener("mouseup", onUp);
+      }}
+      style={{
+        position: "absolute",
+        height: 16,
+        display: "flex",
+        alignItems: "flex-start",
+        cursor: "pointer",
+        ...style,
+      }}
+    >
+      <div style={{
+        position: "relative",
+        width: "100%",
+        height: 3,
+        borderRadius: 2,
+        backgroundColor: "rgba(255,255,255,0.1)",
+        overflow: "hidden",
+      }}>
+        <div style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          height: "100%",
+          width: "28%",
+          borderRadius: 2,
+          background: "linear-gradient(90deg, rgba(168,85,247,0.9), rgba(139,61,255,0.9))",
+          transform: `translateX(${progress * (100 / 0.28 - 100)}%)`,
+        }} />
+      </div>
+    </div>
+  );
+};
 
 const useDragScroll = () => {
   const state = useRef({ dragging: false, startX: 0, startScrollLeft: 0 });
@@ -59,6 +92,8 @@ export function HOMEFRAMEO(_p = {}) {
   };
   const trendingDrag = useDragScroll();
   const recommendedDrag = useDragScroll();
+  const trendingScrollRef = useRef(null);
+  const recommendedScrollRef = useRef(null);
   return (
     <div className={props.className} style={{
       width: 402,
@@ -111,13 +146,13 @@ export function HOMEFRAMEO(_p = {}) {
           height: 96,
           fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           fontWeight: 500,
-          fontSize: 16,
+          fontSize: 15,
           textAlign: "center",
           whiteSpace: "normal",
           lineHeight: "24px",
           letterSpacing: "0.030em",
           color: "rgb(181,174,200)",
-        }}>AI-powered picks for your mood, time, and platforms.</span>
+        }}>AI-powered picks based on your mood, time, and streaming platforms.</span>
         <AskFrameo
           style={{
             position: "absolute",
@@ -243,8 +278,9 @@ export function HOMEFRAMEO(_p = {}) {
           color: "rgb(168,85,247)",
           textDecoration: "underline",
         }}>See all</span>
-        <ScrollTrack progress={recommendedProgress} style={{ left: 27, top: 899, width: 375 }} />
+        <ScrollTrack progress={recommendedProgress} scrollRef={recommendedScrollRef} style={{ left: 27, top: 899, width: 375 }} />
         <div
+          ref={recommendedScrollRef}
           className="no-scrollbar"
           onScroll={handleCarouselScroll(setRecommendedProgress)}
           {...recommendedDrag}
@@ -331,8 +367,9 @@ export function HOMEFRAMEO(_p = {}) {
             height: 130,
           }} />
         </div>
-        <ScrollTrack progress={trendingProgress} style={{ left: 24, top: 691, width: 378 }} />
+        <ScrollTrack progress={trendingProgress} scrollRef={trendingScrollRef} style={{ left: 24, top: 691, width: 378 }} />
         <div
+          ref={trendingScrollRef}
           className="no-scrollbar"
           onScroll={handleCarouselScroll(setTrendingProgress)}
           {...trendingDrag}

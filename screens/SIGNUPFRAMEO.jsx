@@ -127,7 +127,7 @@ export function SIGNUPFRAMEO(_p = {}) {
         <span style={{
           fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           fontWeight: 400,
-          fontSize: 12,
+          fontSize: 15,
           lineHeight: "16px",
           letterSpacing: "0.100em",
           color: "rgb(181,174,200)",

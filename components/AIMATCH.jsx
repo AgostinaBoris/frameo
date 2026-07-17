@@ -66,7 +66,10 @@ export function AIMATCH(_p = {}) {
           width: 172,
           height: 168,
           borderRadius: "50%",
-        }} />
+          overflow: "hidden",
+        }}>
+          <div className="mood-sea-shimmer" />
+        </div>
         <span style={{
           position: "absolute",
           left: 30,
@@ -132,7 +135,7 @@ export function AIMATCH(_p = {}) {
           style={{
             position: "absolute",
             left: 61,
-            top: 773,
+            top: 780,
             width: 280,
             height: 60,
           }}
@@ -184,7 +187,7 @@ export function AIMATCH(_p = {}) {
               height: 51,
               fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
               fontWeight: 700,
-              fontSize: 14,
+              fontSize: 15,
               whiteSpace: "normal",
               lineHeight: "25px",
               letterSpacing: "0.020em",

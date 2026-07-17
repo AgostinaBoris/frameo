@@ -8,27 +8,60 @@ import { THRILLER } from './THRILLER.jsx';
 import { TOPNAV } from './TOPNAV.jsx';
 import { TRENDING } from './TRENDING.jsx';
 
-const ScrollTrack = ({ progress, style }) => (
-  <div style={{
-    position: "absolute",
-    height: 3,
-    borderRadius: 2,
-    backgroundColor: "rgba(255,255,255,0.1)",
-    overflow: "hidden",
-    ...style,
-  }}>
-    <div style={{
-      position: "absolute",
-      top: 0,
-      left: 0,
-      height: "100%",
-      width: "28%",
-      borderRadius: 2,
-      background: "linear-gradient(90deg, rgba(168,85,247,0.9), rgba(139,61,255,0.9))",
-      transform: `translateX(${progress * (100 / 0.28 - 100)}%)`,
-    }} />
-  </div>
-);
+const ScrollTrack = ({ progress, style, scrollRef }) => {
+  const trackRef = useRef(null);
+  const seek = (clientX) => {
+    const el = scrollRef?.current;
+    const track = trackRef.current;
+    if (!el || !track) return;
+    const rect = track.getBoundingClientRect();
+    const fraction = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
+    el.scrollLeft = fraction * (el.scrollWidth - el.clientWidth);
+  };
+  return (
+    <div
+      ref={trackRef}
+      onMouseDown={(e) => {
+        seek(e.clientX);
+        const onMove = (ev) => seek(ev.clientX);
+        const onUp = () => {
+          window.removeEventListener("mousemove", onMove);
+          window.removeEventListener("mouseup", onUp);
+        };
+        window.addEventListener("mousemove", onMove);
+        window.addEventListener("mouseup", onUp);
+      }}
+      style={{
+        position: "absolute",
+        height: 16,
+        display: "flex",
+        alignItems: "flex-start",
+        cursor: "pointer",
+        ...style,
+      }}
+    >
+      <div style={{
+        position: "relative",
+        width: "100%",
+        height: 3,
+        borderRadius: 2,
+        backgroundColor: "rgba(255,255,255,0.1)",
+        overflow: "hidden",
+      }}>
+        <div style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          height: "100%",
+          width: "28%",
+          borderRadius: 2,
+          background: "linear-gradient(90deg, rgba(168,85,247,0.9), rgba(139,61,255,0.9))",
+          transform: `translateX(${progress * (100 / 0.28 - 100)}%)`,
+        }} />
+      </div>
+    </div>
+  );
+};
 
 const useDragScroll = () => {
   const state = useRef({ dragging: false, startX: 0, startScrollLeft: 0 });
@@ -56,6 +89,7 @@ export function DISCOVER(_p = {}) {
   const [trendingProgress, setTrendingProgress] = useState(0);
   const [scifiProgress, setScifiProgress] = useState(0);
   const [romanceProgress, setRomanceProgress] = useState(0);
+  const [filtersProgress, setFiltersProgress] = useState(0);
   const handleCarouselScroll = (setProgress) => (e) => {
     const el = e.currentTarget;
     const max = el.scrollWidth - el.clientWidth;
@@ -64,11 +98,15 @@ export function DISCOVER(_p = {}) {
   const trendingDrag = useDragScroll();
   const scifiDrag = useDragScroll();
   const romanceDrag = useDragScroll();
+  const filtersDrag = useDragScroll();
+  const filtersScrollRef = useRef(null);
+  const trendingScrollRef = useRef(null);
+  const scifiScrollRef = useRef(null);
+  const romanceScrollRef = useRef(null);
   const dimStyle = (key) => ({
     position: "relative",
-    width: 64,
     flexShrink: 0,
-    opacity: activeFilter === key ? 1 : 0.45,
+    opacity: activeFilter === key ? 1 : 0.8,
   });
   return (
     <div className={props.className} style={{
@@ -98,7 +136,7 @@ export function DISCOVER(_p = {}) {
           height: 25,
           fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           fontWeight: 700,
-          fontSize: 14,
+          fontSize: 15,
           whiteSpace: "nowrap",
           lineHeight: "18px",
           letterSpacing: "0.100em",
@@ -127,44 +165,60 @@ export function DISCOVER(_p = {}) {
             color: "rgb(255,255,255)",
           }}>Discover</span>
         </div>
-        <div style={{
-          position: "absolute",
-          left: 17,
-          top: 163,
-          display: "flex",
-          flexDirection: "row",
-          gap: 12,
-          justifyContent: "center",
-          alignItems: "center",
-          flexWrap: "nowrap",
-        }}>
-          <TRENDING
-            style={{ ...dimStyle('trending'), height: 36 }}
-            property1={"default"}
-            onClick={() => setActiveFilter('trending')}
-          />
-          <THRILLER
-            style={dimStyle('thriller')}
-            property1={"default"}
-            onClick={() => setActiveFilter('thriller')}
-          />
-          <SCIFI
-            style={dimStyle('scifi')}
-            property1={"default"}
-            onClick={() => setActiveFilter('scifi')}
-          />
-          <ROMANCE
-            style={{ ...dimStyle('romance'), height: 36 }}
-            property1={"default"}
-            onClick={() => setActiveFilter('romance')}
-          />
-          <FORYOU
-            style={dimStyle('foryou')}
-            text1={"For You"}
-            property1={"default"}
-            onClick={() => setActiveFilter('foryou')}
-          />
+        <div
+          ref={filtersScrollRef}
+          className="no-scrollbar"
+          onScroll={handleCarouselScroll(setFiltersProgress)}
+          {...filtersDrag}
+          style={{
+            position: "absolute",
+            left: 0,
+            top: 163,
+            width: 402,
+            overflowX: "auto",
+            overflowY: "hidden",
+            WebkitOverflowScrolling: "touch",
+            cursor: "grab",
+          }}
+        >
+          <div style={{
+            display: "flex",
+            flexDirection: "row",
+            gap: 16,
+            alignItems: "center",
+            flexWrap: "nowrap",
+            padding: "0 17px",
+            width: "max-content",
+          }}>
+            <TRENDING
+              style={dimStyle('trending')}
+              property1={"default"}
+              onClick={() => setActiveFilter('trending')}
+            />
+            <THRILLER
+              style={dimStyle('thriller')}
+              property1={"default"}
+              onClick={() => setActiveFilter('thriller')}
+            />
+            <SCIFI
+              style={dimStyle('scifi')}
+              property1={"default"}
+              onClick={() => setActiveFilter('scifi')}
+            />
+            <ROMANCE
+              style={dimStyle('romance')}
+              property1={"default"}
+              onClick={() => setActiveFilter('romance')}
+            />
+            <FORYOU
+              style={dimStyle('foryou')}
+              text1={"For You"}
+              property1={"default"}
+              onClick={() => setActiveFilter('foryou')}
+            />
+          </div>
         </div>
+        <ScrollTrack progress={filtersProgress} scrollRef={filtersScrollRef} style={{ left: 17, top: 209, width: 368 }} />
         <SEARCHBAR
           style={{
             position: "absolute",
@@ -218,8 +272,9 @@ export function DISCOVER(_p = {}) {
           letterSpacing: "0.020em",
           color: "rgb(248,247,255)",
         }}>Because You Liked Romance</span>
-        <ScrollTrack progress={trendingProgress} style={{ left: 24, top: 256, width: 352 }} />
+        <ScrollTrack progress={trendingProgress} scrollRef={trendingScrollRef} style={{ left: 24, top: 256, width: 352 }} />
         <div
+          ref={trendingScrollRef}
           className="no-scrollbar"
           onScroll={handleCarouselScroll(setTrendingProgress)}
           {...trendingDrag}
@@ -318,8 +373,9 @@ export function DISCOVER(_p = {}) {
             }} />
           </div>
         </div>
-        <ScrollTrack progress={scifiProgress} style={{ left: 24, top: 463, width: 352 }} />
+        <ScrollTrack progress={scifiProgress} scrollRef={scifiScrollRef} style={{ left: 24, top: 463, width: 352 }} />
         <div
+          ref={scifiScrollRef}
           className="no-scrollbar"
           onScroll={handleCarouselScroll(setScifiProgress)}
           {...scifiDrag}
@@ -418,8 +474,9 @@ export function DISCOVER(_p = {}) {
             }} />
           </div>
         </div>
-        <ScrollTrack progress={romanceProgress} style={{ left: 24, top: 673, width: 352 }} />
+        <ScrollTrack progress={romanceProgress} scrollRef={romanceScrollRef} style={{ left: 24, top: 673, width: 352 }} />
         <div
+          ref={romanceScrollRef}
           className="no-scrollbar"
           onScroll={handleCarouselScroll(setRomanceProgress)}
           {...romanceDrag}

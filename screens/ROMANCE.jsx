@@ -6,15 +6,12 @@ export function ROMANCE(_p = {}) {
   const props = { ..._p, property1: _p.property1 ?? "default" };
   const __body0 = () => (
     <div className={props.className} style={{
-      width: 64,
-      height: 36,
-      display: "flex",
-      flexDirection: "row",
-      gap: 10,
-      padding: "4px 2px 4px 2px",
-      alignItems: "center",
-      flexWrap: "nowrap",
+      height: 40,
+      padding: "0 14px",
       boxSizing: "border-box",
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
       position: "relative",
       cursor: "pointer",
       ...props.style,
@@ -23,25 +20,20 @@ export function ROMANCE(_p = {}) {
     >
       <div style={{
         position: "absolute",
-        left: 0,
-        top: 0,
-        width: 64,
-        height: 36,
-        borderRadius: 15,
+        inset: 0,
+        borderRadius: 5,
         backgroundColor: "rgba(139,61,255,0.5)",
         boxShadow: "inset 0 0 0 1px rgba(168,85,247,0.7), 2px 2px 6px 0.500px rgba(168,85,247,0.45)",
       }} />
       <span style={{
         position: "relative",
+        whiteSpace: "nowrap",
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 700,
         fontSize: 13,
         textAlign: "center",
-        whiteSpace: "nowrap",
-        lineHeight: "25px",
         letterSpacing: "0.020em",
         color: "rgb(255,255,255)",
-        flexShrink: 0,
       }}>{props.text1 ?? "Romance"}</span>
     </div>
   );

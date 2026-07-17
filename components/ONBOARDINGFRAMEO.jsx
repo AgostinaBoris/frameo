@@ -62,7 +62,6 @@ export function ONBOARDINGFRAMEO(_p = {}) {
         top: 387,
         width: 84,
         height: 84,
-        overflow: "hidden",
       }}>
         <div style={{
           position: "absolute",
@@ -70,7 +69,6 @@ export function ONBOARDINGFRAMEO(_p = {}) {
           top: 0,
           width: 84,
           height: 84,
-          overflow: "hidden",
         }}>
           <div style={{
             position: "absolute",
@@ -113,7 +111,7 @@ export function ONBOARDINGFRAMEO(_p = {}) {
           height: 56,
           fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           fontWeight: 600,
-          fontSize: 17,
+          fontSize: 15,
           whiteSpace: "nowrap",
           lineHeight: "30px",
           letterSpacing: "0.040em",

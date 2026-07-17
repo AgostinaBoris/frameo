@@ -21,9 +21,9 @@ export function MOVIEDETAILS(props = {}) {
       <div style={{
         position: "absolute",
         left: 0,
-        top: 64,
+        top: 84,
         width: 402,
-        height: 694,
+        height: 674,
         overflowY: "auto",
         overflowX: "hidden",
         WebkitOverflowScrolling: "touch",
@@ -102,7 +102,7 @@ export function MOVIEDETAILS(props = {}) {
             <span style={{
               ...fontStyle,
               fontWeight: 700,
-              fontSize: 14,
+              fontSize: 15,
               letterSpacing: "0.020em",
               color: "rgb(255,255,255)",
               whiteSpace: "nowrap",
@@ -112,7 +112,7 @@ export function MOVIEDETAILS(props = {}) {
           <span style={{
             ...fontStyle,
             fontWeight: 600,
-            fontSize: 14,
+            fontSize: 15,
             letterSpacing: "0.020em",
             color: "rgb(181,174,200)",
             textAlign: "center",
@@ -121,7 +121,7 @@ export function MOVIEDETAILS(props = {}) {
           <span style={{
             ...fontStyle,
             fontWeight: 600,
-            fontSize: 14,
+            fontSize: 15,
             letterSpacing: "0.020em",
             color: "rgb(248,247,255)",
             textAlign: "center",
@@ -130,8 +130,8 @@ export function MOVIEDETAILS(props = {}) {
           <span style={{
             ...fontStyle,
             fontWeight: 500,
-            fontSize: 15,
-            lineHeight: "23px",
+            fontSize: 16,
+            lineHeight: "24px",
             letterSpacing: "0.010em",
             color: "rgb(248,247,255)",
             textAlign: "center",
@@ -141,15 +141,15 @@ export function MOVIEDETAILS(props = {}) {
             <span style={{
               ...fontStyle,
               fontWeight: 700,
-              fontSize: 16,
+              fontSize: 17,
               letterSpacing: "0.020em",
               color: "rgb(255,255,255)",
             }}>Why this match?</span>
             <span style={{
               ...fontStyle,
               fontWeight: 500,
-              fontSize: 14,
-              lineHeight: "21px",
+              fontSize: 16,
+              lineHeight: "22px",
               letterSpacing: "0.010em",
               color: "rgb(181,174,200)",
             }}>{movie.whyMatch}</span>
@@ -169,6 +169,9 @@ export function MOVIEDETAILS(props = {}) {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+            }}
+            onClick={() => {
+              if (movie.watchUrl) window.open(movie.watchUrl, "_blank", "noopener,noreferrer");
             }}
           >
             <span style={{ ...fontStyle, fontWeight: 700, fontSize: 16, color: "rgb(255,255,255)", letterSpacing: "0.020em" }}>Watch Now</span>

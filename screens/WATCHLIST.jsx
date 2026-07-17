@@ -13,7 +13,8 @@ import { MOVIES as MOVIE_DATA } from './movieData.js';
 export function WATCHLIST(_p = {}) {
   const props = _p;
   const [activeFilter, setActiveFilter] = useState('all');
-  const filterStyle = (key) => ({ opacity: activeFilter === key ? 1 : 0.45 });
+  const filterStyle = (key) => ({ opacity: activeFilter === key ? 1 : 0.8 });
+  const CARD_SCALE = 1.08;
   return (
     <div className={props.className} style={{
       width: 402,
@@ -42,7 +43,7 @@ export function WATCHLIST(_p = {}) {
           height: 25,
           fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           fontWeight: 700,
-          fontSize: 14,
+          fontSize: 15,
           whiteSpace: "nowrap",
           lineHeight: "25px",
           letterSpacing: "0.100em",
@@ -82,23 +83,27 @@ export function WATCHLIST(_p = {}) {
         </div>
         <div style={{
           position: "absolute",
-          left: 19,
+          left: 0,
           top: 226,
-          width: 357,
-          height: 598,
+          width: 402,
+          height: 752,
           display: "flex",
           flexDirection: "column",
           gap: 14,
-          justifyContent: "center",
+          justifyContent: "flex-start",
           alignItems: "center",
           flexWrap: "nowrap",
+          padding: "0 10px",
+          boxSizing: "border-box",
         }}>
+          <div style={{ width: 357 * CARD_SCALE, height: 216 * CARD_SCALE, flexShrink: 0 }}>
+          <div style={{ width: 357, height: 216, transform: `scale(${CARD_SCALE})`, transformOrigin: "top left" }}>
           <div className="selectable-card" style={{
             position: "relative",
-            height: 190,
+            height: 216,
             overflow: "hidden",
             borderRadius: 18,
-            boxShadow: "inset 0 0 0 1px rgba(168,85,247,0.35)",
+            boxShadow: "inset 0 0 0 1.5px rgba(168,85,247,0.7)",
             flexShrink: 0,
             alignSelf: "stretch",
           }}>
@@ -107,7 +112,7 @@ export function WATCHLIST(_p = {}) {
               left: 1,
               top: 1,
               width: 262,
-              height: 189,
+              height: 215,
               overflow: "hidden",
             }}>
               <div className="fig-asset-d9a58d848d1c6df9" style={{
@@ -115,7 +120,7 @@ export function WATCHLIST(_p = {}) {
                 left: 0,
                 top: 0,
                 width: 136,
-                height: 189,
+                height: 215,
                 borderRadius: "18px 0px 0px 18px",
               }} />
               <div style={{
@@ -134,7 +139,7 @@ export function WATCHLIST(_p = {}) {
                   height: 40,
                   fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
                   fontWeight: 700,
-                  fontSize: 15,
+                  fontSize: 16,
                   whiteSpace: "nowrap",
                   lineHeight: "40px",
                   letterSpacing: "0.100em",
@@ -146,7 +151,7 @@ export function WATCHLIST(_p = {}) {
               position: "absolute",
               left: 152,
               top: 50,
-              width: 184.53,
+              width: 200,
               height: 78,
               overflow: "hidden",
             }}>
@@ -158,7 +163,7 @@ export function WATCHLIST(_p = {}) {
                 height: 25,
                 fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
                 fontWeight: 700,
-                fontSize: 12,
+                fontSize: 13,
                 whiteSpace: "nowrap",
                 lineHeight: "25px",
                 letterSpacing: "0.020em",
@@ -168,11 +173,13 @@ export function WATCHLIST(_p = {}) {
                 position: "absolute",
                 left: 0.123,
                 top: 28,
-                width: 184.407,
-                height: 44,
+                width: 200,
+                height: 25,
+                overflow: "hidden",
+                textOverflow: "ellipsis",
                 fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
                 fontWeight: 700,
-                fontSize: 12,
+                fontSize: 13,
                 whiteSpace: "nowrap",
                 lineHeight: "25px",
                 letterSpacing: "0.020em",
@@ -186,7 +193,7 @@ export function WATCHLIST(_p = {}) {
                 height: 23,
                 fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
                 fontWeight: 700,
-                fontSize: 12,
+                fontSize: 13,
                 whiteSpace: "nowrap",
                 lineHeight: "25px",
                 letterSpacing: "0.020em",
@@ -197,7 +204,7 @@ export function WATCHLIST(_p = {}) {
               style={{
                 position: "absolute",
                 left: 184,
-                top: 143,
+                top: 169,
                 width: 86,
                 height: 36,
               }}
@@ -206,9 +213,13 @@ export function WATCHLIST(_p = {}) {
               onClick={() => props.onDetails?.(MOVIE_DATA.ironman2)}
             />
           </div>
+          </div>
+          </div>
+          <div style={{ width: 357 * CARD_SCALE, height: 216 * CARD_SCALE, flexShrink: 0 }}>
+          <div style={{ width: 357, height: 216, transform: `scale(${CARD_SCALE})`, transformOrigin: "top left" }}>
           <div style={{
             position: "relative",
-            height: 190,
+            height: 216,
             overflow: "hidden",
             display: "flex",
             flexDirection: "row",
@@ -224,7 +235,7 @@ export function WATCHLIST(_p = {}) {
               width: 357,
               overflow: "hidden",
               borderRadius: 18,
-              boxShadow: "inset 0 0 0 1px rgba(168,85,247,0.35)",
+              boxShadow: "inset 0 0 0 1.5px rgba(168,85,247,0.7)",
               flexShrink: 0,
               alignSelf: "stretch",
             }}>
@@ -232,16 +243,16 @@ export function WATCHLIST(_p = {}) {
                 position: "absolute",
                 left: 147,
                 top: 21,
-                width: 199,
-                height: 108.21,
+                width: 210,
+                height: 134,
                 overflow: "hidden",
               }}>
                 <div style={{
                   position: "absolute",
                   left: 0,
                   top: 36,
-                  width: 199,
-                  height: 72.21,
+                  width: 210,
+                  height: 98.21,
                   overflow: "hidden",
                 }}>
                   <span style={{
@@ -252,7 +263,7 @@ export function WATCHLIST(_p = {}) {
                     height: 20,
                     fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
                     fontWeight: 700,
-                    fontSize: 12,
+                    fontSize: 13,
                     whiteSpace: "nowrap",
                     lineHeight: "25px",
                     letterSpacing: "0.020em",
@@ -262,12 +273,12 @@ export function WATCHLIST(_p = {}) {
                     position: "absolute",
                     left: 0,
                     top: 23,
-                    width: 199,
-                    height: 24,
+                    width: 210,
+                    height: 50,
                     fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
                     fontWeight: 700,
-                    fontSize: 12,
-                    whiteSpace: "nowrap",
+                    fontSize: 13,
+                    whiteSpace: "normal",
                     lineHeight: "25px",
                     letterSpacing: "0.020em",
                     color: "rgb(248,247,255)",
@@ -275,12 +286,12 @@ export function WATCHLIST(_p = {}) {
                   <span style={{
                     position: "absolute",
                     left: 0,
-                    top: 47,
+                    top: 73,
                     width: 149.641,
                     height: 25.21,
                     fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
                     fontWeight: 700,
-                    fontSize: 12,
+                    fontSize: 13,
                     whiteSpace: "nowrap",
                     lineHeight: "25px",
                     letterSpacing: "0.020em",
@@ -295,7 +306,7 @@ export function WATCHLIST(_p = {}) {
                   height: 36,
                   fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
                   fontWeight: 700,
-                  fontSize: 15,
+                  fontSize: 16,
                   whiteSpace: "nowrap",
                   lineHeight: "40px",
                   letterSpacing: "0.100em",
@@ -307,14 +318,14 @@ export function WATCHLIST(_p = {}) {
                 left: 0,
                 top: 1,
                 width: 131,
-                height: 188,
+                height: 214,
                 borderRadius: "18px 0px 0px 18px",
               }} />
               <DETAILS
                 style={{
                   position: "absolute",
                   left: 185,
-                  top: 144,
+                  top: 170,
                   width: 86,
                   height: 36,
                 }}
@@ -324,6 +335,10 @@ export function WATCHLIST(_p = {}) {
               />
             </div>
           </div>
+          </div>
+          </div>
+          <div style={{ width: 357 * CARD_SCALE, height: 216 * CARD_SCALE, flexShrink: 0 }}>
+          <div style={{ width: 357, height: 216, transform: `scale(${CARD_SCALE})`, transformOrigin: "top left" }}>
           <div style={{
             position: "relative",
             display: "flex",
@@ -338,9 +353,9 @@ export function WATCHLIST(_p = {}) {
             <div className="selectable-card" style={{
               position: "relative",
               width: 357,
-              height: 190,
+              height: 216,
               borderRadius: 18,
-              boxShadow: "inset 0 0 0 1px rgba(168,85,247,0.35)",
+              boxShadow: "inset 0 0 0 1.5px rgba(168,85,247,0.7)",
               flexShrink: 0,
             }}>
               <div className="fig-asset-45cc3d44daf46f8f" style={{
@@ -348,15 +363,15 @@ export function WATCHLIST(_p = {}) {
                 left: 1,
                 top: 2,
                 width: 131,
-                height: 187,
+                height: 213,
                 borderRadius: "18px 0px 0px 18px",
               }} />
               <div style={{
                 position: "absolute",
                 left: 156,
                 top: 14,
-                width: 174,
-                height: 126.214,
+                width: 197,
+                height: 152,
                 overflow: "hidden",
               }}>
                 <span style={{
@@ -367,7 +382,7 @@ export function WATCHLIST(_p = {}) {
                   height: 27.407,
                   fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
                   fontWeight: 700,
-                  fontSize: 12,
+                  fontSize: 13,
                   whiteSpace: "nowrap",
                   lineHeight: "25px",
                   letterSpacing: "0.020em",
@@ -377,12 +392,12 @@ export function WATCHLIST(_p = {}) {
                   position: "absolute",
                   left: 0,
                   top: 54,
-                  width: 174,
-                  height: 56,
+                  width: 197,
+                  height: 50,
                   fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
                   fontWeight: 700,
-                  fontSize: 12,
-                  whiteSpace: "nowrap",
+                  fontSize: 13,
+                  whiteSpace: "normal",
                   lineHeight: "25px",
                   letterSpacing: "0.020em",
                   color: "rgb(248,247,255)",
@@ -390,12 +405,12 @@ export function WATCHLIST(_p = {}) {
                 <span style={{
                   position: "absolute",
                   left: 0,
-                  top: 101,
+                  top: 127,
                   width: 134.799,
                   height: 25.214,
                   fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
                   fontWeight: 700,
-                  fontSize: 12,
+                  fontSize: 13,
                   whiteSpace: "nowrap",
                   lineHeight: "25px",
                   letterSpacing: "0.020em",
@@ -409,7 +424,7 @@ export function WATCHLIST(_p = {}) {
                   height: 43.851,
                   fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
                   fontWeight: 700,
-                  fontSize: 15,
+                  fontSize: 16,
                   whiteSpace: "nowrap",
                   lineHeight: "40px",
                   letterSpacing: "0.100em",
@@ -420,7 +435,7 @@ export function WATCHLIST(_p = {}) {
                 style={{
                   position: "absolute",
                   left: 190,
-                  top: 148,
+                  top: 174,
                   width: 86,
                   height: 36,
                 }}
@@ -430,17 +445,22 @@ export function WATCHLIST(_p = {}) {
               />
             </div>
           </div>
+          </div>
+          </div>
         </div>
         <div style={{
           position: "absolute",
-          left: 24,
+          left: 0,
           top: 162,
+          width: 402,
           display: "flex",
           flexDirection: "row",
           gap: 14,
           justifyContent: "center",
           alignItems: "center",
           flexWrap: "nowrap",
+          padding: "6px 4px",
+          boxSizing: "border-box",
         }}>
           <ALL
             style={{
