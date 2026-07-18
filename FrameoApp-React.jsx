@@ -29,7 +29,18 @@ function useViewportSize() {
   }));
 
   useEffect(() => {
-    const update = () => setSize({ w: window.innerWidth, h: window.innerHeight });
+    const update = () => {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      setSize((prev) => {
+        // Mobile browser chrome (address bar) hiding/showing on scroll changes
+        // innerHeight without changing innerWidth. Treat the smallest height seen
+        // at the current width as the safe, guaranteed-visible viewport so the
+        // layout never grows into a state that later gets clipped or has to jump.
+        if (w !== prev.w) return { w, h };
+        return h < prev.h ? { w, h } : prev;
+      });
+    };
     update();
     window.addEventListener('resize', update);
     window.addEventListener('orientationchange', update);
@@ -52,11 +63,8 @@ export default function FrameoApp() {
   const isMobile = viewport.w <= MOBILE_BREAKPOINT;
   const frameOuterW = CANVAS_W + (isMobile ? 0 : BEZEL * 2);
   const frameOuterH = CANVAS_H + (isMobile ? 0 : BEZEL * 2);
-  // Mobile scale is based on width only: browser chrome (address bar) hiding/showing
-  // changes innerHeight constantly while scrolling, and factoring height into the
-  // scale would make the whole app visibly grow/shrink during that.
   const scale = isMobile
-    ? viewport.w / CANVAS_W
+    ? Math.min(viewport.w / CANVAS_W, viewport.h / CANVAS_H)
     : Math.min(1, (viewport.w - 40) / frameOuterW, (viewport.h - 40) / frameOuterH);
   const scaledW = frameOuterW * scale;
   const scaledH = frameOuterH * scale;
