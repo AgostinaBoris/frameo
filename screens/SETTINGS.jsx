@@ -13,8 +13,8 @@ const SettingsRow = ({ label, danger, onClick }) => (
     style={{
       position: "relative",
       width: "100%",
-      height: 48,
-      borderRadius: 8,
+      height: 72,
+      borderRadius: 12,
       cursor: "pointer",
       backgroundColor: danger ? "rgba(210,24,24,0.12)" : "rgba(139,61,255,0.12)",
       boxShadow: danger
@@ -27,23 +27,23 @@ const SettingsRow = ({ label, danger, onClick }) => (
     <span style={{
       ...fontStyle,
       position: "absolute",
-      left: 20,
+      left: 24,
       top: 0,
       bottom: 0,
       display: "flex",
       alignItems: "center",
       fontWeight: 600,
-      fontSize: 14,
+      fontSize: 18,
       letterSpacing: "0.020em",
       color: danger ? "rgb(255,120,120)" : "rgb(255,255,255)",
       whiteSpace: "nowrap",
     }}>{label}</span>
     <WeuiArrowFilled style={{
       position: "absolute",
-      right: 16,
-      top: 12,
-      width: 12,
-      height: 24,
+      right: 20,
+      top: 24,
+      width: 16,
+      height: 32,
       color: danger ? "rgb(255,120,120)" : "rgb(248,247,255)",
     }} />
   </div>
