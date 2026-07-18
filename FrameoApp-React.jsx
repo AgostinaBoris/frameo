@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles.css';
 
 // Import Figma components from bundle
@@ -17,10 +17,42 @@ import AIMATCHRESULTS from './screens/AIMATCHRESULTS';
 import MOVIEDETAILS from './screens/MOVIEDETAILS';
 import SETTINGS from './screens/SETTINGS';
 
+const CANVAS_W = 402;
+const CANVAS_H = 874;
+const BEZEL = 12;
+const MOBILE_BREAKPOINT = 900;
+
+function useViewportSize() {
+  const [size, setSize] = useState(() => ({
+    w: typeof window !== 'undefined' ? window.innerWidth : CANVAS_W,
+    h: typeof window !== 'undefined' ? window.innerHeight : CANVAS_H,
+  }));
+
+  useEffect(() => {
+    const update = () => setSize({ w: window.innerWidth, h: window.innerHeight });
+    update();
+    window.addEventListener('resize', update);
+    window.addEventListener('orientationchange', update);
+    window.visualViewport?.addEventListener('resize', update);
+    return () => {
+      window.removeEventListener('resize', update);
+      window.removeEventListener('orientationchange', update);
+      window.visualViewport?.removeEventListener('resize', update);
+    };
+  }, []);
+
+  return size;
+}
+
 export default function FrameoApp() {
   const [screen, setScreen] = useState('onboarding');
   const [previousScreen, setPreviousScreen] = useState('home');
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const viewport = useViewportSize();
+  const isMobile = viewport.w <= MOBILE_BREAKPOINT;
+  const scale = isMobile
+    ? Math.min(viewport.w / CANVAS_W, viewport.h / CANVAS_H)
+    : Math.min(1, (viewport.w - 40) / (CANVAS_W + BEZEL * 2), (viewport.h - 40) / (CANVAS_H + BEZEL * 2));
 
   const navHandlers = {
     onHome: () => setScreen('home'),
@@ -48,13 +80,16 @@ export default function FrameoApp() {
   const phoneFrame = {
     boxSizing: 'content-box',
     position: 'relative',
-    width: '402px',
-    height: '874px',
-    borderRadius: '40px',
-    border: '12px solid #1a1a1a',
+    width: `${CANVAS_W}px`,
+    height: `${CANVAS_H}px`,
+    borderRadius: isMobile ? 0 : '40px',
+    border: isMobile ? 'none' : '12px solid #1a1a1a',
     overflow: 'hidden',
-    boxShadow: '0 20px 60px rgba(0,0,0,0.9)',
-    background: '#0a0a0a'
+    boxShadow: isMobile ? 'none' : '0 20px 60px rgba(0,0,0,0.9)',
+    background: '#0a0a0a',
+    transform: `scale(${scale})`,
+    transformOrigin: 'center center',
+    flex: 'none',
   };
 
   return (
@@ -62,9 +97,10 @@ export default function FrameoApp() {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      minHeight: '100vh',
+      minHeight: '100dvh',
       background: '#0a0a0a',
-      padding: '20px',
+      padding: isMobile ? 0 : '20px',
+      overflow: 'hidden',
       fontFamily: 'Manrope, -apple-system, BlinkMacSystemFont, sans-serif'
     }}>
       <div style={phoneFrame}>
