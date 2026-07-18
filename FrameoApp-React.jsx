@@ -50,9 +50,16 @@ export default function FrameoApp() {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const viewport = useViewportSize();
   const isMobile = viewport.w <= MOBILE_BREAKPOINT;
+  const frameOuterW = CANVAS_W + (isMobile ? 0 : BEZEL * 2);
+  const frameOuterH = CANVAS_H + (isMobile ? 0 : BEZEL * 2);
+  // Mobile scale is based on width only: browser chrome (address bar) hiding/showing
+  // changes innerHeight constantly while scrolling, and factoring height into the
+  // scale would make the whole app visibly grow/shrink during that.
   const scale = isMobile
-    ? Math.min(viewport.w / CANVAS_W, viewport.h / CANVAS_H)
-    : Math.min(1, (viewport.w - 40) / (CANVAS_W + BEZEL * 2), (viewport.h - 40) / (CANVAS_H + BEZEL * 2));
+    ? viewport.w / CANVAS_W
+    : Math.min(1, (viewport.w - 40) / frameOuterW, (viewport.h - 40) / frameOuterH);
+  const scaledW = frameOuterW * scale;
+  const scaledH = frameOuterH * scale;
 
   const navHandlers = {
     onHome: () => setScreen('home'),
@@ -79,7 +86,9 @@ export default function FrameoApp() {
 
   const phoneFrame = {
     boxSizing: 'content-box',
-    position: 'relative',
+    position: 'absolute',
+    top: 0,
+    left: 0,
     width: `${CANVAS_W}px`,
     height: `${CANVAS_H}px`,
     borderRadius: isMobile ? 0 : '40px',
@@ -88,21 +97,22 @@ export default function FrameoApp() {
     boxShadow: isMobile ? 'none' : '0 20px 60px rgba(0,0,0,0.9)',
     background: '#0a0a0a',
     transform: `scale(${scale})`,
-    transformOrigin: 'center center',
-    flex: 'none',
+    transformOrigin: 'top left',
   };
 
   return (
     <div style={{
       display: 'flex',
-      alignItems: 'center',
+      alignItems: isMobile ? 'flex-start' : 'center',
       justifyContent: 'center',
       minHeight: '100dvh',
       background: '#0a0a0a',
       padding: isMobile ? 0 : '20px',
-      overflow: 'hidden',
+      overflowY: isMobile ? 'auto' : 'hidden',
+      overflowX: 'hidden',
       fontFamily: 'Manrope, -apple-system, BlinkMacSystemFont, sans-serif'
     }}>
+      <div style={{ position: 'relative', width: scaledW, height: scaledH, flex: 'none' }}>
       <div style={phoneFrame}>
         {screen === 'onboarding' && (
           <div
@@ -196,6 +206,7 @@ export default function FrameoApp() {
             <WATCHLIST {...navHandlers} active={activeTab} onDetails={openMovieDetails} />
           </div>
         )}
+      </div>
       </div>
     </div>
   );
