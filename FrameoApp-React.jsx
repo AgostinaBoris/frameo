@@ -108,8 +108,7 @@ export default function FrameoApp() {
       minHeight: '100dvh',
       background: '#0a0a0a',
       padding: isMobile ? 0 : '20px',
-      overflowY: isMobile ? 'auto' : 'hidden',
-      overflowX: 'hidden',
+      overflow: 'hidden',
       fontFamily: 'Manrope, -apple-system, BlinkMacSystemFont, sans-serif'
     }}>
       <div style={{ position: 'relative', width: scaledW, height: scaledH, flex: 'none' }}>
