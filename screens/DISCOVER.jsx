@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FORYOU } from './FORYOU.jsx';
 import { ROMANCE } from './ROMANCE.jsx';
 import { SCIFI } from './SCIFI.jsx';
@@ -7,6 +7,7 @@ import { TABBAR } from './TABBAR.jsx';
 import { THRILLER } from './THRILLER.jsx';
 import { TOPNAV } from './TOPNAV.jsx';
 import { TRENDING } from './TRENDING.jsx';
+import { searchMovies } from './tmdb.js';
 
 const ScrollTrack = ({ progress, style, scrollRef }) => {
   const trackRef = useRef(null);
@@ -85,7 +86,41 @@ const useDragScroll = () => {
 export function DISCOVER(_p = {}) {
   const props = _p;
   const [query, setQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [searchLoading, setSearchLoading] = useState(false);
+  const [searchError, setSearchError] = useState(null);
   const [activeFilter, setActiveFilter] = useState('trending');
+
+  useEffect(() => {
+    const trimmed = query.trim();
+    if (!trimmed) {
+      setSearchResults([]);
+      setSearchError(null);
+      setSearchLoading(false);
+      return;
+    }
+    const controller = new AbortController();
+    setSearchLoading(true);
+    setSearchError(null);
+    const timer = setTimeout(() => {
+      searchMovies(trimmed, { signal: controller.signal })
+        .then((results) => {
+          setSearchResults(results);
+          setSearchLoading(false);
+        })
+        .catch((err) => {
+          if (err.name === 'AbortError') return;
+          setSearchError('No pudimos buscar peliculas. Intenta de nuevo.');
+          setSearchLoading(false);
+        });
+    }, 400);
+    return () => {
+      clearTimeout(timer);
+      controller.abort();
+    };
+  }, [query]);
+
+  const isSearching = query.trim().length > 0;
   const [trendingProgress, setTrendingProgress] = useState(0);
   const [scifiProgress, setScifiProgress] = useState(0);
   const [romanceProgress, setRomanceProgress] = useState(0);
@@ -165,6 +200,8 @@ export function DISCOVER(_p = {}) {
             color: "rgb(255,255,255)",
           }}>Discover</span>
         </div>
+        {!isSearching && (
+        <>
         <div
           ref={filtersScrollRef}
           className="no-scrollbar"
@@ -219,6 +256,8 @@ export function DISCOVER(_p = {}) {
           </div>
         </div>
         <ScrollTrack progress={filtersProgress} scrollRef={filtersScrollRef} style={{ left: 17, top: 209, width: 368 }} />
+        </>
+        )}
         <SEARCHBAR
           style={{
             position: "absolute",
@@ -230,6 +269,95 @@ export function DISCOVER(_p = {}) {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
+        {isSearching && (
+          <div style={{
+            position: "absolute",
+            left: 23,
+            top: 150,
+            width: 353,
+            display: "flex",
+            flexDirection: "column",
+            gap: 10,
+            paddingBottom: 24,
+          }}>
+            {searchLoading && (
+              <span style={{
+                fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, sans-serif",
+                fontWeight: 600,
+                fontSize: 14,
+                color: "rgb(181,174,200)",
+              }}>Buscando...</span>
+            )}
+            {searchError && (
+              <span style={{
+                fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, sans-serif",
+                fontWeight: 600,
+                fontSize: 14,
+                color: "rgb(248,113,113)",
+              }}>{searchError}</span>
+            )}
+            {!searchLoading && !searchError && searchResults.length === 0 && (
+              <span style={{
+                fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, sans-serif",
+                fontWeight: 600,
+                fontSize: 14,
+                color: "rgb(181,174,200)",
+              }}>No encontramos peliculas para "{query.trim()}".</span>
+            )}
+            {!searchLoading && searchResults.map((movie) => (
+              <div
+                key={movie.id}
+                onClick={() => window.open(movie.tmdbUrl, "_blank", "noopener,noreferrer")}
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  gap: 12,
+                  alignItems: "center",
+                  cursor: "pointer",
+                  padding: 8,
+                  borderRadius: 12,
+                  boxShadow: "inset 0 0 0 1px rgba(168,85,247,0.25)",
+                }}
+              >
+                <div style={{
+                  width: 46,
+                  height: 69,
+                  borderRadius: 8,
+                  flexShrink: 0,
+                  overflow: "hidden",
+                  backgroundColor: "rgba(168,85,247,0.15)",
+                }}>
+                  {movie.posterUrl && (
+                    <img
+                      src={movie.posterUrl}
+                      alt={movie.title}
+                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    />
+                  )}
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 4, minWidth: 0 }}>
+                  <span style={{
+                    fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, sans-serif",
+                    fontWeight: 700,
+                    fontSize: 14,
+                    color: "rgb(248,247,255)",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                  }}>{movie.title}</span>
+                  <span style={{
+                    fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, sans-serif",
+                    fontWeight: 500,
+                    fontSize: 12,
+                    color: "rgb(181,174,200)",
+                  }}>{movie.year}{movie.rating ? ` • ★ ${movie.rating}` : ''}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+        {!isSearching && (
+        <>
         <span style={{
           position: "absolute",
           left: 24,
@@ -575,6 +703,8 @@ export function DISCOVER(_p = {}) {
             }} />
           </div>
         </div>
+        </>
+        )}
         <div style={{ position: "absolute", left: 0, top: 827, width: 1, height: 60 }} />
       </div>
       <TOPNAV
