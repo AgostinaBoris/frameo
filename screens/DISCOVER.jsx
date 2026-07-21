@@ -110,6 +110,7 @@ export function DISCOVER(_p = {}) {
         })
         .catch((err) => {
           if (err.name === 'AbortError') return;
+          console.error('TMDB search failed:', err);
           setSearchError('No pudimos buscar peliculas. Intenta de nuevo.');
           setSearchLoading(false);
         });
