@@ -4,7 +4,7 @@ import { z } from 'zod';
 const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
 const TMDB_IMG_BASE = 'https://image.tmdb.org/t/p/w342';
 
-const GENRE_MAP = {
+const MOVIE_GENRE_MAP = {
   relaxed: [35, 10751],
   romantic: [10749],
   curious: [9648, 99],
@@ -12,6 +12,18 @@ const GENRE_MAP = {
   sad: [18],
   excited: [28, 12],
   adventurous: [12, 28],
+  stressed: [35, 16],
+};
+
+// TMDB TV genres differ from movie genres (no Romance/Thriller genre for TV)
+const TV_GENRE_MAP = {
+  relaxed: [35, 10751],
+  romantic: [18, 10766],
+  curious: [9648, 99],
+  focused: [18, 9648],
+  sad: [18],
+  excited: [10759],
+  adventurous: [10759],
   stressed: [35, 16],
 };
 
@@ -40,7 +52,7 @@ const CONTEXT_LABEL = {
   marathon: 'Movie marathon',
 };
 
-async function discoverMovies({ mood, time, providerIds }) {
+async function discoverByType({ mediaType, genreMap, mood, time, providerIds, voteCountMin }) {
   const apiKey = process.env.VITE_TMDB_API_KEY;
   if (!apiKey) throw new Error('Missing VITE_TMDB_API_KEY');
 
@@ -50,9 +62,9 @@ async function discoverMovies({ mood, time, providerIds }) {
       language: 'en-US',
       sort_by: 'popularity.desc',
       include_adult: 'false',
-      'vote_count.gte': '100',
+      'vote_count.gte': String(voteCountMin),
     });
-    const genres = GENRE_MAP[mood];
+    const genres = genreMap[mood];
     if (genres) params.set('with_genres', genres.join('|'));
     const runtime = RUNTIME_MAP[time];
     if (runtime?.gte) params.set('with_runtime.gte', String(runtime.gte));
@@ -65,14 +77,14 @@ async function discoverMovies({ mood, time, providerIds }) {
   };
 
   const fetchWith = async (params) => {
-    const res = await fetch(`${TMDB_BASE_URL}/discover/movie?${params.toString()}`);
-    if (!res.ok) throw new Error(`TMDB discover failed: ${res.status}`);
+    const res = await fetch(`${TMDB_BASE_URL}/discover/${mediaType}?${params.toString()}`);
+    if (!res.ok) throw new Error(`TMDB ${mediaType} discover failed: ${res.status}`);
     const data = await res.json();
     return data.results ?? [];
   };
 
   let results = await fetchWith(buildParams({ includeProviders: true }));
-  if (results.length < 5 && providerIds.length) {
+  if (results.length < 4 && providerIds.length) {
     results = await fetchWith(buildParams({ includeProviders: false }));
   }
   return results;
@@ -90,8 +102,15 @@ export default async function handler(req, res) {
       .map((p) => PROVIDER_MAP[p])
       .filter(Boolean);
 
-    const results = await discoverMovies({ mood, time, providerIds });
-    const candidates = results.slice(0, 15);
+    const [movieResults, tvResults] = await Promise.all([
+      discoverByType({ mediaType: 'movie', genreMap: MOVIE_GENRE_MAP, mood, time, providerIds, voteCountMin: 100 }),
+      discoverByType({ mediaType: 'tv', genreMap: TV_GENRE_MAP, mood, time, providerIds, voteCountMin: 50 }),
+    ]);
+
+    const candidates = [
+      ...movieResults.slice(0, 10).map((m) => ({ ...m, __mediaType: 'movie' })),
+      ...tvResults.slice(0, 10).map((m) => ({ ...m, __mediaType: 'tv' })),
+    ];
 
     if (!candidates.length) {
       res.status(200).json({ picks: [] });
@@ -100,9 +119,10 @@ export default async function handler(req, res) {
 
     const candidateList = candidates.map((m) => ({
       id: m.id,
-      title: m.title,
+      mediaType: m.__mediaType,
+      title: m.__mediaType === 'tv' ? m.name : m.title,
       overview: m.overview,
-      releaseYear: m.release_date ? m.release_date.slice(0, 4) : null,
+      releaseYear: (m.release_date || m.first_air_date) ? (m.release_date || m.first_air_date).slice(0, 4) : null,
       voteAverage: m.vote_average,
     }));
 
@@ -113,6 +133,7 @@ export default async function handler(req, res) {
           .array(
             z.object({
               id: z.number(),
+              mediaType: z.enum(['movie', 'tv']),
               matchPercent: z.number().min(1).max(100),
               whyMatch: z.string(),
             })
@@ -120,34 +141,37 @@ export default async function handler(req, res) {
           .min(1)
           .max(3),
       }),
-      prompt: `You are Frameo, a movie recommendation assistant. A user wants something to watch tonight.
+      prompt: `You are Frameo, a movie and TV series recommendation assistant. A user wants something to watch tonight.
 Their mood: ${mood ?? 'not specified'}
 Watching context: ${CONTEXT_LABEL[context] ?? 'not specified'}
 Time available: ${time ?? 'not specified'}
 Streaming platforms they have: ${(platforms ?? []).join(', ') || 'not specified'}
 
-From this list of candidate movies, pick the 1 to 3 best matches for this user. For each pick, give a matchPercent (1-100) and a short, warm, personalized "whyMatch" (1-2 sentences, in English) explaining why it fits their mood/context/time.
+From this list of candidates (a mix of movies and TV series, marked by "mediaType"), pick the 1 to 3 best matches for this user. Feel free to recommend movies, series, or a mix of both — whichever genuinely fits best. For each pick, give a matchPercent (1-100) and a short, warm, personalized "whyMatch" (1-2 sentences, in English) explaining why it fits their mood/context/time.
 
 Candidates:
 ${JSON.stringify(candidateList, null, 2)}
 
-Only pick ids that appear in the candidate list above.`,
+Only pick id + mediaType combinations that appear in the candidate list above.`,
     });
 
-    const byId = new Map(candidates.map((m) => [m.id, m]));
+    const byKey = new Map(candidates.map((m) => [`${m.__mediaType}-${m.id}`, m]));
     const picks = object.picks
       .map((pick) => {
-        const movie = byId.get(pick.id);
-        if (!movie) return null;
+        const item = byKey.get(`${pick.mediaType}-${pick.id}`);
+        if (!item) return null;
+        const title = pick.mediaType === 'tv' ? item.name : item.title;
+        const dateStr = item.release_date || item.first_air_date;
         return {
-          id: movie.id,
-          title: movie.title,
-          posterUrl: movie.poster_path ? `${TMDB_IMG_BASE}${movie.poster_path}` : null,
-          overview: movie.overview,
-          year: movie.release_date ? movie.release_date.slice(0, 4) : '',
+          id: item.id,
+          type: pick.mediaType === 'tv' ? 'series' : 'movie',
+          title,
+          posterUrl: item.poster_path ? `${TMDB_IMG_BASE}${item.poster_path}` : null,
+          overview: item.overview,
+          year: dateStr ? dateStr.slice(0, 4) : '',
           matchPercent: Math.round(pick.matchPercent),
           whyMatch: pick.whyMatch,
-          tmdbUrl: `https://www.themoviedb.org/movie/${movie.id}`,
+          tmdbUrl: `https://www.themoviedb.org/${pick.mediaType}/${item.id}`,
         };
       })
       .filter(Boolean);

@@ -15,7 +15,7 @@ const CONTEXT_LABEL = {
   friends: 'With friends', background: 'Background watch', marathon: 'Movie marathon',
 };
 
-const ResultCard = ({ posterUrl, title, match, tag1, tag2, onDetails }) => (
+const ResultCard = ({ posterUrl, title, match, type, tag1, tag2, onDetails }) => (
   <div className="selectable-card" style={{
     position: "relative",
     height: 210,
@@ -64,7 +64,7 @@ const ResultCard = ({ posterUrl, title, match, tag1, tag2, onDetails }) => (
           fontSize: 13,
           marginTop: 4,
           color: "rgb(181,174,200)",
-        }}>{match}</div>
+        }}>{match}{type ? ` • ${type === 'series' ? 'Series' : 'Movie'}` : ''}</div>
       </div>
       <div style={{ display: "flex", flexDirection: "row", gap: 10, flexWrap: "wrap", justifyContent: "center" }}>
         {tag1 && <AIAdvent style={{ position: "relative" }} property1={"default"} text1={tag1} />}
@@ -213,19 +213,20 @@ export function AIMATCHRESULTS(_p = {}) {
           )}
           {picks.map((movie) => (
             <ResultCard
-              key={movie.id}
+              key={`${movie.type}-${movie.id}`}
               posterUrl={movie.posterUrl}
               title={movie.title}
               match={`${movie.matchPercent}% Match`}
+              type={movie.type}
               tag1={moodTag}
               tag2={contextTag}
               onDetails={() => props.onDetails?.({
                 id: movie.id,
-                type: 'movie',
+                type: movie.type,
                 title: movie.title,
                 posterUrl: movie.posterUrl,
                 match: `${movie.matchPercent}% Match`,
-                genre: movie.year,
+                genre: `${movie.type === 'series' ? 'Series' : 'Movie'} • ${movie.year}`,
                 platform: "Check availability on TMDB",
                 watchUrl: movie.tmdbUrl,
                 description: movie.overview,
