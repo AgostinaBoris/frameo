@@ -23,8 +23,8 @@ export function DETAILS(_p = {}) {
         borderRadius: 20,
         background: "linear-gradient(135deg, #c084fc 0%, #9333ea 55%, #6d28d9 100%)",
         boxShadow: props.strong
-          ? "0 6px 20px -2px rgba(147,51,234,0.9), 0 0 18px 3px rgba(168,85,247,0.55), inset 0 1px 0 rgba(255,255,255,0.35)"
-          : "0 4px 12px -2px rgba(147,51,234,0.6), inset 0 1px 0 rgba(255,255,255,0.3)",
+          ? "0 3px 10px -2px rgba(147,51,234,0.5), inset 0 1px 0 rgba(255,255,255,0.25)"
+          : "0 2px 6px -2px rgba(147,51,234,0.35), inset 0 1px 0 rgba(255,255,255,0.2)",
       }} />
       <span style={{
         position: "absolute",

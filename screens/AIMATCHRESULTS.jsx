@@ -42,12 +42,14 @@ const ResultCard = ({ posterUrl, title, match, tag1, tag2, onDetails }) => (
       minWidth: 0,
       display: "flex",
       flexDirection: "column",
+      alignItems: "center",
       justifyContent: "center",
       gap: 12,
-      padding: "0 18px",
+      padding: "0 16px",
       boxSizing: "border-box",
+      textAlign: "center",
     }}>
-      <div>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
         <div style={{
           fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           fontWeight: 700,
@@ -64,11 +66,11 @@ const ResultCard = ({ posterUrl, title, match, tag1, tag2, onDetails }) => (
           color: "rgb(181,174,200)",
         }}>{match}</div>
       </div>
-      <div style={{ display: "flex", flexDirection: "row", gap: 16, flexWrap: "wrap" }}>
+      <div style={{ display: "flex", flexDirection: "row", gap: 10, flexWrap: "wrap", justifyContent: "center" }}>
         {tag1 && <AIAdvent style={{ position: "relative" }} property1={"default"} text1={tag1} />}
         {tag2 && <AIMovieNight2 style={{ position: "relative" }} property1={"default"} text1={tag2} />}
       </div>
-      <DETAILS style={{ position: "relative", marginTop: 8 }} property1={"default"} onClick={onDetails} />
+      <DETAILS style={{ position: "relative", marginTop: 8, width: 124, flexShrink: 0 }} property1={"default"} onClick={onDetails} />
     </div>
   </div>
 );
@@ -219,6 +221,7 @@ export function AIMATCHRESULTS(_p = {}) {
               tag2={contextTag}
               onDetails={() => props.onDetails?.({
                 id: movie.id,
+                type: 'movie',
                 title: movie.title,
                 posterUrl: movie.posterUrl,
                 match: `${movie.matchPercent}% Match`,

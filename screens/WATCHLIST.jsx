@@ -12,124 +12,105 @@ const fontStyle = {
   fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
 };
 
-const CARD_SCALE = 1.08;
+const CARD_WIDTH = 350;
 
 const WatchlistCard = ({ movie, onDetails, onRemove }) => (
-  <div style={{ width: 357 * CARD_SCALE, height: 216 * CARD_SCALE, flexShrink: 0 }}>
-    <div style={{ width: 357, height: 216, transform: `scale(${CARD_SCALE})`, transformOrigin: "top left" }}>
-      <div className="selectable-card" style={{
-        position: "relative",
-        height: 216,
-        overflow: "hidden",
-        borderRadius: 18,
-        boxShadow: "inset 0 0 0 1.5px rgba(168,85,247,0.7)",
-        flexShrink: 0,
-        alignSelf: "stretch",
-        backgroundColor: "rgb(20,14,32)",
-      }}>
-        <div className={movie.imgClass} style={{
+  <div className="selectable-card" style={{
+    position: "relative",
+    width: CARD_WIDTH,
+    height: 216,
+    overflow: "hidden",
+    borderRadius: 18,
+    boxShadow: "inset 0 0 0 1.5px rgba(168,85,247,0.7)",
+    flexShrink: 0,
+    backgroundColor: "rgb(20,14,32)",
+    display: "flex",
+    flexDirection: "row",
+  }}>
+    <div className={movie.imgClass} style={{
+      width: 136,
+      height: "100%",
+      flexShrink: 0,
+      backgroundColor: movie.posterUrl ? "rgb(30,22,46)" : undefined,
+      backgroundImage: movie.posterUrl ? `url(${movie.posterUrl})` : undefined,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    }} />
+    <div style={{
+      position: "relative",
+      flex: 1,
+      minWidth: 0,
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      gap: 6,
+      padding: "16px 18px",
+      boxSizing: "border-box",
+    }}>
+      <div
+        className="tab-icon-wrap"
+        style={{
           position: "absolute",
-          left: 1,
-          top: 1,
-          width: 136,
-          height: 214,
-          borderRadius: "18px 0px 0px 18px",
-          backgroundColor: movie.posterUrl ? "rgb(30,22,46)" : undefined,
-          backgroundImage: movie.posterUrl ? `url(${movie.posterUrl})` : undefined,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }} />
-        <div
-          className="tab-icon-wrap"
-          style={{
-            position: "absolute",
-            left: 322,
-            top: 10,
-            width: 26,
-            height: 26,
-            borderRadius: "50%",
-            backgroundColor: "rgba(139,61,255,0.25)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            cursor: "pointer",
-            zIndex: 1,
-          }}
-          onClick={(e) => { e.stopPropagation(); onRemove?.(movie.id); }}
-        >
-          <span style={{ ...fontStyle, fontWeight: 700, fontSize: 15, lineHeight: "15px", color: "rgb(255,255,255)" }}>×</span>
-        </div>
-        <div style={{
-          position: "absolute",
-          left: 151,
-          top: 9,
-          width: 165,
-          height: 42,
-          overflow: "hidden",
-        }}>
-          <span style={{
-            ...fontStyle,
-            display: "-webkit-box",
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: "vertical",
-            overflow: "hidden",
-            fontWeight: 700,
-            fontSize: 16,
-            lineHeight: "21px",
-            letterSpacing: "0.050em",
-            color: "rgb(255,255,255)",
-          }}>{movie.title}</span>
-        </div>
-        <div style={{
-          position: "absolute",
-          left: 152,
-          top: 58,
-          width: 200,
-          height: 100,
-          overflow: "hidden",
-        }}>
-          <span style={{
-            ...fontStyle,
-            display: "block",
-            fontWeight: 700,
-            fontSize: 13,
-            lineHeight: "25px",
-            letterSpacing: "0.020em",
-            color: "rgb(248,247,255)",
-          }}>{movie.match}</span>
-          <span style={{
-            ...fontStyle,
-            display: "block",
-            fontWeight: 700,
-            fontSize: 13,
-            lineHeight: "18px",
-            letterSpacing: "0.020em",
-            color: "rgb(248,247,255)",
-          }}>{movie.genre}</span>
-          <span style={{
-            ...fontStyle,
-            display: "block",
-            marginTop: 4,
-            fontWeight: 700,
-            fontSize: 13,
-            lineHeight: "18px",
-            letterSpacing: "0.020em",
-            color: "rgb(248,247,255)",
-          }}>{movie.platform}</span>
-        </div>
-        <DETAILS
-          style={{
-            position: "absolute",
-            left: 184,
-            top: 169,
-            width: 86,
-            height: 36,
-          }}
-          strong
-          property1={"default"}
-          onClick={() => onDetails?.(movie)}
-        />
+          top: 10,
+          right: 10,
+          width: 26,
+          height: 26,
+          borderRadius: "50%",
+          backgroundColor: "rgba(139,61,255,0.25)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          cursor: "pointer",
+          zIndex: 1,
+        }}
+        onClick={(e) => { e.stopPropagation(); onRemove?.(movie.id); }}
+      >
+        <span style={{ ...fontStyle, fontWeight: 700, fontSize: 15, lineHeight: "15px", color: "rgb(255,255,255)" }}>×</span>
       </div>
+      <span style={{
+        ...fontStyle,
+        display: "-webkit-box",
+        WebkitLineClamp: 2,
+        WebkitBoxOrient: "vertical",
+        overflow: "hidden",
+        paddingRight: 26,
+        fontWeight: 700,
+        fontSize: 16,
+        lineHeight: "21px",
+        letterSpacing: "0.050em",
+        color: "rgb(255,255,255)",
+      }}>{movie.title}</span>
+      <span style={{
+        ...fontStyle,
+        fontWeight: 700,
+        fontSize: 13,
+        lineHeight: "18px",
+        letterSpacing: "0.020em",
+        color: "rgb(248,247,255)",
+      }}>{movie.match}</span>
+      <span style={{
+        ...fontStyle,
+        fontWeight: 700,
+        fontSize: 13,
+        lineHeight: "18px",
+        letterSpacing: "0.020em",
+        color: "rgb(248,247,255)",
+      }}>{movie.genre}</span>
+      <span style={{
+        ...fontStyle,
+        fontWeight: 700,
+        fontSize: 13,
+        lineHeight: "18px",
+        letterSpacing: "0.020em",
+        color: "rgb(248,247,255)",
+        marginBottom: 4,
+      }}>{movie.platform}</span>
+      <DETAILS
+        style={{ position: "relative", width: 86, height: 36 }}
+        strong
+        property1={"default"}
+        onClick={() => onDetails?.(movie)}
+      />
     </div>
   </div>
 );
@@ -138,8 +119,13 @@ const WatchlistCard = ({ movie, onDetails, onRemove }) => (
 export function WATCHLIST(_p = {}) {
   const props = _p;
   const [activeFilter, setActiveFilter] = useState('all');
-  const filterStyle = (key) => ({ opacity: activeFilter === key ? 1 : 0.8 });
+  const filterStyle = (key) => ({ opacity: activeFilter === key ? 1 : 0.92 });
   const movies = props.movies ?? [];
+  const filteredMovies = activeFilter === 'movies'
+    ? movies.filter((m) => m.type !== 'series')
+    : activeFilter === 'series'
+    ? movies.filter((m) => m.type === 'series')
+    : movies;
   return (
     <div className={props.className} style={{
       width: 402,
@@ -209,7 +195,7 @@ export function WATCHLIST(_p = {}) {
         <div style={{
           position: "absolute",
           left: 0,
-          top: 226,
+          top: 248,
           width: 402,
           minHeight: 216,
           display: "flex",
@@ -221,7 +207,7 @@ export function WATCHLIST(_p = {}) {
           padding: "0 10px 32px",
           boxSizing: "border-box",
         }}>
-          {movies.length === 0 && (
+          {filteredMovies.length === 0 && (
             <span style={{
               ...fontStyle,
               marginTop: 40,
@@ -229,9 +215,13 @@ export function WATCHLIST(_p = {}) {
               fontSize: 14,
               color: "rgb(138,131,156)",
               textAlign: "center",
-            }}>Nothing saved yet — pick something from AI Match or Discover.</span>
+            }}>
+              {movies.length === 0
+                ? "Nothing saved yet — pick something from AI Match or Discover."
+                : "No series saved yet."}
+            </span>
           )}
-          {movies.map((movie) => (
+          {filteredMovies.map((movie) => (
             <WatchlistCard key={movie.id} movie={movie} onDetails={props.onDetails} onRemove={props.onRemove} />
           ))}
         </div>

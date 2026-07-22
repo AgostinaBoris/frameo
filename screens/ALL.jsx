@@ -21,7 +21,7 @@ export function ALL(_p = {}) {
         width: 77,
         height: 40,
         borderRadius: 5,
-        backgroundColor: "rgba(139,61,255,0.5)",
+        backgroundColor: "rgba(139,61,255,0.65)",
         boxShadow: "inset 0 0 0 1px rgba(168,85,247,0.7), 2px 2px 6px 0.500px rgba(168,85,247,0.45)",
       }} />
       <span style={{

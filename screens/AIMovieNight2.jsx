@@ -6,27 +6,20 @@ export function AIMovieNight2(_p = {}) {
   const props = { ..._p, property1: _p.property1 ?? "default" };
   const __body0 = () => (
     <div className={props.className} style={{
-      width: 56,
-      height: 22,
+      minWidth: 66,
+      height: 30,
+      borderRadius: 12,
+      backgroundColor: "rgba(139,61,255,0.35)",
+      boxShadow: "inset 0 0 0 1px rgba(168,85,247,0.7)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: "0 10px",
+      boxSizing: "border-box",
       position: "relative",
       ...props.style,
     }}>
-      <div style={{
-        position: "absolute",
-        left: 0,
-        top: 0,
-        width: 66,
-        height: 30,
-        borderRadius: 12,
-        backgroundColor: "rgba(139,61,255,0.35)",
-        boxShadow: "inset 0 0 0 1px rgba(168,85,247,0.7)",
-      }} />
       <span style={{
-        position: "absolute",
-        left: 3,
-        top: 10,
-        width: 62,
-        height: 9,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 700,
         fontSize: 10,
@@ -38,26 +31,19 @@ export function AIMovieNight2(_p = {}) {
   );
   const __body1 = () => (
     <div className={props.className} style={{
-      width: 56,
-      height: 22,
+      minWidth: 66,
+      height: 30,
+      borderRadius: 12,
+      backgroundColor: "rgb(217,217,217)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: "0 10px",
+      boxSizing: "border-box",
       position: "relative",
       ...props.style,
     }}>
-      <div style={{
-        position: "absolute",
-        left: 0,
-        top: 0,
-        width: 66,
-        height: 30,
-        borderRadius: 12,
-        backgroundColor: "rgb(217,217,217)",
-      }} />
       <span style={{
-        position: "absolute",
-        left: 3,
-        top: 10,
-        width: 60,
-        height: 9,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 700,
         fontSize: 10,

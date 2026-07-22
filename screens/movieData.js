@@ -1,6 +1,7 @@
 export const MOVIES = {
   endgame: {
     id: 'endgame',
+    type: 'movie',
     title: 'Avengers: Endgame',
     imgClass: 'fig-asset-1260199bc4366ee9',
     match: '98% Match',
@@ -12,6 +13,7 @@ export const MOVIES = {
   },
   skyscraper: {
     id: 'skyscraper',
+    type: 'movie',
     title: 'Skyscraper: LIVE',
     imgClass: 'fig-asset-45cc3d44daf46f8f',
     match: '93% Match',
@@ -23,6 +25,7 @@ export const MOVIES = {
   },
   ironman2: {
     id: 'ironman2',
+    type: 'movie',
     title: 'Iron Man 2',
     imgClass: 'fig-asset-d9a58d848d1c6df9',
     match: '93% Match',
