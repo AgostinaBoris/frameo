@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AskFrameo } from './AskFrameo.jsx';
 import { Ellipse10 } from './Ellipse10.jsx';
 import { Ellipse11 } from './Ellipse11.jsx';
@@ -6,6 +6,7 @@ import { Ellipse8 } from './Ellipse8.jsx';
 import { Ellipse9 } from './Ellipse9.jsx';
 import { TABBAR } from './TABBAR.jsx';
 import { TOPNAV } from './TOPNAV.jsx';
+import { getTrendingMovies } from '../screens/tmdb.js';
 
 const ScrollTrack = ({ progress, style, scrollRef }) => {
   const trackRef = useRef(null);
@@ -94,6 +95,17 @@ export function HOMEFRAMEO(_p = {}) {
   const recommendedDrag = useDragScroll();
   const trendingScrollRef = useRef(null);
   const recommendedScrollRef = useRef(null);
+  const [trendingMovies, setTrendingMovies] = useState([]);
+  useEffect(() => {
+    const controller = new AbortController();
+    getTrendingMovies({ signal: controller.signal })
+      .then(setTrendingMovies)
+      .catch((err) => {
+        if (err.name === 'AbortError') return;
+        console.error('TMDB trending fetch failed:', err);
+      });
+    return () => controller.abort();
+  }, []);
   return (
     <div className={props.className} style={{
       width: 402,
@@ -390,90 +402,32 @@ export function HOMEFRAMEO(_p = {}) {
           cursor: "grab",
           backgroundColor: "rgb(7,3,15)",
         }}>
-          <div className="fig-asset-fcb0ef5ff53e601e" style={{
-            position: "absolute",
-            left: 0,
-            top: 0,
-            width: 88,
-            height: 130,
-          }} />
-          <div className="fig-asset-237203808fd8fd1f" style={{
-            position: "absolute",
-            left: 99,
-            top: 0,
-            width: 88,
-            height: 130,
-          }} />
-          <div className="fig-asset-ff36a2c3a2c4b94f" style={{
-            position: "absolute",
-            left: 198,
-            top: 0,
-            width: 88,
-            height: 130,
-          }} />
-          <div className="fig-asset-25943ea217d4f72e" style={{
-            position: "absolute",
-            left: 297,
-            top: 0,
-            width: 88,
-            height: 130,
-          }} />
-          <div className="fig-asset-f2fe566f855ae3fe" style={{
-            position: "absolute",
-            left: 792,
-            top: 0,
-            width: 88,
-            height: 130,
-          }} />
-          <div className="fig-asset-9c6a2c84f86cb417" style={{
-            position: "absolute",
-            left: 396,
-            top: 0,
-            width: 88,
-            height: 130,
-          }} />
-          <div className="fig-asset-ae92377963041c32" style={{
-            position: "absolute",
-            left: 495,
-            top: 0,
-            width: 88,
-            height: 130,
-          }} />
-          <div className="fig-asset-e03f4135636ca39c" style={{
-            position: "absolute",
-            left: 594,
-            top: 0,
-            width: 88,
-            height: 130,
-          }} />
-          <div className="fig-asset-5ea01b727a89d512" style={{
-            position: "absolute",
-            left: 891,
-            top: 0,
-            width: 88,
-            height: 130,
-          }} />
-          <div className="fig-asset-60b65f613ac2cc62" style={{
-            position: "absolute",
-            left: 990,
-            top: -5,
-            width: 88,
-            height: 130,
-          }} />
-          <div className="fig-asset-541ef6b35ea6b1f0" style={{
-            position: "absolute",
-            left: 1089,
-            top: 0,
-            width: 88,
-            height: 130,
-          }} />
-          <div className="fig-asset-d2d7c0a777956e63" style={{
-            position: "absolute",
-            left: 693,
-            top: 0,
-            width: 88,
-            height: 130,
-          }} />
+          {trendingMovies.map((movie, i) => (
+            <div
+              key={movie.id}
+              className="selectable-card"
+              onClick={() => window.open(movie.tmdbUrl, "_blank", "noopener,noreferrer")}
+              style={{
+                position: "absolute",
+                left: i * 99,
+                top: 0,
+                width: 88,
+                height: 130,
+                borderRadius: 8,
+                overflow: "hidden",
+                cursor: "pointer",
+                backgroundColor: "rgba(168,85,247,0.15)",
+              }}
+            >
+              {movie.posterUrl && (
+                <img
+                  src={movie.posterUrl}
+                  alt={movie.title}
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
+              )}
+            </div>
+          ))}
         </div>
         <div style={{ position: "absolute", left: 0, top: 988, width: 1, height: 110 }} />
       </div>
