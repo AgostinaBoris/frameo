@@ -122,7 +122,7 @@ export function HOMEFRAMEO(_p = {}) {
           height: 267,
           opacity: 0.22,
         }} />
-        <span style={{
+        <span className="home-title-spin" style={{
           position: "absolute",
           left: 31,
           top: 153,
@@ -136,7 +136,6 @@ export function HOMEFRAMEO(_p = {}) {
           lineHeight: "40px",
           letterSpacing: "0.050em",
           color: "rgb(255,255,255)",
-          display: "inline-block",
         }}><span style={{ fontSize: 40 }}>{"What"}</span>{" should we watch "}<span style={{ fontWeight: 700, fontSize: 29 }}>{"tonight"}</span><span style={{ fontWeight: 700, fontSize: 27 }}>{"?"}</span></span>
         <span style={{
           position: "absolute",
@@ -167,7 +166,7 @@ export function HOMEFRAMEO(_p = {}) {
         <span style={{
           position: "absolute",
           left: 27,
-          top: 485,
+          top: 444,
           width: 161,
           height: 24,
           fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
@@ -181,7 +180,7 @@ export function HOMEFRAMEO(_p = {}) {
         <span style={{
           position: "absolute",
           left: 24,
-          top: 867,
+          top: 819,
           width: 243,
           height: 24,
           fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
@@ -195,7 +194,7 @@ export function HOMEFRAMEO(_p = {}) {
         <span style={{
           position: "absolute",
           left: 24,
-          top: 659,
+          top: 611,
           width: 151,
           height: 24,
           fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
@@ -209,7 +208,7 @@ export function HOMEFRAMEO(_p = {}) {
         <div style={{
           position: "absolute",
           left: 0,
-          top: 524,
+          top: 488,
           width: 402,
           display: "flex",
           flexDirection: "row",
@@ -251,7 +250,7 @@ export function HOMEFRAMEO(_p = {}) {
         <span style={{
           position: "absolute",
           left: 305,
-          top: 867,
+          top: 819,
           width: 79,
           height: 24,
           fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
@@ -266,7 +265,7 @@ export function HOMEFRAMEO(_p = {}) {
         <span style={{
           position: "absolute",
           left: 306,
-          top: 659,
+          top: 611,
           width: 76,
           height: 24,
           fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
@@ -278,7 +277,7 @@ export function HOMEFRAMEO(_p = {}) {
           color: "rgb(168,85,247)",
           textDecoration: "underline",
         }}>See all</span>
-        <ScrollTrack progress={recommendedProgress} scrollRef={recommendedScrollRef} style={{ left: 27, top: 899, width: 375 }} />
+        <ScrollTrack progress={recommendedProgress} scrollRef={recommendedScrollRef} style={{ left: 27, top: 851, width: 375 }} />
         <div
           ref={recommendedScrollRef}
           className="no-scrollbar"
@@ -287,7 +286,7 @@ export function HOMEFRAMEO(_p = {}) {
           style={{
           position: "absolute",
           left: 27,
-          top: 911,
+          top: 863,
           width: 375,
           height: 125,
           overflowX: "auto",
@@ -367,7 +366,7 @@ export function HOMEFRAMEO(_p = {}) {
             height: 130,
           }} />
         </div>
-        <ScrollTrack progress={trendingProgress} scrollRef={trendingScrollRef} style={{ left: 24, top: 691, width: 378 }} />
+        <ScrollTrack progress={trendingProgress} scrollRef={trendingScrollRef} style={{ left: 24, top: 643, width: 378 }} />
         <div
           ref={trendingScrollRef}
           className="no-scrollbar"
@@ -376,7 +375,7 @@ export function HOMEFRAMEO(_p = {}) {
           style={{
           position: "absolute",
           left: 24,
-          top: 703,
+          top: 655,
           width: 378,
           height: 125,
           overflowX: "auto",
@@ -470,7 +469,7 @@ export function HOMEFRAMEO(_p = {}) {
             height: 130,
           }} />
         </div>
-        <div style={{ position: "absolute", left: 0, top: 1036, width: 1, height: 110 }} />
+        <div style={{ position: "absolute", left: 0, top: 988, width: 1, height: 110 }} />
       </div>
       <TABBAR style={{
           position: "absolute",

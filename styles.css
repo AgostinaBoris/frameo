@@ -7,6 +7,16 @@
   box-sizing: border-box;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  box-shadow: 0 0 0px 1000px transparent inset;
+  -webkit-text-fill-color: rgb(248,247,255);
+  caret-color: rgb(248,247,255);
+  transition: background-color 9999s ease-in-out 0s;
+}
+
 html, body {
   margin: 0;
   height: 100%;
@@ -170,4 +180,16 @@ html, body {
   mix-blend-mode: screen;
   pointer-events: none;
   animation: seaShimmer 4s ease-in-out infinite;
+}
+
+@keyframes titleSpin {
+  0% { transform: rotate(0deg); }
+  18% { transform: rotate(360deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.home-title-spin {
+  display: inline-block;
+  transform-origin: 50% 50%;
+  animation: titleSpin 3.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
 }
