@@ -139,6 +139,9 @@ export function PROFILE2(_p = {}) {
   const [platformsProgress, setPlatformsProgress] = useState(0);
   const platformsDrag = useDragScroll();
   const platformsScrollRef = useRef(null);
+  const [genresProgress, setGenresProgress] = useState(0);
+  const genresDrag = useDragScroll();
+  const genresScrollRef = useRef(null);
   const handleScroll = (setProgress) => (e) => {
     const el = e.currentTarget;
     const max = el.scrollWidth - el.clientWidth;
@@ -307,23 +310,41 @@ export function PROFILE2(_p = {}) {
           color: "rgb(181,174,200)",
         }}>Favorite Genres</span>
 
-        <div style={{
-          position: "absolute",
-          left: 31,
-          top: 502,
-          width: 350,
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          gap: 10,
-          padding: "4px 2px",
-          boxSizing: "border-box",
-        }}>
-          <MYSTERY property1={"default"} />
-          <COMEDY property1={"default"} />
-          <ACTION property1={"default"} />
-          <ADVENTURE property1={"default"} />
-          <DRAMA property1={"default"} />
+        <ScrollTrack progress={genresProgress} scrollRef={genresScrollRef} style={{ left: 31, top: 548, width: 350 }} />
+        <div
+          ref={genresScrollRef}
+          className="no-scrollbar"
+          onScroll={handleScroll(setGenresProgress)}
+          {...genresDrag}
+          style={{
+            position: "absolute",
+            left: 0,
+            top: 502,
+            width: 402,
+            height: 46,
+            overflowX: "auto",
+            overflowY: "hidden",
+            WebkitOverflowScrolling: "touch",
+            cursor: "grab",
+          }}
+        >
+          <div style={{
+            position: "absolute",
+            left: 31,
+            top: 0,
+            display: "flex",
+            flexDirection: "row",
+            gap: 10,
+            alignItems: "center",
+            flexWrap: "nowrap",
+          }}>
+            <MYSTERY property1={"default"} />
+            <COMEDY property1={"default"} />
+            <ACTION property1={"default"} />
+            <ADVENTURE property1={"default"} />
+            <DRAMA property1={"default"} />
+            <div style={{ width: 12, flexShrink: 0 }} />
+          </div>
         </div>
 
         <span style={{
