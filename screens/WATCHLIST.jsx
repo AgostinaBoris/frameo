@@ -14,7 +14,7 @@ const fontStyle = {
 
 const CARD_SCALE = 1.08;
 
-const WatchlistCard = ({ movie, onDetails }) => (
+const WatchlistCard = ({ movie, onDetails, onRemove }) => (
   <div style={{ width: 357 * CARD_SCALE, height: 216 * CARD_SCALE, flexShrink: 0 }}>
     <div style={{ width: 357, height: 216, transform: `scale(${CARD_SCALE})`, transformOrigin: "top left" }}>
       <div className="selectable-card" style={{
@@ -39,11 +39,31 @@ const WatchlistCard = ({ movie, onDetails }) => (
           backgroundSize: "cover",
           backgroundPosition: "center",
         }} />
+        <div
+          className="tab-icon-wrap"
+          style={{
+            position: "absolute",
+            left: 322,
+            top: 10,
+            width: 26,
+            height: 26,
+            borderRadius: "50%",
+            backgroundColor: "rgba(139,61,255,0.25)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            cursor: "pointer",
+            zIndex: 1,
+          }}
+          onClick={(e) => { e.stopPropagation(); onRemove?.(movie.id); }}
+        >
+          <span style={{ ...fontStyle, fontWeight: 700, fontSize: 15, lineHeight: "15px", color: "rgb(255,255,255)" }}>×</span>
+        </div>
         <div style={{
           position: "absolute",
           left: 151,
           top: 9,
-          width: 200,
+          width: 165,
           height: 42,
           overflow: "hidden",
         }}>
@@ -212,7 +232,7 @@ export function WATCHLIST(_p = {}) {
             }}>Nothing saved yet — pick something from AI Match or Discover.</span>
           )}
           {movies.map((movie) => (
-            <WatchlistCard key={movie.id} movie={movie} onDetails={props.onDetails} />
+            <WatchlistCard key={movie.id} movie={movie} onDetails={props.onDetails} onRemove={props.onRemove} />
           ))}
         </div>
         <div style={{

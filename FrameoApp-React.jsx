@@ -67,6 +67,9 @@ export default function FrameoApp() {
   const addToWatchlist = (movie) => {
     setWatchlist((list) => (list.some((m) => m.id === movie.id) ? list : [movie, ...list]));
   };
+  const removeFromWatchlist = (movieId) => {
+    setWatchlist((list) => list.filter((m) => m.id !== movieId));
+  };
   const viewport = useViewportSize();
   const isMobile = viewport.w <= MOBILE_BREAKPOINT;
   const frameOuterW = CANVAS_W + (isMobile ? 0 : BEZEL * 2);
@@ -230,7 +233,7 @@ export default function FrameoApp() {
 
         {screen === 'watchlist' && (
           <div style={{ width: '100%', height: '100%' }}>
-            <WATCHLIST {...navHandlers} active={activeTab} movies={watchlist} onDetails={openMovieDetails} />
+            <WATCHLIST {...navHandlers} active={activeTab} movies={watchlist} onDetails={openMovieDetails} onRemove={removeFromWatchlist} />
           </div>
         )}
       </div>
