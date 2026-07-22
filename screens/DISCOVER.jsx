@@ -144,6 +144,17 @@ export function DISCOVER(_p = {}) {
       });
     return () => controller.abort();
   }, []);
+  const [romanceMovies, setRomanceMovies] = useState([]);
+  useEffect(() => {
+    const controller = new AbortController();
+    getMoviesByGenre(10749, { signal: controller.signal })
+      .then(setRomanceMovies)
+      .catch((err) => {
+        if (err.name === 'AbortError') return;
+        console.error('TMDB romance fetch failed:', err);
+      });
+    return () => controller.abort();
+  }, []);
   const [trendingProgress, setTrendingProgress] = useState(0);
   const [scifiProgress, setScifiProgress] = useState(0);
   const [romanceProgress, setRomanceProgress] = useState(0);
@@ -564,76 +575,31 @@ export function DISCOVER(_p = {}) {
             alignItems: "center",
             flexWrap: "nowrap",
           }}>
-            <div className="fig-asset-cc40e38969aedf98" style={{
-              position: "relative",
-              width: 92,
-              height: 138,
-              borderRadius: 12,
-              flexShrink: 0,
-            }} />
-            <div className="fig-asset-1c451fc3796d6d8c" style={{
-              position: "relative",
-              width: 92,
-              height: 138,
-              borderRadius: 12,
-              flexShrink: 0,
-            }} />
-            <div className="fig-asset-f23faa2d64dd5de9" style={{
-              position: "relative",
-              width: 92,
-              height: 138,
-              borderRadius: 12,
-              flexShrink: 0,
-            }} />
-            <div className="fig-asset-35d3178b0c21622a" style={{
-              position: "relative",
-              width: 92,
-              height: 138,
-              borderRadius: 12,
-              flexShrink: 0,
-            }} />
-            <div className="fig-asset-50e75c23ae5db6be" style={{
-              position: "relative",
-              width: 92,
-              height: 138,
-              borderRadius: 12,
-              flexShrink: 0,
-            }} />
-            <div className="fig-asset-bbdd440b7c809bdb" style={{
-              position: "relative",
-              width: 92,
-              height: 138,
-              borderRadius: 12,
-              flexShrink: 0,
-            }} />
-            <div className="fig-asset-ce08786a7bc1799e" style={{
-              position: "relative",
-              width: 92,
-              height: 138,
-              borderRadius: 12,
-              flexShrink: 0,
-            }} />
-            <div className="fig-asset-df55042a6c8885d5" style={{
-              position: "relative",
-              width: 92,
-              height: 138,
-              borderRadius: 12,
-              flexShrink: 0,
-            }} />
-            <div className="fig-asset-c35cde88b53bc3c9" style={{
-              position: "relative",
-              width: 92,
-              height: 138,
-              borderRadius: 12,
-              flexShrink: 0,
-            }} />
-            <div className="fig-asset-59dc4fd585115a02" style={{
-              position: "relative",
-              width: 92,
-              height: 138,
-              borderRadius: 12,
-              flexShrink: 0,
-            }} />
+            {romanceMovies.map((movie) => (
+              <div
+                key={movie.id}
+                className="selectable-card"
+                onClick={() => window.open(movie.tmdbUrl, "_blank", "noopener,noreferrer")}
+                style={{
+                  position: "relative",
+                  width: 92,
+                  height: 138,
+                  borderRadius: 12,
+                  flexShrink: 0,
+                  cursor: "pointer",
+                  overflow: "hidden",
+                  backgroundColor: "rgba(168,85,247,0.15)",
+                }}
+              >
+                {movie.posterUrl && (
+                  <img
+                    src={movie.posterUrl}
+                    alt={movie.title}
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                  />
+                )}
+              </div>
+            ))}
           </div>
         </div>
         </>
