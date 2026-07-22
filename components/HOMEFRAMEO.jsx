@@ -261,7 +261,10 @@ export function HOMEFRAMEO(_p = {}) {
           letterSpacing: "0.100em",
           color: "rgb(168,85,247)",
           textDecoration: "underline",
-        }}>See all</span>
+          cursor: "pointer",
+        }}
+        onClick={() => props.onSeeAllRecommended?.()}
+        >See all</span>
         <span style={{
           position: "absolute",
           left: 306,
@@ -276,7 +279,10 @@ export function HOMEFRAMEO(_p = {}) {
           letterSpacing: "0.100em",
           color: "rgb(168,85,247)",
           textDecoration: "underline",
-        }}>See all</span>
+          cursor: "pointer",
+        }}
+        onClick={() => props.onSeeAllTrending?.()}
+        >See all</span>
         <ScrollTrack progress={recommendedProgress} scrollRef={recommendedScrollRef} style={{ left: 27, top: 851, width: 375 }} />
         <div
           ref={recommendedScrollRef}

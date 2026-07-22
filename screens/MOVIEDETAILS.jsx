@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { MiArrowUp } from './MiArrowUp.jsx';
 import { TABBAR } from './TABBAR.jsx';
 import { TOPNAV } from './TOPNAV.jsx';
@@ -9,6 +10,7 @@ const fontStyle = {
 // figma node: 319:585 (FRAME) "MOVIE DETAILS"
 export function MOVIEDETAILS(props = {}) {
   const movie = props.movie ?? {};
+  const [saved, setSaved] = useState(false);
   return (
     <div className={props.className} style={{
       width: 402,
@@ -91,6 +93,10 @@ export function MOVIEDETAILS(props = {}) {
             borderRadius: 18,
             boxShadow: "inset 0 0 0 1px rgba(168,85,247,0.5), 0 8px 24px -6px rgba(147,51,234,0.5)",
             flexShrink: 0,
+            backgroundColor: movie.posterUrl ? "rgb(30,22,46)" : undefined,
+            backgroundImage: movie.posterUrl ? `url(${movie.posterUrl})` : undefined,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
           }} />
 
           <div style={{
@@ -192,9 +198,15 @@ export function MOVIEDETAILS(props = {}) {
               alignItems: "center",
               justifyContent: "center",
             }}
-            onClick={props.onWatchlist}
+            onClick={() => {
+              if (!movie.id) return;
+              props.onSave?.(movie);
+              setSaved(true);
+            }}
           >
-            <span style={{ ...fontStyle, fontWeight: 700, fontSize: 16, color: "rgb(255,255,255)", letterSpacing: "0.020em" }}>Save to Watchlist</span>
+            <span style={{ ...fontStyle, fontWeight: 700, fontSize: 16, color: "rgb(255,255,255)", letterSpacing: "0.020em" }}>
+              {saved ? "✓ Saved to Watchlist" : "Save to Watchlist"}
+            </span>
           </div>
         </div>
       </div>

@@ -1,12 +1,21 @@
+import { useEffect, useState } from 'react';
 import { AIAdvent } from './AIAdvent.jsx';
 import { AIMovieNight2 } from './AIMovieNight2.jsx';
 import { DETAILS } from './DETAILS.jsx';
 import { MiArrowUp } from './MiArrowUp.jsx';
 import { TABBAR } from './TABBAR.jsx';
 import { TOPNAV } from './TOPNAV.jsx';
-import { MOVIES } from './movieData.js';
 
-const ResultCard = ({ imgClass, title, match, onDetails }) => (
+const MOOD_LABEL = {
+  relaxed: 'Relaxed', romantic: 'Romantic', curious: 'Curious', focused: 'Focused',
+  sad: 'Sad', excited: 'Excited', adventurous: 'Adventurous', stressed: 'Stressed',
+};
+const CONTEXT_LABEL = {
+  solo: 'Solo night', date: 'Date night', family: 'Family time',
+  friends: 'With friends', background: 'Background watch', marathon: 'Movie marathon',
+};
+
+const ResultCard = ({ posterUrl, title, match, tag1, tag2, onDetails }) => (
   <div className="selectable-card" style={{
     position: "relative",
     height: 210,
@@ -19,7 +28,15 @@ const ResultCard = ({ imgClass, title, match, onDetails }) => (
     alignSelf: "stretch",
     flexShrink: 0,
   }}>
-    <div className={imgClass} style={{ width: 145, height: 210, flexShrink: 0 }} />
+    <div style={{
+      width: 145,
+      height: 210,
+      flexShrink: 0,
+      backgroundColor: "rgb(30,22,46)",
+      backgroundImage: posterUrl ? `url(${posterUrl})` : undefined,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    }} />
     <div style={{
       flex: 1,
       minWidth: 0,
@@ -48,8 +65,8 @@ const ResultCard = ({ imgClass, title, match, onDetails }) => (
         }}>{match}</div>
       </div>
       <div style={{ display: "flex", flexDirection: "row", gap: 16, flexWrap: "wrap" }}>
-        <AIAdvent style={{ position: "relative" }} property1={"default"} />
-        <AIMovieNight2 style={{ position: "relative" }} property1={"default"} />
+        {tag1 && <AIAdvent style={{ position: "relative" }} property1={"default"} text1={tag1} />}
+        {tag2 && <AIMovieNight2 style={{ position: "relative" }} property1={"default"} text1={tag2} />}
       </div>
       <DETAILS style={{ position: "relative", marginTop: 8 }} property1={"default"} onClick={onDetails} />
     </div>
@@ -59,6 +76,39 @@ const ResultCard = ({ imgClass, title, match, onDetails }) => (
 // figma node: 278:307 AI MATCH RESULTS
 export function AIMATCHRESULTS(_p = {}) {
   const props = _p;
+  const answers = props.answers ?? {};
+  const [status, setStatus] = useState('loading');
+  const [picks, setPicks] = useState([]);
+
+  useEffect(() => {
+    let cancelled = false;
+    setStatus('loading');
+    fetch('/api/ai-match', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(answers),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error(`ai-match request failed: ${res.status}`);
+        return res.json();
+      })
+      .then((data) => {
+        if (cancelled) return;
+        setPicks(data.picks ?? []);
+        setStatus((data.picks ?? []).length ? 'ready' : 'empty');
+      })
+      .catch((err) => {
+        if (cancelled) return;
+        console.error('AI match failed:', err);
+        setStatus('error');
+      });
+    return () => { cancelled = true; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [answers.mood, answers.context, answers.time, JSON.stringify(answers.platforms)]);
+
+  const moodTag = MOOD_LABEL[answers.mood];
+  const contextTag = CONTEXT_LABEL[answers.context];
+
   return (
     <div className={props.className} style={{
       width: 402,
@@ -93,7 +143,12 @@ export function AIMATCHRESULTS(_p = {}) {
           lineHeight: "18px",
           letterSpacing: "0.050em",
           color: "rgb(255,255,255)",
-        }}>We found the best picks for your night.</span>
+        }}>
+          {status === 'loading' && "Frameo is thinking..."}
+          {status === 'ready' && "We found the best picks for your night."}
+          {status === 'empty' && "No matches found — try different answers."}
+          {status === 'error' && "Something went wrong. Please try again."}
+        </span>
         <div style={{
           position: "absolute",
           left: 23,
@@ -102,15 +157,22 @@ export function AIMATCHRESULTS(_p = {}) {
           height: 40,
           overflow: "hidden",
         }}>
-          <MiArrowUp style={{
-              position: "absolute",
-              left: 0,
-              top: 0,
-              width: 28,
-              height: 28,
-              transform: "matrix(0.000,-1,1,0.000,0,34)",
-              transformOrigin: "0 0",
-            }} />
+          <div
+            className="tab-icon-wrap"
+            style={{ position: "absolute", left: 0, top: 0, width: 28, height: 28, cursor: "pointer" }}
+            onClick={props.onHome}
+          >
+            <MiArrowUp style={{
+                position: "absolute",
+                left: 0,
+                top: 0,
+                width: 28,
+                height: 28,
+                transform: "matrix(0.000,-1,1,0.000,0,34)",
+                transformOrigin: "0 0",
+              }}
+            />
+          </div>
           <span style={{
             position: "absolute",
             left: 38,
@@ -137,9 +199,37 @@ export function AIMATCHRESULTS(_p = {}) {
           alignItems: "stretch",
           flexWrap: "nowrap",
         }}>
-          <ResultCard imgClass="fig-asset-1260199bc4366ee9-23daf735" title="Avengers: Endgame" match="98% Match" onDetails={() => props.onDetails?.(MOVIES.endgame)} />
-          <ResultCard imgClass="fig-asset-45cc3d44daf46f8f" title="Skyscraper: LIVE" match="93% Match" onDetails={() => props.onDetails?.(MOVIES.skyscraper)} />
-          <ResultCard imgClass="fig-asset-d9a58d848d1c6df9" title="Iron Man 2" match="93% Match" onDetails={() => props.onDetails?.(MOVIES.ironman2)} />
+          {status === 'loading' && (
+            <div className="crystal-ball-ring" style={{
+              width: 64,
+              height: 64,
+              borderRadius: "50%",
+              border: "3px solid rgba(168,85,247,0.35)",
+              borderTopColor: "rgb(192,132,252)",
+              margin: "40px auto",
+            }} />
+          )}
+          {picks.map((movie) => (
+            <ResultCard
+              key={movie.id}
+              posterUrl={movie.posterUrl}
+              title={movie.title}
+              match={`${movie.matchPercent}% Match`}
+              tag1={moodTag}
+              tag2={contextTag}
+              onDetails={() => props.onDetails?.({
+                id: movie.id,
+                title: movie.title,
+                posterUrl: movie.posterUrl,
+                match: `${movie.matchPercent}% Match`,
+                genre: movie.year,
+                platform: "Check availability on TMDB",
+                watchUrl: movie.tmdbUrl,
+                description: movie.overview,
+                whyMatch: movie.whyMatch,
+              })}
+            />
+          ))}
         </div>
         <div style={{ position: "absolute", left: 0, top: 826, width: 1, height: 60 }} />
       </div>

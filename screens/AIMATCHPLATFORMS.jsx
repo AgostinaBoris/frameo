@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { APPLETV } from './APPLETV.jsx';
 import { DISNEY } from './DISNEY.jsx';
 import { GetMatches } from './GetMatches.jsx';
@@ -26,14 +25,8 @@ const SelectRing = ({ selected }) => (
 // figma node: 188:195 AI MATCH PLATFORMS
 export function AIMATCHPLATFORMS(_p = {}) {
   const props = _p;
-  const [platforms, setPlatforms] = useState(new Set());
-  const togglePlatform = (id) => {
-    setPlatforms((prev) => {
-      const next = new Set(prev);
-      next.has(id) ? next.delete(id) : next.add(id);
-      return next;
-    });
-  };
+  const platforms = new Set(props.value ?? []);
+  const togglePlatform = (id) => props.onToggle?.(id);
   const Plat = ({ id, Comp }) => (
     <div
       className="selectable-card"

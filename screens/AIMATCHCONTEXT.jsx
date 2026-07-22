@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { BACKGROUNDWATCH } from './BACKGROUNDWATCH.jsx';
 import { Continue } from './Continue.jsx';
 import { DATENIGHT } from './DATENIGHT.jsx';
@@ -30,12 +29,12 @@ const CARD_SCALE = 0.9;
 // figma node: 109:211 AI MATCH CONTEXT
 export function AIMATCHCONTEXT(_p = {}) {
   const props = _p;
-  const [context, setContext] = useState(null);
+  const context = props.value ?? null;
   const Ctx = ({ id, Comp }) => (
     <div
       className="selectable-card"
       style={{ position: "relative", width: CARD_W * CARD_SCALE, height: CARD_H * CARD_SCALE, cursor: "pointer" }}
-      onClick={() => setContext(id)}
+      onClick={() => props.onSelect?.(id)}
     >
       <div style={{
         position: "absolute",

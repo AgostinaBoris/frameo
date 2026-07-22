@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import relojArenaHero from './assets/reloj-arena-hero.png';
 import { Continue } from './Continue.jsx';
 import { HAVETIME } from './HAVETIME.jsx';
@@ -28,12 +27,12 @@ const DUR_SCALE = 0.9;
 // figma node: 180:145 AI MATCH TIME
 export function AIMATCHTIME(_p = {}) {
   const props = _p;
-  const [duration, setDuration] = useState(null);
+  const duration = props.value ?? null;
   const Dur = ({ id, Comp, ...rest }) => (
     <div
       className="selectable-card"
       style={{ position: "relative", width: DUR_W * DUR_SCALE, height: DUR_H * DUR_SCALE, flexShrink: 0, cursor: "pointer" }}
-      onClick={() => setDuration(id)}
+      onClick={() => props.onSelect?.(id)}
     >
       <div style={{
         position: "absolute",

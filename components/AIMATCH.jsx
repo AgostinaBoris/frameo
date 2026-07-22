@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { ADVENTUROUS } from './ADVENTUROUS.jsx';
 import { CURIOUS } from './CURIOUS.jsx';
 import { Continue } from './Continue.jsx';
@@ -27,12 +26,12 @@ const SelectRing = ({ selected }) => (
 // figma node: 109:209 AI MATCH
 export function AIMATCH(_p = {}) {
   const props = _p;
-  const [mood, setMood] = useState(null);
+  const mood = props.value ?? null;
   const Mood = ({ id, Comp, ...rest }) => (
     <div
       className="selectable-card"
       style={{ position: "relative", width: 160, height: 56, cursor: "pointer" }}
-      onClick={() => setMood(id)}
+      onClick={() => props.onSelect?.(id)}
     >
       <Comp style={{ position: "relative" }} property1={"default"} {...rest} />
       <SelectRing selected={mood === id} />

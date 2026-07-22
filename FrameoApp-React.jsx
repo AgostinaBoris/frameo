@@ -16,6 +16,9 @@ import AIMATCHPLATFORMS from './screens/AIMATCHPLATFORMS';
 import AIMATCHRESULTS from './screens/AIMATCHRESULTS';
 import MOVIEDETAILS from './screens/MOVIEDETAILS';
 import SETTINGS from './screens/SETTINGS';
+import TRENDINGALL from './screens/TRENDINGALL';
+import RECOMMENDEDALL from './screens/RECOMMENDEDALL';
+import { MOVIES as DEFAULT_MOVIES } from './screens/movieData.js';
 
 const CANVAS_W = 402;
 const CANVAS_H = 874;
@@ -59,6 +62,11 @@ export default function FrameoApp() {
   const [screen, setScreen] = useState('onboarding');
   const [previousScreen, setPreviousScreen] = useState('home');
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const [matchAnswers, setMatchAnswers] = useState({ mood: null, context: null, time: null, platforms: [] });
+  const [watchlist, setWatchlist] = useState([DEFAULT_MOVIES.ironman2, DEFAULT_MOVIES.endgame, DEFAULT_MOVIES.skyscraper]);
+  const addToWatchlist = (movie) => {
+    setWatchlist((list) => (list.some((m) => m.id === movie.id) ? list : [movie, ...list]));
+  };
   const viewport = useViewportSize();
   const isMobile = viewport.w <= MOBILE_BREAKPOINT;
   const frameOuterW = CANVAS_W + (isMobile ? 0 : BEZEL * 2);
@@ -78,7 +86,7 @@ export default function FrameoApp() {
   };
 
   const activeTabFor = (s) => {
-    if (s === 'home') return 'home';
+    if (s === 'home' || s === 'trending-all' || s === 'recommended-all') return 'home';
     if (s === 'discover') return 'discover';
     if (s.startsWith('match')) return 'match';
     if (s === 'watchlist') return 'watchlist';
@@ -150,43 +158,55 @@ export default function FrameoApp() {
 
         {screen === 'home' && (
           <div style={{ width: '100%', height: '100%', position: 'relative' }}>
-            <HOMEFRAMEO {...navHandlers} active={activeTab} onAskFrameo={() => setScreen('match')} onQuickMatch={(step) => setScreen(step)} />
+            <HOMEFRAMEO {...navHandlers} active={activeTab} onAskFrameo={() => { setMatchAnswers({ mood: null, context: null, time: null, platforms: [] }); setScreen('match'); }} onQuickMatch={(step) => setScreen(step)} onSeeAllTrending={() => setScreen('trending-all')} onSeeAllRecommended={() => setScreen('recommended-all')} />
+          </div>
+        )}
+
+        {screen === 'trending-all' && (
+          <div style={{ width: '100%', height: '100%' }}>
+            <TRENDINGALL {...navHandlers} active={activeTab} onBack={() => setScreen('home')} />
+          </div>
+        )}
+
+        {screen === 'recommended-all' && (
+          <div style={{ width: '100%', height: '100%' }}>
+            <RECOMMENDEDALL {...navHandlers} active={activeTab} onBack={() => setScreen('home')} />
           </div>
         )}
 
         {screen === 'match' && (
           <div style={{ width: '100%', height: '100%', position: 'relative' }}>
-            <AIMATCH {...navHandlers} active={activeTab} onNext={() => setScreen('match-context')} />
+            <AIMATCH {...navHandlers} active={activeTab} value={matchAnswers.mood} onSelect={(mood) => setMatchAnswers((a) => ({ ...a, mood }))} onNext={() => setScreen('match-context')} />
           </div>
         )}
 
         {screen === 'match-context' && (
           <div style={{ width: '100%', height: '100%' }}>
-            <AIMATCHCONTEXT {...navHandlers} active={activeTab} onNext={() => setScreen('match-time')} />
+            <AIMATCHCONTEXT {...navHandlers} active={activeTab} value={matchAnswers.context} onSelect={(context) => setMatchAnswers((a) => ({ ...a, context }))} onNext={() => setScreen('match-time')} />
           </div>
         )}
 
         {screen === 'match-time' && (
           <div style={{ width: '100%', height: '100%' }}>
-            <AIMATCHTIME {...navHandlers} active={activeTab} onNext={() => setScreen('match-platforms')} />
+            <AIMATCHTIME {...navHandlers} active={activeTab} value={matchAnswers.time} onSelect={(time) => setMatchAnswers((a) => ({ ...a, time }))} onNext={() => setScreen('match-platforms')} />
           </div>
         )}
 
         {screen === 'match-platforms' && (
           <div style={{ width: '100%', height: '100%' }}>
-            <AIMATCHPLATFORMS {...navHandlers} active={activeTab} onNext={() => setScreen('match-results')} />
+            <AIMATCHPLATFORMS {...navHandlers} active={activeTab} value={matchAnswers.platforms} onToggle={(id) => setMatchAnswers((a) => ({ ...a, platforms: a.platforms.includes(id) ? a.platforms.filter((p) => p !== id) : [...a.platforms, id] }))} onNext={() => setScreen('match-results')} />
           </div>
         )}
 
         {screen === 'match-results' && (
           <div style={{ width: '100%', height: '100%' }}>
-            <AIMATCHRESULTS {...navHandlers} active={activeTab} onDetails={openMovieDetails} />
+            <AIMATCHRESULTS {...navHandlers} active={activeTab} answers={matchAnswers} onDetails={openMovieDetails} />
           </div>
         )}
 
         {screen === 'movie-details' && (
           <div style={{ width: '100%', height: '100%' }}>
-            <MOVIEDETAILS {...navHandlers} active={activeTab} movie={selectedMovie} onBack={() => setScreen(previousScreen)} />
+            <MOVIEDETAILS {...navHandlers} active={activeTab} movie={selectedMovie} onBack={() => setScreen(previousScreen)} onSave={addToWatchlist} />
           </div>
         )}
 
@@ -210,7 +230,7 @@ export default function FrameoApp() {
 
         {screen === 'watchlist' && (
           <div style={{ width: '100%', height: '100%' }}>
-            <WATCHLIST {...navHandlers} active={activeTab} onDetails={openMovieDetails} />
+            <WATCHLIST {...navHandlers} active={activeTab} movies={watchlist} onDetails={openMovieDetails} />
           </div>
         )}
       </div>
