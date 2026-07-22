@@ -65,16 +65,31 @@ export function LOGINFRAMEO(_p = {}) {
         letterSpacing: "0.050em",
         color: "rgb(255,255,255)",
       }}>Log in to continue and get personalized recommendations just for you.</span>
+      {props.error && (
+        <span style={{
+          position: "absolute",
+          left: 25,
+          top: 545,
+          width: 350,
+          fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+          fontWeight: 600,
+          fontSize: 13,
+          textAlign: "center",
+          color: "rgb(248,113,113)",
+        }}>{props.error}</span>
+      )}
       <Login
         style={{
           position: "absolute",
           left: 63,
           top: 573,
           width: 280,
-          cursor: "pointer",
+          cursor: props.submitting ? "default" : "pointer",
+          opacity: props.submitting ? 0.6 : 1,
         }}
         property1={"default"}
-        onClick={() => props.onLogin?.({ email, password })}
+        text1={props.submitting ? "Logging in…" : undefined}
+        onClick={() => !props.submitting && props.onLogin?.({ email, password })}
       />
       <Email
         style={{

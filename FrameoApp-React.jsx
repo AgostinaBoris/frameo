@@ -18,7 +18,38 @@ import MOVIEDETAILS from './screens/MOVIEDETAILS';
 import SETTINGS from './screens/SETTINGS';
 import TRENDINGALL from './screens/TRENDINGALL';
 import RECOMMENDEDALL from './screens/RECOMMENDEDALL';
-import { MOVIES as DEFAULT_MOVIES } from './screens/movieData.js';
+import { supabase } from './src/supabaseClient.js';
+
+const PUBLIC_SCREENS = ['onboarding', 'login', 'signup'];
+
+const rowToMovie = (row) => ({
+  id: row.movie_id,
+  type: row.type,
+  title: row.title,
+  posterUrl: row.poster_url,
+  imgClass: row.img_class,
+  match: row.match,
+  genre: row.genre,
+  platform: row.platform,
+  watchUrl: row.watch_url,
+  description: row.description,
+  whyMatch: row.why_match,
+});
+
+const movieToRow = (movie, userId) => ({
+  user_id: userId,
+  movie_id: String(movie.id),
+  type: movie.type ?? 'movie',
+  title: movie.title,
+  poster_url: movie.posterUrl ?? null,
+  img_class: movie.imgClass ?? null,
+  match: movie.match ?? null,
+  genre: movie.genre ?? null,
+  platform: movie.platform ?? null,
+  watch_url: movie.watchUrl ?? null,
+  description: movie.description ?? null,
+  why_match: movie.whyMatch ?? null,
+});
 
 const CANVAS_W = 402;
 const CANVAS_H = 874;
@@ -59,12 +90,115 @@ export default function FrameoApp() {
   const [previousScreen, setPreviousScreen] = useState('home');
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [matchAnswers, setMatchAnswers] = useState({ mood: null, context: null, time: null, platforms: [] });
-  const [watchlist, setWatchlist] = useState([DEFAULT_MOVIES.ironman2, DEFAULT_MOVIES.endgame, DEFAULT_MOVIES.skyscraper]);
+  const [watchlist, setWatchlist] = useState([]);
+  const [session, setSession] = useState(null);
+  const [authReady, setAuthReady] = useState(false);
+  const [authError, setAuthError] = useState('');
+  const [authSubmitting, setAuthSubmitting] = useState(false);
+
+  useEffect(() => {
+    let mounted = true;
+    supabase.auth.getSession().then(({ data }) => {
+      if (!mounted) return;
+      setSession(data.session);
+      setAuthReady(true);
+    });
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, nextSession) => {
+      setSession(nextSession);
+    });
+    return () => {
+      mounted = false;
+      listener.subscription.unsubscribe();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!authReady) return;
+    if (session && PUBLIC_SCREENS.includes(screen)) {
+      setScreen('home');
+    } else if (!session && !PUBLIC_SCREENS.includes(screen)) {
+      setScreen('onboarding');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [authReady, session]);
+
+  useEffect(() => {
+    const userId = session?.user?.id;
+    if (!userId) {
+      setWatchlist([]);
+      return;
+    }
+    supabase
+      .from('watchlist')
+      .select('*')
+      .eq('user_id', userId)
+      .order('created_at', { ascending: false })
+      .then(({ data, error }) => {
+        if (error) {
+          console.error('Failed to load watchlist:', error);
+          return;
+        }
+        setWatchlist((data ?? []).map(rowToMovie));
+      });
+  }, [session?.user?.id]);
+
   const addToWatchlist = (movie) => {
-    setWatchlist((list) => (list.some((m) => m.id === movie.id) ? list : [movie, ...list]));
+    const userId = session?.user?.id;
+    if (!userId) return;
+    const id = String(movie.id);
+    setWatchlist((list) => (list.some((m) => m.id === id) ? list : [{ ...movie, id }, ...list]));
+    supabase.from('watchlist').insert(movieToRow(movie, userId)).then(({ error }) => {
+      if (error && error.code !== '23505') console.error('Failed to save movie:', error);
+    });
   };
   const removeFromWatchlist = (movieId) => {
+    const userId = session?.user?.id;
+    if (!userId) return;
     setWatchlist((list) => list.filter((m) => m.id !== movieId));
+    supabase.from('watchlist').delete().eq('user_id', userId).eq('movie_id', String(movieId)).then(({ error }) => {
+      if (error) console.error('Failed to remove movie:', error);
+    });
+  };
+
+  const handleLogin = async ({ email, password }) => {
+    setAuthError('');
+    setAuthSubmitting(true);
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    setAuthSubmitting(false);
+    if (error) {
+      setAuthError(error.message);
+      return;
+    }
+    setScreen('home');
+  };
+
+  const handleSignUp = async ({ fullName, email, password }) => {
+    setAuthError('');
+    setAuthSubmitting(true);
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: { full_name: fullName },
+        emailRedirectTo: window.location.origin,
+      },
+    });
+    setAuthSubmitting(false);
+    if (error) {
+      setAuthError(error.message);
+      return;
+    }
+    if (data.session) {
+      setScreen('home');
+    } else {
+      setAuthError('Check your email to confirm your account, then log in.');
+      setScreen('login');
+    }
+  };
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    setScreen('onboarding');
   };
   const viewport = useViewportSize();
   const isMobile = viewport.w <= MOBILE_BREAKPOINT;
@@ -142,8 +276,10 @@ export default function FrameoApp() {
         {screen === 'login' && (
           <div style={{ width: '100%', height: '100%' }}>
             <LOGINFRAMEO
-              onLogin={() => setScreen('home')}
-              onSignUp={() => setScreen('signup')}
+              onLogin={handleLogin}
+              onSignUp={() => { setAuthError(''); setScreen('signup'); }}
+              error={authError}
+              submitting={authSubmitting}
             />
           </div>
         )}
@@ -151,8 +287,10 @@ export default function FrameoApp() {
         {screen === 'signup' && (
           <div style={{ width: '100%', height: '100%' }}>
             <SIGNUPFRAMEO
-              onSignUp={() => setScreen('home')}
-              onLogin={() => setScreen('login')}
+              onSignUp={handleSignUp}
+              onLogin={() => { setAuthError(''); setScreen('login'); }}
+              error={authError}
+              submitting={authSubmitting}
             />
           </div>
         )}
@@ -213,13 +351,13 @@ export default function FrameoApp() {
 
         {screen === 'profile' && (
           <div style={{ width: '100%', height: '100%' }}>
-            <PROFILE2 {...navHandlers} active={activeTab} onLogout={() => setScreen('onboarding')} onSettings={() => setScreen('settings')} />
+            <PROFILE2 {...navHandlers} active={activeTab} onLogout={handleLogout} onSettings={() => setScreen('settings')} />
           </div>
         )}
 
         {screen === 'settings' && (
           <div style={{ width: '100%', height: '100%' }}>
-            <SETTINGS {...navHandlers} active={activeTab} onBack={() => setScreen('profile')} onLogout={() => setScreen('onboarding')} />
+            <SETTINGS {...navHandlers} active={activeTab} onBack={() => setScreen('profile')} onLogout={handleLogout} />
           </div>
         )}
 

@@ -134,18 +134,31 @@ export function SIGNUPFRAMEO(_p = {}) {
         }}>I agree to the Terms &amp; Privacy Policy</span>
       </label>
 
+      {props.error && (
+        <span style={{
+          position: "absolute",
+          left: 25,
+          top: 540,
+          width: 350,
+          fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+          fontWeight: 600,
+          fontSize: 13,
+          textAlign: "center",
+          color: "rgb(248,113,113)",
+        }}>{props.error}</span>
+      )}
       <Login
         style={{
           position: "absolute",
           left: 61,
           top: 567,
           width: 280,
-          cursor: agreed ? "pointer" : "not-allowed",
-          opacity: agreed ? 1 : 0.5,
+          cursor: agreed && !props.submitting ? "pointer" : "not-allowed",
+          opacity: agreed && !props.submitting ? 1 : 0.5,
         }}
         property1={"default"}
-        text1={"Sign up"}
-        onClick={() => agreed && props.onSignUp?.({ fullName, email, password })}
+        text1={props.submitting ? "Signing up…" : "Sign up"}
+        onClick={() => agreed && !props.submitting && props.onSignUp?.({ fullName, email, password })}
       />
 
       <span style={{
