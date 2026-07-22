@@ -6,7 +6,7 @@ import { Ellipse8 } from './Ellipse8.jsx';
 import { Ellipse9 } from './Ellipse9.jsx';
 import { TABBAR } from './TABBAR.jsx';
 import { TOPNAV } from './TOPNAV.jsx';
-import { getTrendingMovies } from '../screens/tmdb.js';
+import { getPopularMovies, getTrendingMovies } from '../screens/tmdb.js';
 
 const ScrollTrack = ({ progress, style, scrollRef }) => {
   const trackRef = useRef(null);
@@ -103,6 +103,17 @@ export function HOMEFRAMEO(_p = {}) {
       .catch((err) => {
         if (err.name === 'AbortError') return;
         console.error('TMDB trending fetch failed:', err);
+      });
+    return () => controller.abort();
+  }, []);
+  const [recommendedMovies, setRecommendedMovies] = useState([]);
+  useEffect(() => {
+    const controller = new AbortController();
+    getPopularMovies({ signal: controller.signal })
+      .then(setRecommendedMovies)
+      .catch((err) => {
+        if (err.name === 'AbortError') return;
+        console.error('TMDB popular fetch failed:', err);
       });
     return () => controller.abort();
   }, []);
@@ -313,76 +324,32 @@ export function HOMEFRAMEO(_p = {}) {
           WebkitOverflowScrolling: "touch",
           backgroundColor: "rgb(42,36,56)",
         }}>
-          <div className="fig-asset-e53d47c0c4f85041" style={{
-            position: "absolute",
-            left: 101,
-            top: 0,
-            width: 88,
-            height: 130,
-          }} />
-          <div className="fig-asset-e625a1c455b8166b" style={{
-            position: "absolute",
-            left: 0,
-            top: -5,
-            width: 88,
-            height: 130,
-          }} />
-          <div className="fig-asset-efcaca9d3bb699e8" style={{
-            position: "absolute",
-            left: 202,
-            top: 0,
-            width: 88,
-            height: 130,
-          }} />
-          <div className="fig-asset-dad827e2556ef886" style={{
-            position: "absolute",
-            left: 303,
-            top: 0,
-            width: 88,
-            height: 130,
-          }} />
-          <div className="fig-asset-d771b164fe5721e6" style={{
-            position: "absolute",
-            left: 808,
-            top: 0,
-            width: 88,
-            height: 130,
-          }} />
-          <div className="fig-asset-9e8952d1ae35b842" style={{
-            position: "absolute",
-            left: 404,
-            top: 0,
-            width: 88,
-            height: 130,
-          }} />
-          <div className="fig-asset-23f6e6cf786c3d41" style={{
-            position: "absolute",
-            left: 505,
-            top: 0,
-            width: 88,
-            height: 130,
-          }} />
-          <div className="fig-asset-4b47891a73893a18" style={{
-            position: "absolute",
-            left: 606,
-            top: 0,
-            width: 88,
-            height: 130,
-          }} />
-          <div className="fig-asset-4a78ae4c5c2a4b13" style={{
-            position: "absolute",
-            left: 909,
-            top: 0,
-            width: 88,
-            height: 130,
-          }} />
-          <div className="fig-asset-2663e0e526ac3651" style={{
-            position: "absolute",
-            left: 707,
-            top: 0,
-            width: 88,
-            height: 130,
-          }} />
+          {recommendedMovies.map((movie, i) => (
+            <div
+              key={movie.id}
+              className="selectable-card"
+              onClick={() => window.open(movie.tmdbUrl, "_blank", "noopener,noreferrer")}
+              style={{
+                position: "absolute",
+                left: i * 101,
+                top: 0,
+                width: 88,
+                height: 130,
+                borderRadius: 8,
+                overflow: "hidden",
+                cursor: "pointer",
+                backgroundColor: "rgba(168,85,247,0.15)",
+              }}
+            >
+              {movie.posterUrl && (
+                <img
+                  src={movie.posterUrl}
+                  alt={movie.title}
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
+              )}
+            </div>
+          ))}
         </div>
         <ScrollTrack progress={trendingProgress} scrollRef={trendingScrollRef} style={{ left: 24, top: 643, width: 378 }} />
         <div
