@@ -65,7 +65,7 @@ export function LOGINFRAMEO(_p = {}) {
         letterSpacing: "0.050em",
         color: "rgb(255,255,255)",
       }}>Log in to continue and get personalized recommendations just for you.</span>
-      {props.error && (
+      {(props.error || props.message) && (
         <span style={{
           position: "absolute",
           left: 25,
@@ -75,8 +75,8 @@ export function LOGINFRAMEO(_p = {}) {
           fontWeight: 600,
           fontSize: 13,
           textAlign: "center",
-          color: "rgb(248,113,113)",
-        }}>{props.error}</span>
+          color: props.error ? "rgb(248,113,113)" : "rgb(192,132,252)",
+        }}>{props.error || props.message}</span>
       )}
       <Login
         style={{
@@ -129,7 +129,11 @@ export function LOGINFRAMEO(_p = {}) {
         lineHeight: "16px",
         letterSpacing: "0.050em",
         color: "rgb(255,255,255)",
-      }}>Forgot password?</span>
+        textDecoration: "underline",
+        cursor: "pointer",
+      }}
+      onClick={() => props.onForgotPassword?.(email)}
+      >Forgot password?</span>
       <span style={{
         position: "absolute",
         left: 75,

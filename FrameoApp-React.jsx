@@ -18,6 +18,7 @@ import MOVIEDETAILS from './screens/MOVIEDETAILS';
 import SETTINGS from './screens/SETTINGS';
 import TRENDINGALL from './screens/TRENDINGALL';
 import RECOMMENDEDALL from './screens/RECOMMENDEDALL';
+import RESETPASSWORD from './screens/RESETPASSWORD';
 import { supabase } from './src/supabaseClient.js';
 
 const PUBLIC_SCREENS = ['onboarding', 'login', 'signup'];
@@ -94,6 +95,7 @@ export default function FrameoApp() {
   const [session, setSession] = useState(null);
   const [authReady, setAuthReady] = useState(false);
   const [authError, setAuthError] = useState('');
+  const [authMessage, setAuthMessage] = useState('');
   const [authSubmitting, setAuthSubmitting] = useState(false);
 
   useEffect(() => {
@@ -103,8 +105,13 @@ export default function FrameoApp() {
       setSession(data.session);
       setAuthReady(true);
     });
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, nextSession) => {
+    const { data: listener } = supabase.auth.onAuthStateChange((event, nextSession) => {
       setSession(nextSession);
+      if (event === 'PASSWORD_RECOVERY') {
+        setAuthError('');
+        setAuthMessage('');
+        setScreen('reset-password');
+      }
     });
     return () => {
       mounted = false;
@@ -116,7 +123,7 @@ export default function FrameoApp() {
     if (!authReady) return;
     if (session && PUBLIC_SCREENS.includes(screen)) {
       setScreen('home');
-    } else if (!session && !PUBLIC_SCREENS.includes(screen)) {
+    } else if (!session && !PUBLIC_SCREENS.includes(screen) && screen !== 'reset-password') {
       setScreen('onboarding');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -162,8 +169,40 @@ export default function FrameoApp() {
 
   const handleLogin = async ({ email, password }) => {
     setAuthError('');
+    setAuthMessage('');
     setAuthSubmitting(true);
     const { error } = await supabase.auth.signInWithPassword({ email, password });
+    setAuthSubmitting(false);
+    if (error) {
+      setAuthError(error.message);
+      return;
+    }
+    setScreen('home');
+  };
+
+  const handleForgotPassword = async (email) => {
+    setAuthError('');
+    setAuthMessage('');
+    if (!email) {
+      setAuthError('Enter your email above first, then tap "Forgot password?".');
+      return;
+    }
+    setAuthSubmitting(true);
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: window.location.origin,
+    });
+    setAuthSubmitting(false);
+    if (error) {
+      setAuthError(error.message);
+      return;
+    }
+    setAuthMessage('Check your email for a link to reset your password.');
+  };
+
+  const handleResetPassword = async (password) => {
+    setAuthError('');
+    setAuthSubmitting(true);
+    const { error } = await supabase.auth.updateUser({ password });
     setAuthSubmitting(false);
     if (error) {
       setAuthError(error.message);
@@ -277,8 +316,10 @@ export default function FrameoApp() {
           <div style={{ width: '100%', height: '100%' }}>
             <LOGINFRAMEO
               onLogin={handleLogin}
-              onSignUp={() => { setAuthError(''); setScreen('signup'); }}
+              onSignUp={() => { setAuthError(''); setAuthMessage(''); setScreen('signup'); }}
+              onForgotPassword={handleForgotPassword}
               error={authError}
+              message={authMessage}
               submitting={authSubmitting}
             />
           </div>
@@ -288,7 +329,17 @@ export default function FrameoApp() {
           <div style={{ width: '100%', height: '100%' }}>
             <SIGNUPFRAMEO
               onSignUp={handleSignUp}
-              onLogin={() => { setAuthError(''); setScreen('login'); }}
+              onLogin={() => { setAuthError(''); setAuthMessage(''); setScreen('login'); }}
+              error={authError}
+              submitting={authSubmitting}
+            />
+          </div>
+        )}
+
+        {screen === 'reset-password' && (
+          <div style={{ width: '100%', height: '100%' }}>
+            <RESETPASSWORD
+              onSave={handleResetPassword}
               error={authError}
               submitting={authSubmitting}
             />
