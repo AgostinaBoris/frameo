@@ -120,11 +120,12 @@ export default function FrameoApp() {
       display: 'flex',
       alignItems: isMobile ? 'flex-start' : 'center',
       justifyContent: 'center',
-      minHeight: '100dvh',
+      height: '100dvh',
       background: '#0a0a0a',
       padding: isMobile ? 0 : '20px',
       overflowX: 'hidden',
       overflowY: isMobile ? 'auto' : 'hidden',
+      WebkitOverflowScrolling: 'touch',
       fontFamily: 'Manrope, -apple-system, BlinkMacSystemFont, sans-serif'
     }}>
       <div style={{ position: 'relative', width: scaledW, height: scaledH, flex: 'none' }}>
