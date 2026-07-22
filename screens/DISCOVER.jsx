@@ -319,10 +319,10 @@ export function DISCOVER(_p = {}) {
         <SEARCHBAR
           style={{
             position: "absolute",
-            left: 23,
-            top: 98,
-            width: 353,
-            height: 42,
+            left: 19,
+            top: 96,
+            width: 365,
+            height: 46,
           }}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
