@@ -3,7 +3,6 @@ import { ALL } from './ALL.jsx';
 import { DETAILS } from './DETAILS.jsx';
 import { MOVIES } from './MOVIES.jsx';
 import { MiArrowUp } from './MiArrowUp.jsx';
-import { RECENTLYSAVED } from './RECENTLYSAVED.jsx';
 import { SERIES } from './SERIES.jsx';
 import { TABBAR } from './TABBAR.jsx';
 import { TOPNAV } from './TOPNAV.jsx';
@@ -271,18 +270,6 @@ export function WATCHLIST(_p = {}) {
             }}
             property1={"default"}
             onClick={() => setActiveFilter('series')}
-          />
-          <RECENTLYSAVED
-            style={{
-              position: "relative",
-              width: 88,
-              height: 40,
-              flexShrink: 0,
-              ...filterStyle('saved'),
-            }}
-            text1={"Saved\n"}
-            property1={"default"}
-            onClick={() => setActiveFilter('saved')}
           />
         </div>
         <div style={{ position: "absolute", left: 0, top: 824, width: 1, height: 60 }} />
