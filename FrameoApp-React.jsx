@@ -26,24 +26,20 @@ const BEZEL = 12;
 const MOBILE_BREAKPOINT = 900;
 
 function useViewportSize() {
-  const [size, setSize] = useState(() => ({
+  const getSize = () => ({
     w: typeof window !== 'undefined' ? window.innerWidth : CANVAS_W,
-    h: typeof window !== 'undefined' ? window.innerHeight : CANVAS_H,
-  }));
+    // visualViewport reflects the true visible area (browser chrome already
+    // excluded) where available, so the frame can use all the room it
+    // actually has instead of freezing at whatever height was smallest.
+    h: typeof window !== 'undefined'
+      ? Math.round(window.visualViewport?.height ?? window.innerHeight)
+      : CANVAS_H,
+  });
+
+  const [size, setSize] = useState(getSize);
 
   useEffect(() => {
-    const update = () => {
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-      setSize((prev) => {
-        // Mobile browser chrome (address bar) hiding/showing on scroll changes
-        // innerHeight without changing innerWidth. Treat the smallest height seen
-        // at the current width as the safe, guaranteed-visible viewport so the
-        // layout never grows into a state that later gets clipped or has to jump.
-        if (w !== prev.w) return { w, h };
-        return h < prev.h ? { w, h } : prev;
-      });
-    };
+    const update = () => setSize(getSize());
     update();
     window.addEventListener('resize', update);
     window.addEventListener('orientationchange', update);
