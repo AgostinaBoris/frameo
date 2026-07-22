@@ -7,7 +7,7 @@ import { TABBAR } from './TABBAR.jsx';
 import { THRILLER } from './THRILLER.jsx';
 import { TOPNAV } from './TOPNAV.jsx';
 import { TRENDING } from './TRENDING.jsx';
-import { getMoviesByGenre, getTrendingMovies, searchMovies } from './tmdb.js';
+import { getMoviesByGenre, getPopularMovies, getTrendingMovies, searchMovies } from './tmdb.js';
 
 const ScrollTrack = ({ progress, style, scrollRef }) => {
   const trackRef = useRef(null);
@@ -155,6 +155,30 @@ export function DISCOVER(_p = {}) {
       });
     return () => controller.abort();
   }, []);
+  const [thrillerMovies, setThrillerMovies] = useState([]);
+  useEffect(() => {
+    const controller = new AbortController();
+    getMoviesByGenre(53, { signal: controller.signal })
+      .then(setThrillerMovies)
+      .catch((err) => {
+        if (err.name === 'AbortError') return;
+        console.error('TMDB thriller fetch failed:', err);
+      });
+    return () => controller.abort();
+  }, []);
+  const [forYouMovies, setForYouMovies] = useState([]);
+  useEffect(() => {
+    const controller = new AbortController();
+    getPopularMovies({ signal: controller.signal })
+      .then(setForYouMovies)
+      .catch((err) => {
+        if (err.name === 'AbortError') return;
+        console.error('TMDB popular fetch failed:', err);
+      });
+    return () => controller.abort();
+  }, []);
+  const FILTER_LABELS = { thriller: 'Thriller', scifi: 'Sci-Fi', romance: 'Romance', foryou: 'For You' };
+  const FILTER_MOVIES = { thriller: thrillerMovies, scifi: scifiMovies, romance: romanceMovies, foryou: forYouMovies };
   const [trendingProgress, setTrendingProgress] = useState(0);
   const [scifiProgress, setScifiProgress] = useState(0);
   const [romanceProgress, setRomanceProgress] = useState(0);
@@ -390,7 +414,7 @@ export function DISCOVER(_p = {}) {
             ))}
           </div>
         )}
-        {!isSearching && (
+        {!isSearching && activeFilter === 'trending' && (
         <>
         <span style={{
           position: "absolute",
@@ -601,6 +625,58 @@ export function DISCOVER(_p = {}) {
               </div>
             ))}
           </div>
+        </div>
+        </>
+        )}
+        {!isSearching && activeFilter !== 'trending' && (
+        <>
+        <span style={{
+          position: "absolute",
+          left: 24,
+          top: 229,
+          width: 200,
+          height: 25,
+          fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+          fontWeight: 600,
+          fontSize: 15,
+          whiteSpace: "nowrap",
+          lineHeight: "24px",
+          letterSpacing: "0.020em",
+          color: "rgb(248,247,255)",
+        }}>{FILTER_LABELS[activeFilter]}</span>
+        <div style={{
+          position: "absolute",
+          left: 24,
+          top: 264,
+          width: 354,
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr)",
+          gap: 14,
+          paddingBottom: 32,
+        }}>
+          {(FILTER_MOVIES[activeFilter] ?? []).map((movie) => (
+            <div
+              key={movie.id}
+              className="selectable-card"
+              onClick={() => window.open(movie.tmdbUrl, "_blank", "noopener,noreferrer")}
+              style={{
+                position: "relative",
+                aspectRatio: "92 / 138",
+                borderRadius: 12,
+                cursor: "pointer",
+                overflow: "hidden",
+                backgroundColor: "rgba(168,85,247,0.15)",
+              }}
+            >
+              {movie.posterUrl && (
+                <img
+                  src={movie.posterUrl}
+                  alt={movie.title}
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
+              )}
+            </div>
+          ))}
         </div>
         </>
         )}
