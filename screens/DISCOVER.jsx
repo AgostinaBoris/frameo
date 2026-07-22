@@ -7,7 +7,7 @@ import { TABBAR } from './TABBAR.jsx';
 import { THRILLER } from './THRILLER.jsx';
 import { TOPNAV } from './TOPNAV.jsx';
 import { TRENDING } from './TRENDING.jsx';
-import { searchMovies } from './tmdb.js';
+import { getMoviesByGenre, getTrendingMovies, searchMovies } from './tmdb.js';
 
 const ScrollTrack = ({ progress, style, scrollRef }) => {
   const trackRef = useRef(null);
@@ -122,6 +122,28 @@ export function DISCOVER(_p = {}) {
   }, [query]);
 
   const isSearching = query.trim().length > 0;
+  const [trendingMovies, setTrendingMovies] = useState([]);
+  useEffect(() => {
+    const controller = new AbortController();
+    getTrendingMovies({ signal: controller.signal })
+      .then(setTrendingMovies)
+      .catch((err) => {
+        if (err.name === 'AbortError') return;
+        console.error('TMDB trending fetch failed:', err);
+      });
+    return () => controller.abort();
+  }, []);
+  const [scifiMovies, setScifiMovies] = useState([]);
+  useEffect(() => {
+    const controller = new AbortController();
+    getMoviesByGenre(878, { signal: controller.signal })
+      .then(setScifiMovies)
+      .catch((err) => {
+        if (err.name === 'AbortError') return;
+        console.error('TMDB sci-fi fetch failed:', err);
+      });
+    return () => controller.abort();
+  }, []);
   const [trendingProgress, setTrendingProgress] = useState(0);
   const [scifiProgress, setScifiProgress] = useState(0);
   const [romanceProgress, setRomanceProgress] = useState(0);
@@ -430,76 +452,31 @@ export function DISCOVER(_p = {}) {
             alignItems: "center",
             flexWrap: "nowrap",
           }}>
-            <div className="fig-asset-fe8e3ff3a7e328a9-d2451234" style={{
-              position: "relative",
-              width: 92,
-              height: 138,
-              borderRadius: 12,
-              flexShrink: 0,
-            }} />
-            <div className="fig-asset-754b5a5b696dd43f-485e6025" style={{
-              position: "relative",
-              width: 92,
-              height: 138,
-              borderRadius: 12,
-              flexShrink: 0,
-            }} />
-            <div className="fig-asset-e2301214ffe38250-d7f76f45" style={{
-              position: "relative",
-              width: 92,
-              height: 138,
-              borderRadius: 12,
-              flexShrink: 0,
-            }} />
-            <div className="fig-asset-16a6c192d408dcaa-af6ff228" style={{
-              position: "relative",
-              width: 92,
-              height: 138,
-              borderRadius: 12,
-              flexShrink: 0,
-            }} />
-            <div className="fig-asset-bd384dcc53e483e1-fb37d8b1" style={{
-              position: "relative",
-              width: 92,
-              height: 138,
-              borderRadius: 12,
-              flexShrink: 0,
-            }} />
-            <div className="fig-asset-78a0584f805dd4e9-ad4adc0a" style={{
-              position: "relative",
-              width: 92,
-              height: 138,
-              borderRadius: 12,
-              flexShrink: 0,
-            }} />
-            <div className="fig-asset-16cca228fe83b99c-d08764a1" style={{
-              position: "relative",
-              width: 92,
-              height: 138,
-              borderRadius: 12,
-              flexShrink: 0,
-            }} />
-            <div className="fig-asset-ca56b448bbb4aa85-0c260b56" style={{
-              position: "relative",
-              width: 92,
-              height: 138,
-              borderRadius: 12,
-              flexShrink: 0,
-            }} />
-            <div className="fig-asset-dd47d71321de0b71-456ced60" style={{
-              position: "relative",
-              width: 92,
-              height: 138,
-              borderRadius: 12,
-              flexShrink: 0,
-            }} />
-            <div className="fig-asset-d6b1537051c19838-d05ea2bc" style={{
-              position: "relative",
-              width: 92,
-              height: 138,
-              borderRadius: 12,
-              flexShrink: 0,
-            }} />
+            {trendingMovies.map((movie) => (
+              <div
+                key={movie.id}
+                className="selectable-card"
+                onClick={() => window.open(movie.tmdbUrl, "_blank", "noopener,noreferrer")}
+                style={{
+                  position: "relative",
+                  width: 92,
+                  height: 138,
+                  borderRadius: 12,
+                  flexShrink: 0,
+                  cursor: "pointer",
+                  overflow: "hidden",
+                  backgroundColor: "rgba(168,85,247,0.15)",
+                }}
+              >
+                {movie.posterUrl && (
+                  <img
+                    src={movie.posterUrl}
+                    alt={movie.title}
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                  />
+                )}
+              </div>
+            ))}
           </div>
         </div>
         <ScrollTrack progress={scifiProgress} scrollRef={scifiScrollRef} style={{ left: 24, top: 463, width: 352 }} />
@@ -531,76 +508,31 @@ export function DISCOVER(_p = {}) {
             alignItems: "center",
             flexWrap: "nowrap",
           }}>
-            <div className="fig-asset-7902f039ec999184" style={{
-              position: "relative",
-              width: 92,
-              height: 138,
-              borderRadius: 12,
-              flexShrink: 0,
-            }} />
-            <div className="fig-asset-5e70b4ac683e4b89" style={{
-              position: "relative",
-              width: 92,
-              height: 138,
-              borderRadius: 12,
-              flexShrink: 0,
-            }} />
-            <div className="fig-asset-0ff7da68992424f1" style={{
-              position: "relative",
-              width: 92,
-              height: 138,
-              borderRadius: 12,
-              flexShrink: 0,
-            }} />
-            <div className="fig-asset-35d7609ff5a735ab" style={{
-              position: "relative",
-              width: 92,
-              height: 138,
-              borderRadius: 12,
-              flexShrink: 0,
-            }} />
-            <div className="fig-asset-91fa26e9efd95ed3" style={{
-              position: "relative",
-              width: 92,
-              height: 138,
-              borderRadius: 12,
-              flexShrink: 0,
-            }} />
-            <div className="fig-asset-f5e1ed4d0e45b5e6" style={{
-              position: "relative",
-              width: 92,
-              height: 138,
-              borderRadius: 12,
-              flexShrink: 0,
-            }} />
-            <div className="fig-asset-dfab7020f46c7b1b" style={{
-              position: "relative",
-              width: 92,
-              height: 138,
-              borderRadius: 12,
-              flexShrink: 0,
-            }} />
-            <div className="fig-asset-ff5b3b64d4d23751" style={{
-              position: "relative",
-              width: 92,
-              height: 138,
-              borderRadius: 12,
-              flexShrink: 0,
-            }} />
-            <div className="fig-asset-114124f630c4fc60" style={{
-              position: "relative",
-              width: 92,
-              height: 138,
-              borderRadius: 12,
-              flexShrink: 0,
-            }} />
-            <div className="fig-asset-9568bc66df398674" style={{
-              position: "relative",
-              width: 92,
-              height: 138,
-              borderRadius: 12,
-              flexShrink: 0,
-            }} />
+            {scifiMovies.map((movie) => (
+              <div
+                key={movie.id}
+                className="selectable-card"
+                onClick={() => window.open(movie.tmdbUrl, "_blank", "noopener,noreferrer")}
+                style={{
+                  position: "relative",
+                  width: 92,
+                  height: 138,
+                  borderRadius: 12,
+                  flexShrink: 0,
+                  cursor: "pointer",
+                  overflow: "hidden",
+                  backgroundColor: "rgba(168,85,247,0.15)",
+                }}
+              >
+                {movie.posterUrl && (
+                  <img
+                    src={movie.posterUrl}
+                    alt={movie.title}
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                  />
+                )}
+              </div>
+            ))}
           </div>
         </div>
         <ScrollTrack progress={romanceProgress} scrollRef={romanceScrollRef} style={{ left: 24, top: 673, width: 352 }} />
