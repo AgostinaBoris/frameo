@@ -121,7 +121,7 @@ export function WATCHLIST(_p = {}) {
   const filterStyle = (key) => ({ opacity: activeFilter === key ? 1 : 0.92 });
   const movies = props.movies ?? [];
   const filteredMovies = activeFilter === 'movies'
-    ? movies.filter((m) => m.type !== 'series')
+    ? movies.filter((m) => m.type === 'movie')
     : activeFilter === 'series'
     ? movies.filter((m) => m.type === 'series')
     : movies;
