@@ -23,6 +23,7 @@ export function MAX2(_p = {}) {
         lineHeight: "24px",
         letterSpacing: "0.050em",
         color: "rgb(255,255,255)",
+        textAlign: "center",
         whiteSpace: "pre-wrap",
       }}>{props.text1 ?? "Max\n"}</span>
       <div className="fig-asset-7ca60bcf740459d7-2e00ffef" style={{
@@ -71,6 +72,7 @@ export function MAX2(_p = {}) {
         lineHeight: "24px",
         letterSpacing: "0.050em",
         color: "rgb(255,255,255)",
+        textAlign: "center",
         whiteSpace: "pre-wrap",
       }}>{props.text1 ?? "Max\n"}</span>
       <div className="fig-asset-7ca60bcf740459d7-2e00ffef" style={{
