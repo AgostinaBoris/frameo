@@ -103,15 +103,15 @@ export function AIMATCHTIME(_p = {}) {
         <span style={{
           position: "absolute",
           left: 29,
-          top: 210,
+          top: 215,
           width: 190,
           height: 152,
           fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           fontWeight: 700,
-          fontSize: 26,
+          fontSize: 32,
           whiteSpace: "normal",
-          lineHeight: "32px",
-          letterSpacing: "0.020em",
+          lineHeight: "44px",
+          letterSpacing: "0.030em",
           color: "rgb(255,255,255)",
         }}>{t('aimatch.timeHeading')}</span>
         <div style={{
