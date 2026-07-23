@@ -47,7 +47,7 @@ export function TRENDINGALL(props = {}) {
       }}>
         <div style={{
           position: "relative",
-          width: 259,
+          width: 355,
           height: 40,
           margin: "22px 0 0 24px",
         }}>
@@ -71,10 +71,10 @@ export function TRENDINGALL(props = {}) {
             position: "absolute",
             left: 38,
             top: 0,
-            width: 221,
+            width: 317,
             height: 40,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: 19,
             whiteSpace: "nowrap",
             lineHeight: "40px",
             letterSpacing: "0.050em",
