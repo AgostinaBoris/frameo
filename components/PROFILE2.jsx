@@ -5,7 +5,6 @@ import { APPLETV } from './APPLETV.jsx';
 import { COMEDY } from './COMEDY.jsx';
 import { DISNEY } from './DISNEY.jsx';
 import { DRAMA } from './DRAMA.jsx';
-import { HULU } from './HULU.jsx';
 import { MAX2 } from './MAX2.jsx';
 import { MYSTERY } from './MYSTERY.jsx';
 import { NETFLIX } from './NETFLIX.jsx';
@@ -290,7 +289,6 @@ export function PROFILE2(_p = {}) {
             flexWrap: "nowrap",
           }}>
             <DISNEY style={{ position: "relative", width: 150, height: 100, flexShrink: 0 }} property1={"default"} onClick={() => window.open("https://www.disneyplus.com", "_blank", "noopener,noreferrer")} />
-            <HULU style={{ position: "relative", width: 150, height: 100, flexShrink: 0 }} property1={"default"} onClick={() => window.open("https://www.hulu.com", "_blank", "noopener,noreferrer")} />
             <MAX2 style={{ position: "relative", width: 150, height: 100, flexShrink: 0 }} property1={"default"} onClick={() => window.open("https://www.max.com", "_blank", "noopener,noreferrer")} />
             <NETFLIX style={{ position: "relative", width: 150, height: 100, flexShrink: 0 }} property1={"default"} onClick={() => window.open("https://www.netflix.com", "_blank", "noopener,noreferrer")} />
             <PRIMEVIDEO style={{ position: "relative", width: 150, height: 100, flexShrink: 0 }} property1={"default"} onClick={() => window.open("https://www.primevideo.com", "_blank", "noopener,noreferrer")} />
