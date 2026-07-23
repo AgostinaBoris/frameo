@@ -100,18 +100,17 @@ export function ONBOARDINGFRAMEO(_p = {}) {
       </div>
       <div style={{
         position: "absolute",
-        left: 116,
+        left: 0,
         top: 748,
-        width: 184,
+        width: 402,
         height: 56,
-        overflow: "hidden",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 8,
       }}>
         <span style={{
-          position: "absolute",
-          left: 0,
-          top: 0,
-          width: 169,
-          height: 56,
+          position: "relative",
           fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           fontWeight: 600,
           fontSize: 15,
@@ -122,11 +121,10 @@ export function ONBOARDINGFRAMEO(_p = {}) {
           filter: "drop-shadow(0px 0px 4px rgba(255,255,255,0))",
         }}>{t('onboarding.pressPlay')}</span>
         <div style={{
-          position: "absolute",
-          left: 172,
-          top: 5,
+          position: "relative",
           width: 12,
           height: 24,
+          flexShrink: 0,
         }}>
           <svg width={7.134} height={12.970} viewBox="0 0 7.134 12.970" fill="none" style={{
             position: "absolute",
