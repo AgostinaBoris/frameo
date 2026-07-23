@@ -8,6 +8,7 @@ import { SOLONIGHT } from './SOLONIGHT.jsx';
 import { TABBAR } from './TABBAR.jsx';
 import { TOPNAV } from './TOPNAV.jsx';
 import { WITHFRIENDS } from './WITHFRIENDS.jsx';
+import { useLanguage } from '../src/i18n.jsx';
 
 const SelectRing = ({ selected }) => (
   <div style={{
@@ -29,6 +30,7 @@ const CARD_SCALE = 0.9;
 // figma node: 109:211 AI MATCH CONTEXT
 export function AIMATCHCONTEXT(_p = {}) {
   const props = _p;
+  const { t } = useLanguage();
   const context = props.value ?? null;
   const Ctx = ({ id, Comp }) => (
     <div
@@ -100,7 +102,7 @@ export function AIMATCHCONTEXT(_p = {}) {
           letterSpacing: "0.100em",
           color: "rgb(255,255,255)",
           whiteSpace: "pre-wrap",
-        }}>{"Choose \nyour context!"}</span>
+        }}>{t('aimatch.contextHeading')}</span>
         <div style={{
           position: "absolute",
           left: 29,
@@ -146,7 +148,7 @@ export function AIMATCHCONTEXT(_p = {}) {
                 lineHeight: "18px",
                 letterSpacing: "0.280em",
                 color: "rgb(255,255,255)",
-              }}>Step 2 of 4</span>
+              }}>{t('aimatch.step2of4')}</span>
               <svg width={35} height={4} viewBox="0 0 35 4" fill="none" style={{
                 position: "absolute",
                 left: 40,
@@ -229,7 +231,7 @@ export function AIMATCHCONTEXT(_p = {}) {
             lineHeight: "40px",
             letterSpacing: "0.100em",
             color: "rgb(255,255,255)",
-          }}>AI Match</span>
+          }}>{t('aimatch.title')}</span>
           <MiArrowUp style={{
               position: "absolute",
               left: 0,
@@ -254,7 +256,7 @@ export function AIMATCHCONTEXT(_p = {}) {
           lineHeight: "22px",
           letterSpacing: "0.050em",
           color: "rgb(255,255,255)",
-        }}>Tell us how you’re watching so we can recommend the perfect movie.</span>
+        }}>{t('aimatch.contextSubtitle')}</span>
       </div>
       <TABBAR style={{
           position: "absolute",

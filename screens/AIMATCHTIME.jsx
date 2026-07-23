@@ -6,6 +6,7 @@ import { QUICKBREAK } from './QUICKBREAK.jsx';
 import { SHORTWATCH } from './SHORTWATCH.jsx';
 import { TABBAR } from './TABBAR.jsx';
 import { TOPNAV } from './TOPNAV.jsx';
+import { useLanguage } from '../src/i18n.jsx';
 
 const SelectRing = ({ selected }) => (
   <div style={{
@@ -27,6 +28,7 @@ const DUR_SCALE = 0.9;
 // figma node: 180:145 AI MATCH TIME
 export function AIMATCHTIME(_p = {}) {
   const props = _p;
+  const { t } = useLanguage();
   const duration = props.value ?? null;
   const Dur = ({ id, Comp, ...rest }) => (
     <div
@@ -111,7 +113,7 @@ export function AIMATCHTIME(_p = {}) {
           lineHeight: "38px",
           letterSpacing: "0.030em",
           color: "rgb(255,255,255)",
-        }}>How much time do you have?</span>
+        }}>{t('aimatch.timeHeading')}</span>
         <div style={{
           position: "absolute",
           left: 29,
@@ -157,7 +159,7 @@ export function AIMATCHTIME(_p = {}) {
                 lineHeight: "18px",
                 letterSpacing: "0.280em",
                 color: "rgb(255,255,255)",
-              }}>Step 3 of 4</span>
+              }}>{t('aimatch.step3of4')}</span>
               <svg width={35} height={4} viewBox="0 0 35 4" fill="none" style={{
                 position: "absolute",
                 left: 40,
@@ -213,7 +215,7 @@ export function AIMATCHTIME(_p = {}) {
           lineHeight: "22px",
           letterSpacing: "0.050em",
           color: "rgb(255,255,255)",
-        }}>Frameo will match you with something that fits your available time.</span>
+        }}>{t('aimatch.timeSubtitle')}</span>
         <div style={{
           position: "absolute",
           left: 26,
@@ -229,7 +231,7 @@ export function AIMATCHTIME(_p = {}) {
           boxSizing: "border-box",
         }}>
           <Dur id="short" Comp={SHORTWATCH} />
-          <Dur id="quick" Comp={QUICKBREAK} text1={"Under 30 min.\n"} />
+          <Dur id="quick" Comp={QUICKBREAK} text1={t('time.quick.duration')} />
           <Dur id="night" Comp={MOVIENIGHT} />
           <Dur id="have-time" Comp={HAVETIME} />
         </div>
@@ -274,7 +276,7 @@ export function AIMATCHTIME(_p = {}) {
             lineHeight: "40px",
             letterSpacing: "0.100em",
             color: "rgb(255,255,255)",
-          }}>AI Match</span>
+          }}>{t('aimatch.title')}</span>
         </div>
       </div>
       <TOPNAV style={{

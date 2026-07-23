@@ -9,6 +9,7 @@ import { SAD } from './SAD.jsx';
 import { STRESSED } from './STRESSED.jsx';
 import { TABBAR } from './TABBAR.jsx';
 import { TOPNAV } from './TOPNAV.jsx';
+import { useLanguage } from '../src/i18n.jsx';
 
 const SelectRing = ({ selected }) => (
   <div style={{
@@ -26,6 +27,7 @@ const SelectRing = ({ selected }) => (
 // figma node: 109:209 AI MATCH
 export function AIMATCH(_p = {}) {
   const props = _p;
+  const { t } = useLanguage();
   const mood = props.value ?? null;
   const Mood = ({ id, Comp, ...rest }) => (
     <div
@@ -82,7 +84,7 @@ export function AIMATCH(_p = {}) {
           lineHeight: "40px",
           letterSpacing: "0.100em",
           color: "rgb(255,255,255)",
-        }}>AI Match</span>
+        }}>{t('aimatch.title')}</span>
         <span style={{
           position: "absolute",
           left: 30,
@@ -96,7 +98,7 @@ export function AIMATCH(_p = {}) {
           lineHeight: "40px",
           letterSpacing: "0.100em",
           color: "rgb(255,255,255)",
-        }}>Step 1 of 4</span>
+        }}>{t('aimatch.step1of4')}</span>
         <div style={{
           position: "absolute",
           left: 24,
@@ -177,7 +179,7 @@ export function AIMATCH(_p = {}) {
               letterSpacing: "0.100em",
               color: "rgb(255,255,255)",
               display: "inline-block",
-            }}>{"Tell FRAMEO "}{"your mood"}</span>
+            }}>{t('aimatch.moodHeading1')}{t('aimatch.moodHeading2')}</span>
             <span style={{
               position: "absolute",
               left: 3,
@@ -191,7 +193,7 @@ export function AIMATCH(_p = {}) {
               lineHeight: "25px",
               letterSpacing: "0.020em",
               color: "rgb(181,174,200)",
-            }}>Choose how you feel and FRAMEO will start building your match.</span>
+            }}>{t('aimatch.moodSubtitle')}</span>
           </div>
           <div style={{
             position: "relative",
@@ -222,7 +224,7 @@ export function AIMATCH(_p = {}) {
               <Mood id="excited" Comp={EXCITED} />
             </div>
             <div style={{ gridRow: "4", gridColumn: "1" }}>
-              <Mood id="adventurous" Comp={ADVENTUROUS} text1={"Adventurous"} />
+              <Mood id="adventurous" Comp={ADVENTUROUS} text1={t('mood.adventurous')} />
             </div>
             <div style={{ gridRow: "4", gridColumn: "2" }}>
               <Mood id="stressed" Comp={STRESSED} />

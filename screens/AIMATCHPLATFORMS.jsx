@@ -8,6 +8,7 @@ import { NETFLIX } from './NETFLIX.jsx';
 import { PRIMEVIDEO } from './PRIMEVIDEO.jsx';
 import { TABBAR } from './TABBAR.jsx';
 import { TOPNAV } from './TOPNAV.jsx';
+import { useLanguage } from '../src/i18n.jsx';
 
 const SelectRing = ({ selected }) => (
   <div style={{
@@ -25,6 +26,7 @@ const SelectRing = ({ selected }) => (
 // figma node: 188:195 AI MATCH PLATFORMS
 export function AIMATCHPLATFORMS(_p = {}) {
   const props = _p;
+  const { t } = useLanguage();
   const platforms = new Set(props.value ?? []);
   const togglePlatform = (id) => props.onToggle?.(id);
   const Plat = ({ id, Comp }) => (
@@ -71,7 +73,7 @@ export function AIMATCHPLATFORMS(_p = {}) {
           lineHeight: "40px",
           letterSpacing: "0.100em",
           color: "rgb(255,255,255)",
-        }}>Which platforms do you have?</span>
+        }}>{t('aimatch.platformsHeading')}</span>
         <div style={{
           position: "absolute",
           left: 27,
@@ -117,7 +119,7 @@ export function AIMATCHPLATFORMS(_p = {}) {
                 lineHeight: "18px",
                 letterSpacing: "0.280em",
                 color: "rgb(255,255,255)",
-              }}>Step 4 of 4</span>
+              }}>{t('aimatch.step4of4')}</span>
               <svg width={35} height={4} viewBox="0 0 35 4" fill="none" style={{
                 position: "absolute",
                 left: 40,
@@ -160,7 +162,7 @@ export function AIMATCHPLATFORMS(_p = {}) {
           lineHeight: "22px",
           letterSpacing: "0.050em",
           color: "rgb(255,255,255)",
-        }}>Choose your streaming services so Frameo can find available matches.</span>
+        }}>{t('aimatch.platformsSubtitle')}</span>
         <span style={{
           position: "absolute",
           left: 57,
@@ -174,7 +176,7 @@ export function AIMATCHPLATFORMS(_p = {}) {
           lineHeight: "25px",
           letterSpacing: "0.100em",
           color: "rgb(255,255,255)",
-        }}>You can select more than one.</span>
+        }}>{t('aimatch.platformsHint')}</span>
         <div style={{
           position: "absolute",
           left: 19,
@@ -205,7 +207,7 @@ export function AIMATCHPLATFORMS(_p = {}) {
             lineHeight: "40px",
             letterSpacing: "0.100em",
             color: "rgb(255,255,255)",
-          }}>AI Match</span>
+          }}>{t('aimatch.title')}</span>
         </div>
         <div style={{
           position: "absolute",

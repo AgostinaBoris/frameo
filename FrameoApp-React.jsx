@@ -16,6 +16,7 @@ import AIMATCHPLATFORMS from './screens/AIMATCHPLATFORMS';
 import AIMATCHRESULTS from './screens/AIMATCHRESULTS';
 import MOVIEDETAILS from './screens/MOVIEDETAILS';
 import SETTINGS from './screens/SETTINGS';
+import LANGUAGE from './screens/LANGUAGE';
 import TRENDINGALL from './screens/TRENDINGALL';
 import RECOMMENDEDALL from './screens/RECOMMENDEDALL';
 import RESETPASSWORD from './screens/RESETPASSWORD';
@@ -402,13 +403,19 @@ export default function FrameoApp() {
 
         {screen === 'profile' && (
           <div style={{ width: '100%', height: '100%' }}>
-            <PROFILE2 {...navHandlers} active={activeTab} onLogout={handleLogout} onSettings={() => setScreen('settings')} />
+            <PROFILE2 {...navHandlers} active={activeTab} onLogout={handleLogout} onSettings={() => setScreen('settings')} onLanguage={() => setScreen('language')} />
           </div>
         )}
 
         {screen === 'settings' && (
           <div style={{ width: '100%', height: '100%' }}>
             <SETTINGS {...navHandlers} active={activeTab} onBack={() => setScreen('profile')} onLogout={handleLogout} />
+          </div>
+        )}
+
+        {screen === 'language' && (
+          <div style={{ width: '100%', height: '100%' }}>
+            <LANGUAGE {...navHandlers} active={activeTab} onBack={() => setScreen('profile')} />
           </div>
         )}
 

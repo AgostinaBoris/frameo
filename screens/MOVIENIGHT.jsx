@@ -1,9 +1,11 @@
 // figma node: 180:262 MOVIE NIGHT (2 variants)
+import { useLanguage } from '../src/i18n.jsx';
 const __venc = (v) => String(v).replace(/[%|=]/g, encodeURIComponent);
 const __vkey = (p) => "property1=" + __venc(p.property1);
 
 export function MOVIENIGHT(_p = {}) {
   const props = { ..._p, property1: _p.property1 ?? "default" };
+  const { t } = useLanguage();
   const __body0 = () => (
     <div className={`selectable-card ${props.className ?? ''}`} style={{
       width: 352,
@@ -24,7 +26,7 @@ export function MOVIENIGHT(_p = {}) {
         lineHeight: "25px",
         letterSpacing: "0.100em",
         color: "rgb(255,255,255)",
-      }}>{props.text1 ?? "1-2 hours."}</span>
+      }}>{props.text1 ?? t('time.night.duration')}</span>
       <div style={{
         position: "absolute",
         left: 0,
@@ -54,7 +56,7 @@ export function MOVIENIGHT(_p = {}) {
         lineHeight: "40px",
         letterSpacing: "0.020em",
         color: "rgb(255,255,255)",
-      }}>{props.text2 ?? "Movie Night"}</span>
+      }}>{props.text2 ?? t('time.night.label')}</span>
     </div>
   );
   const __body1 = () => (
@@ -77,7 +79,7 @@ export function MOVIENIGHT(_p = {}) {
         lineHeight: "25px",
         letterSpacing: "0.100em",
         color: "rgb(255,255,255)",
-      }}>{props.text1 ?? "1-2 hours."}</span>
+      }}>{props.text1 ?? t('time.night.duration')}</span>
       <div style={{
         position: "absolute",
         left: 0,
@@ -107,7 +109,7 @@ export function MOVIENIGHT(_p = {}) {
         lineHeight: "40px",
         letterSpacing: "0.020em",
         color: "rgb(255,255,255)",
-      }}>{props.text2 ?? "Movie Night"}</span>
+      }}>{props.text2 ?? t('time.night.label')}</span>
       <span style={{
         position: "absolute",
         left: 112,

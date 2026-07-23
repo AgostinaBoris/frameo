@@ -13,6 +13,7 @@ import { PRIMEVIDEO } from './PRIMEVIDEO.jsx';
 import { TABBAR } from './TABBAR.jsx';
 import { TOPNAV } from './TOPNAV.jsx';
 import { WeuiArrowFilled } from './WeuiArrowFilled.jsx';
+import { useLanguage } from '../src/i18n.jsx';
 
 const fontStyle = {
   fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
@@ -136,6 +137,7 @@ const SettingsRow = ({ label, onClick, danger }) => (
 // figma node: 411:451 PROFILE
 export function PROFILE2(_p = {}) {
   const props = _p;
+  const { t } = useLanguage();
   const [platformsProgress, setPlatformsProgress] = useState(0);
   const platformsDrag = useDragScroll();
   const platformsScrollRef = useRef(null);
@@ -181,7 +183,7 @@ export function PROFILE2(_p = {}) {
           lineHeight: "40px",
           letterSpacing: "0.050em",
           color: "rgb(255,255,255)",
-        }}>Profile</span>
+        }}>{t('profile.title')}</span>
         <span style={{
           ...fontStyle,
           position: "absolute",
@@ -194,7 +196,7 @@ export function PROFILE2(_p = {}) {
           whiteSpace: "nowrap",
           letterSpacing: "0.020em",
           color: "rgb(181,174,200)",
-        }}>Manage your movie preferences.</span>
+        }}>{t('profile.subtitle')}</span>
 
         <div style={{
           position: "absolute",
@@ -241,7 +243,7 @@ export function PROFILE2(_p = {}) {
             whiteSpace: "nowrap",
             letterSpacing: "0.020em",
             color: "rgb(181,174,200)",
-          }}>Movie mood explorer</span>
+          }}>{t('profile.tagline')}</span>
         </div>
 
         <span style={{
@@ -256,7 +258,7 @@ export function PROFILE2(_p = {}) {
           whiteSpace: "nowrap",
           letterSpacing: "0.020em",
           color: "rgb(181,174,200)",
-        }}>Streaming Platforms</span>
+        }}>{t('profile.streamingPlatforms')}</span>
 
         <ScrollTrack progress={platformsProgress} scrollRef={platformsScrollRef} style={{ left: 26, top: 449, width: 350 }} />
         <div
@@ -308,7 +310,7 @@ export function PROFILE2(_p = {}) {
           whiteSpace: "nowrap",
           letterSpacing: "0.020em",
           color: "rgb(181,174,200)",
-        }}>Favorite Genres</span>
+        }}>{t('profile.favoriteGenres')}</span>
 
         <ScrollTrack progress={genresProgress} scrollRef={genresScrollRef} style={{ left: 31, top: 548, width: 350 }} />
         <div
@@ -359,7 +361,7 @@ export function PROFILE2(_p = {}) {
           whiteSpace: "nowrap",
           letterSpacing: "0.020em",
           color: "rgb(181,174,200)",
-        }}>Preferences</span>
+        }}>{t('profile.preferences')}</span>
 
         <div style={{
           position: "absolute",
@@ -373,11 +375,11 @@ export function PROFILE2(_p = {}) {
           padding: "4px 10px",
           boxSizing: "border-box",
         }}>
-          <SettingsRow label="Settings" onClick={props.onSettings} />
-          <SettingsRow label="Language" onClick={props.onLanguage} />
-          <SettingsRow label="Notifications" onClick={props.onNotifications} />
-          <SettingsRow label="Privacy" onClick={props.onPrivacy} />
-          <SettingsRow label="Log out" onClick={props.onLogout} danger />
+          <SettingsRow label={t('profile.settings')} onClick={props.onSettings} />
+          <SettingsRow label={t('profile.language')} onClick={props.onLanguage} />
+          <SettingsRow label={t('profile.notifications')} onClick={props.onNotifications} />
+          <SettingsRow label={t('profile.privacy')} onClick={props.onPrivacy} />
+          <SettingsRow label={t('profile.logout')} onClick={props.onLogout} danger />
         </div>
 
         <div style={{ position: "absolute", left: 0, top: 1047, width: 1, height: 40 }} />

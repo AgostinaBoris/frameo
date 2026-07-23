@@ -2,10 +2,12 @@ import { useState } from 'react';
 import { Email } from './Email.jsx';
 import { Login } from './Login.jsx';
 import { Password } from './Password.jsx';
+import { useLanguage } from '../src/i18n.jsx';
 
 // figma node: 1:3 LOG IN - FRAMEO
 export function LOGINFRAMEO(_p = {}) {
   const props = _p;
+  const { t } = useLanguage();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   return (
@@ -49,7 +51,7 @@ export function LOGINFRAMEO(_p = {}) {
         lineHeight: "40px",
         letterSpacing: "0.100em",
         color: "rgb(255,255,255)",
-      }}>Welcome back</span>
+      }}>{t('login.welcomeBack')}</span>
       <span style={{
         position: "absolute",
         left: 28,
@@ -64,7 +66,7 @@ export function LOGINFRAMEO(_p = {}) {
         lineHeight: "24px",
         letterSpacing: "0.050em",
         color: "rgb(255,255,255)",
-      }}>Log in to continue and get personalized recommendations just for you.</span>
+      }}>{t('login.subtitle')}</span>
       {(props.error || props.message) && (
         <span style={{
           position: "absolute",
@@ -88,7 +90,7 @@ export function LOGINFRAMEO(_p = {}) {
           opacity: props.submitting ? 0.6 : 1,
         }}
         property1={"default"}
-        text1={props.submitting ? "Logging in…" : undefined}
+        text1={props.submitting ? t('login.loggingIn') : undefined}
         onClick={() => !props.submitting && props.onLogin?.({ email, password })}
       />
       <Email
@@ -133,7 +135,7 @@ export function LOGINFRAMEO(_p = {}) {
         cursor: "pointer",
       }}
       onClick={() => props.onForgotPassword?.(email)}
-      >Forgot password?</span>
+      >{t('login.forgotPassword')}</span>
       <span style={{
         position: "absolute",
         left: 75,
@@ -148,7 +150,7 @@ export function LOGINFRAMEO(_p = {}) {
         lineHeight: "18px",
         letterSpacing: "0.050em",
         color: "rgb(248,247,255)",
-      }}>Don’t have an account?</span>
+      }}>{t('login.noAccount')}</span>
       <span style={{
         position: "absolute",
         left: 165,
@@ -167,7 +169,7 @@ export function LOGINFRAMEO(_p = {}) {
         cursor: "pointer",
       }}
       onClick={() => props.onSignUp?.()}
-      >Sign up</span>
+      >{t('login.signUp')}</span>
     </div>
   );
 }

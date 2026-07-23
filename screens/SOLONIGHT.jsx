@@ -1,9 +1,11 @@
 // figma node: 165:225 SOLO NIGHT (2 variants)
+import { useLanguage } from '../src/i18n.jsx';
 const __venc = (v) => String(v).replace(/[%|=]/g, encodeURIComponent);
 const __vkey = (p) => "property1=" + __venc(p.property1);
 
 export function SOLONIGHT(_p = {}) {
   const props = { ..._p, property1: _p.property1 ?? "default" };
+  const { t } = useLanguage();
   const __body0 = () => (
     <div className={`selectable-card ${props.className ?? ''}`} style={{
       width: 168,
@@ -34,7 +36,7 @@ export function SOLONIGHT(_p = {}) {
         lineHeight: "24px",
         letterSpacing: "0.050em",
         color: "rgb(255,255,255)",
-      }}>{props.text1 ?? "Solo Night"}</span>
+      }}>{props.text1 ?? t('context.solo')}</span>
       <div className="fig-asset-eabf35b2f19fbba2-fabbaae7" style={{
         position: "absolute",
         left: 42,
@@ -89,7 +91,7 @@ export function SOLONIGHT(_p = {}) {
         lineHeight: "24px",
         letterSpacing: "0.050em",
         color: "rgb(255,255,255)",
-      }}>{props.text2 ?? "Solo Night"}</span>
+      }}>{props.text2 ?? t('context.solo')}</span>
       <div className="fig-asset-eabf35b2f19fbba2-f3963b48" style={{
         position: "absolute",
         left: 44,

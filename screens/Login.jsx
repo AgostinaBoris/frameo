@@ -1,9 +1,11 @@
 // figma node: 22:48 Login (2 variants)
+import { useLanguage } from '../src/i18n.jsx';
 const __venc = (v) => String(v).replace(/[%|=]/g, encodeURIComponent);
 const __vkey = (p) => "property1=" + __venc(p.property1);
 
 export function Login(_p = {}) {
   const props = { ..._p, property1: _p.property1 ?? "default" };
+  const { t } = useLanguage();
   const __body0 = () => (
     <div className={`cta-button ${props.className ?? ''}`} style={{
       width: 280,
@@ -40,7 +42,7 @@ export function Login(_p = {}) {
         textAlign: "center",
         whiteSpace: "nowrap",
         color: "rgb(241,245,249)",
-      }}>{props.text1 ?? "Log in"}</span>
+      }}>{props.text1 ?? t('common.login')}</span>
     </div>
   );
   const __body1 = () => (
@@ -77,7 +79,7 @@ export function Login(_p = {}) {
         textAlign: "center",
         whiteSpace: "nowrap",
         color: "rgb(241,245,249)",
-      }}>{props.text1 ?? "Log in"}</span>
+      }}>{props.text1 ?? t('common.login')}</span>
     </div>
   );
   const __impls = {

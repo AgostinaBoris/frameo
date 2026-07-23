@@ -1,9 +1,11 @@
 // figma node: 350:751 ROMANCE (2 variants)
+import { useLanguage } from '../src/i18n.jsx';
 const __venc = (v) => String(v).replace(/[%|=]/g, encodeURIComponent);
 const __vkey = (p) => "property1=" + __venc(p.property1);
 
 export function ROMANCE(_p = {}) {
   const props = { ..._p, property1: _p.property1 ?? "default" };
+  const { t } = useLanguage();
   const __body0 = () => (
     <div className={props.className} style={{
       height: 40,
@@ -34,7 +36,7 @@ export function ROMANCE(_p = {}) {
         textAlign: "center",
         letterSpacing: "0.020em",
         color: "rgb(255,255,255)",
-      }}>{props.text1 ?? "Romance"}</span>
+      }}>{props.text1 ?? t('discover.filter.romance')}</span>
     </div>
   );
   const __body1 = () => (
@@ -67,7 +69,7 @@ export function ROMANCE(_p = {}) {
         lineHeight: "25px",
         letterSpacing: "0.020em",
         color: "rgb(255,255,255)",
-      }}>{props.text1 ?? "Romance"}</span>
+      }}>{props.text1 ?? t('discover.filter.romance')}</span>
     </div>
   );
   const __impls = {

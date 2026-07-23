@@ -1,6 +1,9 @@
 // figma node: 1:2 ONBOARDING - FRAMEO
+import { useLanguage } from '../src/i18n.jsx';
+
 export function ONBOARDINGFRAMEO(_p = {}) {
   const props = _p;
+  const { t } = useLanguage();
   return (
     <div className={props.className} style={{
       width: 402,
@@ -117,7 +120,7 @@ export function ONBOARDINGFRAMEO(_p = {}) {
           letterSpacing: "0.040em",
           color: "rgb(181,174,200)",
           filter: "drop-shadow(0px 0px 4px rgba(255,255,255,0))",
-        }}>Press play to begin</span>
+        }}>{t('onboarding.pressPlay')}</span>
         <div style={{
           position: "absolute",
           left: 172,

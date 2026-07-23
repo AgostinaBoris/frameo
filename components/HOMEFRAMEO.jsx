@@ -7,6 +7,7 @@ import { Ellipse9 } from './Ellipse9.jsx';
 import { TABBAR } from './TABBAR.jsx';
 import { TOPNAV } from './TOPNAV.jsx';
 import { getPopularMovies, getTrendingMovies } from '../screens/tmdb.js';
+import { useLanguage } from '../src/i18n.jsx';
 
 const ScrollTrack = ({ progress, style, scrollRef }) => {
   const trackRef = useRef(null);
@@ -84,6 +85,7 @@ const useDragScroll = () => {
 // figma node: 99:95 HOME - FRAMEO
 export function HOMEFRAMEO(_p = {}) {
   const props = _p;
+  const { t } = useLanguage();
   const [trendingProgress, setTrendingProgress] = useState(0);
   const [recommendedProgress, setRecommendedProgress] = useState(0);
   const handleCarouselScroll = (setProgress) => (e) => {
@@ -159,7 +161,7 @@ export function HOMEFRAMEO(_p = {}) {
           lineHeight: "40px",
           letterSpacing: "0.050em",
           color: "rgb(255,255,255)",
-        }}><span style={{ fontSize: 40 }}>{"What"}</span>{" should we watch "}<span style={{ fontWeight: 700, fontSize: 29 }}>{"tonight"}</span><span style={{ fontWeight: 700, fontSize: 27 }}>{"?"}</span></span>
+        }}><span style={{ fontSize: 40 }}>{t('home.titlePart1')}</span>{t('home.titlePart2')}<span style={{ fontWeight: 700, fontSize: 29 }}>{t('home.titlePart3')}</span><span style={{ fontWeight: 700, fontSize: 27 }}>{"?"}</span></span>
         <span style={{
           position: "absolute",
           left: 27,
@@ -174,7 +176,7 @@ export function HOMEFRAMEO(_p = {}) {
           lineHeight: "24px",
           letterSpacing: "0.030em",
           color: "rgb(181,174,200)",
-        }}>AI-powered picks based on your mood, time, and streaming platforms.</span>
+        }}>{t('home.subtitle')}</span>
         <AskFrameo
           style={{
             position: "absolute",
@@ -199,7 +201,7 @@ export function HOMEFRAMEO(_p = {}) {
           lineHeight: "24px",
           letterSpacing: "0.100em",
           color: "rgb(255,255,255)",
-        }}>Quick Match</span>
+        }}>{t('home.quickMatch')}</span>
         <span style={{
           position: "absolute",
           left: 24,
@@ -213,7 +215,7 @@ export function HOMEFRAMEO(_p = {}) {
           lineHeight: "24px",
           letterSpacing: "0.100em",
           color: "rgb(255,255,255)",
-        }}>Recommended for you</span>
+        }}>{t('home.recommendedForYou')}</span>
         <span style={{
           position: "absolute",
           left: 24,
@@ -227,7 +229,7 @@ export function HOMEFRAMEO(_p = {}) {
           lineHeight: "24px",
           letterSpacing: "0.100em",
           color: "rgb(255,255,255)",
-        }}>Trending now</span>
+        }}>{t('home.trendingNow')}</span>
         <div style={{
           position: "absolute",
           left: 0,
@@ -240,10 +242,10 @@ export function HOMEFRAMEO(_p = {}) {
           gap: 28,
         }}>
           {[
-            { Icon: Ellipse8, label: "Mood", step: "match" },
-            { Icon: Ellipse9, label: "Context", step: "match-context" },
-            { Icon: Ellipse10, label: "Time", step: "match-time" },
-            { Icon: Ellipse11, label: "Platforms", step: "match-platforms" },
+            { Icon: Ellipse8, label: t('home.mood'), step: "match" },
+            { Icon: Ellipse9, label: t('home.context'), step: "match-context" },
+            { Icon: Ellipse10, label: t('home.time'), step: "match-time" },
+            { Icon: Ellipse11, label: t('home.platforms'), step: "match-platforms" },
           ].map(({ Icon, label, step }) => (
             <div
               key={label}
@@ -287,7 +289,7 @@ export function HOMEFRAMEO(_p = {}) {
           cursor: "pointer",
         }}
         onClick={() => props.onSeeAllRecommended?.()}
-        >See all</span>
+        >{t('common.seeAll')}</span>
         <span style={{
           position: "absolute",
           left: 306,
@@ -305,7 +307,7 @@ export function HOMEFRAMEO(_p = {}) {
           cursor: "pointer",
         }}
         onClick={() => props.onSeeAllTrending?.()}
-        >See all</span>
+        >{t('common.seeAll')}</span>
         <ScrollTrack progress={recommendedProgress} scrollRef={recommendedScrollRef} style={{ left: 27, top: 851, width: 375 }} />
         <div
           ref={recommendedScrollRef}

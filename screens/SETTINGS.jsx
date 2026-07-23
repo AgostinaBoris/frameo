@@ -2,6 +2,7 @@ import { MiArrowUp } from './MiArrowUp.jsx';
 import { TABBAR } from './TABBAR.jsx';
 import { TOPNAV } from './TOPNAV.jsx';
 import { WeuiArrowFilled } from './WeuiArrowFilled.jsx';
+import { useLanguage } from '../src/i18n.jsx';
 
 const fontStyle = {
   fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
@@ -66,6 +67,7 @@ const Section = ({ title, children }) => (
 
 // figma node: 416:794 SETTINGS
 export function SETTINGS(props = {}) {
+  const { t } = useLanguage();
   return (
     <div className={props.className} style={{
       width: 402,
@@ -120,7 +122,7 @@ export function SETTINGS(props = {}) {
             lineHeight: "40px",
             letterSpacing: "0.050em",
             color: "rgb(255,255,255)",
-          }}>Settings</span>
+          }}>{t('settings.title')}</span>
         </div>
         <span style={{
           ...fontStyle,
@@ -130,7 +132,7 @@ export function SETTINGS(props = {}) {
           fontSize: 14,
           letterSpacing: "0.020em",
           color: "rgb(181,174,200)",
-        }}>Manage your account preferences.</span>
+        }}>{t('settings.subtitle')}</span>
 
         <div style={{
           display: "flex",
@@ -139,18 +141,18 @@ export function SETTINGS(props = {}) {
           width: 344,
           margin: "28px auto 40px",
         }}>
-          <Section title="Account">
-            <SettingsRow label="Change Password" />
-            <SettingsRow label="Email Preferences" />
+          <Section title={t('settings.account')}>
+            <SettingsRow label={t('settings.changePassword')} />
+            <SettingsRow label={t('settings.emailPreferences')} />
           </Section>
-          <Section title="Preferences">
-            <SettingsRow label="Favorite Genres" />
-            <SettingsRow label="Watch Preferences" />
+          <Section title={t('settings.preferences')}>
+            <SettingsRow label={t('settings.favoriteGenres')} />
+            <SettingsRow label={t('settings.watchPreferences')} />
           </Section>
-          <Section title="App">
-            <SettingsRow label="Appearance" />
-            <SettingsRow label="Downloads" />
-            <SettingsRow label="Log out" danger onClick={props.onLogout} />
+          <Section title={t('settings.app')}>
+            <SettingsRow label={t('settings.appearance')} />
+            <SettingsRow label={t('settings.downloads')} />
+            <SettingsRow label={t('settings.logout')} danger onClick={props.onLogout} />
           </Section>
         </div>
       </div>

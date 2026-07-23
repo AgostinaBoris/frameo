@@ -1,9 +1,11 @@
 // figma node: 300:388 DETAILS (2 variants)
+import { useLanguage } from '../src/i18n.jsx';
 const __venc = (v) => String(v).replace(/[%|=]/g, encodeURIComponent);
 const __vkey = (p) => "property1=" + __venc(p.property1);
 
 export function DETAILS(_p = {}) {
   const props = { ..._p, property1: _p.property1 ?? "default" };
+  const { t } = useLanguage();
   const __body0 = () => (
     <div className={`cta-button ${props.className ?? ''}`} style={{
       width: 124,
@@ -38,7 +40,7 @@ export function DETAILS(_p = {}) {
         whiteSpace: "nowrap",
         letterSpacing: "0.020em",
         color: "rgb(255,255,255)",
-      }}>{props.text1 ?? "Details"}</span>
+      }}>{props.text1 ?? t('common.details')}</span>
     </div>
   );
   const __body1 = __body0;

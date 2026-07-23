@@ -1,4 +1,5 @@
 // figma node: 165:243 MOVIE MARATHON (2 variants)
+import { useLanguage } from '../src/i18n.jsx';
 const __venc = (v) => String(v).replace(/[%|=]/g, encodeURIComponent);
 const __vkey = (p) => "property1=" + __venc(p.property1);
 
@@ -13,6 +14,7 @@ const MovieMarathonIcon = ({ style }) => (
 
 export function MOVIEMARATHON(_p = {}) {
   const props = { ..._p, property1: _p.property1 ?? "default" };
+  const { t } = useLanguage();
   const __body0 = () => (
     <div className={`selectable-card ${props.className ?? ''}`} style={{
       width: 168,
@@ -43,7 +45,7 @@ export function MOVIEMARATHON(_p = {}) {
         lineHeight: "20px",
         letterSpacing: "0.020em",
         color: "rgb(255,255,255)",
-      }}>{props.text1 ?? "Movie Marathon"}</span>
+      }}>{props.text1 ?? t('context.marathon')}</span>
       <MovieMarathonIcon style={{
         position: "absolute",
         left: 56,
@@ -98,7 +100,7 @@ export function MOVIEMARATHON(_p = {}) {
         lineHeight: "20px",
         letterSpacing: "0.020em",
         color: "rgb(255,255,255)",
-      }}>{props.text2 ?? "Movie Marathon"}</span>
+      }}>{props.text2 ?? t('context.marathon')}</span>
       <MovieMarathonIcon style={{
         position: "absolute",
         left: 59,

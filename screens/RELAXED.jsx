@@ -1,11 +1,13 @@
 // figma node: 126:119 RELAXED (2 variants)
+import { useLanguage } from '../src/i18n.jsx';
 const __venc = (v) => String(v).replace(/[%|=]/g, encodeURIComponent);
 const __vkey = (p) => "property1=" + __venc(p.property1);
 
 export function RELAXED(_p = {}) {
   const props = { ..._p, property1: _p.property1 ?? "default" };
+  const { t } = useLanguage();
   const __body0 = () => (
-    <div className={props.className} style={{
+    <div className={`selectable-card ${props.className ?? ''}`} style={{
       width: 160,
       height: 56,
       position: "relative",
@@ -33,11 +35,11 @@ export function RELAXED(_p = {}) {
         lineHeight: "24px",
         letterSpacing: "0.020em",
         color: "rgb(255,255,255)",
-      }}>{props.text1 ?? "Relaxed"}</span>
+      }}>{props.text1 ?? t('mood.relaxed')}</span>
     </div>
   );
   const __body1 = () => (
-    <div className={props.className} style={{
+    <div className={`selectable-card ${props.className ?? ''}`} style={{
       width: 160,
       height: 56,
       position: "relative",
@@ -65,7 +67,7 @@ export function RELAXED(_p = {}) {
         lineHeight: "24px",
         letterSpacing: "0.020em",
         color: "rgb(255,255,255)",
-      }}>{props.text1 ?? "Relaxed"}</span>
+      }}>{props.text1 ?? t('mood.relaxed')}</span>
     </div>
   );
   const __impls = {

@@ -1,9 +1,11 @@
 // figma node: 580:616 Email (2 variants)
+import { useLanguage } from '../src/i18n.jsx';
 const __venc = (v) => String(v).replace(/[%|=]/g, encodeURIComponent);
 const __vkey = (p) => "property1=" + __venc(p.property1);
 
 export function Email(_p = {}) {
   const props = { ..._p, property1: _p.property1 ?? "default" };
+  const { t } = useLanguage();
   const __body0 = () => (
     <div className={props.className} style={{
       width: 350,
@@ -31,7 +33,7 @@ export function Email(_p = {}) {
         type={props.type ?? "email"}
         value={props.value}
         onChange={props.onChange}
-        placeholder={props.text1 ?? "Email"}
+        placeholder={props.text1 ?? t('common.email')}
         style={{
           position: "absolute",
           left: 19.886,

@@ -1,9 +1,11 @@
 // figma node: 188:265 Get Matches (2 variants)
+import { useLanguage } from '../src/i18n.jsx';
 const __venc = (v) => String(v).replace(/[%|=]/g, encodeURIComponent);
 const __vkey = (p) => "property1=" + __venc(p.property1);
 
 export function GetMatches(_p = {}) {
   const props = { ..._p, property1: _p.property1 ?? "default" };
+  const { t } = useLanguage();
   const __body0 = () => (
     <div className={`cta-button ${props.className ?? ''}`} style={{
       width: 280,
@@ -37,7 +39,7 @@ export function GetMatches(_p = {}) {
         textAlign: "center",
         whiteSpace: "nowrap",
         color: "rgb(241,245,249)",
-      }}>{props.text1 ?? "Get matches"}</span>
+      }}>{props.text1 ?? t('common.getMatches')}</span>
       <svg width={22.468} height={12.499} viewBox="0 0 22.468 12.499" fill="none" style={{
         position: "absolute",
         left: 0,
@@ -94,7 +96,7 @@ export function GetMatches(_p = {}) {
         textAlign: "center",
         whiteSpace: "nowrap",
         color: "rgb(241,245,249)",
-      }}>{props.text1 ?? "Get matches"}</span>
+      }}>{props.text1 ?? t('common.getMatches')}</span>
       <svg width={2.500} height={25.833} viewBox="0 0 2.500 25.833" fill="none" style={{
         position: "absolute",
         left: 0,

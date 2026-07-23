@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { MiArrowUp } from './MiArrowUp.jsx';
 import { TABBAR } from './TABBAR.jsx';
 import { TOPNAV } from './TOPNAV.jsx';
+import { useLanguage } from '../src/i18n.jsx';
 
 const fontStyle = {
   fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
@@ -9,6 +10,7 @@ const fontStyle = {
 
 // figma node: 319:585 (FRAME) "MOVIE DETAILS"
 export function MOVIEDETAILS(props = {}) {
+  const { t } = useLanguage();
   const movie = props.movie ?? {};
   const [saved, setSaved] = useState(false);
   return (
@@ -65,7 +67,7 @@ export function MOVIEDETAILS(props = {}) {
             lineHeight: "40px",
             letterSpacing: "0.050em",
             color: "rgb(255,255,255)",
-          }}>Movie Details</span>
+          }}>{t('movieDetails.title')}</span>
         </div>
 
         <div style={{
@@ -150,7 +152,7 @@ export function MOVIEDETAILS(props = {}) {
               fontSize: 17,
               letterSpacing: "0.020em",
               color: "rgb(255,255,255)",
-            }}>Why this match?</span>
+            }}>{t('movieDetails.whyMatch')}</span>
             <span style={{
               ...fontStyle,
               fontWeight: 500,
@@ -180,7 +182,7 @@ export function MOVIEDETAILS(props = {}) {
               if (movie.watchUrl) window.open(movie.watchUrl, "_blank", "noopener,noreferrer");
             }}
           >
-            <span style={{ ...fontStyle, fontWeight: 700, fontSize: 16, color: "rgb(255,255,255)", letterSpacing: "0.020em" }}>Watch Now</span>
+            <span style={{ ...fontStyle, fontWeight: 700, fontSize: 16, color: "rgb(255,255,255)", letterSpacing: "0.020em" }}>{t('movieDetails.watchNow')}</span>
           </div>
 
           <div
@@ -205,7 +207,7 @@ export function MOVIEDETAILS(props = {}) {
             }}
           >
             <span style={{ ...fontStyle, fontWeight: 700, fontSize: 16, color: "rgb(255,255,255)", letterSpacing: "0.020em" }}>
-              {saved ? "✓ Saved to Watchlist" : "Save to Watchlist"}
+              {saved ? t('movieDetails.saved') : t('movieDetails.save')}
             </span>
           </div>
         </div>

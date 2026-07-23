@@ -1,9 +1,11 @@
 // figma node: 165:237 FAMILY TIME (2 variants)
+import { useLanguage } from '../src/i18n.jsx';
 const __venc = (v) => String(v).replace(/[%|=]/g, encodeURIComponent);
 const __vkey = (p) => "property1=" + __venc(p.property1);
 
 export function FAMILYTIME(_p = {}) {
   const props = { ..._p, property1: _p.property1 ?? "default" };
+  const { t } = useLanguage();
   const __body0 = () => (
     <div className={`selectable-card ${props.className ?? ''}`} style={{
       width: 168,
@@ -33,7 +35,7 @@ export function FAMILYTIME(_p = {}) {
         lineHeight: "24px",
         letterSpacing: "0.050em",
         color: "rgb(255,255,255)",
-      }}>{props.text1 ?? "Family Time"}</span>
+      }}>{props.text1 ?? t('context.family')}</span>
       <div className="fig-asset-93f1afa9a37fa12c-e8df5db2" style={{
         position: "absolute",
         left: 58,
@@ -87,7 +89,7 @@ export function FAMILYTIME(_p = {}) {
         lineHeight: "24px",
         letterSpacing: "0.050em",
         color: "rgb(255,255,255)",
-      }}>{props.text2 ?? "Family Time"}</span>
+      }}>{props.text2 ?? t('context.family')}</span>
       <div className="fig-asset-93f1afa9a37fa12c-f7bb6c02" style={{
         position: "absolute",
         left: 60,

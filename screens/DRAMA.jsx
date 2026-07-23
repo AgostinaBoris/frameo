@@ -1,11 +1,13 @@
 // figma node: 416:548 DRAMA (2 variants)
+import { useLanguage } from '../src/i18n.jsx';
 const __venc = (v) => String(v).replace(/[%|=]/g, encodeURIComponent);
 const __vkey = (p) => "property1=" + __venc(p.property1);
 
 export function DRAMA(_p = {}) {
   const props = { ..._p, property1: _p.property1 ?? "default" };
+  const { t } = useLanguage();
   const __body0 = () => (
-    <div className={props.className} style={{
+    <div className={`selectable-card ${props.className ?? ''}`} style={{
       width: 64,
       display: "flex",
       flexDirection: "column",
@@ -19,7 +21,8 @@ export function DRAMA(_p = {}) {
         position: "relative",
         height: 36,
         borderRadius: 15,
-        boxShadow: "inset 0 0 0 1px rgb(0,0,0), 2px 2px 6px 0.500px rgba(168,85,247,0.89)",
+        backgroundColor: "rgba(139,61,255,0.35)",
+        boxShadow: "inset 0 0 0 1px rgba(168,85,247,0.7), 2px 2px 6px 0.500px rgba(168,85,247,0.45)",
         flexShrink: 0,
         alignSelf: "stretch",
       }} />
@@ -34,7 +37,7 @@ export function DRAMA(_p = {}) {
         lineHeight: "25px",
         letterSpacing: "0.020em",
         color: "rgb(255,255,255)",
-      }}>{props.text1 ?? "Drama"}</span>
+      }}>{props.text1 ?? t('genre.drama')}</span>
     </div>
   );
   const __body1 = () => (
@@ -67,7 +70,7 @@ export function DRAMA(_p = {}) {
         lineHeight: "25px",
         letterSpacing: "0.020em",
         color: "rgb(255,255,255)",
-      }}>{props.text1 ?? "Drama"}</span>
+      }}>{props.text1 ?? t('genre.drama')}</span>
     </div>
   );
   const __impls = {

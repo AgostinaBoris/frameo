@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Login } from './Login.jsx';
 import { Password } from './Password.jsx';
+import { useLanguage } from '../src/i18n.jsx';
 
 const fontStyle = {
   fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
@@ -8,6 +9,7 @@ const fontStyle = {
 
 // New screen: set a new password after arriving via a Supabase password-recovery email link
 export function RESETPASSWORD(props = {}) {
+  const { t } = useLanguage();
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const mismatch = confirmPassword.length > 0 && password !== confirmPassword;
@@ -55,7 +57,7 @@ export function RESETPASSWORD(props = {}) {
         lineHeight: "40px",
         letterSpacing: "0.100em",
         color: "rgb(255,255,255)",
-      }}>Set a new password</span>
+      }}>{t('resetPassword.title')}</span>
       <span style={{
         ...fontStyle,
         position: "absolute",
@@ -70,7 +72,7 @@ export function RESETPASSWORD(props = {}) {
         lineHeight: "24px",
         letterSpacing: "0.050em",
         color: "rgb(255,255,255)",
-      }}>Choose a new password for your account.</span>
+      }}>{t('resetPassword.subtitle')}</span>
 
       <Password
         style={{
@@ -81,7 +83,7 @@ export function RESETPASSWORD(props = {}) {
           height: 50,
         }}
         property1={"default"}
-        text1={"New password"}
+        text1={t('resetPassword.newPassword')}
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
@@ -94,7 +96,7 @@ export function RESETPASSWORD(props = {}) {
           height: 50,
         }}
         property1={"default"}
-        text1={"Confirm password"}
+        text1={t('resetPassword.confirmPassword')}
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
       />
@@ -110,7 +112,7 @@ export function RESETPASSWORD(props = {}) {
           fontSize: 13,
           textAlign: "center",
           color: "rgb(248,113,113)",
-        }}>{props.error || "Passwords don't match."}</span>
+        }}>{props.error || t('resetPassword.mismatch')}</span>
       )}
 
       <Login
@@ -123,7 +125,7 @@ export function RESETPASSWORD(props = {}) {
           opacity: canSubmit ? 1 : 0.5,
         }}
         property1={"default"}
-        text1={props.submitting ? "Saving…" : "Save password"}
+        text1={props.submitting ? t('resetPassword.saving') : t('resetPassword.save')}
         onClick={() => canSubmit && props.onSave?.(password)}
       />
     </div>

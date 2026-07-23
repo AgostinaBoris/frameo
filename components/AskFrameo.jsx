@@ -1,9 +1,11 @@
 // figma node: 84:46 Ask Frameo (2 variants)
+import { useLanguage } from '../src/i18n.jsx';
 const __venc = (v) => String(v).replace(/[%|=]/g, encodeURIComponent);
 const __vkey = (p) => "property1=" + __venc(p.property1);
 
 export function AskFrameo(_p = {}) {
   const props = { ..._p, property1: _p.property1 ?? "default" };
+  const { t } = useLanguage();
   const __body0 = () => (
     <div className={`cta-button ${props.className ?? ''}`} style={{
       width: 280,
@@ -38,7 +40,7 @@ export function AskFrameo(_p = {}) {
         whiteSpace: "nowrap",
         color: "rgb(255,255,255)",
         textShadow: "0 1px 3px rgba(0,0,0,0.35)",
-      }}>✨ {props.text1 ?? "Ask Frameo"}</span>
+      }}>✨ {props.text1 ?? t('home.askFrameo')}</span>
     </div>
   );
   const __body1 = () => (
@@ -72,7 +74,7 @@ export function AskFrameo(_p = {}) {
         textAlign: "center",
         whiteSpace: "nowrap",
         color: "rgb(241,245,249)",
-      }}>{props.text1 ?? "Ask Frameo"}</span>
+      }}>{props.text1 ?? t('home.askFrameo')}</span>
     </div>
   );
   const __impls = {

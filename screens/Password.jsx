@@ -1,4 +1,5 @@
 import { Password2 } from './Password2.jsx';
+import { useLanguage } from '../src/i18n.jsx';
 
 // figma node: 580:620 Password (2 variants)
 const __venc = (v) => String(v).replace(/[%|=]/g, encodeURIComponent);
@@ -6,6 +7,7 @@ const __vkey = (p) => "property1=" + __venc(p.property1);
 
 export function Password(_p = {}) {
   const props = { ..._p, property1: _p.property1 ?? "default" };
+  const { t } = useLanguage();
   const __body0 = () => (
     <div className={props.className} style={{
       width: 350,
@@ -26,7 +28,7 @@ export function Password(_p = {}) {
         type="password"
         value={props.value}
         onChange={props.onChange}
-        placeholder={props.text1 ?? "Password"}
+        placeholder={props.text1 ?? t('common.password')}
         style={{
           position: "absolute",
           left: 19.886,

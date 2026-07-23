@@ -1,9 +1,11 @@
 // figma node: 165:231 DATE NIGHT (2 variants)
+import { useLanguage } from '../src/i18n.jsx';
 const __venc = (v) => String(v).replace(/[%|=]/g, encodeURIComponent);
 const __vkey = (p) => "property1=" + __venc(p.property1);
 
 export function DATENIGHT(_p = {}) {
   const props = { ..._p, property1: _p.property1 ?? "default" };
+  const { t } = useLanguage();
   const __body0 = () => (
     <div className={`selectable-card ${props.className ?? ''}`} style={{
       width: 168,
@@ -33,7 +35,7 @@ export function DATENIGHT(_p = {}) {
         lineHeight: "24px",
         letterSpacing: "0.050em",
         color: "rgb(255,255,255)",
-      }}>{props.text1 ?? "Date Night"}</span>
+      }}>{props.text1 ?? t('context.date')}</span>
       <div className="fig-asset-9cb29cb4e9297e40-373f4e57" style={{
         position: "absolute",
         left: 56,
@@ -87,7 +89,7 @@ export function DATENIGHT(_p = {}) {
         lineHeight: "24px",
         letterSpacing: "0.050em",
         color: "rgb(255,255,255)",
-      }}>{props.text2 ?? "Date Night"}</span>
+      }}>{props.text2 ?? t('context.date')}</span>
       <div className="fig-asset-9cb29cb4e9297e40-2ab9bc1a" style={{
         position: "absolute",
         left: 53,

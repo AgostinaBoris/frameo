@@ -8,6 +8,7 @@ import { THRILLER } from './THRILLER.jsx';
 import { TOPNAV } from './TOPNAV.jsx';
 import { TRENDING } from './TRENDING.jsx';
 import { getMoviesByGenre, getPopularMovies, getTrendingMovies, searchMovies } from './tmdb.js';
+import { useLanguage } from '../src/i18n.jsx';
 
 const ScrollTrack = ({ progress, style, scrollRef }) => {
   const trackRef = useRef(null);
@@ -85,6 +86,7 @@ const useDragScroll = () => {
 // figma node: 348:562 DISCOVER
 export function DISCOVER(_p = {}) {
   const props = _p;
+  const { t } = useLanguage();
   const [query, setQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [searchLoading, setSearchLoading] = useState(false);
@@ -111,7 +113,7 @@ export function DISCOVER(_p = {}) {
         .catch((err) => {
           if (err.name === 'AbortError') return;
           console.error('TMDB search failed:', err);
-          setSearchError('No pudimos buscar peliculas. Intenta de nuevo.');
+          setSearchError(t('discover.searchError'));
           setSearchLoading(false);
         });
     }, 400);
@@ -177,7 +179,12 @@ export function DISCOVER(_p = {}) {
       });
     return () => controller.abort();
   }, []);
-  const FILTER_LABELS = { thriller: 'Thriller', scifi: 'Sci-Fi', romance: 'Romance', foryou: 'For You' };
+  const FILTER_LABELS = {
+    thriller: t('discover.filter.thriller'),
+    scifi: t('discover.filter.scifi'),
+    romance: t('discover.filter.romance'),
+    foryou: t('discover.filter.foryou'),
+  };
   const FILTER_MOVIES = { thriller: thrillerMovies, scifi: scifiMovies, romance: romanceMovies, foryou: forYouMovies };
   const [trendingProgress, setTrendingProgress] = useState(0);
   const [scifiProgress, setScifiProgress] = useState(0);
@@ -234,7 +241,7 @@ export function DISCOVER(_p = {}) {
           lineHeight: "18px",
           letterSpacing: "0.100em",
           color: "rgb(138,131,156)",
-        }}>Explore movies across your platforms.</span>
+        }}>{t('discover.subtitle')}</span>
         <div style={{
           position: "absolute",
           left: 28,
@@ -256,7 +263,7 @@ export function DISCOVER(_p = {}) {
             lineHeight: "40px",
             letterSpacing: "0.100em",
             color: "rgb(255,255,255)",
-          }}>Discover</span>
+          }}>{t('discover.title')}</span>
         </div>
         {!isSearching && (
         <>
@@ -307,7 +314,7 @@ export function DISCOVER(_p = {}) {
             />
             <FORYOU
               style={dimStyle('foryou')}
-              text1={"For You"}
+              text1={t('discover.filter.foryou')}
               property1={"default"}
               onClick={() => setActiveFilter('foryou')}
             />
@@ -344,7 +351,7 @@ export function DISCOVER(_p = {}) {
                 fontWeight: 600,
                 fontSize: 14,
                 color: "rgb(181,174,200)",
-              }}>Buscando...</span>
+              }}>{t('discover.searching')}</span>
             )}
             {searchError && (
               <span style={{
@@ -360,7 +367,7 @@ export function DISCOVER(_p = {}) {
                 fontWeight: 600,
                 fontSize: 14,
                 color: "rgb(181,174,200)",
-              }}>No encontramos peliculas para "{query.trim()}".</span>
+              }}>{t('discover.noResults', { query: query.trim() })}</span>
             )}
             {!searchLoading && searchResults.map((movie) => (
               <div
@@ -429,7 +436,7 @@ export function DISCOVER(_p = {}) {
           lineHeight: "24px",
           letterSpacing: "0.020em",
           color: "rgb(248,247,255)",
-        }}>Trending Now</span>
+        }}>{t('discover.trendingNow')}</span>
         <span style={{
           position: "absolute",
           left: 23,
@@ -443,7 +450,7 @@ export function DISCOVER(_p = {}) {
           lineHeight: "24px",
           letterSpacing: "0.020em",
           color: "rgb(248,247,255)",
-        }}>Because You Liked Sci-Fi</span>
+        }}>{t('discover.becauseScifi')}</span>
         <span style={{
           position: "absolute",
           left: 23,
@@ -457,7 +464,7 @@ export function DISCOVER(_p = {}) {
           lineHeight: "24px",
           letterSpacing: "0.020em",
           color: "rgb(248,247,255)",
-        }}>Because You Liked Romance</span>
+        }}>{t('discover.becauseRomance')}</span>
         <ScrollTrack progress={trendingProgress} scrollRef={trendingScrollRef} style={{ left: 24, top: 256, width: 352 }} />
         <div
           ref={trendingScrollRef}

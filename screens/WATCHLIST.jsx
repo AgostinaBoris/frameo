@@ -6,6 +6,7 @@ import { MiArrowUp } from './MiArrowUp.jsx';
 import { SERIES } from './SERIES.jsx';
 import { TABBAR } from './TABBAR.jsx';
 import { TOPNAV } from './TOPNAV.jsx';
+import { useLanguage } from '../src/i18n.jsx';
 
 const fontStyle = {
   fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
@@ -117,6 +118,7 @@ const WatchlistCard = ({ movie, onDetails, onRemove }) => (
 // figma node: 326:335 WATCHLIST
 export function WATCHLIST(_p = {}) {
   const props = _p;
+  const { t } = useLanguage();
   const [activeFilter, setActiveFilter] = useState('all');
   const filterStyle = (key) => ({ opacity: activeFilter === key ? 1 : 0.92 });
   const movies = props.movies ?? [];
@@ -158,7 +160,7 @@ export function WATCHLIST(_p = {}) {
           lineHeight: "25px",
           letterSpacing: "0.100em",
           color: "rgb(138,131,156)",
-        }}>Your saved picks in one place.</span>
+        }}>{t('watchlist.subtitle')}</span>
         <div style={{
           position: "absolute",
           left: 23,
@@ -189,7 +191,7 @@ export function WATCHLIST(_p = {}) {
             lineHeight: "40px",
             letterSpacing: "0.100em",
             color: "rgb(255,255,255)",
-          }}>Watchlist</span>
+          }}>{t('watchlist.title')}</span>
         </div>
         <div style={{
           position: "absolute",
@@ -216,8 +218,8 @@ export function WATCHLIST(_p = {}) {
               textAlign: "center",
             }}>
               {movies.length === 0
-                ? "Nothing saved yet — pick something from AI Match or Discover."
-                : "No series saved yet."}
+                ? t('watchlist.empty')
+                : t('watchlist.emptySeries')}
             </span>
           )}
           {filteredMovies.map((movie) => (

@@ -1,6 +1,9 @@
 // figma node: 350:765 SEARCH BAR
+import { useLanguage } from '../src/i18n.jsx';
+
 export function SEARCHBAR(_p = {}) {
   const props = _p;
+  const { t } = useLanguage();
   return (
     <div className={props.className} style={{
       width: 353,
@@ -22,7 +25,7 @@ export function SEARCHBAR(_p = {}) {
         type="text"
         value={props.value}
         onChange={props.onChange}
-        placeholder={props.text1 ?? "Search movies, series, genres..."}
+        placeholder={props.text1 ?? t('discover.searchPlaceholder')}
         style={{
           flex: 1,
           minWidth: 0,

@@ -1,4 +1,5 @@
 // figma node: 165:255 BACKGROUND WATCH (2 variants)
+import { useLanguage } from '../src/i18n.jsx';
 const __venc = (v) => String(v).replace(/[%|=]/g, encodeURIComponent);
 const __vkey = (p) => "property1=" + __venc(p.property1);
 
@@ -12,6 +13,7 @@ const BackgroundWatchIcon = ({ style }) => (
 
 export function BACKGROUNDWATCH(_p = {}) {
   const props = { ..._p, property1: _p.property1 ?? "default" };
+  const { t } = useLanguage();
   const __body0 = () => (
     <div className={`selectable-card ${props.className ?? ''}`} style={{
       width: 168,
@@ -42,7 +44,7 @@ export function BACKGROUNDWATCH(_p = {}) {
         lineHeight: "20px",
         letterSpacing: "0.020em",
         color: "rgb(255,255,255)",
-      }}>{props.text1 ?? "Background Watch"}</span>
+      }}>{props.text1 ?? t('context.background')}</span>
       <BackgroundWatchIcon style={{
         position: "absolute",
         left: 49,
@@ -82,7 +84,7 @@ export function BACKGROUNDWATCH(_p = {}) {
         lineHeight: "20px",
         letterSpacing: "0.020em",
         color: "rgb(255,255,255)",
-      }}>{props.text1 ?? "Background Watch"}</span>
+      }}>{props.text1 ?? t('context.background')}</span>
       <BackgroundWatchIcon style={{
         position: "absolute",
         left: 49,

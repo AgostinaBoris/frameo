@@ -5,17 +5,11 @@ import { DETAILS } from './DETAILS.jsx';
 import { MiArrowUp } from './MiArrowUp.jsx';
 import { TABBAR } from './TABBAR.jsx';
 import { TOPNAV } from './TOPNAV.jsx';
+import { useLanguage } from '../src/i18n.jsx';
 
-const MOOD_LABEL = {
-  relaxed: 'Relaxed', romantic: 'Romantic', curious: 'Curious', focused: 'Focused',
-  sad: 'Sad', excited: 'Excited', adventurous: 'Adventurous', stressed: 'Stressed',
-};
-const CONTEXT_LABEL = {
-  solo: 'Solo night', date: 'Date night', family: 'Family time',
-  friends: 'With friends', background: 'Background watch', marathon: 'Movie marathon',
-};
-
-const ResultCard = ({ posterUrl, title, match, type, tag1, tag2, onDetails }) => (
+const ResultCard = ({ posterUrl, title, match, type, tag1, tag2, onDetails }) => {
+  const { t } = useLanguage();
+  return (
   <div className="selectable-card" style={{
     position: "relative",
     height: 210,
@@ -64,7 +58,7 @@ const ResultCard = ({ posterUrl, title, match, type, tag1, tag2, onDetails }) =>
           fontSize: 13,
           marginTop: 4,
           color: "rgb(181,174,200)",
-        }}>{match}{type ? ` • ${type === 'series' ? 'Series' : 'Movie'}` : ''}</div>
+        }}>{match}{type ? ` • ${type === 'series' ? t('results.series') : t('results.movie')}` : ''}</div>
       </div>
       <div style={{ display: "flex", flexDirection: "row", gap: 10, flexWrap: "wrap", justifyContent: "center" }}>
         {tag1 && <AIAdvent style={{ position: "relative" }} property1={"default"} text1={tag1} />}
@@ -73,11 +67,13 @@ const ResultCard = ({ posterUrl, title, match, type, tag1, tag2, onDetails }) =>
       <DETAILS style={{ position: "relative", marginTop: 8, width: 124, flexShrink: 0 }} property1={"default"} onClick={onDetails} />
     </div>
   </div>
-);
+  );
+};
 
 // figma node: 278:307 AI MATCH RESULTS
 export function AIMATCHRESULTS(_p = {}) {
   const props = _p;
+  const { t } = useLanguage();
   const answers = props.answers ?? {};
   const [status, setStatus] = useState('loading');
   const [picks, setPicks] = useState([]);
@@ -108,8 +104,8 @@ export function AIMATCHRESULTS(_p = {}) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [answers.mood, answers.context, answers.time, JSON.stringify(answers.platforms)]);
 
-  const moodTag = MOOD_LABEL[answers.mood];
-  const contextTag = CONTEXT_LABEL[answers.context];
+  const moodTag = answers.mood ? t(`mood.${answers.mood}`) : undefined;
+  const contextTag = answers.context ? t(`context.${answers.context}`) : undefined;
 
   return (
     <div className={props.className} style={{
@@ -146,10 +142,10 @@ export function AIMATCHRESULTS(_p = {}) {
           letterSpacing: "0.050em",
           color: "rgb(255,255,255)",
         }}>
-          {status === 'loading' && "Frameo is thinking..."}
-          {status === 'ready' && "We found the best picks for your night."}
-          {status === 'empty' && "No matches found — try different answers."}
-          {status === 'error' && "Something went wrong. Please try again."}
+          {status === 'loading' && t('results.thinking')}
+          {status === 'ready' && t('results.ready')}
+          {status === 'empty' && t('results.empty')}
+          {status === 'error' && t('results.error')}
         </span>
         <div style={{
           position: "absolute",
@@ -188,7 +184,7 @@ export function AIMATCHRESULTS(_p = {}) {
             lineHeight: "40px",
             letterSpacing: "0.100em",
             color: "rgb(255,255,255)",
-          }}>AI Match Results</span>
+          }}>{t('results.title')}</span>
         </div>
         <div style={{
           position: "absolute",
@@ -226,8 +222,8 @@ export function AIMATCHRESULTS(_p = {}) {
                 title: movie.title,
                 posterUrl: movie.posterUrl,
                 match: `${movie.matchPercent}% Match`,
-                genre: `${movie.type === 'series' ? 'Series' : 'Movie'} • ${movie.year}`,
-                platform: "Check availability on TMDB",
+                genre: `${movie.type === 'series' ? t('results.series') : t('results.movie')} • ${movie.year}`,
+                platform: t('results.checkAvailability'),
                 watchUrl: movie.tmdbUrl,
                 description: movie.overview,
                 whyMatch: movie.whyMatch,

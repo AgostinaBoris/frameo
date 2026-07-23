@@ -2,6 +2,7 @@ import { BoxiconsSearch } from './BoxiconsSearch.jsx';
 import { IconoirBrightStar } from './IconoirBrightStar.jsx';
 import { MaterialSymbolsBookmarkOutline } from './MaterialSymbolsBookmarkOutline.jsx';
 import { MaterialSymbolsHomeOutlineRounded } from './MaterialSymbolsHomeOutlineRounded.jsx';
+import { useLanguage } from '../src/i18n.jsx';
 
 const ACTIVE_COLOR = "rgb(192,132,252)";
 const INACTIVE_COLOR = "rgb(201,202,190)";
@@ -43,6 +44,7 @@ const iconWrapStyle = (active) => ({
 export function TABBAR(_p = {}) {
   const props = _p;
   const active = props.active;
+  const { t } = useLanguage();
   return (
     <div className={props.className} style={{
       width: 402,
@@ -60,25 +62,25 @@ export function TABBAR(_p = {}) {
         <div className="tab-icon-wrap" style={iconWrapStyle(active === "home")}>
           {props.icon1 ?? <MaterialSymbolsHomeOutlineRounded style={{ transform: "scale(1.167, 1.167)", transformOrigin: "0 0", color: active === "home" ? ACTIVE_COLOR : INACTIVE_COLOR }} />}
         </div>
-        <span style={labelStyle(active === "home")}>{props.text1 ?? "Home"}</span>
+        <span style={labelStyle(active === "home")}>{props.text1 ?? t('tab.home')}</span>
       </div>
       <div style={tabStyle} onClick={props.onDiscover}>
         <div className="tab-icon-wrap" style={iconWrapStyle(active === "discover")}>
           {props.icon2 ?? <BoxiconsSearch style={{ transform: "scale(1.333, 1.333)", transformOrigin: "0 0", color: active === "discover" ? ACTIVE_COLOR : INACTIVE_COLOR }} />}
         </div>
-        <span style={labelStyle(active === "discover")}>{props.text2 ?? "Discover"}</span>
+        <span style={labelStyle(active === "discover")}>{props.text2 ?? t('tab.discover')}</span>
       </div>
       <div style={tabStyle} onClick={props.onMatch}>
         <div className="tab-icon-wrap" style={iconWrapStyle(active === "match")}>
           {props.icon3 ?? <IconoirBrightStar style={{ transform: "scale(1.067, 1.067)", transformOrigin: "0 0", color: active === "match" ? ACTIVE_COLOR : INACTIVE_COLOR }} />}
         </div>
-        <span style={labelStyle(active === "match")}>{props.text3 ?? "AI Match"}</span>
+        <span style={labelStyle(active === "match")}>{props.text3 ?? t('tab.aiMatch')}</span>
       </div>
       <div style={tabStyle} onClick={props.onWatchlist}>
         <div className="tab-icon-wrap" style={iconWrapStyle(active === "watchlist")}>
           {props.icon4 ?? <MaterialSymbolsBookmarkOutline style={{ color: active === "watchlist" ? ACTIVE_COLOR : INACTIVE_COLOR }} />}
         </div>
-        <span style={labelStyle(active === "watchlist")}>{props.text4 ?? "Watchlist"}</span>
+        <span style={labelStyle(active === "watchlist")}>{props.text4 ?? t('tab.watchlist')}</span>
       </div>
     </div>
   );

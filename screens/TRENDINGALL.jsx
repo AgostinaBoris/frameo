@@ -1,6 +1,7 @@
 import { MiArrowUp } from './MiArrowUp.jsx';
 import { TABBAR } from './TABBAR.jsx';
 import { TOPNAV } from './TOPNAV.jsx';
+import { useLanguage } from '../src/i18n.jsx';
 
 const fontStyle = {
   fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
@@ -23,6 +24,7 @@ const TRENDING_IMG_CLASSES = [
 
 // New screen: full grid of all trending posters, opened from Home > Trending now > See all
 export function TRENDINGALL(props = {}) {
+  const { t } = useLanguage();
   return (
     <div className={props.className} style={{
       width: 402,
@@ -77,7 +79,7 @@ export function TRENDINGALL(props = {}) {
             lineHeight: "40px",
             letterSpacing: "0.050em",
             color: "rgb(255,255,255)",
-          }}>Trending Now</span>
+          }}>{t('trendingAll.title')}</span>
         </div>
 
         <div style={{

@@ -2,10 +2,12 @@ import { useState } from 'react';
 import { Email } from './Email.jsx';
 import { Password } from './Password.jsx';
 import { Login } from './Login.jsx';
+import { useLanguage } from '../src/i18n.jsx';
 
 // figma node: 1:4 SIGN UP - FRAMEO
 export function SIGNUPFRAMEO(_p = {}) {
   const props = _p;
+  const { t } = useLanguage();
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -52,7 +54,7 @@ export function SIGNUPFRAMEO(_p = {}) {
         lineHeight: "40px",
         letterSpacing: "0.100em",
         color: "rgb(255,255,255)",
-      }}>Create account</span>
+      }}>{t('signup.createAccount')}</span>
       <span style={{
         position: "absolute",
         left: 28,
@@ -67,7 +69,7 @@ export function SIGNUPFRAMEO(_p = {}) {
         lineHeight: "24px",
         letterSpacing: "0.050em",
         color: "rgb(255,255,255)",
-      }}>Sign up to personalize your recommendations and start discovering what to watch.</span>
+      }}>{t('signup.subtitle')}</span>
 
       <Email
         style={{
@@ -78,7 +80,7 @@ export function SIGNUPFRAMEO(_p = {}) {
           height: 48,
         }}
         property1={"default"}
-        text1={"Full name"}
+        text1={t('signup.fullName')}
         type={"text"}
         value={fullName}
         onChange={(e) => setFullName(e.target.value)}
@@ -131,7 +133,7 @@ export function SIGNUPFRAMEO(_p = {}) {
           lineHeight: "16px",
           letterSpacing: "0.100em",
           color: "rgb(181,174,200)",
-        }}>I agree to the Terms &amp; Privacy Policy</span>
+        }}>{t('signup.agree')}</span>
       </label>
 
       {props.error && (
@@ -157,7 +159,7 @@ export function SIGNUPFRAMEO(_p = {}) {
           opacity: agreed && !props.submitting ? 1 : 0.5,
         }}
         property1={"default"}
-        text1={props.submitting ? "Signing up…" : "Sign up"}
+        text1={props.submitting ? t('signup.signingUp') : t('signup.signUp')}
         onClick={() => agreed && !props.submitting && props.onSignUp?.({ fullName, email, password })}
       />
 
@@ -175,7 +177,7 @@ export function SIGNUPFRAMEO(_p = {}) {
         lineHeight: "18px",
         letterSpacing: "0.050em",
         color: "rgb(248,247,255)",
-      }}>Already have an account?</span>
+      }}>{t('signup.haveAccount')}</span>
       <span style={{
         position: "absolute",
         left: 150,
@@ -194,7 +196,7 @@ export function SIGNUPFRAMEO(_p = {}) {
         cursor: "pointer",
       }}
       onClick={() => props.onLogin?.()}
-      >Log in</span>
+      >{t('signup.logIn')}</span>
     </div>
   );
 }

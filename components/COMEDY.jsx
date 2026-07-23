@@ -1,9 +1,11 @@
 // figma node: 416:541 COMEDY (2 variants)
+import { useLanguage } from '../src/i18n.jsx';
 const __venc = (v) => String(v).replace(/[%|=]/g, encodeURIComponent);
 const __vkey = (p) => "property1=" + __venc(p.property1);
 
 export function COMEDY(_p = {}) {
   const props = { ..._p, property1: _p.property1 ?? "default" };
+  const { t } = useLanguage();
   const __body0 = () => (
     <div className={`selectable-card ${props.className ?? ''}`} style={{
       width: 64,
@@ -35,7 +37,7 @@ export function COMEDY(_p = {}) {
         lineHeight: "25px",
         letterSpacing: "0.020em",
         color: "rgb(255,255,255)",
-      }}>{props.text1 ?? "Comedy"}</span>
+      }}>{props.text1 ?? t('genre.comedy')}</span>
     </div>
   );
   const __body1 = () => (
@@ -68,7 +70,7 @@ export function COMEDY(_p = {}) {
         lineHeight: "25px",
         letterSpacing: "0.020em",
         color: "rgb(255,255,255)",
-      }}>{props.text1 ?? "Comedy"}</span>
+      }}>{props.text1 ?? t('genre.comedy')}</span>
     </div>
   );
   const __impls = {
