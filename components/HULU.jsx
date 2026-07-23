@@ -9,8 +9,11 @@ export function HULU(_p = {}) {
       width: 150,
       height: 100,
       position: "relative",
+      cursor: "pointer",
       ...props.style,
-    }}>
+    }}
+    onClick={props.onClick}
+    >
       <span style={{
         position: "absolute",
         left: 60,

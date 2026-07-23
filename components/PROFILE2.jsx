@@ -289,12 +289,12 @@ export function PROFILE2(_p = {}) {
             alignItems: "center",
             flexWrap: "nowrap",
           }}>
-            <DISNEY style={{ position: "relative", width: 150, height: 100, flexShrink: 0 }} property1={"default"} />
-            <HULU style={{ position: "relative", width: 150, height: 100, flexShrink: 0 }} property1={"default"} />
-            <MAX2 style={{ position: "relative", width: 150, height: 100, flexShrink: 0 }} property1={"default"} />
-            <NETFLIX style={{ position: "relative", width: 150, height: 100, flexShrink: 0 }} property1={"default"} />
-            <PRIMEVIDEO style={{ position: "relative", width: 150, height: 100, flexShrink: 0 }} property1={"default"} />
-            <APPLETV style={{ position: "relative", width: 150, height: 100, flexShrink: 0 }} property1={"default"} />
+            <DISNEY style={{ position: "relative", width: 150, height: 100, flexShrink: 0 }} property1={"default"} onClick={() => window.open("https://www.disneyplus.com", "_blank", "noopener,noreferrer")} />
+            <HULU style={{ position: "relative", width: 150, height: 100, flexShrink: 0 }} property1={"default"} onClick={() => window.open("https://www.hulu.com", "_blank", "noopener,noreferrer")} />
+            <MAX2 style={{ position: "relative", width: 150, height: 100, flexShrink: 0 }} property1={"default"} onClick={() => window.open("https://www.max.com", "_blank", "noopener,noreferrer")} />
+            <NETFLIX style={{ position: "relative", width: 150, height: 100, flexShrink: 0 }} property1={"default"} onClick={() => window.open("https://www.netflix.com", "_blank", "noopener,noreferrer")} />
+            <PRIMEVIDEO style={{ position: "relative", width: 150, height: 100, flexShrink: 0 }} property1={"default"} onClick={() => window.open("https://www.primevideo.com", "_blank", "noopener,noreferrer")} />
+            <APPLETV style={{ position: "relative", width: 150, height: 100, flexShrink: 0 }} property1={"default"} onClick={() => window.open("https://tv.apple.com", "_blank", "noopener,noreferrer")} />
             <div style={{ width: 12, flexShrink: 0 }} />
           </div>
         </div>

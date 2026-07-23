@@ -9,8 +9,11 @@ export function APPLETV(_p = {}) {
       width: 150,
       height: 100,
       position: "relative",
+      cursor: "pointer",
       ...props.style,
-    }}>
+    }}
+    onClick={props.onClick}
+    >
       <div className="fig-asset-ea5abcb6314634e4-bb393892" style={{
         position: "absolute",
         left: 35,

@@ -10,8 +10,11 @@ export function DISNEY(_p = {}) {
       height: 100,
       boxShadow: "5px 4px 4px 0px rgba(0,0,0,0.25)",
       position: "relative",
+      cursor: "pointer",
       ...props.style,
-    }}>
+    }}
+    onClick={props.onClick}
+    >
       <span style={{
         position: "absolute",
         left: 49,
