@@ -250,7 +250,7 @@ const translations = {
     'aimatch.title': 'IA Match',
     'aimatch.moodHeading1': '¿Cómo te sentís hoy?',
     'aimatch.moodHeading2': '',
-    'aimatch.moodSubtitle': 'Elegí cómo te sentís y FRAMEO empezará a armar tu match.',
+    'aimatch.moodSubtitle': 'Elegí cómo te sentís para que FRAMEO arme tu match.',
 
     'context.solo': 'Noche solo',
     'context.date': 'Noche de pareja',
