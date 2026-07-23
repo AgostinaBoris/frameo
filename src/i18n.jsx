@@ -127,7 +127,7 @@ const translations = {
     // Profile
     'profile.title': 'Profile',
     'profile.subtitle': 'Manage your movie preferences.',
-    'profile.tagline': 'Movie mood explorer',
+    'profile.tagline': 'FRAMEO Explorer',
     'profile.streamingPlatforms': 'Streaming Platforms',
     'profile.favoriteGenres': 'Favorite Genres',
     'profile.preferences': 'Preferences',
@@ -307,7 +307,7 @@ const translations = {
 
     'profile.title': 'Perfil',
     'profile.subtitle': 'Gestioná tus preferencias de películas.',
-    'profile.tagline': 'Explorador de estados de ánimo',
+    'profile.tagline': 'FRAMEO Explorer',
     'profile.streamingPlatforms': 'Plataformas de streaming',
     'profile.favoriteGenres': 'Géneros favoritos',
     'profile.preferences': 'Preferencias',
