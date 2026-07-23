@@ -165,7 +165,7 @@ export function HOMEFRAMEO(_p = {}) {
         <span style={{
           position: "absolute",
           left: 27,
-          top: 236,
+          top: 254,
           width: 343,
           height: 96,
           fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
