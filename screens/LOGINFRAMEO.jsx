@@ -170,6 +170,24 @@ export function LOGINFRAMEO(_p = {}) {
       }}
       onClick={() => props.onSignUp?.()}
       >{t('login.signUp')}</span>
+      <span style={{
+        position: "absolute",
+        left: 26,
+        top: 745,
+        width: 350,
+        fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+        fontWeight: 600,
+        fontSize: 14,
+        textAlign: "center",
+        whiteSpace: "normal",
+        lineHeight: "18px",
+        letterSpacing: "0.020em",
+        color: "rgb(181,174,200)",
+        textDecoration: "underline",
+        cursor: "pointer",
+      }}
+      onClick={() => props.onGuest?.()}
+      >{t('login.continueAsGuest')}</span>
     </div>
   );
 }

@@ -171,6 +171,8 @@ const translations = {
     'login.noAccount': 'Don’t have an account?',
     'login.signUp': 'Sign up',
     'login.loggingIn': 'Logging in…',
+    'login.continueAsGuest': 'Continue without an account',
+    'login.needAccountToSave': 'Log in to save titles to your Watchlist.',
 
     // Sign up
     'signup.createAccount': 'Create account',
@@ -345,6 +347,8 @@ const translations = {
     'login.noAccount': '¿No tenés una cuenta?',
     'login.signUp': 'Registrate',
     'login.loggingIn': 'Iniciando sesión…',
+    'login.continueAsGuest': 'Continuar sin una cuenta',
+    'login.needAccountToSave': 'Iniciá sesión para guardar títulos en tu Watchlist.',
 
     'signup.createAccount': 'Crear cuenta',
     'signup.subtitle': 'Registrate para personalizar tus recomendaciones y empezar a descubrir qué ver.',

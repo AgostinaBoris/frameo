@@ -21,6 +21,7 @@ import TRENDINGALL from './screens/TRENDINGALL';
 import RECOMMENDEDALL from './screens/RECOMMENDEDALL';
 import RESETPASSWORD from './screens/RESETPASSWORD';
 import { supabase } from './src/supabaseClient.js';
+import { useLanguage } from './src/i18n.jsx';
 
 const PUBLIC_SCREENS = ['onboarding', 'login', 'signup'];
 
@@ -88,12 +89,14 @@ function useViewportSize() {
 }
 
 export default function FrameoApp() {
+  const { t } = useLanguage();
   const [screen, setScreen] = useState('onboarding');
   const [previousScreen, setPreviousScreen] = useState('home');
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [matchAnswers, setMatchAnswers] = useState({ mood: null, context: null, time: null, platforms: [] });
   const [watchlist, setWatchlist] = useState([]);
   const [session, setSession] = useState(null);
+  const [guest, setGuest] = useState(false);
   const [authReady, setAuthReady] = useState(false);
   const [authError, setAuthError] = useState('');
   const [authMessage, setAuthMessage] = useState('');
@@ -124,11 +127,11 @@ export default function FrameoApp() {
     if (!authReady) return;
     if (session && PUBLIC_SCREENS.includes(screen)) {
       setScreen('home');
-    } else if (!session && !PUBLIC_SCREENS.includes(screen) && screen !== 'reset-password') {
+    } else if (!session && !guest && !PUBLIC_SCREENS.includes(screen) && screen !== 'reset-password') {
       setScreen('onboarding');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [authReady, session]);
+  }, [authReady, session, guest]);
 
   useEffect(() => {
     const userId = session?.user?.id;
@@ -152,7 +155,13 @@ export default function FrameoApp() {
 
   const addToWatchlist = (movie) => {
     const userId = session?.user?.id;
-    if (!userId) return;
+    if (!userId) {
+      setAuthError('');
+      setAuthMessage(t('login.needAccountToSave'));
+      setGuest(false);
+      setScreen('login');
+      return;
+    }
     const id = String(movie.id);
     setWatchlist((list) => (list.some((m) => m.id === id) ? list : [{ ...movie, id }, ...list]));
     supabase.from('watchlist').insert(movieToRow(movie, userId)).then(({ error }) => {
@@ -238,7 +247,15 @@ export default function FrameoApp() {
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
+    setGuest(false);
     setScreen('onboarding');
+  };
+
+  const handleGuestContinue = () => {
+    setAuthError('');
+    setAuthMessage('');
+    setGuest(true);
+    setScreen('home');
   };
   const viewport = useViewportSize();
   const isMobile = viewport.w <= MOBILE_BREAKPOINT;
@@ -319,6 +336,7 @@ export default function FrameoApp() {
               onLogin={handleLogin}
               onSignUp={() => { setAuthError(''); setAuthMessage(''); setScreen('signup'); }}
               onForgotPassword={handleForgotPassword}
+              onGuest={handleGuestContinue}
               error={authError}
               message={authMessage}
               submitting={authSubmitting}
@@ -373,19 +391,19 @@ export default function FrameoApp() {
 
         {screen === 'match-context' && (
           <div style={{ width: '100%', height: '100%' }}>
-            <AIMATCHCONTEXT {...navHandlers} active={activeTab} value={matchAnswers.context} onSelect={(context) => setMatchAnswers((a) => ({ ...a, context }))} onNext={() => setScreen('match-time')} />
+            <AIMATCHCONTEXT {...navHandlers} active={activeTab} value={matchAnswers.context} onSelect={(context) => setMatchAnswers((a) => ({ ...a, context }))} onNext={() => setScreen('match-time')} onBack={() => setScreen('match')} />
           </div>
         )}
 
         {screen === 'match-time' && (
           <div style={{ width: '100%', height: '100%' }}>
-            <AIMATCHTIME {...navHandlers} active={activeTab} value={matchAnswers.time} onSelect={(time) => setMatchAnswers((a) => ({ ...a, time }))} onNext={() => setScreen('match-platforms')} />
+            <AIMATCHTIME {...navHandlers} active={activeTab} value={matchAnswers.time} onSelect={(time) => setMatchAnswers((a) => ({ ...a, time }))} onNext={() => setScreen('match-platforms')} onBack={() => setScreen('match-context')} />
           </div>
         )}
 
         {screen === 'match-platforms' && (
           <div style={{ width: '100%', height: '100%' }}>
-            <AIMATCHPLATFORMS {...navHandlers} active={activeTab} value={matchAnswers.platforms} onToggle={(id) => setMatchAnswers((a) => ({ ...a, platforms: a.platforms.includes(id) ? a.platforms.filter((p) => p !== id) : [...a.platforms, id] }))} onNext={() => setScreen('match-results')} />
+            <AIMATCHPLATFORMS {...navHandlers} active={activeTab} value={matchAnswers.platforms} onToggle={(id) => setMatchAnswers((a) => ({ ...a, platforms: a.platforms.includes(id) ? a.platforms.filter((p) => p !== id) : [...a.platforms, id] }))} onNext={() => setScreen('match-results')} onBack={() => setScreen('match-time')} />
           </div>
         )}
 
@@ -427,7 +445,7 @@ export default function FrameoApp() {
 
         {screen === 'watchlist' && (
           <div style={{ width: '100%', height: '100%' }}>
-            <WATCHLIST {...navHandlers} active={activeTab} movies={watchlist} onDetails={openMovieDetails} onRemove={removeFromWatchlist} />
+            <WATCHLIST {...navHandlers} active={activeTab} movies={watchlist} onDetails={openMovieDetails} onRemove={removeFromWatchlist} onBack={() => setScreen('home')} />
           </div>
         )}
       </div>

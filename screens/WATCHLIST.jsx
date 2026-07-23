@@ -169,15 +169,21 @@ export function WATCHLIST(_p = {}) {
           height: 40,
           overflow: "hidden",
         }}>
-          <MiArrowUp style={{
-              position: "absolute",
-              left: 0,
-              top: 0,
-              width: 28,
-              height: 28,
-              transform: "matrix(0.000,-1,1,0.000,0,34)",
-              transformOrigin: "0 0",
-            }} />
+          <div
+            className="tab-icon-wrap"
+            style={{ position: "absolute", left: 0, top: 6, width: 28, height: 28, cursor: "pointer" }}
+            onClick={props.onBack}
+          >
+            <MiArrowUp style={{
+                position: "absolute",
+                left: 0,
+                top: 0,
+                width: 28,
+                height: 28,
+                transform: "matrix(0.000,-1,1,0.000,0,34)",
+                transformOrigin: "0 0",
+              }} />
+          </div>
           <span style={{
             position: "absolute",
             left: 38,

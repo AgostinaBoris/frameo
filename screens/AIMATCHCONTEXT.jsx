@@ -232,15 +232,21 @@ export function AIMATCHCONTEXT(_p = {}) {
             letterSpacing: "0.100em",
             color: "rgb(255,255,255)",
           }}>{t('aimatch.title')}</span>
-          <MiArrowUp style={{
-              position: "absolute",
-              left: 0,
-              top: 0,
-              width: 28,
-              height: 28,
-              transform: "matrix(0.000,-1,1,0.000,0,34)",
-              transformOrigin: "0 0",
-            }} />
+          <div
+            className="tab-icon-wrap"
+            style={{ position: "absolute", left: 0, top: 0, width: 28, height: 28, cursor: "pointer" }}
+            onClick={props.onBack}
+          >
+            <MiArrowUp style={{
+                position: "absolute",
+                left: 0,
+                top: 0,
+                width: 28,
+                height: 28,
+                transform: "matrix(0.000,-1,1,0.000,0,34)",
+                transformOrigin: "0 0",
+              }} />
+          </div>
         </div>
         <span style={{
           position: "absolute",
