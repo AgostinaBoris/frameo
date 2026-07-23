@@ -260,7 +260,7 @@ const translations = {
     'context.marathon': 'Maratón de películas',
     'aimatch.step2of4': 'Paso 2 de 4',
     'aimatch.contextHeading': 'Elegí \ntu contexto!',
-    'aimatch.contextSubtitle': 'Contános cómo vas a ver para recomendarte la película perfecta.',
+    'aimatch.contextSubtitle': 'Contanos cómo vas a ver la peli para recomendarte el match perfecto.',
 
     'time.short.duration': '30-60 min.',
     'time.short.label': 'Rato corto',
