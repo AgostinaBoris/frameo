@@ -17,6 +17,8 @@ export function APPLETV(_p = {}) {
         top: 21,
         width: 150,
         height: 35,
+        transform: "scale(0.65)",
+        transformOrigin: "center",
       }} />
       <span style={{
         position: "absolute",
@@ -65,6 +67,8 @@ export function APPLETV(_p = {}) {
         top: 21,
         width: 150,
         height: 35,
+        transform: "scale(0.65)",
+        transformOrigin: "center",
       }} />
       <span style={{
         position: "absolute",
