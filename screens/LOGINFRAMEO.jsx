@@ -72,7 +72,7 @@ export function LOGINFRAMEO(_p = {}) {
         <span style={{
           position: "absolute",
           left: 25,
-          top: 545,
+          top: 480,
           width: 350,
           fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
           fontWeight: 600,
@@ -85,7 +85,7 @@ export function LOGINFRAMEO(_p = {}) {
         style={{
           position: "absolute",
           left: 63,
-          top: 573,
+          top: 505,
           width: 280,
           cursor: props.submitting ? "default" : "pointer",
           opacity: props.submitting ? 0.6 : 1,
@@ -98,7 +98,7 @@ export function LOGINFRAMEO(_p = {}) {
         style={{
           position: "absolute",
           left: 25,
-          top: 365,
+          top: 330,
           width: 350,
           height: 48,
         }}
@@ -110,7 +110,7 @@ export function LOGINFRAMEO(_p = {}) {
         style={{
           position: "absolute",
           left: 25,
-          top: 430,
+          top: 390,
           width: 350,
           height: 50,
         }}
@@ -121,7 +121,7 @@ export function LOGINFRAMEO(_p = {}) {
       <span style={{
         position: "absolute",
         left: 242,
-        top: 502,
+        top: 452,
         width: 132,
         height: 21,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
@@ -140,7 +140,7 @@ export function LOGINFRAMEO(_p = {}) {
       <span style={{
         position: "absolute",
         left: 75,
-        top: 678,
+        top: 590,
         width: 251,
         height: 21,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
@@ -155,7 +155,7 @@ export function LOGINFRAMEO(_p = {}) {
       <span style={{
         position: "absolute",
         left: 165,
-        top: 704,
+        top: 616,
         width: 72,
         height: 21,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
@@ -174,7 +174,7 @@ export function LOGINFRAMEO(_p = {}) {
       <span style={{
         position: "absolute",
         left: 26,
-        top: 745,
+        top: 650,
         width: 350,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,
