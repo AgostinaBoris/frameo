@@ -145,7 +145,7 @@ export function HOMEFRAMEO(_p = {}) {
           top: 127,
           width: 342,
           height: 267,
-          opacity: 0.22,
+          opacity: 0.38,
         }} />
         <span className="home-title-spin" style={{
           position: "absolute",
@@ -165,7 +165,7 @@ export function HOMEFRAMEO(_p = {}) {
         <span style={{
           position: "absolute",
           left: 27,
-          top: 271,
+          top: 236,
           width: 343,
           height: 96,
           fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",

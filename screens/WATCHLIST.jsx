@@ -192,7 +192,7 @@ export function WATCHLIST(_p = {}) {
             height: 40,
             fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: 19,
             whiteSpace: "nowrap",
             lineHeight: "40px",
             letterSpacing: "0.100em",

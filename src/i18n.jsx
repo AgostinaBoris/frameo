@@ -211,9 +211,9 @@ const translations = {
     'tab.watchlist': 'Mi lista',
 
     'home.titlePart1': '¿Qué',
-    'home.titlePart2': ' deberíamos ver ',
-    'home.titlePart3': 'esta noche',
-    'home.subtitle': 'Recomendaciones con IA según tu estado de ánimo, tiempo y plataformas de streaming.',
+    'home.titlePart2': ' vemos ',
+    'home.titlePart3': 'hoy',
+    'home.subtitle': 'Decinos cómo te sentís y FRAMEO encontrará la mejor película para este momento.',
     'home.askFrameo': 'Preguntale a Frameo',
     'home.quickMatch': 'Match rápido',
     'home.mood': 'Ánimo',
