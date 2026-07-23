@@ -40,13 +40,14 @@ export function LOGINFRAMEO(_p = {}) {
       </div>
       <span style={{
         position: "absolute",
-        left: 95,
+        left: 0,
         top: 202,
-        width: 212,
+        width: 402,
         height: 46,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 700,
         fontSize: 26,
+        textAlign: "center",
         whiteSpace: "nowrap",
         lineHeight: "40px",
         letterSpacing: "0.100em",
