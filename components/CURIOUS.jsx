@@ -24,9 +24,9 @@ export function CURIOUS(_p = {}) {
       }} />
       <span style={{
         position: "absolute",
-        left: 51,
+        left: 0,
         top: 16,
-        width: 59,
+        width: 160,
         height: 23,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,
@@ -57,9 +57,9 @@ export function CURIOUS(_p = {}) {
       }} />
       <span style={{
         position: "absolute",
-        left: 50,
+        left: 0,
         top: 16,
-        width: 60,
+        width: 160,
         height: 23,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,

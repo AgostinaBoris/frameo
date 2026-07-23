@@ -24,9 +24,9 @@ export function ROMANTIC(_p = {}) {
       }} />
       <span style={{
         position: "absolute",
-        left: 43,
+        left: 0,
         top: 15,
-        width: 73,
+        width: 160,
         height: 26,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,
@@ -57,9 +57,9 @@ export function ROMANTIC(_p = {}) {
       }} />
       <span style={{
         position: "absolute",
-        left: 43,
+        left: 0,
         top: 15,
-        width: 74,
+        width: 160,
         height: 26,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,

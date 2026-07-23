@@ -32,9 +32,9 @@ export function BACKGROUNDWATCH(_p = {}) {
       }} />
       <span style={{
         position: "absolute",
-        left: 14,
+        left: 0,
         top: 88,
-        width: 140,
+        width: 168,
         height: 47,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,
@@ -72,9 +72,9 @@ export function BACKGROUNDWATCH(_p = {}) {
       }} />
       <span style={{
         position: "absolute",
-        left: 14,
+        left: 0,
         top: 90,
-        width: 140,
+        width: 168,
         height: 47,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,

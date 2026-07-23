@@ -13,9 +13,9 @@ export function MAX2(_p = {}) {
     }}>
       <span style={{
         position: "absolute",
-        left: 62,
+        left: 0,
         top: 50,
-        width: 26,
+        width: 150,
         height: 24,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,
@@ -62,9 +62,9 @@ export function MAX2(_p = {}) {
       }} />
       <span style={{
         position: "absolute",
-        left: 62,
+        left: 0,
         top: 50,
-        width: 26,
+        width: 150,
         height: 24,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,

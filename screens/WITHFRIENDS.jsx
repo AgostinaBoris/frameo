@@ -24,9 +24,9 @@ export function WITHFRIENDS(_p = {}) {
       }} />
       <span style={{
         position: "absolute",
-        left: 34,
+        left: 0,
         top: 93,
-        width: 99,
+        width: 168,
         height: 23,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,
@@ -55,9 +55,9 @@ export function WITHFRIENDS(_p = {}) {
     }}>
       <span style={{
         position: "absolute",
-        left: 19,
+        left: 0,
         top: 116,
-        width: 131,
+        width: 168,
         height: 17,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,
@@ -79,9 +79,9 @@ export function WITHFRIENDS(_p = {}) {
       }} />
       <span style={{
         position: "absolute",
-        left: 32,
+        left: 0,
         top: 93,
-        width: 104,
+        width: 168,
         height: 23,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,

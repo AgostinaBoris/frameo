@@ -13,9 +13,9 @@ export function APPLETV(_p = {}) {
     }}>
       <div className="fig-asset-ea5abcb6314634e4-bb393892" style={{
         position: "absolute",
-        left: 35,
+        left: 0,
         top: 21,
-        width: 80,
+        width: 150,
         height: 35,
       }} />
       <span style={{
@@ -61,9 +61,9 @@ export function APPLETV(_p = {}) {
       }} />
       <div className="fig-asset-ea5abcb6314634e4-bb393892" style={{
         position: "absolute",
-        left: 35,
+        left: 0,
         top: 21,
-        width: 80,
+        width: 150,
         height: 35,
       }} />
       <span style={{

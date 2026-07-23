@@ -33,9 +33,9 @@ export function MOVIEMARATHON(_p = {}) {
       }} />
       <span style={{
         position: "absolute",
-        left: 14,
+        left: 0,
         top: 83,
-        width: 140,
+        width: 168,
         height: 47,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,
@@ -64,9 +64,9 @@ export function MOVIEMARATHON(_p = {}) {
     }}>
       <span style={{
         position: "absolute",
-        left: 31,
+        left: 0,
         top: 116,
-        width: 105,
+        width: 168,
         height: 17,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,
@@ -88,9 +88,9 @@ export function MOVIEMARATHON(_p = {}) {
       }} />
       <span style={{
         position: "absolute",
-        left: 14,
+        left: 0,
         top: 78,
-        width: 140,
+        width: 168,
         height: 47,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,

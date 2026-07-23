@@ -24,9 +24,9 @@ export function STRESSED(_p = {}) {
       }} />
       <span style={{
         position: "absolute",
-        left: 46,
+        left: 0,
         top: 15,
-        width: 69,
+        width: 160,
         height: 26,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,
@@ -57,9 +57,9 @@ export function STRESSED(_p = {}) {
       }} />
       <span style={{
         position: "absolute",
-        left: 45,
+        left: 0,
         top: 15,
-        width: 71,
+        width: 160,
         height: 26,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,

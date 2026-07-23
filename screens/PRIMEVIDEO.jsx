@@ -13,9 +13,9 @@ export function PRIMEVIDEO(_p = {}) {
     }}>
       <span style={{
         position: "absolute",
-        left: 36,
+        left: 0,
         top: 57,
-        width: 78,
+        width: 150,
         height: 24,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,
@@ -61,9 +61,9 @@ export function PRIMEVIDEO(_p = {}) {
       }} />
       <span style={{
         position: "absolute",
-        left: 38,
+        left: 0,
         top: 57,
-        width: 75,
+        width: 150,
         height: 24,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,

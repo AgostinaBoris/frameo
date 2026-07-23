@@ -24,9 +24,9 @@ export function FOCUSED(_p = {}) {
       }} />
       <span style={{
         position: "absolute",
-        left: 48,
+        left: 0,
         top: 15,
-        width: 64,
+        width: 160,
         height: 26,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,
@@ -57,9 +57,9 @@ export function FOCUSED(_p = {}) {
       }} />
       <span style={{
         position: "absolute",
-        left: 49,
+        left: 0,
         top: 15,
-        width: 63,
+        width: 160,
         height: 26,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,

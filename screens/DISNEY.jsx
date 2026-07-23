@@ -14,9 +14,9 @@ export function DISNEY(_p = {}) {
     }}>
       <span style={{
         position: "absolute",
-        left: 49,
+        left: 0,
         top: 61,
-        width: 53,
+        width: 150,
         height: 24,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,
@@ -62,9 +62,9 @@ export function DISNEY(_p = {}) {
       }} />
       <span style={{
         position: "absolute",
-        left: 49,
+        left: 0,
         top: 61,
-        width: 53,
+        width: 150,
         height: 24,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,

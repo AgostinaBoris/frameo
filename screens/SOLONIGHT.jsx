@@ -24,9 +24,9 @@ export function SOLONIGHT(_p = {}) {
       }} />
       <span style={{
         position: "absolute",
-        left: 50,
+        left: 0,
         top: 93,
-        width: 68,
+        width: 168,
         height: 26,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,
@@ -55,9 +55,9 @@ export function SOLONIGHT(_p = {}) {
     }}>
       <span style={{
         position: "absolute",
-        left: 33,
+        left: 0,
         top: 117,
-        width: 102,
+        width: 168,
         height: 17,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,
@@ -79,9 +79,9 @@ export function SOLONIGHT(_p = {}) {
       }} />
       <span style={{
         position: "absolute",
-        left: 50,
+        left: 0,
         top: 91,
-        width: 69,
+        width: 168,
         height: 26,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,

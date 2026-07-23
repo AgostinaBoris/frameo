@@ -2,7 +2,6 @@
 import { useLanguage } from '../src/i18n.jsx';
 const __venc = (v) => String(v).replace(/[%|=]/g, encodeURIComponent);
 const __vkey = (p) => "property1=" + __venc(p.property1);
-
 export function DATENIGHT(_p = {}) {
   const props = { ..._p, property1: _p.property1 ?? "default" };
   const { t } = useLanguage();
@@ -24,13 +23,14 @@ export function DATENIGHT(_p = {}) {
       }} />
       <span style={{
         position: "absolute",
-        left: 42,
+        left: 0,
         top: 93,
-        width: 85,
+        width: 168,
         height: 19,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,
         fontSize: 15,
+        textAlign: "center",
         whiteSpace: "nowrap",
         lineHeight: "24px",
         letterSpacing: "0.050em",
@@ -54,9 +54,9 @@ export function DATENIGHT(_p = {}) {
     }}>
       <span style={{
         position: "absolute",
-        left: 19,
+        left: 0,
         top: 116,
-        width: 130,
+        width: 168,
         height: 17,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,
@@ -78,13 +78,14 @@ export function DATENIGHT(_p = {}) {
       }} />
       <span style={{
         position: "absolute",
-        left: 42,
+        left: 0,
         top: 100,
-        width: 85,
+        width: 168,
         height: 23,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,
         fontSize: 15,
+        textAlign: "center",
         whiteSpace: "nowrap",
         lineHeight: "24px",
         letterSpacing: "0.050em",

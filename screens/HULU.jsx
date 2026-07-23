@@ -13,9 +13,9 @@ export function HULU(_p = {}) {
     }}>
       <span style={{
         position: "absolute",
-        left: 60,
+        left: 0,
         top: 61,
-        width: 30,
+        width: 150,
         height: 24,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,
@@ -61,9 +61,9 @@ export function HULU(_p = {}) {
       }} />
       <span style={{
         position: "absolute",
-        left: 60,
+        left: 0,
         top: 61,
-        width: 30,
+        width: 150,
         height: 24,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,

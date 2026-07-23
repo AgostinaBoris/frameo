@@ -248,8 +248,8 @@ const translations = {
     'mood.stressed': 'Estresado',
     'aimatch.step1of4': 'Paso 1 de 4',
     'aimatch.title': 'IA Match',
-    'aimatch.moodHeading1': 'Decile a FRAMEO ',
-    'aimatch.moodHeading2': 'tu ánimo',
+    'aimatch.moodHeading1': '¿Cómo te sentís hoy?',
+    'aimatch.moodHeading2': '',
     'aimatch.moodSubtitle': 'Elegí cómo te sentís y FRAMEO empezará a armar tu match.',
 
     'context.solo': 'Noche solo',

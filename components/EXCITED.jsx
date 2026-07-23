@@ -24,9 +24,9 @@ export function EXCITED(_p = {}) {
       }} />
       <span style={{
         position: "absolute",
-        left: 52,
+        left: 0,
         top: 16,
-        width: 56,
+        width: 160,
         height: 23,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,
@@ -57,9 +57,9 @@ export function EXCITED(_p = {}) {
       }} />
       <span style={{
         position: "absolute",
-        left: 52,
+        left: 0,
         top: 16,
-        width: 56,
+        width: 160,
         height: 23,
         fontFamily: "Manrope, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
         fontWeight: 600,
