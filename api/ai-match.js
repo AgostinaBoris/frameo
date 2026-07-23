@@ -44,22 +44,27 @@ const PROVIDER_MAP = {
 };
 
 const CONTEXT_LABEL = {
-  solo: 'Solo night',
-  date: 'Date night',
-  family: 'Family time',
-  friends: 'With friends',
-  background: 'Background watch',
-  marathon: 'Movie marathon',
+  en: {
+    solo: 'Solo night', date: 'Date night', family: 'Family time',
+    friends: 'With friends', background: 'Background watch', marathon: 'Movie marathon',
+  },
+  es: {
+    solo: 'Noche solo', date: 'Noche de pareja', family: 'Tiempo en familia',
+    friends: 'Con amigos', background: 'De fondo', marathon: 'Maratón de películas',
+  },
 };
 
-async function discoverByType({ mediaType, genreMap, mood, time, providerIds, voteCountMin }) {
+const TMDB_LOCALE = { en: 'en-US', es: 'es-ES' };
+const LANGUAGE_NAME = { en: 'English', es: 'Spanish' };
+
+async function discoverByType({ mediaType, genreMap, mood, time, providerIds, voteCountMin, locale }) {
   const apiKey = process.env.VITE_TMDB_API_KEY;
   if (!apiKey) throw new Error('Missing VITE_TMDB_API_KEY');
 
   const buildParams = ({ includeProviders }) => {
     const params = new URLSearchParams({
       api_key: apiKey,
-      language: 'en-US',
+      language: locale,
       sort_by: 'popularity.desc',
       include_adult: 'false',
       'vote_count.gte': String(voteCountMin),
@@ -97,14 +102,16 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { mood, context, time, platforms } = req.body ?? {};
+    const { mood, context, time, platforms, lang: rawLang } = req.body ?? {};
+    const lang = rawLang === 'es' ? 'es' : 'en';
+    const locale = TMDB_LOCALE[lang];
     const providerIds = (Array.isArray(platforms) ? platforms : [])
       .map((p) => PROVIDER_MAP[p])
       .filter(Boolean);
 
     const [movieResults, tvResults] = await Promise.all([
-      discoverByType({ mediaType: 'movie', genreMap: MOVIE_GENRE_MAP, mood, time, providerIds, voteCountMin: 100 }),
-      discoverByType({ mediaType: 'tv', genreMap: TV_GENRE_MAP, mood, time, providerIds, voteCountMin: 50 }),
+      discoverByType({ mediaType: 'movie', genreMap: MOVIE_GENRE_MAP, mood, time, providerIds, voteCountMin: 100, locale }),
+      discoverByType({ mediaType: 'tv', genreMap: TV_GENRE_MAP, mood, time, providerIds, voteCountMin: 50, locale }),
     ]);
 
     const candidates = [
@@ -143,11 +150,13 @@ export default async function handler(req, res) {
       }),
       prompt: `You are Frameo, a movie and TV series recommendation assistant. A user wants something to watch tonight.
 Their mood: ${mood ?? 'not specified'}
-Watching context: ${CONTEXT_LABEL[context] ?? 'not specified'}
+Watching context: ${CONTEXT_LABEL[lang][context] ?? 'not specified'}
 Time available: ${time ?? 'not specified'}
 Streaming platforms they have: ${(platforms ?? []).join(', ') || 'not specified'}
 
-From this list of candidates (a mix of movies and TV series, marked by "mediaType"), pick the 1 to 3 best matches for this user. Feel free to recommend movies, series, or a mix of both — whichever genuinely fits best. For each pick, give a matchPercent (1-100) and a short, warm, personalized "whyMatch" (1-2 sentences, in English) explaining why it fits their mood/context/time.
+From this list of candidates (a mix of movies and TV series, marked by "mediaType"), pick the 1 to 3 best matches for this user. Feel free to recommend movies, series, or a mix of both — whichever genuinely fits best. For each pick, give a matchPercent (1-100) and a short, warm, personalized "whyMatch" (1-2 sentences) explaining why it fits their mood/context/time.
+
+Write the "whyMatch" text in ${LANGUAGE_NAME[lang]}.
 
 Candidates:
 ${JSON.stringify(candidateList, null, 2)}

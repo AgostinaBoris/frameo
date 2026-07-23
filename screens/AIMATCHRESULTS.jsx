@@ -73,7 +73,7 @@ const ResultCard = ({ posterUrl, title, match, type, tag1, tag2, onDetails }) =>
 // figma node: 278:307 AI MATCH RESULTS
 export function AIMATCHRESULTS(_p = {}) {
   const props = _p;
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const answers = props.answers ?? {};
   const [status, setStatus] = useState('loading');
   const [picks, setPicks] = useState([]);
@@ -84,7 +84,7 @@ export function AIMATCHRESULTS(_p = {}) {
     fetch('/api/ai-match', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(answers),
+      body: JSON.stringify({ ...answers, lang }),
     })
       .then((res) => {
         if (!res.ok) throw new Error(`ai-match request failed: ${res.status}`);
@@ -102,7 +102,7 @@ export function AIMATCHRESULTS(_p = {}) {
       });
     return () => { cancelled = true; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [answers.mood, answers.context, answers.time, JSON.stringify(answers.platforms)]);
+  }, [answers.mood, answers.context, answers.time, JSON.stringify(answers.platforms), lang]);
 
   const moodTag = answers.mood ? t(`mood.${answers.mood}`) : undefined;
   const contextTag = answers.context ? t(`context.${answers.context}`) : undefined;
