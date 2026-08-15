@@ -134,7 +134,7 @@ export default async function handler(req, res) {
     }));
 
     const { object } = await generateObject({
-      model: 'anthropic/claude-sonnet-4.6',
+      model: 'deepseek/deepseek-v4-pro-0813',
       schema: z.object({
         picks: z
           .array(
