@@ -134,7 +134,7 @@ export default async function handler(req, res) {
     }));
 
     const { object } = await generateObject({
-      model: 'deepseek/deepseek-v4-pro-0813',
+      model: 'openai/gpt-5-nano',
       schema: z.object({
         picks: z
           .array(
