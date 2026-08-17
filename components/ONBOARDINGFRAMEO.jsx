@@ -86,15 +86,15 @@ export function ONBOARDINGFRAMEO(_p = {}) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          perspective: "340px",
+          perspective: "520px",
           touchAction: "none",
         }}>
         <div className="onboarding-reel-shadow" />
         <div style={{
           position: "relative",
-          width: 236,
-          height: 350,
-          transform: `translateZ(${active ? 80 : 0}px) rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg) scale(${active ? 1.12 : 1})`,
+          width: 256,
+          height: 380,
+          transform: `translateZ(${active ? 55 : 0}px) rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg) scale(${active ? 1.1 : 1})`,
           transition: active ? "transform 90ms linear" : "transform 550ms cubic-bezier(0.22,1,0.36,1)",
           transformStyle: "preserve-3d",
         }}>
@@ -105,7 +105,7 @@ export function ONBOARDINGFRAMEO(_p = {}) {
           <div className={`onboarding-reel-float${active ? ' is-active' : ''}`} style={{
             position: "absolute",
             inset: 0,
-            transformOrigin: "64px 102px",
+            transformOrigin: "69px 111px",
           }}>
             <div className={`fig-asset-strip-only onboarding-reel-roll${active ? ' is-active' : ''}`} style={{
               position: "absolute",
