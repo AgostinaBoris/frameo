@@ -143,6 +143,67 @@ export function PROFILE2(_p = {}) {
   const [genresProgress, setGenresProgress] = useState(0);
   const genresDrag = useDragScroll();
   const genresScrollRef = useRef(null);
+
+  const avatarInputRef = useRef(null);
+  const [avatarUploading, setAvatarUploading] = useState(false);
+  const [avatarError, setAvatarError] = useState('');
+  const [editingName, setEditingName] = useState(false);
+  const [nameDraft, setNameDraft] = useState('');
+  const [nameSaving, setNameSaving] = useState(false);
+  const [nameError, setNameError] = useState('');
+
+  const isGuest = !props.session;
+  const avatarUrl = props.session?.user?.user_metadata?.avatar_url;
+  const displayName = props.session?.user?.user_metadata?.full_name?.trim()
+    || props.session?.user?.email?.split('@')[0]
+    || t('profile.guestName');
+
+  const requireLogin = () => {
+    setAvatarError('');
+    setNameError('');
+    props.onNeedLogin?.();
+  };
+
+  const handleAvatarClick = () => {
+    if (isGuest) { requireLogin(); return; }
+    avatarInputRef.current?.click();
+  };
+
+  const handleAvatarChange = async (e) => {
+    const file = e.target.files?.[0];
+    e.target.value = '';
+    if (!file) return;
+    if (!file.type.startsWith('image/')) { setAvatarError(t('profile.photoInvalidType')); return; }
+    if (file.size > 5 * 1024 * 1024) { setAvatarError(t('profile.photoTooLarge')); return; }
+    setAvatarError('');
+    setAvatarUploading(true);
+    const { error } = await props.onUpdateProfile?.({ avatarFile: file }) ?? {};
+    setAvatarUploading(false);
+    if (error) setAvatarError(t('profile.saveError'));
+  };
+
+  const startEditName = () => {
+    if (isGuest) { requireLogin(); return; }
+    setNameDraft(props.session?.user?.user_metadata?.full_name?.trim() || '');
+    setNameError('');
+    setEditingName(true);
+  };
+
+  const cancelEditName = () => {
+    setEditingName(false);
+    setNameError('');
+  };
+
+  const saveName = async () => {
+    const trimmed = nameDraft.trim();
+    if (!trimmed) { setNameError(t('profile.saveError')); return; }
+    setNameSaving(true);
+    const { error } = await props.onUpdateProfile?.({ fullName: trimmed }) ?? {};
+    setNameSaving(false);
+    if (error) { setNameError(t('profile.saveError')); return; }
+    setEditingName(false);
+  };
+
   const handleScroll = (setProgress) => (e) => {
     const el = e.currentTarget;
     const max = el.scrollWidth - el.clientWidth;
@@ -207,43 +268,169 @@ export function PROFILE2(_p = {}) {
           backgroundColor: "rgb(20,14,32)",
           boxShadow: "inset 0 0 0 1px rgba(168,85,247,0.35), 0 8px 20px -6px rgba(147,51,234,0.4)",
         }}>
-          <div className="fig-asset-c3d70d6602d14253" style={{
-            position: "absolute",
-            left: 20,
-            top: 17,
-            width: 120,
-            height: 116,
-            borderRadius: "50%",
-            boxShadow: "0 0 0 2px rgba(168,85,247,0.6)",
-          }} />
-          <span style={{
-            ...fontStyle,
-            position: "absolute",
-            left: 165,
-            top: 46,
-            width: 165,
-            height: 40,
-            fontWeight: 700,
-            fontSize: 26,
-            whiteSpace: "nowrap",
-            lineHeight: "34px",
-            letterSpacing: "0.050em",
-            color: "rgb(255,255,255)",
-          }}>Aldana</span>
-          <span style={{
-            ...fontStyle,
-            position: "absolute",
-            left: 165,
-            top: 84,
-            width: 155,
-            height: 40,
-            fontWeight: 500,
-            fontSize: 13,
-            whiteSpace: "normal",
-            lineHeight: "18px",
-            letterSpacing: "0.020em",
-            color: "rgb(181,174,200)",
-          }}>{t('profile.tagline')}</span>
+          <input
+            ref={avatarInputRef}
+            type="file"
+            accept="image/*"
+            style={{ display: "none" }}
+            onChange={handleAvatarChange}
+          />
+          <div
+            onClick={handleAvatarClick}
+            title={t('profile.changePhoto')}
+            className={avatarUrl ? undefined : "fig-asset-c3d70d6602d14253"}
+            style={{
+              position: "absolute",
+              left: 20,
+              top: 17,
+              width: 120,
+              height: 116,
+              borderRadius: "50%",
+              boxShadow: "0 0 0 2px rgba(168,85,247,0.6)",
+              cursor: "pointer",
+              backgroundImage: avatarUrl ? `url(${avatarUrl})` : undefined,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
+            <div style={{
+              position: "absolute",
+              right: -2,
+              bottom: -2,
+              width: 32,
+              height: 32,
+              borderRadius: "50%",
+              backgroundColor: "rgb(139,61,255)",
+              boxShadow: "0 0 0 2px rgb(20,14,32)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}>
+              {avatarUploading ? (
+                <div className="crystal-ball-ring" style={{
+                  width: 14,
+                  height: 14,
+                  borderRadius: "50%",
+                  border: "2px solid rgba(255,255,255,0.35)",
+                  borderTopColor: "rgb(255,255,255)",
+                }} />
+              ) : (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path d="M4 8a2 2 0 0 1 2-2h1.5l.8-1.6A2 2 0 0 1 10.1 3.4h3.8a2 2 0 0 1 1.8 1l.8 1.6H18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8Z" stroke="white" strokeWidth="1.6" />
+                  <circle cx="12" cy="13" r="3.4" stroke="white" strokeWidth="1.6" />
+                </svg>
+              )}
+            </div>
+          </div>
+
+          {editingName ? (
+            <div style={{ position: "absolute", left: 165, top: 40, width: 165 }}>
+              <input
+                autoFocus
+                value={nameDraft}
+                onChange={(e) => setNameDraft(e.target.value)}
+                onKeyDown={(e) => { if (e.key === 'Enter') saveName(); if (e.key === 'Escape') cancelEditName(); }}
+                placeholder={t('profile.namePlaceholder')}
+                maxLength={40}
+                style={{
+                  ...fontStyle,
+                  width: "100%",
+                  fontWeight: 700,
+                  fontSize: 18,
+                  color: "rgb(255,255,255)",
+                  background: "rgba(255,255,255,0.08)",
+                  border: "1px solid rgba(168,85,247,0.6)",
+                  borderRadius: 8,
+                  padding: "6px 8px",
+                  boxSizing: "border-box",
+                  outline: "none",
+                }}
+              />
+              <div style={{ display: "flex", gap: 8, marginTop: 6 }}>
+                <button
+                  onClick={saveName}
+                  disabled={nameSaving}
+                  style={{
+                    ...fontStyle,
+                    fontSize: 12,
+                    fontWeight: 700,
+                    color: "white",
+                    background: "rgb(139,61,255)",
+                    border: "none",
+                    borderRadius: 6,
+                    padding: "5px 10px",
+                    cursor: nameSaving ? "default" : "pointer",
+                  }}
+                >{nameSaving ? t('profile.uploading') : t('profile.save')}</button>
+                <button
+                  onClick={cancelEditName}
+                  disabled={nameSaving}
+                  style={{
+                    ...fontStyle,
+                    fontSize: 12,
+                    fontWeight: 600,
+                    color: "rgb(181,174,200)",
+                    background: "transparent",
+                    border: "1px solid rgba(255,255,255,0.2)",
+                    borderRadius: 6,
+                    padding: "5px 10px",
+                    cursor: "pointer",
+                  }}
+                >{t('profile.cancel')}</button>
+              </div>
+              {nameError && (
+                <span style={{ ...fontStyle, display: "block", marginTop: 4, fontSize: 11, color: "rgb(255,120,120)" }}>{nameError}</span>
+              )}
+            </div>
+          ) : (
+            <div
+              onClick={startEditName}
+              title={t('profile.editName')}
+              style={{
+                position: "absolute",
+                left: 165,
+                top: 46,
+                width: 165,
+                height: 40,
+                display: "flex",
+                alignItems: "center",
+                gap: 6,
+                cursor: "pointer",
+              }}
+            >
+              <span style={{
+                ...fontStyle,
+                fontWeight: 700,
+                fontSize: 26,
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                lineHeight: "34px",
+                letterSpacing: "0.050em",
+                color: "rgb(255,255,255)",
+              }}>{displayName}</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0, opacity: 0.6 }}>
+                <path d="M4 20h4l10.5-10.5a2 2 0 0 0 0-2.8l-1.2-1.2a2 2 0 0 0-2.8 0L4 16v4Z" stroke="white" strokeWidth="1.6" strokeLinejoin="round" />
+              </svg>
+            </div>
+          )}
+
+          {!editingName && (
+            <span style={{
+              ...fontStyle,
+              position: "absolute",
+              left: 165,
+              top: 84,
+              width: 165,
+              height: 40,
+              fontWeight: 500,
+              fontSize: 13,
+              whiteSpace: "normal",
+              lineHeight: "18px",
+              letterSpacing: "0.020em",
+              color: avatarError ? "rgb(255,120,120)" : "rgb(181,174,200)",
+            }}>{avatarError || t('profile.tagline')}</span>
+          )}
         </div>
 
         <span style={{

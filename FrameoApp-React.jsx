@@ -245,6 +245,30 @@ export default function FrameoApp() {
     }
   };
 
+  const handleUpdateProfile = async ({ fullName, avatarFile }) => {
+    const userId = session?.user?.id;
+    if (!userId) return { error: 'Not logged in' };
+
+    const data = {};
+    if (fullName !== undefined) data.full_name = fullName;
+
+    if (avatarFile) {
+      const ext = (avatarFile.name.split('.').pop() || 'jpg').toLowerCase();
+      const path = `${userId}/avatar.${ext}`;
+      const { error: uploadError } = await supabase.storage
+        .from('avatars')
+        .upload(path, avatarFile, { upsert: true, cacheControl: '3600' });
+      if (uploadError) return { error: uploadError.message };
+      const { data: pub } = supabase.storage.from('avatars').getPublicUrl(path);
+      data.avatar_url = `${pub.publicUrl}?t=${Date.now()}`;
+    }
+
+    const { data: updated, error } = await supabase.auth.updateUser({ data });
+    if (error) return { error: error.message };
+    setSession((s) => (s ? { ...s, user: updated.user } : s));
+    return { error: null };
+  };
+
   const handleLogout = async () => {
     await supabase.auth.signOut();
     setGuest(false);
@@ -421,7 +445,7 @@ export default function FrameoApp() {
 
         {screen === 'profile' && (
           <div style={{ width: '100%', height: '100%' }}>
-            <PROFILE2 {...navHandlers} active={activeTab} onLogout={handleLogout} onSettings={() => setScreen('settings')} onLanguage={() => setScreen('language')} />
+            <PROFILE2 {...navHandlers} active={activeTab} session={session} onUpdateProfile={handleUpdateProfile} onNeedLogin={() => { setGuest(false); setScreen('login'); }} onLogout={handleLogout} onSettings={() => setScreen('settings')} onLanguage={() => setScreen('language')} />
           </div>
         )}
 
