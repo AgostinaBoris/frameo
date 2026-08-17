@@ -1,9 +1,44 @@
 // figma node: 1:2 ONBOARDING - FRAMEO
+import { useRef, useState } from 'react';
 import { useLanguage } from '../src/i18n.jsx';
 
 export function ONBOARDINGFRAMEO(_p = {}) {
   const props = _p;
   const { t } = useLanguage();
+  const reelRef = useRef(null);
+  const [tilt, setTilt] = useState({ rx: 0, ry: 0 });
+  const [active, setActive] = useState(false);
+
+  const updateTiltFromPoint = (clientX, clientY) => {
+    const el = reelRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const px = (clientX - rect.left) / rect.width;
+    const py = (clientY - rect.top) / rect.height;
+    setTilt({ rx: (0.5 - py) * 46, ry: (px - 0.5) * 46 });
+  };
+
+  const handlePointerMove = (e) => updateTiltFromPoint(e.clientX, e.clientY);
+  const handlePointerEnter = () => setActive(true);
+  const handlePointerLeave = () => {
+    setActive(false);
+    setTilt({ rx: 0, ry: 0 });
+  };
+
+  const handleTouchStart = (e) => {
+    setActive(true);
+    const touch = e.touches[0];
+    if (touch) updateTiltFromPoint(touch.clientX, touch.clientY);
+  };
+  const handleTouchMove = (e) => {
+    const touch = e.touches[0];
+    if (touch) updateTiltFromPoint(touch.clientX, touch.clientY);
+  };
+  const handleTouchEnd = () => {
+    setActive(false);
+    setTilt({ rx: 0, ry: 0 });
+  };
+
   return (
     <div className={props.className} style={{
       width: 402,
@@ -33,29 +68,53 @@ export function ONBOARDINGFRAMEO(_p = {}) {
         <span style={{ color: "rgb(255,255,255)" }}>FRAME</span>
         <span style={{ color: "rgb(192,132,252)" }}>O</span>
       </div>
-      <div style={{
-        position: "absolute",
-        left: 0,
-        top: 264,
-        width: 410,
-        height: 410,
-        overflow: "hidden",
-        perspective: "600px",
-      }}>
-        <div className="fig-asset-5596bc84483bed9d onboarding-sphere" style={{
+      <div
+        ref={reelRef}
+        onPointerMove={handlePointerMove}
+        onPointerEnter={handlePointerEnter}
+        onPointerLeave={handlePointerLeave}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        onTouchCancel={handleTouchEnd}
+        style={{
           position: "absolute",
-          left: 65,
-          top: 30.75,
-          width: 278.8,
-          height: 278.8,
-          borderRadius: "50%",
-          boxShadow: "inset 10px 10px 30px 0px rgba(204,128,255,0.35), inset -12px -16px 24px 0px rgba(0,0,0,0.6), 0px 0px 50px 8px rgba(128,38,255,0.55), 18px 22px 28px -4px rgba(0,0,26,0.7)",
-          overflow: "hidden",
+          left: 0,
+          top: 264,
+          width: 402,
+          height: 410,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          perspective: "340px",
+          touchAction: "none",
         }}>
-          <div className="onboarding-sphere-highlight" style={{
+        <div className="onboarding-reel-shadow" />
+        <div style={{
+          position: "relative",
+          width: 236,
+          height: 350,
+          transform: `translateZ(${active ? 80 : 0}px) rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg) scale(${active ? 1.12 : 1})`,
+          transition: active ? "transform 90ms linear" : "transform 550ms cubic-bezier(0.22,1,0.36,1)",
+          transformStyle: "preserve-3d",
+        }}>
+          <div className="onboarding-reel-glow" style={{
+            opacity: active ? 1 : 0.75,
+            transform: active ? "scale(1.25)" : "scale(1)",
+          }} />
+          <div className={`onboarding-reel-float${active ? ' is-active' : ''}`} style={{
             position: "absolute",
             inset: 0,
-            borderRadius: "50%",
+            transformOrigin: "64px 102px",
+          }}>
+            <div className={`fig-asset-strip-only onboarding-reel-roll${active ? ' is-active' : ''}`} style={{
+              position: "absolute",
+              inset: 0,
+            }} />
+          </div>
+          <div className={`fig-asset-reel-only onboarding-reel-spin${active ? ' is-active' : ''}`} style={{
+            position: "absolute",
+            inset: 0,
           }} />
         </div>
       </div>
