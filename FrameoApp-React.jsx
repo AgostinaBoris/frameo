@@ -286,7 +286,7 @@ export default function FrameoApp() {
   const frameOuterW = CANVAS_W + (isMobile ? 0 : BEZEL * 2);
   const frameOuterH = CANVAS_H + (isMobile ? 0 : BEZEL * 2);
   const scale = isMobile
-    ? viewport.w / CANVAS_W
+    ? Math.min(viewport.w / CANVAS_W, viewport.h / CANVAS_H)
     : Math.min(1, (viewport.w - 40) / frameOuterW, (viewport.h - 40) / frameOuterH);
   const scaledW = frameOuterW * scale;
   const scaledH = frameOuterH * scale;
@@ -333,13 +333,13 @@ export default function FrameoApp() {
   return (
     <div style={{
       display: 'flex',
-      alignItems: isMobile ? 'flex-start' : 'center',
+      alignItems: 'center',
       justifyContent: 'center',
       height: '100dvh',
       background: '#0a0a0a',
       padding: isMobile ? 0 : '20px',
       overflowX: 'hidden',
-      overflowY: isMobile ? 'auto' : 'hidden',
+      overflowY: 'hidden',
       WebkitOverflowScrolling: 'touch',
       fontFamily: 'Manrope, -apple-system, BlinkMacSystemFont, sans-serif'
     }}>
